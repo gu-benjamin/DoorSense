@@ -3,15 +3,22 @@
 @tailwind utilities;
 
 :root {
-
+  --color-primary: #05AFF2;
+  --color-background: #F0F5F9;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
-
-  }
-}
+    --color-background: #6F6F6F;
+  } */
 
 body {
+  color: rgb(var(--color-primary));
+  background-color: rgb(var(--color-background))
+}
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
