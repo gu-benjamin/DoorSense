@@ -7,14 +7,10 @@
   --color-background: #F0F5F9;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --color-background: #6F6F6F;
-  } */
 
 body {
   color: rgb(var(--color-primary));
-  background-color: rgb(var(--color-background))
+  background-color: var(--color-background)
 }
 
 input::-webkit-outer-spin-button,
