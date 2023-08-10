@@ -14,7 +14,7 @@
 
 body {
   color: rgb(var(--color-primary));
-  background-color: rgb(var(--color-background))
+  background-color: var(--color-background)
 }
 
 input::-webkit-outer-spin-button,
