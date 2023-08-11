@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function LoginPage() {
   return (
-    <main className={`w-screen h-screen flex`}>
+    <main className={`w-screen h-screen flex flex-row`}>
 
         <aside className={`w-2/3 h-full`}>
             <img src="/images/login_img.png" alt="login image" className={`w-full h-full`}/>
