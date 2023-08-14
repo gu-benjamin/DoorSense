@@ -5,6 +5,7 @@
 :root {
   --color-primary: #05AFF2;
   --color-background: #F0F5F9;
+  --color-error: hsl(0, 100%, 67%)
 }
 
 
