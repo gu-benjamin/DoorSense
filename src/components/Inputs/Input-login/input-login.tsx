@@ -22,7 +22,7 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
     return (
       //Div root 
       <div
-        className={`flex flex-col justify-start gap-4 w-1/2 relative mb-4`}
+        className={`flex flex-col justify-start gap-4 relative mb-4`}
         data-te-input-wrapper-init
       >
         {/* Icone */}

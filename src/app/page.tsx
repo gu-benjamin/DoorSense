@@ -11,6 +11,7 @@ import { useState } from 'react';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
+import Link from 'next/link';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -157,7 +158,7 @@ export default function LoginPage() {
           <Button btnName="ENTRAR" />
         </form>
         {/* Link */}
-        <a href="">Esqueceu a senha?</a>
+        <Link href="/Dashboard">Esqueceu a senha?</Link>
       </section>
     </main>
   );
