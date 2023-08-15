@@ -1,66 +1,164 @@
-import Image from 'next/image'
+'use client';
+
 import IconUser from 'components/Icons/icon-user';
 import IconLock from 'components/Icons/icon-lock';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { InputLogin } from './../components/Inputs/Input-login/input-login';
+import { Button } from './../components/Buttons/Button/button';
+import { useState } from 'react';
+import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
+import IconOpenPassword from './../components/Icons/icon-password-open';
+import IconClosePassword from './../components/Icons/icon-password-close';
+
+// Esquema de validação para o formulário do Login - Utilizado a lib Zod
+const schema = z.object({
+  user: z
+    .string({
+      required_error: 'Este campo é obrigatório'
+    })
+    .min(3, 'Por favor insira um usuário válido'),
+  password: z
+    .string({
+      required_error: 'Este campo é obrigatório'
+    })
+    .min(5, 'Por favor insira uma senha válida')
+});
+
+// Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
+type FormProps = z.infer<typeof schema>;
 
 export default function LoginPage() {
+  // Chamada do hook useForm para a criação do formulário do login
+  const {
+    register,
+    handleSubmit,
+    resetField,
+    formState: { errors }
+  } = useForm<FormProps>({
+    mode: 'all',
+    reValidateMode: 'onBlur',
+    resolver: zodResolver(schema)
+  });
+
+  //Função acionada ao dar submit do formulário
+  const handleForm = (data: FormProps) => {
+    console.log(data);
+    resetField('user');
+    resetField('password');
+  };
+
+  // State para mudar a visibilidade da senha
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  function togglePasswordVisibility() {
+    setIsPasswordVisible((prevState) => !prevState);
+  }
+
+  // Front da página
   return (
     <main className={`w-screen h-screen flex`}>
+      {/* Right Column Image */}
+      <aside className={`w-1/2 h-full hidden lg:block xl:block`}>
+        <img
+          src="/images/Login.png"
+          alt="login image"
+          className={`w-full h-full`}
+        />
+      </aside>
 
-        {/* Right Column Image */}
-        <aside className={`w-1/2 h-full`}>
-            <img src="/images/Login.png" alt="login image" className={`w-full h-full`}/>
-        </aside>
+      {/* Left Column Form */}
+      <section
+        className={`p-6 flex flex-col items-center justify-center w-1/2 h-full gap-12`}
+      >
+        <img src="/images/Logo.png" alt="" className={`lg:w-24`} />
 
-        {/* Left Column Form */}
-        <section className={`p-6 pt-20 flex flex-col items-center justify-start w-1/2 h-full gap-12`}>
+        <h1 className={`text-primary font-extrabold text-5xl lg:text-3x1`}>
+          Login
+        </h1>
+        <p className={`font-regular text-lg md:text-sm`}>
+          Conecte-se usando o usuário de administrador
+        </p>
 
-            <img src="/images/Logo.png" alt="" className={``}/>
-
-            <h1 className={`text-primary font-extrabold text-6xl`}>Login</h1>
-            <p className={`font-regular text-lg`}>Conecte-se usando o usuário de administrador</p>
-
-            <form action="" className={`flex flex-col items-center gap-10 w-2/3`}>
-                <div className="flex flex-col justify-start gap-4 w-1/2 relative mb-4" data-te-input-wrapper-init>
-                <div className='absolute'>
-                <IconUser width={30} height={30} color={'#05AFF2'}/>
-                </div>
-                    <input
-                        type="text"
-                        className="peer block min-h-[auto] w-full pl-10 border-b-2 border-primary bg-transparent py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="InputUser"
-                        placeholder="" />
-                    <label
-                        id="FormUser"
-                        
-                        className="flex pointer-events-none pl-10 absolute left-0 top-0 mb-0 origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                        > Digite seu usuário
-                    </label>
-                </div>
-                <div className="flex flex-col justify-start gap-4 w-1/2 relative mb-4" data-te-input-wrapper-init>
-                    
-                    <input
-                        type="password"
-                        className="peer block min-h-[auto] w-full border-b-2 border-primary bg-transparent py-[0.32rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
-                        id="InputPassword"
-                        placeholder="Example label" />
-                        
-                    <label
-                        id="FormPassword"
-                        className="pointer-events-none absolute left-0 top-0 mb-0 origin-[0_0] truncate pt-[0.37rem] leading-[1.6] text-neutral-500 transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
-                        >Digite sua senha
-                    </label>
-                </div>
+        <form
+          onSubmit={handleSubmit(handleForm)}
+          className={`flex flex-col items-center gap-10 w-full lg:w-1/2 xl:1/2`}
+        >
+          {/* Campo Usuário */}
+          <InputLogin
+          //Registrando campo na hook
+            {...register('user', { required: true })}
+          //Pros
+            icon={
+              <IconUser
+                size={30}
+                color={
+                  errors.user?.message
+                    ? `var(--color-error)`
+                    : `var(--color-primary)`
+                }
+              />
+            }
+            label="Digite seu usuário"
+            helperText={errors.user?.message}
+          />
 
 
-                <div className={`flex flex-col w-1/2 mt-4 text-white`}>
-                    <button type='submit' className={`bg-primary p-3 rounded-lg font-extrabold`}>ENTRAR</button>
-                </div>
+          {/* Campo password */}
+          <InputLogin
+          // Registrando campo na hook
+            {...register('password', { required: true })}
+          //Props
+            type={isPasswordVisible ? 'text' : 'password'}
+            icon={
+              <IconLock
+                size={30}
+                color={
+                  errors.password?.message
+                    ? `var(--color-error)`
+                    : `var(--color-primary)`
+                }
+            />
+            }
+            label="Digite sua senha"
+            helperText={errors.password?.message}
 
-                {/* Link */}
-                <a href="">Esqueceu a senha?</a>
-            </form>
+            //Botao icone de esconder a senha
+            actionIcon={
+              <ButtonIcon
+                icon={
+                  isPasswordVisible ? (
+                    <IconOpenPassword
+                      size={30}
+                      color={
+                        errors.password?.message
+                          ? `var(--color-error)`
+                          : `var(--color-primary)`
+                      }
+                    />
+                  ) : (
+                    <IconClosePassword
+                      size={30}
+                      color={
+                        errors.password?.message
+                          ? `var(--color-error)`
+                          : `var(--color-primary)`
+                      }
+                    />
+                  )
+                }
+                onClick={togglePasswordVisibility}
+              />
+            }
 
-        </section>  
+          />
+
+          <Button btnName="ENTRAR" />
+        </form>
+        {/* Link */}
+        <a href="">Esqueceu a senha?</a>
+      </section>
     </main>
   );
 }
