@@ -7,7 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { InputLogin } from './../components/Inputs/Input-login/input-login';
 import { Button } from './../components/Buttons/Button/button';
+import { useState } from 'react';
+import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
+import IconOpenPassword from './../components/Icons/icon-password-open';
+import IconClosePassword from './../components/Icons/icon-password-close';
 
+// Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
   user: z
     .string({
@@ -21,9 +26,11 @@ const schema = z.object({
     .min(5, 'Por favor insira uma senha válida')
 });
 
+// Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
 type FormProps = z.infer<typeof schema>;
 
 export default function LoginPage() {
+  // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
@@ -35,16 +42,25 @@ export default function LoginPage() {
     resolver: zodResolver(schema)
   });
 
+  //Função acionada ao dar submit do formulário
   const handleForm = (data: FormProps) => {
     console.log(data);
-    resetField('user')
-    resetField('password')
+    resetField('user');
+    resetField('password');
   };
 
+  // State para mudar a visibilidade da senha
+  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+
+  function togglePasswordVisibility() {
+    setIsPasswordVisible((prevState) => !prevState);
+  }
+
+  // Front da página
   return (
     <main className={`w-screen h-screen flex`}>
       {/* Right Column Image */}
-      <aside className={`w-1/2 h-full`}>
+      <aside className={`w-1/2 h-full hidden lg:block xl:block`}>
         <img
           src="/images/Login.png"
           alt="login image"
@@ -54,22 +70,26 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`p-6 pt-20 flex flex-col items-center justify-start w-1/2 h-full gap-12`}
+        className={`p-6 flex flex-col items-center justify-center w-1/2 h-full gap-12`}
       >
-        <img src="/images/Logo.png" alt="" className={``} />
+        <img src="/images/Logo.png" alt="" className={`lg:w-24`} />
 
-        <h1 className={`text-primary font-extrabold text-6xl`}>Login</h1>
-        <p className={`font-regular text-lg`}>
+        <h1 className={`text-primary font-extrabold text-5xl lg:text-3x1`}>
+          Login
+        </h1>
+        <p className={`font-regular text-lg md:text-sm`}>
           Conecte-se usando o usuário de administrador
         </p>
 
         <form
           onSubmit={handleSubmit(handleForm)}
-          className={`flex flex-col items-center gap-10 w-2/3`}
+          className={`flex flex-col items-center gap-10 w-full lg:w-1/2 xl:1/2`}
         >
-
+          {/* Campo Usuário */}
           <InputLogin
-            {...register('user', {required: true})}
+          //Registrando campo na hook
+            {...register('user', { required: true })}
+          //Pros
             icon={
               <IconUser
                 size={30}
@@ -80,12 +100,17 @@ export default function LoginPage() {
                 }
               />
             }
-            label="Digite seu usuário ..."
+            label="Digite seu usuário"
             helperText={errors.user?.message}
           />
 
+
+          {/* Campo password */}
           <InputLogin
-            {...register('password', {required: true})}
+          // Registrando campo na hook
+            {...register('password', { required: true })}
+          //Props
+            type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <IconLock
                 size={30}
@@ -94,17 +119,45 @@ export default function LoginPage() {
                     ? `var(--color-error)`
                     : `var(--color-primary)`
                 }
+            />
+            }
+            label="Digite sua senha"
+            helperText={errors.password?.message}
+
+            //Botao icone de esconder a senha
+            actionIcon={
+              <ButtonIcon
+                icon={
+                  isPasswordVisible ? (
+                    <IconOpenPassword
+                      size={30}
+                      color={
+                        errors.password?.message
+                          ? `var(--color-error)`
+                          : `var(--color-primary)`
+                      }
+                    />
+                  ) : (
+                    <IconClosePassword
+                      size={30}
+                      color={
+                        errors.password?.message
+                          ? `var(--color-error)`
+                          : `var(--color-primary)`
+                      }
+                    />
+                  )
+                }
+                onClick={togglePasswordVisibility}
               />
             }
-            label="Digite sua senha ..."
-            helperText={errors.password?.message}
+
           />
 
           <Button btnName="ENTRAR" />
-
         </form>
-          {/* Link */}
-          <a href="">Esqueceu a senha?</a>
+        {/* Link */}
+        <a href="">Esqueceu a senha?</a>
       </section>
     </main>
   );

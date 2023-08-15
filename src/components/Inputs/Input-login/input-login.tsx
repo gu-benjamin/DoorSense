@@ -1,51 +1,66 @@
-import {
-  InputHTMLAttributes,
-  ReactNode,
-  forwardRef,
-  useId
-} from 'react';
+import { InputHTMLAttributes, ReactNode, forwardRef, useId } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type InputLoginProps = InputHTMLAttributes<HTMLInputElement> & {
-    label?: string;
-    helperText?: string;
-    icon: ReactNode
+  label?: string;
+  helperText?: string;
+  icon: ReactNode;
+  actionIcon?: ReactNode
 };
 
 export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
-  ({ name = '', type = 'text', label, helperText = '', icon, ...props }, ref) => {
+  (
+    { name = '', type = 'text', label, helperText = '', icon, actionIcon, ...props },
+    ref
+  ) => {
+    //useId para acessebilidade
     const inputId = useId();
+    //helperText é o texto que aparece ao ter um campo errado no input, hasError é a variavel usada para fazer a alternancia de cores entre certo(azul) e errado (vermelho) 
     const hasError = helperText.length > 0;
 
+    //Front
     return (
+      //Div root 
       <div
-        className="flex flex-col justify-start gap-4 w-1/2 relative mb-4"
+        className={`flex flex-col justify-start gap-4 w-1/2 relative mb-4`}
         data-te-input-wrapper-init
       >
-        <div className="absolute">
-          {icon}
-        </div>
+        {/* Icone */}
+        <div className={`absolute`}>{icon}</div>
+
+        {/* Campo de input */}
         <input
           type={type}
           name={name}
           ref={ref}
-          className={`peer block min-h-[auto] w-full pl-10 border-b-2 ${hasError ? `border-light-red` : `border-primary` } bg-transparent py-[0.32rem] leading-[1.6]
-                    outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary ${hasError && `border-light-red`}
-                     data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-200
-                     [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
+          className={`peer block min-h-[auto] pl-10 w-full border-b-2 ${hasError ? `border-light-red` : `border-primary`} 
+                      bg-transparent py-[0.35rem] leading-[1.6] outline-none transition-all duration-200 ease-linear focus:placeholder:opacity-100 
+                      peer-focus:${hasError ? `text-light-red` : `text-primary`} data-[te-input-state-active]:placeholder:opacity-100 
+                      motion-reduce:transition-none dark:text-neutral-200 dark:placeholder:${hasError ? `text-light-red` : `text-neutral-200`} 
+                      dark:peer-focus:${hasError ? `text-light-red` : `text-primary`} [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0`}
           id={inputId}
           {...props}
         />
+
+        {/* Label animada */}
         <label
-          className={`flex pointer-events-none pl-10 absolute left-0 top-0 mb-0 origin-[0_0] truncate pt-[0.37rem]
-                      leading-[1.6] ${hasError ? `text-light-red` : `text-neutral-500` } transition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] 
-                      peer-focus:scale-[0.8] peer-focus:${hasError ? `text-light-red` : `text-neutral-500` } peer-data-[te-input-state-active]:-translate-y-[0.9rem] 
-                      peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:${hasError ? `text-light-red` : `text-neutral-200` } dark:peer-focus:${hasError ? `text-light-red` : `text-primary` }`}
+          className={twMerge(`absolute left-9 text-sm ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-400`}
+                              duration-300 transform peer-focus:-translate-y-6 scale-75 top-1 -z-10 origin-[0] peer-focus:left-7 
+                              peer-focus:${hasError ? `text-light-red` : `text-primary`} peer-focus:dark:${hasError ? `text-light-red` : `text-primary`} 
+                              peer-placeholder-shown:scale-100 peer-focus:scale-75`,props.className)}
           htmlFor={inputId}
         >
           {label}
         </label>
 
-        {hasError && <p className={`text-light-red font-normal italic text-sm`}>{helperText}</p>}
+        <div className={`absolute right-0 bottom-5`}>
+          {actionIcon}  
+        </div>
+
+
+        {/* Mensagem de erro */}
+        {hasError && (<p className={`text-light-red font-normal italic text-sm`}>{helperText}</p>)}
+        
       </div>
     );
   }
