@@ -23,14 +23,15 @@ export default function HomePage(){
             </div>
           </div>
         </div>
-
-          {/* Campo de busca */}
+        {/* Campo de busca */}
           <div className="relative max-w-md w-full mb-4">
             <div className="absolute top-1 left-2 inline-flex items-center p-2">
               <i className="fas fa-search text-gray-400"></i>
             </div>
-            <input className="w-full h-10 pl-10 pr-4 py-1 text-base placeholder-gray-500 border rounded-full focus:shadow-outline" type="search" placeholder="Buscar..." />
-          </div>
+            <div className="bg-blue-200 p-3 rounded-full">
+              <input className="w-full h-10 pl-10 pr-4 py-1 text-base placeholder-gray-500 border-none focus:shadow-outline rounded-full" type="search" placeholder="Buscar..." />
+            </div>
+        </div>
 
           {/* O Dashboard */}
           <div className="bg-white p-4 shadow rounded-lg">
