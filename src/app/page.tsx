@@ -11,6 +11,8 @@ import { useState } from 'react';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
+import Link from 'next/link';
+import Image from 'next/image';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -60,13 +62,17 @@ export default function LoginPage() {
   return (
     <main className={`w-screen h-screen flex`}>
       {/* Right Column Image */}
-      <aside className={`w-1/2 h-full hidden lg:block xl:block`}>
-        <img
+      <picture className={`w-1/2 h-full hidden md:block lg:block xl:block relative`}>
+        <Image
           src="/images/Login.png"
           alt="login image"
-          className={`w-full h-full`}
+          fill
+          quality={100}
+          className={`object-fill`}
+          priority
+          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
         />
-      </aside>
+      </picture>
 
       {/* Left Column Form */}
       <section
@@ -157,7 +163,7 @@ export default function LoginPage() {
           <Button btnName="ENTRAR" />
         </form>
         {/* Link */}
-        <a href="">Esqueceu a senha?</a>
+        <Link href="/Dashboard">Esqueceu a senha?</Link>
       </section>
     </main>
   );
