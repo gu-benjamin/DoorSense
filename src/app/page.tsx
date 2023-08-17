@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { InputLogin } from './../components/Inputs/Input-login/input-login';
 import { Button } from './../components/Buttons/Button/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
@@ -57,6 +57,14 @@ export default function LoginPage() {
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
+
+  useEffect(() => {
+    const init = async () => {
+      const { Datepicker, Input, initTE } = await import("tw-elements");
+      initTE({ Datepicker, Input });
+    };
+    init();
+  }, []);
 
   // Front da página
   return (
