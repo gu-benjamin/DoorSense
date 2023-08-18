@@ -7,7 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { InputLogin } from './../components/Inputs/Input-login/input-login';
 import { Button } from './../components/Buttons/Button/button';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
@@ -30,6 +30,10 @@ const schema = z.object({
 
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
 type FormProps = z.infer<typeof schema>;
+
+// const DynamicInputLogin = dynamic(() => import("../components/Inputs/Input-login/input-login"), {
+//   ssr: false,
+// });
 
 export default function LoginPage() {
   // Chamada do hook useForm para a criação do formulário do login
@@ -96,6 +100,7 @@ export default function LoginPage() {
           //Registrando campo na hook
             {...register('user', { required: true })}
           //Pros
+            placeholder='Digite sua senha ...'
             icon={
               <IconUser
                 size={30}
@@ -106,16 +111,16 @@ export default function LoginPage() {
                 }
               />
             }
-            label="Digite seu usuário"
+            label="Usuário:"
             helperText={errors.user?.message}
           />
-
 
           {/* Campo password */}
           <InputLogin
           // Registrando campo na hook
             {...register('password', { required: true })}
           //Props
+          placeholder='Digite sua senha ...'
             type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <IconLock
@@ -127,7 +132,7 @@ export default function LoginPage() {
                 }
             />
             }
-            label="Digite sua senha"
+            label="Senha:"
             helperText={errors.password?.message}
 
             //Botao icone de esconder a senha
