@@ -55,7 +55,7 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
           {...props}
         />
 
-        <div className={`absolute right-0 ${hasError ? `bottom-12` : `bottom-[19px]`}`}>
+        <div className={`absolute right-3 ${hasError ? `bottom-8` : `bottom-1`}`}>
           {actionIcon}  
         </div>
 

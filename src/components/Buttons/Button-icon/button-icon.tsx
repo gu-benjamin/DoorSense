@@ -11,7 +11,6 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
       <>
       {/*Botao*/}
         <button
-          className={`absolute inset-y-0 right-0 flex items-center px-4 text-gray-600`}
           type={type}
           ref={ref}
           {...props}

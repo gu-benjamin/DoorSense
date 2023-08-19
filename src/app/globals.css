@@ -8,6 +8,10 @@
   --color-error: hsl(0, 100%, 67%)
 }
 
+.botao-teste{
+  @apply mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2;
+  @apply text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto
+}
 
 body {
   color: rgb(var(--color-primary));
