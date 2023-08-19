@@ -4,6 +4,7 @@ import { ExclamationTriangleIcon, XCircleIcon } from '@heroicons/react/24/outlin
 import IconUser from '../Icons/icon-user'
 import { ButtonIcon } from './../Buttons/Button-icon/button-icon';
 import { InputLogin } from './../Inputs/Input-login/input-login';
+import IconClosePassword from 'components/Icons/icon-password-close';
 
 export default function Modal() {
   const [open, setOpen] = useState(true)
@@ -44,7 +45,7 @@ export default function Modal() {
                 </div>
 
                 {/* Main section */}
-                <div className="bg-white px-4 pb-4 pt-5 sm:p-6 sm:pb-4 flex flex-col items-center gap-3">
+                <div className="bg-white px-4 pb-5 pt-5 sm:p-6 sm:pb-5 flex flex-col items-center gap-3">
 
                     {/* Modal Icon */}
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100">
@@ -53,16 +54,16 @@ export default function Modal() {
 
                       {/* Modal Title */}
                       <Dialog.Title as="h1" className="text-xl font-semibold leading-6 text-gray-900">
-                        Teste
+                        Primeiro Acesso
                       </Dialog.Title>
 
                       {/* Modal content */}
-                     <div className="my-1">
+                     <div className="flex flex-col gap-4 my-1">
                         {/* <p className="text-sm text-gray-500">
                           Are you sure you want to deactivate your account? All of your data will be permanently
                           removed. This action cannot be undone.
                         </p> */}
-                        <InputLogin icon={<IconUser size={25} color='#000' />} label={`Testeeee`} placeholder='digita ae'/>
+                        {/* <InputLogin icon={<IconUser size={30} color='#000' />} label={`Testeeee`} placeholder='digita ae' actionIcon={<ButtonIcon className={`absolute right-3 bottom-2`} icon={<IconClosePassword size={25} color={`#000`}/>}/>}/> */}
                         
                      </div>
                     

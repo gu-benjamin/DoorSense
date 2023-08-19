@@ -72,9 +72,9 @@ export default function LoginPage() {
           alt="login image"
           fill
           quality={100}
-          className={`object-fill`}
+          className={``}
           priority
-          sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
+          sizes='(max-width: 768px) 100vw'
         />
       </picture>
 
@@ -138,6 +138,7 @@ export default function LoginPage() {
             //Botao icone de esconder a senha
             actionIcon={
               <ButtonIcon
+              className={`absolute right-3 ${errors.password?.message ? `bottom-9` : `bottom-2`}`}
                 icon={
                   isPasswordVisible ? (
                     <IconOpenPassword
