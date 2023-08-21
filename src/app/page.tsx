@@ -79,9 +79,9 @@ export default function LoginPage() {
 
   // Front da página
   return (
-    <main className={`w-screen h-screen flex`}>
+    <main className={`w-screen h-screen flex justify-center`}>
       {/* Right Column Image */}
-      <picture className={`w-1/2 h-full hidden md:block lg:block xl:block relative`}>
+      <picture className={`w-1/2 h-full hidden lg:block xl:block relative`}>
         <Image
           src="/images/Login.png"
           alt="login image"
@@ -95,14 +95,14 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`p-6 flex flex-col items-center justify-center w-1/2 h-full gap-12`}
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-12`}
       >
         <img src="/images/Logo.png" alt="" className={`lg:w-24`} />
 
         <h1 className={`text-primary font-extrabold text-5xl lg:text-3x1`}>
           Login
         </h1>
-        <p className={`font-regular text-lg md:text-sm`}>
+        <p className={`font-regular text-lg`}>
           Conecte-se usando o usuário de administrador
         </p>
 
@@ -115,7 +115,7 @@ export default function LoginPage() {
           //Registrando campo na hook
             {...register('user', { required: true })}
           //Pros
-            placeholder='Digite sua senha ...'
+            placeholder='Digite seu usuário'
             icon={
               <IconUser
                 size={30}
@@ -135,7 +135,7 @@ export default function LoginPage() {
           // Registrando campo na hook
             {...register('password', { required: true })}
           //Props
-          placeholder='Digite sua senha ...'
+          placeholder='Digite sua senha'
             type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <IconLock
@@ -181,11 +181,10 @@ export default function LoginPage() {
 
           />
 
-          <Button btnName="ENTRAR" className={`botao-primary`}/>
+          <Button btnName="ENTRAR" className={`botao-primary `}/>
         </form>
         {/* Link */}
         <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility}/>
-        <Link href="/Dashboard">Dashboard</Link>
       </section>
 
      <Modal.Root open={open} onClose={setOpen}>
@@ -194,14 +193,14 @@ export default function LoginPage() {
       </Modal.CloseTop>
       <Modal.MainSection>
        <Modal.Icon icon={<IconUser size={30} color={`#000`}/>}/> 
-       <Modal.Title title={`Teste`}/>
+       <Modal.Title title={`Esqueceu a senha?`}/>
        <Modal.Content>
-        <InputLogin icon={<IconUser size={30} color={`#000`}/>} placeholder='testeeeeee' label='Testee'/>
+        <InputLogin icon={<IconUser size={30} color={`#000`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
        </Modal.Content>
       </Modal.MainSection>
       <Modal.Actions>
-        <Modal.Action btnName='Clica ae' onClick={toggleModalVisibility}/>
-        <Modal.Action btnName='Clica ae' className='botao-cancel' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Cance' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Reset' className='botao-cancel' onClick={toggleModalVisibility}/>
       </Modal.Actions>
      </Modal.Root>
      

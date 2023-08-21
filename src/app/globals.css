@@ -10,7 +10,7 @@
 
 
 .botao-primary{
-  @apply bg-primary p-3 rounded-lg font-extrabold w-1/2 mt-4 text-white
+  @apply bg-primary p-3 rounded-lg font-extrabold mt-4 text-white text-center px-7
 }
 
 .botao-cancel{
