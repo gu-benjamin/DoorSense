@@ -7,7 +7,7 @@ import { InputLogin } from './../Inputs/Input-login/input-login';
 import IconClosePassword from 'components/Icons/icon-password-close';
 
 export default function Modal() {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const cancelButtonRef = useRef(null)
 

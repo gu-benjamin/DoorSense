@@ -7,12 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { InputLogin } from './../components/Inputs/Input-login/input-login';
 import { Button } from './../components/Buttons/Button/button';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
 import Link from 'next/link';
 import Image from 'next/image';
+import { Modal } from 'components/Modals';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -36,6 +38,7 @@ type FormProps = z.infer<typeof schema>;
 // });
 
 export default function LoginPage() {
+
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
@@ -55,11 +58,23 @@ export default function LoginPage() {
     resetField('password');
   };
 
-  // State para mudar a visibilidade da senha
+  // STATES 
+  //para mudar a visibilidade da senha
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  //para mudar a visibilidade da modal
+  const [open, setOpen] = useState(false)
 
+  //Ref ao botao de cancelar ação na modal
+  // const cancelButtonRef = useRef(null)
+  // console.log(cancelButtonRef)
+
+  // Função visibilidade da senha 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
+  }
+  // Função visibilidade da modal 
+  function toggleModalVisibility() {
+    setOpen((prevState) => !prevState);
   }
 
   // Front da página
@@ -166,11 +181,30 @@ export default function LoginPage() {
 
           />
 
-          <Button btnName="ENTRAR" />
+          <Button btnName="ENTRAR" className={`botao-primary`}/>
         </form>
         {/* Link */}
-        <Link href="/Dashboard">Esqueceu a senha?</Link>
+        <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility}/>
+        <Link href="/Dashboard">Dashboard</Link>
       </section>
+
+     <Modal.Root open={open} onClose={setOpen}>
+      <Modal.CloseTop>
+      <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-primary`}/>}  />                            
+      </Modal.CloseTop>
+      <Modal.MainSection>
+       <Modal.Icon icon={<IconUser size={30} color={`#000`}/>}/> 
+       <Modal.Title title={`Teste`}/>
+       <Modal.Content>
+        <InputLogin icon={<IconUser size={30} color={`#000`}/>} placeholder='testeeeeee' label='Testee'/>
+       </Modal.Content>
+      </Modal.MainSection>
+      <Modal.Actions>
+        <Modal.Action btnName='Clica ae' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Clica ae' className='botao-cancel' onClick={toggleModalVisibility}/>
+      </Modal.Actions>
+     </Modal.Root>
+     
     </main>
   );
 }

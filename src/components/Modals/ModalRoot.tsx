@@ -1,19 +1,19 @@
 
-import { Fragment, ReactNode, useState, useRef } from 'react';
+import { Fragment, ReactNode, useState, useRef, SetStateAction } from 'react';
 import { Dialog, Transition } from '@headlessui/react'
 
 interface ModalRootProps {
     children: ReactNode;
+    open: boolean,
+    onClose: React.Dispatch<SetStateAction<boolean>>
 }
 
-export default function ModalRoot({children}: ModalRootProps){
-    const [open, setOpen] = useState(true)
+export default function ModalRoot({children, open, onClose}: ModalRootProps){
 
-    const cancelButtonRef = useRef(null)
   
     return(
     <Transition.Root show={open} as={Fragment}>
-      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={setOpen}>
+      <Dialog as="div" className="relative z-10"  onClose={onClose}>
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"

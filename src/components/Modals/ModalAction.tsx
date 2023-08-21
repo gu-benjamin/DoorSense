@@ -10,7 +10,7 @@ export default function ModalAction({btnName, ...props}: ModalActionProps) {
     <>
       <button
         type="button"
-        className={twMerge(`botao-teste2`, props.className)}
+        className={twMerge(`botao-danger`, props.className)}
         {...props}
       >
         {btnName}
