@@ -7,14 +7,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { InputLogin } from './../components/Inputs/Input-login/input-login';
 import { Button } from './../components/Buttons/Button/button';
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Modal } from 'components/Modals';
+import { Modal } from 'components/Modal';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
