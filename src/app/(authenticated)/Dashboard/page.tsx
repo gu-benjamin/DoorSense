@@ -10,11 +10,9 @@ import IconX from 'components/Icons/🦆 icon-x';
 import IconFiltro from 'components/Icons/icon-lupa';
 import IconLupa from 'components/Icons/icon-lupa';
 
-export default function HomePage(){
-  
+export default function HomePage() {
   return (
     <main className="flex flex-col h-screen bg-gray-100">
-
       {/* Conteúdo principal */}
       <div className="flex items-center justify-center bg-secondary">
         {/* Área de conteúdo principal */}
@@ -22,10 +20,8 @@ export default function HomePage(){
           <div className="flex">
             <div className="bg-gray-100 py-4 text-left">
               <div className="flex items-center">
-              {/* Tamanho responsivo para IconHome */}
-              <IconHome size={75} color='' />
+                <IconHome size={75} color='' />
                 <div className="p-5">
-                  {/* Tamanho responsivo para textos */}
                   <p className="text-3xl sm:text-5xl font-semibold text-gray-800">Salas</p>
                   <p className="text-md sm:text-lg text-gray-600">Lista das salas criadas</p>
                 </div>
@@ -33,20 +29,22 @@ export default function HomePage(){
             </div>
           </div>
 
-
-          {/* Campo de busca e filtro */}
-          <div className="flex sm:flex-row mb-4">
-            <div className="relative max-w-7xl w-full ">
+         {/* Campo de busca e filtro */}
+          <div className="flex sm:flex-row mb-4 space-y-2 sm:space-y-0 sm:space-x-4">
+            <div className="relative max-w-7xl w-full">
               <div className="bg-blue-200 p-4 rounded-2xl flex w-full">
-                <IconLupa size={0} color=''  />
-                <input className="pl-10 pr-10 text-base focus:shadow-outline rounded-full w-full" type="search" placeholder="Buscar..."  />
-                  <button className="ml-4 border-2 border-primary bg-transparent hover:text-white hover:bg-primary text-cyan-500 font-semibold py-2 px-4 rounded">
-                    <IconFiltro size={0} color=''  />
-                    Filtros
-                  </button>    
+                <IconLupa size={0} color='' />
+                <input className="pl-10 pr-10 text-base focus:shadow-outline rounded-full w-full" type="search" placeholder="Buscar..." />
+                <button className="ml-4 border-2 border-primary bg-transparent hover:text-white hover:bg-primary text-cyan-500 font-semibold py-2 px-4 rounded">
+                  <IconFiltro size={0} color='' />
+                  Filtros
+                </button>
               </div>
             </div>
-            
+
+            {/* Espaço adicionado entre os elementos */}
+            <div className="w-4" />
+
             {/* Nova Sala */}
             <div className="bg-blue-200 p-4 rounded-2xl flex items-center">
               <button className="border-primary bg-primary text-white font-semibold py-2 px-4 rounded flex items-center" style={{ whiteSpace: 'nowrap' }}>
@@ -57,30 +55,30 @@ export default function HomePage(){
           </div>
 
           {/* O Dashboard */}
-          <div className="w-full overflow-x-auto ">
+          <div className="w-full overflow-x-auto">
             <table className="table-auto text-sm w-full border-collapse">
-                <thead>
-                  <tr className="hover:bg-grey-lighter">
-                    <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">ID da Sala</th>
-                    <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Número</th>
-                    <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Nome da Sala</th>
-                    <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Status</th>
-                    <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Ações</th>
-                  </tr>
-                </thead>
+              <thead>
+                <tr className="hover:bg-grey-lighter">
+                  <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">ID da Sala</th>
+                  <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Número</th>
+                  <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Nome da Sala</th>
+                  <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Status</th>
+                  <th className="py-2 px-4 text-center bg-grey-lightest font-normal uppercase text-sm text-primary relative border border-grey-light">Ações</th>
+                </tr>
+              </thead>
                 <tbody>
                   {/* -----------------------------ID 1-------------------------------- */}
-                  <tr className="bg-white mb-4 " >
-                    <td className="py-3 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light" >123abcdef456ghi89</td>
-                    <td className="py-3 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">1</td>
-                    <td className="py-3 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">Laboratório</td>
-                    <td className="py-3 px-4 text-center border-b border-grey-light text-green-500 whitespace-nowrap border border-grey-light">
+                  <tr className="bg-white mb-4 border-secondary border-y-4 rounded-3xl">
+                    <td className="py-3 px-4 text-center border-b whitespace-nowrap " >123abcdef456ghi89</td>
+                    <td className="py-3 px-4 text-center border-b whitespace-nowrap">1</td>
+                    <td className="py-3 px-4 text-center border-b whitespace-nowrap ">Laboratório</td>
+                    <td className="py-3 px-4 text-center border-b text-green-500 whitespace-nowrap">
                       <div className="flex items-center justify-center">
                         <IconCerto size={16} color=''/>
                         <span className="ml-1">Ativo</span>
                       </div>
                     </td>
-                    <td className="flex items-center justify-center py-2 px-4 text-center border-b border-grey-light border border-grey-light">
+                    <td className="flex items-center justify-center py-2 px-4 text-center">
                       <div className="flex items-center space-x-2">
                         <IconEdit size={30} color=''/>
                         <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
@@ -90,17 +88,17 @@ export default function HomePage(){
                   </tr>
                   
                   {/* -----------------------------ID 2-------------------------------- */}
-                  <tr className="bg-white mb-4">
-                    <td className="py-2 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">123abcdef456ghi89</td>
-                    <td className="py-2 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">1</td>
-                    <td className="py-2 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">Laboratório</td>
-                    <td className="py-2 px-4 text-center border-b border-grey-light text-green-500 whitespace-nowrap border border-grey-light">
+                  <tr className="bg-white mb-4 border-secondary border-y-4">
+                    <td className="py-2 px-4 text-center whitespace-nowrap">123abcdef456ghi89</td>
+                    <td className="py-2 px-4 text-center whitespace-nowrap">1</td>
+                    <td className="py-2 px-4 text-center whitespace-nowrap">Laboratório</td>
+                    <td className="py-2 px-4 text-center text-green-500 whitespace-nowrap">
                       <div className="flex items-center justify-center">
                         <IconCerto size={16} color=''/>
                         <span className="ml-1">Ativo</span>
                       </div>
                     </td>
-                    <td className="flex items-center justify-center py-2 px-4 text-center border-b border-grey-light border border-grey-light">
+                    <td className="flex items-center justify-center py-2 px-4 text-center">
                       <div className="flex items-center space-x-2">
                         <IconEdit size={30} color=''/>
                         <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
@@ -110,17 +108,17 @@ export default function HomePage(){
                   </tr>
                   
                   {/* -----------------------------ID 3-------------------------------- */}
-                  <tr className="bg-white ">
-                    <td className="py-2 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">123abcdef456ghi89</td>
-                    <td className="py-2 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">1</td>
-                    <td className="py-2 px-4 text-center border-b border-grey-light whitespace-nowrap border border-grey-light">Laboratório</td>
-                    <td className="py-2 px-4 text-center border-b border-grey-light text-green-500 whitespace-nowrap border border-grey-light">
+                  <tr className="bg-white mb-4 border-secondary border-y-4">
+                    <td className="py-2 px-4 text-center whitespace-nowrap">123abcdef456ghi89</td>
+                    <td className="py-2 px-4 text-center whitespace-nowrap">1</td>
+                    <td className="py-2 px-4 text-center whitespace-nowrap">Laboratório</td>
+                    <td className="py-2 px-4 text-center text-red-500 whitespace-nowrap">
                       <div className="flex items-center justify-center">
-                        <IconCerto size={16} color=''/>
-                        <span className="ml-1">Ativo</span>
+                        <IconX size={16} color=''/>
+                        <span className="ml-1">Inativo</span>
                       </div>
                     </td>
-                    <td className="flex items-center justify-center py-2 px-4 text-center border-b border-grey-light border border-grey-light">
+                    <td className="flex items-center justify-center py-2 px-4 text-center">
                       <div className="flex items-center space-x-2">
                         <IconEdit size={30} color=''/>
                         <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
