@@ -79,9 +79,9 @@ export default function LoginPage() {
 
   // Front da página
   return (
-    <main className={`w-screen h-screen flex justify-center`}>
+    <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen `}>
       {/* Right Column Image */}
-      <picture className={`w-1/2 h-full hidden lg:block xl:block relative`}>
+      <picture className={`w-1/2 h-screen hidden lg:block xl:block relative`}>
         <Image
           src="/images/Login.png"
           alt="login image"
@@ -95,9 +95,9 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`flex flex-col items-center justify-center w-1/2 h-full gap-12`}
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 `}
       >
-        <img src="/images/Logo.png" alt="" className={`lg:w-24`} />
+        <img src="/images/Logo.png" alt="" className={` w-24`} />
 
         <h1 className={`text-primary font-extrabold text-5xl lg:text-3x1`}>
           Login
@@ -192,14 +192,13 @@ export default function LoginPage() {
       <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-primary`}/>}  />                            
       </Modal.CloseTop>
       <Modal.MainSection>
-       <Modal.Icon icon={<IconUser size={30} color={`#000`}/>}/> 
-       <Modal.Title title={`Esqueceu a senha?`}/>
+       <Modal.Title title={`Esqueceu a senha?`} />
        <Modal.Content>
         <InputLogin icon={<IconUser size={30} color={`#000`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
        </Modal.Content>
       </Modal.MainSection>
       <Modal.Actions>
-        <Modal.Action btnName='Cance' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Cancelar' onClick={toggleModalVisibility}/>
         <Modal.Action btnName='Reset' className='botao-cancel' onClick={toggleModalVisibility}/>
       </Modal.Actions>
      </Modal.Root>

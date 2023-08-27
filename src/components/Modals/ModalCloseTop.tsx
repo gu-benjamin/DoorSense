@@ -8,7 +8,7 @@ interface ModalCloseTopProps {
 
 export default function ModalCloseTop({children} : ModalCloseTopProps){
     return(
-    <div className={`bg-gray-50 flex flex-row-reverse p-[2px] mr-1`}>
+    <div className={`bg-secondary flex flex-row-reverse p-[2px] mr-1`}>
         {children}        
     </div>
     )

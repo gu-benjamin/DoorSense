@@ -45,7 +45,7 @@ export default function Modal() {
                 </div>
 
                 {/* Main section */}
-                <div className="bg-white px-4 pb-5 pt-5 sm:p-6 sm:pb-5 flex flex-col items-center gap-3">
+                <div className="bg-secondary px-4 pb-5 pt-5 sm:p-6 sm:pb-5 flex flex-col items-center gap-3">
 
                     {/* Modal Icon */}
                     <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-100">
@@ -71,13 +71,7 @@ export default function Modal() {
 
                 {/* Buttons section */}
                 <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
-                    onClick={() => setOpen(false)}
-                  >
-                    Deactivate
-                  </button>
+                  
                   <button
                     type="button"
                     className={`botao-teste`}
@@ -85,6 +79,13 @@ export default function Modal() {
                     ref={cancelButtonRef}
                   >
                     Cancel
+                  </button>
+                  <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
+                    onClick={() => setOpen(false)}
+                  >
+                    Deactivate
                   </button>
                 </div>
 
