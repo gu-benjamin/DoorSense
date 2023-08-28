@@ -2,6 +2,9 @@
 
 import IconUser from 'components/Icons/icon-user';
 import IconLock from 'components/Icons/icon-lock';
+import IconOpenPassword from './../components/Icons/icon-password-open';
+import IconClosePassword from './../components/Icons/icon-password-close';
+import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -10,8 +13,6 @@ import { Button } from './../components/Buttons/Button/button';
 import { useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
-import IconOpenPassword from './../components/Icons/icon-password-open';
-import IconClosePassword from './../components/Icons/icon-password-close';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from 'components/Modal';
@@ -33,12 +34,7 @@ const schema = z.object({
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
 type FormProps = z.infer<typeof schema>;
 
-// const DynamicInputLogin = dynamic(() => import("../components/Inputs/Input-login/input-login"), {
-//   ssr: false,
-// });
-
 export default function LoginPage() {
-
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
@@ -58,21 +54,21 @@ export default function LoginPage() {
     resetField('password');
   };
 
-  // STATES 
+  // STATES
   //para mudar a visibilidade da senha
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   //para mudar a visibilidade da modal
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
   //Ref ao botao de cancelar ação na modal
   // const cancelButtonRef = useRef(null)
   // console.log(cancelButtonRef)
 
-  // Função visibilidade da senha 
+  // Função visibilidade da senha
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
   }
-  // Função visibilidade da modal 
+  // Função visibilidade da modal
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
   }
@@ -81,7 +77,9 @@ export default function LoginPage() {
   return (
     <main className={`w-screen h-screen flex`}>
       {/* Right Column Image */}
-      <picture className={`w-1/2 h-full hidden md:block lg:block xl:block relative`}>
+      <picture
+        className={`relative w-1/2 h-full hidden md:block lg:block xl:block `}
+      >
         <Image
           src="/images/Login.png"
           alt="login image"
@@ -89,7 +87,7 @@ export default function LoginPage() {
           quality={100}
           className={``}
           priority
-          sizes='(max-width: 768px) 100vw'
+          sizes="(max-width: 768px) 100vw"
         />
       </picture>
 
@@ -97,9 +95,10 @@ export default function LoginPage() {
       <section
         className={`p-6 flex flex-col items-center justify-center w-1/2 h-full gap-12`}
       >
+        <ThemeButton/>
         <img src="/images/Logo.png" alt="" className={`lg:w-24`} />
 
-        <h1 className={`text-primary font-extrabold text-5xl lg:text-3x1`}>
+        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-3x1`}>
           Login
         </h1>
         <p className={`font-regular text-lg md:text-sm`}>
@@ -112,10 +111,10 @@ export default function LoginPage() {
         >
           {/* Campo Usuário */}
           <InputLogin
-          //Registrando campo na hook
+            //Registrando campo na hook
             {...register('user', { required: true })}
-          //Pros
-            placeholder='Digite sua senha ...'
+            //Pros
+            placeholder="Digite sua senha ..."
             icon={
               <IconUser
                 size={30}
@@ -132,10 +131,10 @@ export default function LoginPage() {
 
           {/* Campo password */}
           <InputLogin
-          // Registrando campo na hook
+            // Registrando campo na hook
             {...register('password', { required: true })}
-          //Props
-          placeholder='Digite sua senha ...'
+            //Props
+            placeholder="Digite sua senha ..."
             type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <IconLock
@@ -145,15 +144,16 @@ export default function LoginPage() {
                     ? `var(--color-error)`
                     : `var(--color-primary)`
                 }
-            />
+              />
             }
             label="Senha:"
             helperText={errors.password?.message}
-
             //Botao icone de esconder a senha
             actionIcon={
               <ButtonIcon
-              className={`absolute right-3 ${errors.password?.message ? `bottom-9` : `bottom-2`}`}
+                className={`absolute right-3 ${
+                  errors.password?.message ? `bottom-9` : `bottom-2`
+                }`}
                 icon={
                   isPasswordVisible ? (
                     <IconOpenPassword
@@ -178,49 +178,60 @@ export default function LoginPage() {
                 onClick={togglePasswordVisibility}
               />
             }
-
           />
 
-          <Button btnName="ENTRAR" className={`botao-primary`}/>
+          <Button btnName="ENTRAR" className={`botao-primary`} />
         </form>
         {/* Link */}
-        <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility}/>
+        <Button
+          btnName="Esqueceu a senha?"
+          type="button"
+          onClick={toggleModalVisibility}
+        />
         <Link href="/Dashboard">Dashboard</Link>
       </section>
 
       {/*Esqueleto da modal*/}
-     <Modal.Root open={open} onClose={setOpen}>
+      <Modal.Root open={open} onClose={setOpen}>
+        {/*Parte de cima da modal - Action de fechar a modal*/}
+        <Modal.CloseTop>
+          <ButtonIcon
+            onClick={toggleModalVisibility}
+            icon={<XCircleIcon width={25} height={25} className={``} />}
+          />
+        </Modal.CloseTop>
 
-      {/*Parte de cima da modal - Action de fechar a modal*/}
-      <Modal.CloseTop>
-      <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-primary`}/>}  />                            
-      </Modal.CloseTop>
+        {/*Corpo da modal*/}
+        <Modal.MainSection>
+          {/*Icone da modal*/}
+          <Modal.Icon
+            icon={<IconUser size={50} color={`var(--color-primary)`} />}
+          />
 
-      {/*Corpo da modal*/}
-      <Modal.MainSection>
+          {/*Titulo da modal*/}
+          <Modal.Title title={`Teste`} />
 
-        {/*Icone da modal*/}
-       <Modal.Icon icon={<IconUser size={50} color={`var(--color-primary)`}/>}/>
+          {/*Conteudo da modal*/}
+          <Modal.Content>
+            <InputLogin
+              icon={<IconUser size={30} color={`var(--color-primary)`} />}
+              placeholder="testeeeeee"
+              label="Testee"
+            />
+          </Modal.Content>
+        </Modal.MainSection>
 
-       {/*Titulo da modal*/}
-       <Modal.Title title={`Teste`}/>
-
-       {/*Conteudo da modal*/}
-       <Modal.Content>
-        <InputLogin icon={<IconUser size={30} color={`var(--color-primary)`}/>} placeholder='testeeeeee' label='Testee'/>
-       </Modal.Content>
-
-      </Modal.MainSection>
-
-      {/*Parte de baixo da modal - seção de botões*/}
-      <Modal.Actions>
-        
-        {/*Botões da modal*/}
-        <Modal.Action btnName='Clica ae' onClick={toggleModalVisibility}/>
-        <Modal.Action btnName='Clica ae' className='botao-cancel' onClick={toggleModalVisibility}/>
-      </Modal.Actions>
-     </Modal.Root>
-     
+        {/*Parte de baixo da modal - seção de botões*/}
+        <Modal.Actions>
+          {/*Botões da modal*/}
+          <Modal.Action btnName="Clica ae" onClick={toggleModalVisibility} />
+          <Modal.Action
+            btnName="Clica ae"
+            className="botao-cancel"
+            onClick={toggleModalVisibility}
+          />
+        </Modal.Actions>
+      </Modal.Root>
     </main>
   );
 }

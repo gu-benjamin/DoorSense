@@ -1,21 +1,14 @@
-import { ReactNode, createContext, useState } from "react"
+'use client'
 
+import { ThemeProvider } from "next-themes";
+import { ReactNode } from 'react';
 
-interface DarkThemeProviderProps {
+interface ProvidersProps {
     children: ReactNode
 }
 
-const DarkThemeContext = createContext({})
-
-export default DarkThemeContext;
-
-export function DarkThemeProvider({children} : DarkThemeProviderProps){
-
-    const [theme, setTheme] = useState(false)
-    
+export default function Providers({children} : ProvidersProps){
     return(
-        <DarkThemeContext.Provider value={''}>
-            {children}
-        </DarkThemeContext.Provider>
+        <ThemeProvider attribute='class'>{children}</ThemeProvider>
     )
 }

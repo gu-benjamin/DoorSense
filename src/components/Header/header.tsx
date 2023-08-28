@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
+import Link from 'next/link';
 
 interface HeaderProps {
 
@@ -7,7 +9,7 @@ interface HeaderProps {
 export default function Header(props : HeaderProps){
     return(
       <header
-            className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white font-bold`}
+            className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white dark:bg-black font-bold`}
         >
         <div className={`flex items-center`}>
           <Image src='/images/Logo.png' alt='Logo' width={48} height={48} className={`w-12 sm:w-20`} />
@@ -18,26 +20,10 @@ export default function Header(props : HeaderProps){
         </div>
         <div className={`flex items-center space-x-4 sm:space-x-6`}>
           {/* <!-- Botão de Logout --> */}
+          <Link href="/">Login</Link>
           <Image src='/images/logout.png' alt='Logout' width={24} height={24} className={`h-6 w-6`} />
           {/* <!-- Botão de alternância de tema --> */}
-          <button>
-            <Image
-              id='moonIcon'
-              src='/images/lua.avif'
-              alt='Lua'
-              width={24}
-              height={24}
-              className={`h-6 w-6 text-gray-700 `}
-            />
-            <Image
-              id='sunIcon'
-              src='/images/sol.png'
-              alt='Sol'
-              width={24}
-              height={24}
-              className={`h-6 w-6 text-gray-700 hidden`}
-            />
-          </button>
+          <ThemeButton/>
         </div>
       </header>
     )
