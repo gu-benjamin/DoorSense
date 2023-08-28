@@ -46,7 +46,7 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
           type={type}
           name={name}
           ref={ref}
-          className={`peer block min-h-[auto] px-8 pb-2 w-full border-b-2 ${hasError ? `border-light-red` : `border-primary`} 
+          className={`peer block min-h-[auto] px-14 pb-2 w-full border-b-2 ${hasError ? `border-light-red` : `border-primary`} 
                       bg-transparent py-1 leading-[1.6] outline-none transition-all duration-200 ease-linear 
                       peer-focus:${hasError ? `text-light-red` : `text-primary`} 
                       dark:text-gray-500 dark:placeholder:${hasError ? `text-light-red` : `text-neutral-500`} 

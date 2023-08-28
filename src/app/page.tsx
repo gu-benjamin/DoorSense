@@ -95,7 +95,7 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 `}
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-4 `}
       >
         <img src="/images/Logo.png" alt="" className={` w-24`} />
 
@@ -108,7 +108,7 @@ export default function LoginPage() {
 
         <form
           onSubmit={handleSubmit(handleForm)}
-          className={`flex flex-col items-center gap-10 w-full lg:w-1/2 xl:1/2`}
+          className={`flex flex-col items-center gap-8 w-full lg:w-1/2 xl:1/2`}
         >
           {/* Campo Usuário */}
           <InputLogin
@@ -189,7 +189,7 @@ export default function LoginPage() {
 
      <Modal.Root open={open} onClose={setOpen}>
       <Modal.CloseTop>
-      <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-primary`}/>}  />                            
+      <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-white`}/>}  />                            
       </Modal.CloseTop>
       <Modal.MainSection>
        <Modal.Title title={`Esqueceu a senha?`} />
@@ -198,8 +198,8 @@ export default function LoginPage() {
        </Modal.Content>
       </Modal.MainSection>
       <Modal.Actions>
-        <Modal.Action btnName='Cancelar' onClick={toggleModalVisibility}/>
-        <Modal.Action btnName='Reset' className='botao-cancel' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Reset' className='botao-reset' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Sair' className='botao-danger' onClick={toggleModalVisibility}/>
       </Modal.Actions>
      </Modal.Root>
      

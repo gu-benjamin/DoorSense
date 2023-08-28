@@ -8,7 +8,7 @@ interface ModalContentProps {
 
 export default function ModalMainSection({ children }: ModalContentProps) {
   return (
-    <div className={twMerge(`bg-white px-5 pb-5 pt-5 sm:p-6 sm:pb-5 flex flex-col items-center gap-3 border-primary`)}>
+    <div className={twMerge(`bg-secondary px-5 pb-5 pt-5 sm:p-6 sm:pb-5 flex flex-col gap-3 border-primary`)}>
         {children}
     </div>
   );
