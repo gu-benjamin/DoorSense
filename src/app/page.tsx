@@ -194,7 +194,7 @@ export default function LoginPage() {
       <Modal.MainSection>
        <Modal.Title title={`Esqueceu a senha?`} />
        <Modal.Content>
-        <InputLogin icon={<IconUser size={30} color={`#000`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
+        <InputLogin icon={<IconUser size={30} color={`#05AFF2`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
        </Modal.Content>
       </Modal.MainSection>
       <Modal.Actions>
