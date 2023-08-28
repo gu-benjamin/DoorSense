@@ -15,6 +15,8 @@ const config: Config = {
         blue: '#7CD4F7',
         topbottom: '#7aa7da',
         grey: '#606e80',
+        modaltop: '#FCFCFC',
+        iconcolor: '#DAF3FD',
       }
     },
   },

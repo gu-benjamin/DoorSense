@@ -12,6 +12,7 @@ import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconOpenPassword from './../components/Icons/icon-password-open';
 import IconClosePassword from './../components/Icons/icon-password-close';
+import IconLost from '../components/Icons/icon-lostpass';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from 'components/Modals';
@@ -192,7 +193,9 @@ export default function LoginPage() {
       <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-white`}/>}  />                            
       </Modal.CloseTop>
       <Modal.MainSection>
-       <Modal.Title title={`Esqueceu a senha?`} />
+       <Modal.Icon icon={<IconLost size={50} color={`var(--color-primary)`}/>}/>
+       <Modal.Title title={`Redefinição de senha`} />
+            <p>Por favor insira seu e-mail de recuperação</p>
        <Modal.Content>
         <InputLogin icon={<IconUser size={30} color={`#05AFF2`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
        </Modal.Content>
