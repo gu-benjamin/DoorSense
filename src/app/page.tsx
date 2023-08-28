@@ -188,18 +188,34 @@ export default function LoginPage() {
         <Link href="/Dashboard">Dashboard</Link>
       </section>
 
+      {/*Esqueleto da modal*/}
      <Modal.Root open={open} onClose={setOpen}>
+
+      {/*Parte de cima da modal - Action de fechar a modal*/}
       <Modal.CloseTop>
       <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-primary`}/>}  />                            
       </Modal.CloseTop>
+
+      {/*Corpo da modal*/}
       <Modal.MainSection>
-       <Modal.Icon icon={<IconUser size={30} color={`#000`}/>}/> 
+
+        {/*Icone da modal*/}
+       <Modal.Icon icon={<IconUser size={50} color={`var(--color-primary)`}/>}/>
+
+       {/*Titulo da modal*/}
        <Modal.Title title={`Teste`}/>
+
+       {/*Conteudo da modal*/}
        <Modal.Content>
-        <InputLogin icon={<IconUser size={30} color={`#000`}/>} placeholder='testeeeeee' label='Testee'/>
+        <InputLogin icon={<IconUser size={30} color={`var(--color-primary)`}/>} placeholder='testeeeeee' label='Testee'/>
        </Modal.Content>
+
       </Modal.MainSection>
+
+      {/*Parte de baixo da modal - seção de botões*/}
       <Modal.Actions>
+        
+        {/*Botões da modal*/}
         <Modal.Action btnName='Clica ae' onClick={toggleModalVisibility}/>
         <Modal.Action btnName='Clica ae' className='botao-cancel' onClick={toggleModalVisibility}/>
       </Modal.Actions>
