@@ -9,14 +9,15 @@ const config: Config = {
   theme: {
     extend: {
       colors:{
-        primary: '#05AFF2',
+        primary: {
+          50: '#DAF3FD',
+          70: '#33C5FF',
+          100:'#05AFF2'
+        },
         secondary: '#F0F5F9',
         'light-red': 'hsl(0, 100%, 67%)',
-        blue: '#7CD4F7',
         topbottom: '#7aa7da',
-        grey: '#606e80',
         modaltop: '#FCFCFC',
-        iconcolor: '#DAF3FD',
       }
     },
   },

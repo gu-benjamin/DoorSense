@@ -100,7 +100,7 @@ export default function LoginPage() {
       >
         <img src="/images/Logo.png" alt="" className={` w-24`} />
 
-        <h1 className={`text-primary font-extrabold text-5xl lg:text-3x1`}>
+        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-3x1`}>
           Login
         </h1>
         <p className={`font-regular text-lg`}>
@@ -201,8 +201,8 @@ export default function LoginPage() {
        </Modal.Content>
       </Modal.MainSection>
       <Modal.Actions>
-        <Modal.Action btnName='Reset' className='botao-reset' onClick={toggleModalVisibility}/>
         <Modal.Action btnName='Sair' className='botao-danger' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Reset' className='botao-reset' onClick={toggleModalVisibility}/>
       </Modal.Actions>
      </Modal.Root>
      
