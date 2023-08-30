@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import IconHome from 'components/Icons/🦆 icon-home';  // Importar o ícone para a página
 import IconMais from 'components/Icons/icon-mais';   // Importar o ícone para a página
 import IconEdit from 'components/Icons/🦆 icon-edit';  // Importar o ícone para a página
@@ -16,6 +16,14 @@ export default function HomePage() {
   const [selectedOption, setSelectedOption] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Estado para controlar a exibição das opções
 
+  // função para pegar o tamanho da tela quando houver mudança
+  const [windowSize, setWidth] = useState(window.innerWidth); // inicia com o tamanho da tela.
+    const handleResize = () => setWidth(window.innerWidth); // envia o tamanho atual da tela para a variável
+    useEffect(() => {
+      window.addEventListener('resize', handleResize); // adiciona a função à tela para quando houver mudança do tamanho
+      return () => window.removeEventListener('resize', handleResize); // retorna removendo a função (provavelmente para não rodar infinitamente)
+    }, [handleResize]);
+
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
@@ -25,7 +33,7 @@ export default function HomePage() {
   };
 
   return (
-    <main className="flex flex-col bg-gray-100">
+    <main className="flex flex-col bg-gray-100"> 
       <div className="flex items-center justify-center bg-secondary">
         <div className="w-full sm:w-11/12 md:w-5/6 lg:w-3/5 xl:w-4/5 p-4">
           {/* Cabeçalho */}
@@ -97,46 +105,52 @@ export default function HomePage() {
                 <IconX size={16} color='' />
                 <span>Inativo</span>
               </div>
-              <div className="relative w-full lg:max-w-sm">
-            <div
-              className="p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none cursor-pointer flex items-center justify-between"
-              onClick={handleDropdownClick}
-            >
-              {selectedOption ? (
-                <>
-                  {selectedOption === 'edit' && <IconEdit size={30} color='' />}
-                  {selectedOption === 'delete' && <IconTrash size={37} color='#FF0F00' />}
-                </>
-              ) : (
-                <>
-                  <span>Escolha uma ação</span>
-                  <IconDropDown size={20} color='' /> {/* Substitua pelo ícone de seta para baixo */}
-                </>
-              )}
-            </div>
-            {isDropdownOpen && (
-              <div className="flex flex-col bg-white border rounded-md shadow-md mt-1 absolute z-10">
-                <button
-                  className="p-2 hover:bg-gray-100"
-                  onClick={() => {
-                    setSelectedOption('edit');
-                    setIsDropdownOpen(false);
-                  }}
-                >
-                  Editar
-                </button>
-                <button
-                  className="p-2 hover:bg-gray-100"
-                  onClick={() => {
-                    setSelectedOption('delete');
-                    setIsDropdownOpen(false);
-                  }}
-                >
-                  Excluir
-                </button>
-              </div>
-            )}
-          </div>
+              {windowSize <= 600 ? <div
+                        className="p-2.5 text-gray-500 bg-white border rounded-md shadow-sm outline-none appearance-none cursor-pointer flex items-center justify-between"
+                        onClick={handleDropdownClick}
+                      >
+
+                          {selectedOption ? (
+                            <>
+                              {selectedOption === 'edit' && <IconEdit size={30} color='' />}
+                              {selectedOption === 'delete' && <IconTrash size={37} color='#FF0F00' />}
+                            </>
+                          ) : (
+                            <>
+                              <span>Escolha uma ação</span>
+                              <IconDropDown size={20} color='' /> {/* Substitua pelo ícone de seta para baixo */}
+                            </>
+                          )}
+                        {isDropdownOpen && (
+                          <div className="flex flex-col bg-white border rounded-md shadow-md mt-1 absolute z-10">
+                            <button
+                              className="p-2 hover:bg-gray-100"
+                              onClick={() => {
+                                setSelectedOption('edit');
+                                setIsDropdownOpen(false);
+                              }}
+                            >
+                              <IconEdit size={30} color='' />
+                            </button>
+                            <button
+                              className="p-2 hover:bg-gray-100"
+                              onClick={() => {
+                                setSelectedOption('delete');
+                                setIsDropdownOpen(false);
+                              }}
+                            >
+                              <IconTrash size={37} color='#FF0F00' />
+                            </button>
+                          </div>
+                        )}
+                      </div> 
+                      : 
+                      <div className="w-1/5 text-center sm:w-1/5 flex items-center justify-center space-x-2">
+                
+                      <IconEdit size={30} color='' />
+                      <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
+                      <IconTrash size={37} color='#FF0F00' />
+                    </div>}
             </div>            
           </div>
         </div>

@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={Mplus.className}>
-        <div className={`w-screen h-screen flex flex-col justify-between`}>
+        <div className={`w-screen h-screen flex flex-col justify-between overflow-x-hidden`}>  {/* overflow-x-hidden para remover scroll horizontal */}
           <Header/>
           {children}
           <Footer/>
