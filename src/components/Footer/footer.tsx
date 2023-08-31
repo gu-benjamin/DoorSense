@@ -8,7 +8,7 @@ export default function Footer(props: FooterProps) {
   return (
     
     <div className="bg-white">
-      <div className="max-w-xl mx-auto text-white py-6">
+      <div className="max-w-3xl mx-auto text-white py-4">
         <div className="text-center">
           <div className="flex justify-center">
             <IconLogoEquipe size={100} color="" /> {/* Ajuste o tamanho e a cor aqui */}
@@ -24,7 +24,7 @@ export default function Footer(props: FooterProps) {
           </div>
         </div>
         <hr/>
-        <div className="mt-28 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
+        <div className="mt-4 flex flex-col md:flex-row md:justify-between items-center text-sm text-gray-400">
           <p className="order-2 md:order-1 mt-8 md:mt-0">&copy; AcessoTech, 2023.</p>
           <div className="order-1 md:order-2">
             <span className="px-2">All rights reserved.</span>
