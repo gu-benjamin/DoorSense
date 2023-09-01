@@ -37,11 +37,6 @@ export default function HomePage() {
   const handleDropdownToggle = () => {
     setIsDropdownOpen(!isDropdownOpen); // Inverte o estado do dropdown
   };
-
-  const handleDropdownItemClick = (option) => {
-    setSelectedOption(option);
-    setIsDropdownOpen(false); // Fecha o dropdown após selecionar uma opção
-  };
   const [isDropdownOpenCard1, setIsDropdownOpenCard1] = useState(false);
   const [isDropdownOpenCard2, setIsDropdownOpenCard2] = useState(false);
 
@@ -58,6 +53,7 @@ export default function HomePage() {
     <main className="flex flex-col bg-gray-100">
       <div className="flex items-center justify-center bg-secondary">
         <div className="w-full sm:w-full md:w-10/12 lg:w-10/12 xl:w-10/12 p-4">
+          
           {/* Cabeçalho */}
           <div className="bg-gray-100 py-4 text-left flex items-center">
             <IconHome size={75} color="" />
@@ -90,11 +86,11 @@ export default function HomePage() {
 
           {/* Dashboard - Cabeçalho */}
           <div className="p-4 border-b-2 border-primary mb-4 flex justify-center text-primary">
-            <div className={`w-1/5 text-center sm:w-1/5 ${windowSize <= 600 ? 'text-xs' : ''}`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
-            <div className={`w-1/5 text-center sm:w-1/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Número</div>
-            <div className={`w-1/5 text-center sm:w-1/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Arduíno</div>
-            <div className={`w-1/5 text-center sm:w-1/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Status</div>
-            {windowSize > 600 && <div className={`w-1/5 text-center sm:w-1/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Ações</div>}
+            <div className={`w-2/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
+            <div className={`w-2/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Número</div>
+            <div className={`w-2/5 sm:w-2/5 ${windowSize <= 600 ? 'text-xs text-center' : ''}`}>Arduíno</div>
+            <div className={`w-2/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Status</div>
+            {windowSize > 600 && <div className={`w-1/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Ações</div>}
           </div>
 
           {/* Cards de informações */}
@@ -128,17 +124,15 @@ export default function HomePage() {
                       )}
                     </button>
                     {isDropdownOpenCard1 && (
-                      <div className="absolute mt-28 bg-white rounded shadow-lg z-10">
+                      <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
-                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('edit')}>
-                            <IconEdit size={30} color="" />
-                            Editar
+                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center ${windowSize <= 600} `} onClick={() => handleDropdownItemClick('edit')}>
+                            <IconEdit size={25} color="" />
                           </button>
                           <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
                           <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('delete')}>
-                            <IconTrash size={37} color="#FF0F00" />
-                            Excluir
+                            <IconTrash size={35} color="#FF0F00" />
                           </button>
                           {/* Se tiver outras opções, colocar aqui */}
                         </div>
@@ -182,17 +176,15 @@ export default function HomePage() {
                       )}
                     </button>
                     {isDropdownOpenCard2 && (
-                      <div className="absolute mt-28 bg-white rounded shadow-lg z-10">
+                      <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
                           <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('edit')}>
-                            <IconEdit size={30} color="" />
-                            Editar
+                            <IconEdit size={30} color="" />            
                           </button>
                           <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
                           <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('delete')}>
                             <IconTrash size={37} color="#FF0F00" />
-                            Excluir
                           </button>
                           {/* Se tiver outras opções, colocar aqui */}
                         </div>
