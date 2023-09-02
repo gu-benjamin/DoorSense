@@ -63,7 +63,7 @@ export default function HomePage() {
           </div>
 
           {/* Barra de pesquisa e botões */}
-          <div className={`flex sm:flex-row mb-4 sm:space-y-0 space-x-4 ${windowSize <= 600 ? 'text-xs' : ''}`}>
+          <div className={` text-xs flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}>
             <div className="relative max-w-8xl w-full">
               <div className="bg-thirdy p-4 rounded-2xl flex">
                 <IconLupa size={0} color="" />
