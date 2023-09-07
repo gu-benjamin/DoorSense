@@ -23,20 +23,11 @@ export default function HomePage() {
     window.addEventListener('resize', handleResize); // adiciona a função à tela para quando houver mudança do tamanho
     return () => window.removeEventListener('resize', handleResize); // retorna removendo a função (provavelmente para não rodar infinitamente)
   }, []);
-
-  // const handleDropdownToggle = () => {
-  //   setIsDropdownContentVisible(!isDropdownContentVisible); 
-  // };
   
   const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedOption(event.target.value);
   };
 
-  // const [isDropdownContentVisible, setIsDropdownContentVisible] = useState(false);
-
-  const handleDropdownToggle = () => {
-    setIsDropdownOpen(!isDropdownOpen); // Inverte o estado do dropdown
-  };
   const [isDropdownOpenCard1, setIsDropdownOpenCard1] = useState(false);
   const [isDropdownOpenCard2, setIsDropdownOpenCard2] = useState(false);
 
@@ -58,11 +49,11 @@ export default function HomePage() {
             <IconHome size={75} color="" />
             <div className="p-5">
               <p className="text-3xl sm:text-5xl font-semibold text-gray-800">Salas</p>
-              <p className="text-md sm:text-lg text-gray-600">Lista das salas criadas</p>
+              <p className="text-md sm:text-lg">Lista das salas criadas</p>
             </div>
           </div>
 
-          {/* Barra de pesquisa e botões */}
+          {/* Barra de pesquisa e botão Nova Sala */}
           <div className={` text-xs flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}>
             <div className="relative max-w-8xl w-full">
               <div className="bg-thirdy p-4 rounded-2xl flex">
@@ -76,7 +67,7 @@ export default function HomePage() {
             </div>
 
             <div className="bg-thirdy p-3 rounded-2xl flex items-center">
-              <button className="border-primary bg-primary text-white font-semibold py-2 px-4 rounded flex items-center" style={{ whiteSpace: 'nowrap' }} onClick={handleDropdownToggle}>
+              <button className="border-primary bg-primary text-white font-semibold py-2 px-4 rounded flex items-center" style={{ whiteSpace: 'nowrap' }}>
                 <IconMais size={17} />
                 Nova Sala
               </button>
@@ -84,12 +75,12 @@ export default function HomePage() {
           </div>
 
           {/* Dashboard - Cabeçalho */}
-          <div className="p-4 border-b-2 border-primary mb-4 flex justify-center text-primary">
-            <div className={`w-2/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
-            <div className={`w-2/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Número</div>
-            <div className={`w-2/5 sm:w-2/5 ${windowSize <= 600 ? 'text-xs text-center' : ''}`}>Arduíno</div>
-            <div className={`w-2/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Status</div>
-            {windowSize > 600 && <div className={`w-1/5 text-center sm:w-2/5 ${windowSize <= 600 ? 'text-xs' : ''}`}>Ações</div>}
+          <div className="p-4 border-b-2 border-primary flex justify-center text-sm sm:text-base text-primary">
+            <div className={`w-2/5 text-center`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
+            <div className={`w-2/5 text-center `}>Número</div>
+            <div className={`w-2/5 text-center sm:text-left`}>Arduíno</div>
+            <div className={`w-2/5 text-center `}>Status</div>
+            {windowSize > 640 && <div className={`w-2/5 text-center `}>Ações</div>}
           </div>
 
           {/* Cards de informações */}
@@ -97,21 +88,21 @@ export default function HomePage() {
 
 
             {/* Card 1 */}
-            <div className="bg-white p-4 rounded-md border flex space-x-4 items-center justify-center">
-              <p className={`w-1/5 text-center sm:w-1/5 text-gray-600 ${windowSize <= 600 ? 'text-xs' : ''}`}>Laboratório</p>
-              <p className={`w-1/5 text-center sm:w-1/5 text-gray-600 ${windowSize <= 600 ? 'text-xs' : ''}`}>1</p>
-              <p className={`w-1/5 sm:w-1/5 text-gray-600 ${windowSize <= 600 ? 'text-xs' : 'text-sm'}`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
-              {windowSize > 600 && (
-                <div className={`w-1/5 text-center sm:w-1/5 flex items-center justify-center space-x-2 ${windowSize <= 600 ? 'text-xs' : ''}`}>
-                  <IconCerto size={windowSize <= 600 ? 12 : 16} color="" />
-                  <span className={windowSize <= 600 ? 'text-xs' : 'text-green-500'}>Ativo</span>
+            <div className="bg-white text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
+              <p className={` w-1/5 text-center  `}>Laboratório</p>
+              <p className={`w-1/5 text-center  sm:w-1/5`}>1</p>
+              <p className={`w-1/5 sm:w-1/5  text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
+              {windowSize > 640 && (
+                <div className={`w-1/5 text-center  sm:w-1/5 flex items-center justify-center space-x-2 `}>
+                  <IconCerto size={16} color="" />
+                  <span className={' text-green-500'}>Ativo</span>
                 </div>
               )}
-              {windowSize <= 600 ? (
+              {windowSize <= 640 ? (
                 <div className="relative">
-                  <div className={`flex items-center justify-end space-x-2 ${windowSize <= 600 ? 'text-xs' : ''}`}>
+                  <div className={`flex items-center justify-end space-x-2 }`}>
                     <IconCerto size={16} color="" />
-                    <p className={windowSize <= 600 ? 'text-xs text-green-500' : ''}>Ativo</p>
+                    <p className={' text-green-500'}>Ativo</p>
                     <button className=" bg-white cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard1}>
                       {selectedOption ? (
                         <>
@@ -119,14 +110,14 @@ export default function HomePage() {
                           {selectedOption === 'delete' && <IconTrash size={windowSize <= 600 ? 24 : 37} color="#FF0F00" />}
                         </>
                       ) : (
-                        <IconDropDown size={windowSize <= 600 ? 15 : 20} color="" />
+                        <IconDropDown size={18} color="" />
                       )}
                     </button>
                     {isDropdownOpenCard1 && (
                       <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
-                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center ${windowSize <= 600} `} onClick={() => handleDropdownItemClick('edit')}>
+                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `} onClick={() => handleDropdownItemClick('edit')}>
                             <IconEdit size={25} color="" />
                           </button>
                           <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
@@ -140,7 +131,7 @@ export default function HomePage() {
                   </div>
                 </div>
               ) : (
-                <div className={`w-1/5 text-center sm:w-1/5 flex items-center justify-center space-x-2 ${windowSize <= 600 ? 'text-xs' : ''}`}>
+                <div className={`w-1/5 text-center sm:w-1/5 text-xs sm:text-sm flex items-center justify-center space-x-2 `}>
                   <IconEdit size={30} color="" />
                   <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
                   <IconTrash size={37} color="#FF0F00" />
@@ -149,41 +140,41 @@ export default function HomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white p-4 rounded-md border flex space-x-4 items-center justify-center">
-              <p className={`w-1/5 text-center sm:w-1/5 text-gray-600 ${windowSize <= 600 ? 'text-xs' : ''}`}>Biblioteca</p>
-              <p className={`w-1/5 text-center sm:w-1/5 text-gray-600 ${windowSize <= 600 ? 'text-xs' : ''}`}>2</p>
-              <p className={`w-1/5 sm:w-1/5 text-gray-600 ${windowSize <= 600 ? 'text-xs' : 'text-sm'}`} style={{ whiteSpace: 'nowrap' }}>B3D4F7H9</p>
-              {windowSize > 600 && (
-                <div className={`w-1/5 text-center sm:w-1/5 flex items-center justify-center space-x-2 ${windowSize <= 600 ? 'text-xs' : ''}`}>
-                  <IconX size={windowSize <= 600 ? 12 : 16} color="" />
-                  <span className={windowSize <= 600 ? 'text-xs' : 'text-red-500'}>Inativo</span>
+            <div className="bg-white text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
+              <p className={` w-1/5 text-center `}>Biblioteca</p>
+              <p className={`w-1/5 text-center sm:w-1/5`}>2</p>
+              <p className={`w-1/5 sm:w-1/5 text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
+              {windowSize > 640 && (
+                <div className={`w-1/5 text-center  sm:w-1/5 flex items-center justify-center space-x-2 `}>
+                  <IconX size={16} color="" />
+                  <span className={' text-red-500'}>Inativo</span>
                 </div>
               )}
-              {windowSize <= 600 ? (
+              {windowSize <= 640 ? (
                 <div className="relative">
-                  <div className={`flex items-center justify-end space-x-2 ${windowSize <= 600 ? 'text-xs' : ''}`}>
+                  <div className={`flex items-center justify-end space-x-2 }`}>
                     <IconX size={16} color="" />
-                    <span className={windowSize <= 600 ? 'text-xs text-red-500' : ''}>Inativo</span>
+                    <p className={' text-red-500'}>Inativo</p>
                     <button className=" bg-white cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard2}>
                       {selectedOption ? (
                         <>
-                          {selectedOption === 'edit' && <IconEdit size={windowSize <= 600 ? 20 : 30} color="" />}
-                          {selectedOption === 'delete' && <IconTrash size={windowSize <= 600 ? 24 : 37} color="#FF0F00" />}
+                          {selectedOption === 'edit' && <IconEdit size={30} color="" />}
+                          {selectedOption === 'delete' && <IconTrash size={37} color="#FF0F00" />}
                         </>
                       ) : (
-                        <IconDropDown size={windowSize <= 600 ? 15 : 20} color="" />
+                        <IconDropDown size={18} color="" />
                       )}
                     </button>
                     {isDropdownOpenCard2 && (
                       <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
-                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('edit')}>
-                            <IconEdit size={30} color="" />            
+                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `} onClick={() => handleDropdownItemClick('edit')}>
+                            <IconEdit size={25} color="" />
                           </button>
                           <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
                           <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('delete')}>
-                            <IconTrash size={37} color="#FF0F00" />
+                            <IconTrash size={35} color="#FF0F00" />
                           </button>
                           {/* Se tiver outras opções, colocar aqui */}
                         </div>
@@ -192,7 +183,7 @@ export default function HomePage() {
                   </div>
                 </div>
               ) : (
-                <div className={`w-1/5 text-center sm:w-1/5 flex items-center justify-center space-x-2 ${windowSize <= 600 ? 'text-xs' : ''}`}>
+                <div className={`w-1/5 text-center sm:w-1/5 text-xs sm:text-sm flex items-center justify-center space-x-2 `}>
                   <IconEdit size={30} color="" />
                   <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
                   <IconTrash size={37} color="#FF0F00" />

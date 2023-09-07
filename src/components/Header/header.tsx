@@ -1,5 +1,6 @@
+import IconMoon from 'components/Icons/🦆 icon-moon';
 import Image from 'next/image';
-
+import IconLogout from 'components/Icons/🦆 icon-logout'
 interface HeaderProps {
 
 }
@@ -17,26 +18,11 @@ export default function Header(props : HeaderProps){
           </div>
         </div>
         <div className={`flex items-center space-x-4 sm:space-x-6`}>
-          {/* <!-- Botão de Logout --> */}
-          <Image src='/images/logout.png' alt='Logout' width={24} height={24} className={`h-6 w-6`} />
-          {/* <!-- Botão de alternância de tema --> */}
+          {/*  Botão de Logout  */}
+          <IconLogout size={20}/>
+          {/* Botão de alternância de tema */}
           <button>
-            <Image
-              id='moonIcon'
-              src='/images/lua.avif'
-              alt='Lua'
-              width={24}
-              height={24}
-              className={`h-6 w-6 text-gray-700 `}
-            />
-            <Image
-              id='sunIcon'
-              src='/images/sol.png'
-              alt='Sol'
-              width={24}
-              height={24}
-              className={`h-6 w-6 text-gray-700 hidden`}
-            />
+            <IconMoon size={20}/>
           </button>
         </div>
       </header>
