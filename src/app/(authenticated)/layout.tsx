@@ -17,16 +17,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-br" className="light" style={{ colorScheme: 'light' }}>
-      <body className={Mplus.className}>
-        <Providers>
+      <Providers>
+        <body className={Mplus.className, `bg-secondary dark:bg-black`}>
           <div className={`w-screen h-screen flex flex-col justify-between`}>
             <Header />
             {children}
             <Footer />
           </div>
-        </Providers>
-      </body>
+        </body>
+      </Providers>
     </html>
   );
 }
-

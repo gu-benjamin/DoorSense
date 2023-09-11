@@ -15,8 +15,8 @@ const config: Config = {
           100:'#05AFF2'
         },
         secondary: '#F0F5F9',
+        thirdy: '#E0EFF5',
         'light-red': 'hsl(0, 100%, 67%)',
-        'thirdy': '#E0EFF5',
       },
       
     },

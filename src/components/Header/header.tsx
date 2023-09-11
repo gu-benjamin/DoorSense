@@ -1,11 +1,11 @@
 import IconMoon from 'components/Icons/🦆 icon-moon';
 import Image from 'next/image';
 import IconLogout from 'components/Icons/🦆 icon-logout'
-interface HeaderProps {
 
-}
+import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 
-export default function Header(props : HeaderProps){
+
+export default function Header(){
     return(
       <header
             className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white font-bold`}
@@ -19,11 +19,9 @@ export default function Header(props : HeaderProps){
         </div>
         <div className={`flex items-center space-x-4 sm:space-x-6`}>
           {/*  Botão de Logout  */}
-          <IconLogout size={20}/>
+          <IconLogout size={20} color="#000"/>
           {/* Botão de alternância de tema */}
-          <button>
-            <IconMoon size={20}/>
-          </button>
+          <ThemeButton/>
         </div>
       </header>
     )

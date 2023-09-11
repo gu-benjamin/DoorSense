@@ -40,11 +40,11 @@ export default function HomePage() {
   };
  
   return (
-    <main className="flex flex-colitems-center justify-center bg-secondary">
+    <main className="flex flex-colitems-center justify-center">
         <div className="w-full sm:w-full md:w-10/12 lg:w-10/12 xl:w-10/12 p-4">
           
           {/* Cabeçalho */}
-          <div className="bg-gray-100 py-4 text-left flex items-center">
+          <div className=" py-4 text-left flex items-center">
             <IconHome size={75} color="" />
             <div className="p-5">
               <p className="text-3xl sm:text-5xl font-semibold text-gray-800">Salas</p>
@@ -58,7 +58,7 @@ export default function HomePage() {
               <div className="bg-thirdy p-4 rounded-2xl flex">
                 <IconLupa size={0} color="" />
                 <input className="pl-6 pr-4 text-base focus:shadow-outline rounded-lg w-full" type="search" placeholder="Buscar..." />
-                <button className="ml-4 border-2 border-primary bg-transparent hover:text-white hover:bg-primary text-cyan-500 font-semibold py-1 px-4 rounded">
+                <button className="ml-4 border-2 border-primary-100 bg-transparent hover:text-white hover:bg-primary-100 text-cyan-500 font-semibold py-1 px-4 rounded">
                   <IconFiltro size={0} color="" />
                   Filtros
                 </button>
@@ -66,7 +66,7 @@ export default function HomePage() {
             </div>
 
             <div className="bg-thirdy p-3 rounded-2xl flex items-center">
-              <button className="border-primary bg-primary text-white font-semibold py-2 px-4 rounded flex items-center" style={{ whiteSpace: 'nowrap' }}>
+              <button className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center" style={{ whiteSpace: 'nowrap' }}>
                 <IconMais size={17} />
                 Nova Sala
               </button>
@@ -74,7 +74,7 @@ export default function HomePage() {
           </div>
 
           {/* Dashboard - Cabeçalho */}
-          <div className="p-4 border-b-2 border-primary flex justify-center text-sm sm:text-base text-primary">
+          <div className="p-4 border-b-2 border-primary-100 flex justify-center text-sm sm:text-base text-primary-100">
             <div className={`w-2/5 text-center`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
             <div className={`w-2/5 text-center `}>Número</div>
             <div className={`w-2/5 text-center sm:text-left`}>Arduíno</div>
