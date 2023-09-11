@@ -38,8 +38,7 @@ export default function HomePage() {
   const handleDropdownToggleCard2 = () => {
     setIsDropdownOpenCard2(!isDropdownOpenCard2);
   };
-  
-
+ 
   return (
     <main className="flex flex-colitems-center justify-center bg-secondary">
         <div className="w-full sm:w-full md:w-10/12 lg:w-10/12 xl:w-10/12 p-4">
