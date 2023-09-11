@@ -22,3 +22,4 @@ export const ButtonIcon = forwardRef<HTMLButtonElement, ButtonIconProps>(
     );
   }
 );
+
