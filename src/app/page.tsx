@@ -96,14 +96,14 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 `}
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-9 xl:gap-9`}
       >
-        <img src="/images/Logo.png" alt="" className={`w-24 lg:w-32 xl:w-32`} />
+        <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} />
 
-        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-3x1`}>
+        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-5xl xl:text-5xl`}>
           Login
         </h1>
-        <p className={`font-regular text-lg`}>
+        <p className={`font-regular text-lg text-center`}>
           Conecte-se usando o usuário de administrador
         </p>
 
@@ -182,7 +182,7 @@ export default function LoginPage() {
 
           />
 
-          <Button btnName="ENTRAR" className={`botao-primary`}/>
+          <Button btnName="ENTRAR" className={`botao-primary lg:px-10 xl:px-10`}/>
         </form>
         {/* Link */}
         <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility}/>
