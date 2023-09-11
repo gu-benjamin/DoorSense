@@ -96,9 +96,9 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`flex flex-col items-center justify-center w-1/2 h-full gap-4 `}
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 `}
       >
-        <img src="/images/Logo.png" alt="" className={` w-24`} />
+        <img src="/images/Logo.png" alt="" className={`w-24 lg:w-32 xl:w-32`} />
 
         <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-3x1`}>
           Login
@@ -127,7 +127,7 @@ export default function LoginPage() {
                 }
               />
             }
-            label="Usuário:"
+            // label="Usuário:"
             helperText={errors.user?.message}
           />
 
@@ -148,13 +148,13 @@ export default function LoginPage() {
                 }
             />
             }
-            label="Senha:"
+            // label="Senha:"
             helperText={errors.password?.message}
 
             //Botao icone de esconder a senha
             actionIcon={
               <ButtonIcon
-              className={`absolute right-3 ${errors.password?.message ? `bottom-9` : `bottom-2`}`}
+              className={`absolute right-3 ${errors.password?.message ? `bottom-12` : `bottom-2`}`}
                 icon={
                   isPasswordVisible ? (
                     <IconOpenPassword
@@ -182,7 +182,7 @@ export default function LoginPage() {
 
           />
 
-          <Button btnName="ENTRAR" className={`botao-primary `}/>
+          <Button btnName="ENTRAR" className={`botao-primary`}/>
         </form>
         {/* Link */}
         <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility}/>

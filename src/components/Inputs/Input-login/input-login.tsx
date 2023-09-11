@@ -25,15 +25,15 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
     return (
       //Div root 
       <div
-        className={`flex flex-col justify-start relative gap-2 text-start`}
+        className={`flex flex-col justify-start relative gap-5 text-start`}
       >
         {/* Icone */}
-        <div className={`absolute ${hasError ? `bottom-9` : `bottom-2`}`}>{icon}</div>
+        <div className={`absolute ${hasError ? `bottom-12` : `bottom-2`}`}>{icon}</div>
 
            {/* Label */}
         <label
-          className={twMerge(`text-base   ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-400`}
-                              duration-300 transform peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
+          className={twMerge(`text-base ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-400`}
+                              duration-300  transform peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
                               peer-focus:dark:${hasError ? `text-light-red` : `text-primary`}
                               `,props.className)}
           htmlFor={inputId}
@@ -46,11 +46,11 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
           type={type}
           name={name}
           ref={ref}
-          className={`peer block min-h-[auto] px-9 pb-2  border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
-                      bg-transparent py-1 leading-[1.6] outline-none transition-all duration-200 ease-linear 
+          className={`px-9 lg:w-72 xl:w-72 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
+                      bg-transparent outline-none
                       peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
                       dark:text-gray-500 dark:placeholder:${hasError ? `text-light-red` : `text-neutral-500`} 
-                      dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`} text-xs`}
+                      dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`} text-base`}
           id={inputId}
           {...props}
         />
