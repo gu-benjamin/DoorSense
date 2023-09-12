@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className="light" style={{ colorScheme: 'light' }}>
       <Providers>
-        <body className={Mplus.className, `bg-secondary dark:bg-black`}>
+        <body className={Mplus.className, `bg-secondary dark:bg-dark`}>
           <div className={`w-screen h-screen flex flex-col justify-between`}>
             <Header />
             {children}

@@ -42,30 +42,29 @@ export default function HomePage() {
   return (
     <main className="flex flex-colitems-center justify-center">
         <div className="w-full sm:w-full md:w-10/12 lg:w-10/12 xl:w-10/12 p-4">
-          
           {/* Cabeçalho */}
           <div className=" py-4 text-left flex items-center">
             <IconHome size={75} color="" />
             <div className="p-5">
-              <p className="text-3xl sm:text-5xl font-semibold text-gray-800">Salas</p>
-              <p className="text-md sm:text-lg">Lista das salas criadas</p>
+              <p className="text-3xl sm:text-5xl font-semibold dark:text-white">Salas</p>
+              <p className="text-md sm:text-lg dark:text-white">Lista das salas criadas</p>
             </div>
           </div>
 
           {/* Barra de pesquisa e botão Nova Sala */}
-          <div className={` text-xs flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}>
+          <div className={`text-xs flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}>
             <div className="relative max-w-8xl w-full">
-              <div className="bg-thirdy p-4 rounded-2xl flex">
+              <div className="bg-thirdy p-4 rounded-2xl flex dark:bg-darkbusc">
                 <IconLupa size={0} color="" />
-                <input className="pl-6 pr-4 text-base focus:shadow-outline rounded-lg w-full" type="search" placeholder="Buscar..." />
-                <button className="ml-4 border-2 border-primary-100 bg-transparent hover:text-white hover:bg-primary-100 text-cyan-500 font-semibold py-1 px-4 rounded">
+                <input className="pl-6 pr-4 text-base focus:shadow-outline rounded-lg w-full bg-white" type="search" placeholder="Buscar..." />
+                <button className="ml-4 border-2 border-primary-100 dark:border-white text-primary-100 dark:text-white bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
                   <IconFiltro size={0} color="" />
                   Filtros
                 </button>
               </div>
             </div>
 
-            <div className="bg-thirdy p-3 rounded-2xl flex items-center">
+            <div className="bg-thirdy p-3 rounded-2xl flex items-center dark:bg-darkbusc">
               <button className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center" style={{ whiteSpace: 'nowrap' }}>
                 <IconMais size={17} />
                 Nova Sala
@@ -74,23 +73,21 @@ export default function HomePage() {
           </div>
 
           {/* Dashboard - Cabeçalho */}
-          <div className="p-4 border-b-2 border-primary-100 flex justify-center text-sm sm:text-base text-primary-100">
-            <div className={`w-2/5 text-center`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
-            <div className={`w-2/5 text-center `}>Número</div>
-            <div className={`w-2/5 text-center sm:text-left`}>Arduíno</div>
-            <div className={`w-2/5 text-center `}>Status</div>
-            {windowSize > 640 && <div className={`w-2/5 text-center `}>Ações</div>}
+          <div className="p-4 border-b-2 dark:border-white border-primary-100 flex justify-center text-sm sm:text-base text-primary-100">
+            <div className={`w-2/5 dark:text-white text-center`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
+            <div className={`w-2/5 dark:text-white text-center `}>Número</div>
+            <div className={`w-2/5 dark:text-white text-center sm:text-left`}>Arduíno</div>
+            <div className={`w-2/5 dark:text-white text-center `}>Status</div>
+            {windowSize > 640 && <div className={`w-2/5 dark:text-white text-center `}>Ações</div>}
           </div>
 
           {/* Cards de informações */}
-          <div className="space-y-4 mt-4">
-
-
+          <div className="space-y-4 mt-4 ">
             {/* Card 1 */}
-            <div className="bg-white text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
-              <p className={` w-1/5 text-center  `}>Laboratório</p>
-              <p className={`w-1/5 text-center  sm:w-1/5`}>1</p>
-              <p className={`w-1/5 sm:w-1/5  text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
+            <div className="bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
+              <p className={` w-1/5 text-center dark:text-black `}>Laboratório</p>
+              <p className={`w-1/5 text-center dark:text-black sm:w-1/5`}>1</p>
+              <p className={`w-1/5 sm:w-1/5 dark:text-black text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
               {windowSize > 640 && (
                 <div className={`w-1/5 text-center  sm:w-1/5 flex items-center justify-center space-x-2 `}>
                   <IconCerto size={16} color="" />
@@ -105,8 +102,8 @@ export default function HomePage() {
                     <button className=" bg-white cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard1}>
                       {selectedOption ? (
                         <>
-                          {selectedOption === 'edit' && <IconEdit size={windowSize <= 600 ? 20 : 30} color="" />}
-                          {selectedOption === 'delete' && <IconTrash size={windowSize <= 600 ? 24 : 37} color="#FF0F00" />}
+                          {selectedOption === 'edit' && <IconEdit size={30} color="" />}
+                          {selectedOption === 'delete' && <IconTrash size={37} color="#FF0F00" />}
                         </>
                       ) : (
                         <IconDropDown size={18} color="" />
@@ -116,11 +113,11 @@ export default function HomePage() {
                       <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
-                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `} onClick={() => handleDropdownItemClick('edit')}>
+                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `}>
                             <IconEdit size={25} color="" />
                           </button>
                           <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('delete')}>
+                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center">
                             <IconTrash size={35} color="#FF0F00" />
                           </button>
                           {/* Se tiver outras opções, colocar aqui */}
@@ -139,10 +136,10 @@ export default function HomePage() {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
-              <p className={` w-1/5 text-center `}>Biblioteca</p>
-              <p className={`w-1/5 text-center sm:w-1/5`}>2</p>
-              <p className={`w-1/5 sm:w-1/5 text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
+            <div className="bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
+              <p className={` w-1/5 dark:text-black text-center `}>Biblioteca</p>
+              <p className={`w-1/5 dark:text-black text-center sm:w-1/5`}>2</p>
+              <p className={`w-1/5 dark:text-black sm:w-1/5 text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
               {windowSize > 640 && (
                 <div className={`w-1/5 text-center  sm:w-1/5 flex items-center justify-center space-x-2 `}>
                   <IconX size={16} color="" />
@@ -168,11 +165,11 @@ export default function HomePage() {
                       <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
-                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `} onClick={() => handleDropdownItemClick('edit')}>
+                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `}>
                             <IconEdit size={25} color="" />
                           </button>
                           <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center" onClick={() => handleDropdownItemClick('delete')}>
+                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center">
                             <IconTrash size={35} color="#FF0F00" />
                           </button>
                           {/* Se tiver outras opções, colocar aqui */}

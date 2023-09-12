@@ -8,7 +8,7 @@ import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 export default function Header(){
     return(
       <header
-            className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white font-bold`}
+            className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white dark:bg-darkheader font-bold`}
         >
         <div className={`flex items-center`}>
           <Image src='/images/Logo.png' alt='Logo' width={48} height={48} className={`w-12 sm:w-20`} />

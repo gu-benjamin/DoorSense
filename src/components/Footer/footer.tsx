@@ -7,7 +7,7 @@ interface FooterProps {
 export default function Footer(props: FooterProps) {
   return (
     
-    <div className="bg-white">
+    <div className="bg-white dark:bg-darkheader">
       <div className="max-w-3xl mx-auto text-white py-4">
         <div className="text-center">
           <div className="flex justify-center">
