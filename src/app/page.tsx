@@ -16,6 +16,8 @@ import IconLost from '../components/Icons/icon-lostpass';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from 'components/Modals';
+import { MaterialCommunityIcons } from '@expo/vector-icons'; 
+import { Feather } from '@expo/vector-icons'; 
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -98,6 +100,20 @@ export default function LoginPage() {
       <section
         className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-9 xl:gap-9`}
       >
+      {/* Button Dark Theme */}
+      {/* <
+          if (
+            localStorage.getItem('color-theme') === 'dark' ||
+            (!('color-theme' in localStorage) &&
+              window.matchMedia('(prefers-color-scheme: dark)').matches)
+          ) {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        </ */}
+        <MaterialCommunityIcons name="moon-waning-crescent" size={24} color="black" />
+        
         <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} />
 
         <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-5xl xl:text-5xl`}>
