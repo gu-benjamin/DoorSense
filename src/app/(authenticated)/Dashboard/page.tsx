@@ -99,7 +99,7 @@ export default function HomePage() {
                   <div className={`flex items-center justify-end space-x-2 }`}>
                     <IconCerto size={16} color="" />
                     <p className={' text-green-500'}>Ativo</p>
-                    <button className=" bg-white cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard1}>
+                    <button className=" cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard1}>
                       {selectedOption ? (
                         <>
                           {selectedOption === 'edit' && <IconEdit size={30} color="" />}
@@ -110,7 +110,7 @@ export default function HomePage() {
                       )}
                     </button>
                     {isDropdownOpenCard1 && (
-                      <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
+                      <div className="absolute mt-24 bg-white dark:bg-darkcard bg-rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
                           <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `}>
@@ -151,7 +151,7 @@ export default function HomePage() {
                   <div className={`flex items-center justify-end space-x-2 }`}>
                     <IconX size={16} color="" />
                     <p className={' text-red-500'}>Inativo</p>
-                    <button className=" bg-white cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard2}>
+                    <button className=" cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard2}>
                       {selectedOption ? (
                         <>
                           {selectedOption === 'edit' && <IconEdit size={30} color="" />}
@@ -162,7 +162,7 @@ export default function HomePage() {
                       )}
                     </button>
                     {isDropdownOpenCard2 && (
-                      <div className="absolute mt-24 bg-white rounded shadow-lg z-10">
+                      <div className="absolute mt-24 bg-white dark:bg-darkcard bg-rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
                         <div className="flex space-x-2">
                           <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `}>

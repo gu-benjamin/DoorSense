@@ -19,7 +19,7 @@ export default function Header(){
         </div>
         <div className={`flex items-center space-x-4 sm:space-x-6`}>
           {/*  Botão de Logout  */}
-          <IconLogout size={20} color="#000"/>
+          <IconLogout size={20} color="#000" />
           {/* Botão de alternância de tema */}
           <ThemeButton/>
         </div>

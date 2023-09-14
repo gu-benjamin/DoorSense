@@ -29,7 +29,7 @@
 
 body {
   color: rgb(var(--color-primary));
-    
+  overflow-x: hidden;
 }
 
 input::-webkit-outer-spin-button,
