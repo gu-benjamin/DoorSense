@@ -10,23 +10,10 @@ import IconX from 'components/Icons/🦆 icon-x';        // Importar o ícone pa
 import IconFiltro from 'components/Icons/icon-lupa';  // Importar o ícone para a página
 import IconLupa from 'components/Icons/icon-lupa';    // Importar o ícone para a página
 import IconDropDown from 'components/Icons/icon-drop-down';
+import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
+
 
 export default function HomePage() {
-  const [selectedOption, setSelectedOption] = useState('');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false); // Estado para controlar a exibição das opções
-
-  // função para pegar o tamanho da tela quando houver mudança
-  const [windowSize, setWidth] = useState(window.innerWidth); // inicia com o tamanho da tela.
-  const handleResize = () => setWidth(window.innerWidth); // envia o tamanho atual da tela para a variável
-
-  useEffect(() => {
-    window.addEventListener('resize', handleResize); // adiciona a função à tela para quando houver mudança do tamanho
-    return () => window.removeEventListener('resize', handleResize); // retorna removendo a função (provavelmente para não rodar infinitamente)
-  }, []);
-  
-  const handleSelectChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedOption(event.target.value);
-  };
 
   const [isDropdownOpenCard1, setIsDropdownOpenCard1] = useState(false);
   const [isDropdownOpenCard2, setIsDropdownOpenCard2] = useState(false);
@@ -40,8 +27,9 @@ export default function HomePage() {
   };
  
   return (
-    <main className="flex flex-colitems-center justify-center">
-        <div className="w-full sm:w-full md:w-10/12 lg:w-10/12 xl:w-10/12 p-4">
+
+    <main className="flex flex-col items-center justify-center">
+        <div className="w-full sm:w-10/12 p-4">
           {/* Cabeçalho */}
           <div className=" py-4 text-left flex items-center">
             <IconHome size={75} color="" />
@@ -73,119 +61,94 @@ export default function HomePage() {
           </div>
 
           {/* Dashboard - Cabeçalho */}
-          <div className="p-4 border-b-2 dark:border-white border-primary-100 flex justify-center text-sm sm:text-base text-primary-100">
-            <div className={`w-2/5 dark:text-white text-center`} style={{ whiteSpace: 'nowrap' }}>Nome da Sala</div>
-            <div className={`w-2/5 dark:text-white text-center `}>Número</div>
-            <div className={`w-2/5 dark:text-white text-center sm:text-left`}>Arduíno</div>
-            <div className={`w-2/5 dark:text-white text-center `}>Status</div>
-            {windowSize > 640 && <div className={`w-2/5 dark:text-white text-center `}>Ações</div>}
+          <div className="p-4 border-b-2 dark:border-white border-primary-100 flex justify-around text-sm sm:text-base text-primary-100">
+            <p className={`dark:text-white text-center`}>Nome da Sala</p>
+            <p className={`dark:text-white text-center `}>Número</p>
+            <p className={`dark:text-white text-center sm:text-left`}>Arduíno</p>
+            <p className={`dark:text-white text-center `}>Status</p>
+            <p className={`dark:text-white text-center hidden sm:block`}>Ações</p>
           </div>
 
-          {/* Cards de informações */}
-          <div className="space-y-4 mt-4 ">
-            {/* Card 1 */}
-            <div className="bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
-              <p className={` w-1/5 text-center dark:text-black `}>Laboratório</p>
-              <p className={`w-1/5 text-center dark:text-black sm:w-1/5`}>1</p>
-              <p className={`w-1/5 sm:w-1/5 dark:text-black text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
-              {windowSize > 640 && (
-                <div className={`w-1/5 text-center  sm:w-1/5 flex items-center justify-center space-x-2 `}>
-                  <IconCerto size={16} color="" />
-                  <span className={' text-green-500'}>Ativo</span>
-                </div>
-              )}
-              {windowSize <= 640 ? (
-                <div className="relative">
-                  <div className={`flex items-center justify-end space-x-2 }`}>
+          {/* Cards Section */}
+          <div className="flex flex-col gap-4 mt-4 ">
+
+            {/* Card */}
+            <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex items-center justify-around">
+
+              <p className={`  text-center dark:text-black `}>Laboratório</p>
+              <p className={` text-center dark:text-black `}>1</p>
+              <p className={` dark:text-black text-center sm:text-left`}>A2C4E6G8</p>
+
+              <div className={`hidden sm:flex sm:gap-2 items-center`}>
+                <IconCerto size={16} color="" />
+                <p className={' text-green-500'}>Ativo</p>
+              </div>
+      
+                  <div className={`flex gap-2 sm:hidden `}>
                     <IconCerto size={16} color="" />
-                    <p className={' text-green-500'}>Ativo</p>
-                    <button className=" cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard1}>
-                      {selectedOption ? (
-                        <>
-                          {selectedOption === 'edit' && <IconEdit size={30} color="" />}
-                          {selectedOption === 'delete' && <IconTrash size={37} color="#FF0F00" />}
-                        </>
-                      ) : (
-                        <IconDropDown size={18} color="" />
-                      )}
-                    </button>
+                    <p className={'text-green-500'}>Ativo</p>
+                    <ButtonIcon icon={<IconDropDown size={18} color="" />} onClick={handleDropdownToggleCard1}/>
+                  </div>
+
                     {isDropdownOpenCard1 && (
-                      <div className="absolute mt-24 bg-white dark:bg-darkcard bg-rounded shadow-lg z-10">
+                      <div className="absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-darkcard bg-rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
-                        <div className="flex space-x-2">
-                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `}>
-                            <IconEdit size={25} color="" />
-                          </button>
-                          <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center">
-                            <IconTrash size={35} color="#FF0F00" />
-                          </button>
+                        <div className="flex gap-2">
+                          <ButtonIcon icon={<IconEdit size={25} color="" />}/>
+                          <div className="w-px bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
+                          <ButtonIcon icon={<IconTrash size={30} color="#FF0F00" />}/>
                           {/* Se tiver outras opções, colocar aqui */}
                         </div>
                       </div>
                     )}
-                  </div>
-                </div>
-              ) : (
-                <div className={`w-1/5 text-center sm:w-1/5 text-xs sm:text-sm flex items-center justify-center space-x-2 `}>
-                  <IconEdit size={30} color="" />
+
+                <div className={`gap-2 items-center hidden sm:flex`}>
+                  <ButtonIcon icon={<IconEdit size={30} color="" />}/>
                   <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                  <IconTrash size={37} color="#FF0F00" />
+                  <ButtonIcon icon={<IconTrash size={35} color="#FF0F00" />}/>
                 </div>
-              )}
+
             </div>
 
-            {/* Card 2 */}
-            <div className="bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex space-x-4 items-center justify-center">
-              <p className={` w-1/5 dark:text-black text-center `}>Biblioteca</p>
-              <p className={`w-1/5 dark:text-black text-center sm:w-1/5`}>2</p>
-              <p className={`w-1/5 dark:text-black sm:w-1/5 text-center sm:text-left`} style={{ whiteSpace: 'nowrap' }}>A2C4E6G8</p>
-              {windowSize > 640 && (
-                <div className={`w-1/5 text-center  sm:w-1/5 flex items-center justify-center space-x-2 `}>
+            {/* Card */}
+            <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex items-center justify-around">
+
+              <p className={`  text-center dark:text-black `}>Laboratório</p>
+              <p className={` text-center dark:text-black `}>1</p>
+              <p className={` dark:text-black text-center sm:text-left`}>A2C4E6G8</p>
+
+              <div className={`hidden sm:flex sm:gap-2 items-center`}>
+              <IconX size={16} color="" />
+                <p className={' text-red-500'}>Inativo</p>
+              </div>
+      
+                  <div className={`flex gap-2 sm:hidden`}>
                   <IconX size={16} color="" />
-                  <span className={' text-red-500'}>Inativo</span>
-                </div>
-              )}
-              {windowSize <= 640 ? (
-                <div className="relative">
-                  <div className={`flex items-center justify-end space-x-2 }`}>
-                    <IconX size={16} color="" />
                     <p className={' text-red-500'}>Inativo</p>
-                    <button className=" cursor-pointer flex items-center justify-between" onClick={handleDropdownToggleCard2}>
-                      {selectedOption ? (
-                        <>
-                          {selectedOption === 'edit' && <IconEdit size={30} color="" />}
-                          {selectedOption === 'delete' && <IconTrash size={37} color="#FF0F00" />}
-                        </>
-                      ) : (
-                        <IconDropDown size={18} color="" />
-                      )}
-                    </button>
+                    <ButtonIcon icon={<IconDropDown size={18} color="" />} onClick={handleDropdownToggleCard2}/>
+                  </div>
+
                     {isDropdownOpenCard2 && (
-                      <div className="absolute mt-24 bg-white dark:bg-darkcard bg-rounded shadow-lg z-10">
+                      <div className="absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-darkcard bg-rounded shadow-lg z-10">
                         {/* Aqui é o conteúdo do dropdown */}
-                        <div className="flex space-x-2">
-                          <button className={`p-2 flex flex-col hover:bg-gray-100 text-center justify-center `}>
-                            <IconEdit size={25} color="" />
-                          </button>
-                          <div className="w-px  bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                          <button className="p-2 flex flex-col hover:bg-gray-100 justify-center">
-                            <IconTrash size={35} color="#FF0F00" />
-                          </button>
+                        <div className="flex gap-2">
+                          <ButtonIcon icon={<IconEdit size={25} color="" />}/>
+                          <div className="w-px bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
+                          <ButtonIcon icon={<IconTrash size={30} color="#FF0F00" />}/>
                           {/* Se tiver outras opções, colocar aqui */}
                         </div>
                       </div>
                     )}
-                  </div>
-                </div>
-              ) : (
-                <div className={`w-1/5 text-center sm:w-1/5 text-xs sm:text-sm flex items-center justify-center space-x-2 `}>
-                  <IconEdit size={30} color="" />
+
+                <div className={`gap-2 items-center hidden sm:flex`}>
+                  <ButtonIcon icon={<IconEdit size={30} color="" />}/>
                   <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                  <IconTrash size={37} color="#FF0F00" />
+                  <ButtonIcon icon={<IconTrash size={35} color="#FF0F00" />}/>
                 </div>
-              )}
+
             </div>
+
+
           </div>
         </div>
     </main>

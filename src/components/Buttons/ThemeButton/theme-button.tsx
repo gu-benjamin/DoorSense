@@ -34,7 +34,7 @@ export const ThemeButton = forwardRef<HTMLButtonElement, ThemeButtonProps>(
         >
           {/*Icone do botao*/}
           {resolvedTheme === 'dark' ? 
-          (<SunIcon className={twMerge(`h-10 w-10`, props.className)}/>) : (<MoonIcon className={twMerge(`h-10 w-10`, props.className)}/>)
+          (<SunIcon className={twMerge(`h-8 w-8`, props.className)}/>) : (<MoonIcon className={twMerge(`h-8 w-8`, props.className)}/>)
         }
         </button>
       </>

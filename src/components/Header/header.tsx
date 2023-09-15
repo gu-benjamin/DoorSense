@@ -3,6 +3,7 @@ import Image from 'next/image';
 import IconLogout from 'components/Icons/🦆 icon-logout'
 
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
+import { ButtonIcon } from './../Buttons/Button-icon/button-icon';
 
 
 export default function Header(){
@@ -19,7 +20,8 @@ export default function Header(){
         </div>
         <div className={`flex items-center space-x-4 sm:space-x-6`}>
           {/*  Botão de Logout  */}
-          <IconLogout size={20} color="#000" />
+          <ButtonIcon icon={<IconLogout size={24} color="#000" />}/>
+            
           {/* Botão de alternância de tema */}
           <ThemeButton/>
         </div>
