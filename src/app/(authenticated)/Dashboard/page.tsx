@@ -11,6 +11,14 @@ import IconFiltro from 'components/Icons/icon-lupa'; // Importar o ícone para a
 import IconLupa from 'components/Icons/icon-lupa'; // Importar o ícone para a página
 import IconDropDown from 'components/Icons/icon-drop-down';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
+import { TiEdit } from 'react-icons/ti';
+import { BiTrash } from 'react-icons/bi';
+import { AiOutlinePlus, AiFillCloseCircle, AiFillCheckCircle } from 'react-icons/ai';
+import { PiMagnifyingGlassBold } from 'react-icons/pi'; 
+import { BiFilter } from 'react-icons/bi'; // Importar o ícone BiFilter do react-icons/bi
+
+
+
 
 export default function HomePage() {
   const [isDropdownOpenCard1, setIsDropdownOpenCard1] = useState(false);
@@ -41,20 +49,18 @@ export default function HomePage() {
         </div>
 
         {/* Barra de pesquisa e botão Nova Sala */}
-        <div
-          className={`text-xs flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}
-        >
+        <div className={`text-md flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}>
           <div className="relative max-w-8xl w-full">
             <div className="bg-thirdy p-4 rounded-2xl flex dark:bg-darkbusc">
-              <IconLupa size={0} color="" />
-              <input
-                className="pl-6 pr-4 text-base focus:shadow-outline rounded-lg w-full bg-white"
-                type="search"
-                placeholder="Buscar..."
-              />
-              <button className="ml-4 border-2 border-primary-100 dark:border-white text-primary-100 dark:text-white bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
-                <IconFiltro size={0} color="" />
-                Filtros
+              <label className="pl-10 py-1  text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark">
+                <input
+                  type="search"
+                  placeholder="Buscar..."
+                />
+                {/* <PiMagnifyingGlassBold size={0} color="gray" className=""/> */}
+              </label>
+              <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
+                <BiFilter size={24} color="" /> Filtros
               </button>
             </div>
           </div>
@@ -64,38 +70,39 @@ export default function HomePage() {
               className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center"
               style={{ whiteSpace: 'nowrap' }}
             >
-              <IconMais size={17} />
+              <AiOutlinePlus size={20} />
               Nova Sala
             </button>
           </div>
         </div>
 
+
         {/* Dashboard - Cabeçalho */}
-        <div className="p-4 border-b-2 dark:border-white border-primary-100 grid grid-flow-col justify-stretch text-sm sm:text-base text-primary-100">
-          <p className={`dark:text-white text-center md:pr-6`}>Nome da Sala</p>
-          <p className={`dark:text-white text-start xl:text-center xl:pr-8`}>Número</p>
-          <p className={`dark:text-white text-start md:pr-6 xl:pr-14 xl:text-center`}>Arduíno</p>
-          <p className={`dark:text-white text-start xl:text-center xl:pr-16`}>Status</p>
-          <p className={`dark:text-white text-center hidden sm:block md:pr-8`}>Ações</p>
+        <div className="p-4 border-b-2 dark:border-primary-100 border-primary-100 grid grid-flow-col justify-stretch text-sm sm:text-base text-primary-100">
+          <p className={`dark:text-primary-100 text-center md:pr-6`}>Nome da Sala</p>
+          <p className={`dark:text-primary-100 text-start xl:text-center xl:pr-8`}>Número</p>
+          <p className={`dark:text-primary-100 text-start md:pr-6 xl:pr-14 xl:text-center`}>Arduíno</p>
+          <p className={`dark:text-primary-100 text-start xl:text-center xl:pr-16`}>Status</p>
+          <p className={`dark:text-primary-100 text-center hidden sm:block md:pr-8`}>Ações</p>
         </div>
 
         {/* Cards Section */}
         <div className="flex flex-col gap-4 mt-4 ">
-          {/* Card */}
-          <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex items-center justify-around">
-            <p className={`text-center dark:text-black `}>Laboratório</p>
-            <p className={`text-center dark:text-black `}>1</p>
-            <p className={` dark:text-black text-center sm:text-left`}>
+          {/* Card 1 */}
+          <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
+            <p className={`text-center dark:text-white `}>Laboratório</p>
+            <p className={`text-center dark:text-white `}>1</p>
+            <p className={` dark:text-white text-center sm:text-left`}>
               A2C4E6G8
             </p>
 
             <div className={`hidden sm:flex sm:gap-2 items-center`}>
-              <IconCerto size={16} color="" />
+              <AiFillCheckCircle size={16} color="#00D715" />
               <p className={' text-green-500'}>Ativo</p>
             </div>
 
             <div className={`flex gap-2 sm:hidden `}>
-              <IconCerto size={16} color="" />
+              <AiFillCheckCircle size={16} color="#00D715" />
               <p className={'text-green-500'}>Ativo</p>
               <ButtonIcon
                 icon={<IconDropDown size={18} color="" />}
@@ -107,36 +114,36 @@ export default function HomePage() {
               <div className="absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-darkcard bg-rounded shadow-lg z-10">
                 {/* Aqui é o conteúdo do dropdown */}
                 <div className="flex gap-2">
-                  <ButtonIcon icon={<IconEdit size={25} color="" />} />
+                  <ButtonIcon icon={<TiEdit size={25} color="#05AFF2" />} />
                   <div className="w-px bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                  <ButtonIcon icon={<IconTrash size={30} color="#FF0F00" />} />
+                  <ButtonIcon icon={<BiTrash size={25} color="#FF0F00" />} /> {/* Substituir IconTrash por BiTrash */}
                   {/* Se tiver outras opções, colocar aqui */}
                 </div>
               </div>
             )}
 
             <div className={`gap-2 items-center hidden sm:flex`}>
-              <ButtonIcon icon={<IconEdit size={30} color="" />} />
+              <ButtonIcon icon={<TiEdit size={35} color="#05AFF2" />} />
               <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-              <ButtonIcon icon={<IconTrash size={35} color="#FF0F00" />} />
+              <ButtonIcon icon={<BiTrash size={35} color="#FF0F00" />} />
             </div>
           </div>
 
-          {/* Card */}
-          <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md border flex items-center justify-around">
-            <p className={`  text-center dark:text-black `}>Laboratório</p>
-            <p className={` text-center dark:text-black `}>1</p>
-            <p className={` dark:text-black text-center sm:text-left`}>
+          {/* Card 2 */}
+          <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
+            <p className={`  text-center dark:text-white `}>Laboratório</p>
+            <p className={` text-center dark:text-white `}>1</p>
+            <p className={` dark:text-white text-center sm:text-left`}>
               A2C4E6G8
             </p>
 
             <div className={`hidden sm:flex sm:gap-2 items-center`}>
-              <IconX size={16} color="" />
+              <AiFillCloseCircle size={16} color="#FF0000" />
               <p className={' text-red-500'}>Inativo</p>
             </div>
 
             <div className={`flex gap-2 sm:hidden`}>
-              <IconX size={16} color="" />
+              <AiFillCloseCircle size={16} color="#FF0000" />
               <p className={' text-red-500'}>Inativo</p>
               <ButtonIcon
                 icon={<IconDropDown size={18} color="" />}
@@ -148,19 +155,19 @@ export default function HomePage() {
               <div className="absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-darkcard bg-rounded shadow-lg z-10">
                 {/* Aqui é o conteúdo do dropdown */}
                 <div className="flex gap-2">
-                  <ButtonIcon icon={<IconEdit size={25} color="" />} />
+                  <ButtonIcon icon={<TiEdit size={25} color="#05AFF2" />} />
                   <div className="w-px bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                  <ButtonIcon icon={<IconTrash size={30} color="#FF0F00" />} />
+                  <ButtonIcon icon={<BiTrash size={25} color="#FF0F00" />} /> {/* Substituir IconTrash por BiTrash */}
                   {/* Se tiver outras opções, colocar aqui */}
                 </div>
               </div>
             )}
 
             <div className={`gap-2 items-center hidden sm:flex`}>
-              <ButtonIcon icon={<IconEdit size={30} color="" />} />
+              <ButtonIcon icon={<TiEdit size={35} color="#05AFF2" />} />
               <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-              <ButtonIcon icon={<IconTrash size={35} color="#FF0F00" />} />
-            </div>
+              <ButtonIcon icon={<BiTrash size={35} color="#FF0F00" />} />
+            </div>  
           </div>
         </div>
       </div>
