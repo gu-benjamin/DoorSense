@@ -49,15 +49,15 @@ export default function HomePage() {
         </div>
 
         {/* Barra de pesquisa e botão Nova Sala */}
-        <div className={`text-md flex sm:flex-row mb-4 sm:space-y-0 space-x-4 sm:text-base`}>
-          <div className="relative max-w-8xl w-full">
+        <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base">
+          <div className="relative w-full sm:mr-4 sm:mb-0">
             <div className="bg-thirdy p-4 rounded-2xl flex dark:bg-darkbusc">
-              <label className="pl-10 py-1  text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark">
+              <label className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark">
                 <input
                   type="search"
                   placeholder="Buscar..."
+                  className="w-full"
                 />
-                {/* <PiMagnifyingGlassBold size={0} color="gray" className=""/> */}
               </label>
               <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
                 <BiFilter size={24} color="" /> Filtros
@@ -65,7 +65,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="bg-thirdy p-3 rounded-2xl flex items-center dark:bg-darkbusc">
+          <div className="bg-thirdy p-3 w-fit mt-2 sm:mt-0 sm:w-auto rounded-2xl flex sm:items-center dark:bg-darkbusc">
             <button
               className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center"
               style={{ whiteSpace: 'nowrap' }}
@@ -75,6 +75,7 @@ export default function HomePage() {
             </button>
           </div>
         </div>
+
 
 
         {/* Dashboard - Cabeçalho */}
