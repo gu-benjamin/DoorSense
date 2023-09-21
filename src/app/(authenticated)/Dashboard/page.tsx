@@ -2,20 +2,13 @@
 
 import React, { useState, useEffect } from 'react';
 import IconHome from 'components/Icons/🦆 icon-home'; // Importar o ícone para a página
-import IconMais from 'components/Icons/icon-mais'; // Importar o ícone para a página
-import IconEdit from 'components/Icons/🦆 icon-edit'; // Importar o ícone para a página
-import IconTrash from 'components/Icons/🦆 icon-trash'; // Importar o ícone para a página
-import IconCerto from 'components/Icons/icon-certo'; // Importar o ícone para a página
-import IconX from 'components/Icons/🦆 icon-x'; // Importar o ícone para a página
-import IconFiltro from 'components/Icons/icon-lupa'; // Importar o ícone para a página
-import IconLupa from 'components/Icons/icon-lupa'; // Importar o ícone para a página
-import IconDropDown from 'components/Icons/icon-drop-down';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { TiEdit } from 'react-icons/ti';
 import { BiTrash } from 'react-icons/bi';
 import { AiOutlinePlus, AiFillCloseCircle, AiFillCheckCircle } from 'react-icons/ai';
 import { PiMagnifyingGlassBold } from 'react-icons/pi'; 
 import { BiFilter } from 'react-icons/bi'; // Importar o ícone BiFilter do react-icons/bi
+import { MdKeyboardArrowDown } from 'react-icons/md'; 
 
 
 
@@ -106,7 +99,7 @@ export default function HomePage() {
               <AiFillCheckCircle size={16} color="#00D715" />
               <p className={'text-green-500'}>Ativo</p>
               <ButtonIcon
-                icon={<IconDropDown size={18} color="" />}
+                icon={<MdKeyboardArrowDown size={18} color="#05AFF2" />}
                 onClick={handleDropdownToggleCard1}
               />
             </div>
@@ -147,7 +140,7 @@ export default function HomePage() {
               <AiFillCloseCircle size={16} color="#FF0000" />
               <p className={' text-red-500'}>Inativo</p>
               <ButtonIcon
-                icon={<IconDropDown size={18} color="" />}
+                icon={<MdKeyboardArrowDown size={18} color="#05AFF2" />}
                 onClick={handleDropdownToggleCard2}
               />
             </div>
