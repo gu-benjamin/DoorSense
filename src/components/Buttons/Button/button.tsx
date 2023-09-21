@@ -8,18 +8,18 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({type='submit', btnName, ...props}, ref) => {
     return(
         //Button root
-        <div className={`flex flex-col w-1/2 mt-4 text-white`}>
+        <>
             {/*Botao*/}
             <button
             type={type}
-            className={twMerge(`bg-primary p-3 rounded-lg font-extrabold`, props.className)}
+            className={twMerge(` `, props.className)}
             {...props}
             ref={ref}
             >
             {/*Nome do botao*/}
             {btnName}
             </button>
-      </div>
+      </>
     )
 })
 

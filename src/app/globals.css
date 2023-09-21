@@ -9,9 +9,27 @@
 }
 
 
+.botao-primary{
+  @apply bg-primary-100 p-3 rounded-lg font-extrabold w-1/2 mt-4 text-white
+}
+
+.botao-cancel{
+  @apply mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2;
+  @apply text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto
+}
+
+.botao-danger{
+  @apply inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 ;
+  @apply text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto
+}
+.botao-primary-modal{
+  @apply inline-flex w-full justify-center rounded-md bg-primary-100 px-3 py-2 ;
+  @apply text-sm font-semibold text-white shadow-sm hover:bg-sky-400 sm:ml-3 sm:w-auto
+}
+
 body {
   color: rgb(var(--color-primary));
-  background-color: var(--color-background)
+  overflow-x: hidden;
 }
 
 input::-webkit-outer-spin-button,
