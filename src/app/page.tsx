@@ -16,7 +16,7 @@ import IconLost from '../components/Icons/icon-lostpass';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from 'components/Modals';
-import { Ionicons } from '@expo/vector-icons'; 
+import { BsMoonFill } from "react-icons/bs";
 
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -120,7 +120,7 @@ export default function LoginPage() {
             setDarkMode(!darkMode);
         }} 
         >
-        <Ionicons name="moon-sharp" size={24} color="black" />
+          <BsMoonFill />
         {darkMode ? "Light" : "Dark"} Mode
         </button>
       </div>
