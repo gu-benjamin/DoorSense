@@ -25,10 +25,10 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
     return (
       //Div root 
       <div
-        className={`flex flex-col justify-start relative gap-5 text-start`}
+        className={`flex flex-col justify-start relative gap-3 text-start`}
       >
         {/* Icone */}
-        <div className={`absolute ${hasError ? `bottom-12` : `bottom-2`}`}>{icon}</div>
+        <div className={`absolute ${hasError ? `bottom-10` : `bottom-2`}`}>{icon}</div>
 
            {/* Label */}
         <label
