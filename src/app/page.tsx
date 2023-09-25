@@ -13,9 +13,13 @@ import { Button } from './../components/Buttons/Button/button';
 import { useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
-import Link from 'next/link';
+import IconOpenPassword from './../components/Icons/icon-password-open';
+import IconClosePassword from './../components/Icons/icon-password-close';
+import IconLost from '../components/Icons/icon-lostpass';
 import Image from 'next/image';
-import { Modal } from 'components/Modal';
+import { Modal } from 'components/Modals';
+import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
+
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -80,15 +84,34 @@ export default function LoginPage() {
     setOpen((prevState) => !prevState);
   }
 
+  //Dark Theme
+  let [darkMode, setDarkMode] = useState(false);
+
+  useEffect(()=>{
+    if (darkMode){
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [darkMode]);
+  //End
+
   // Front da página
   return (
-    <main className={`w-screen h-screen flex`}>
+    <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black`}>
       {/* Right Column Image */}
-      <picture
-        className={`relative w-1/2 h-full hidden md:block lg:block xl:block `}
-      >
-        <Image
-          src="/images/Login.png"
+      <picture className={`w-1/2 h-screen hidden lg:block xl:block relative`}>
+        {/* {darkMode ? <Image
+        src="/images/darklogin.png"
+        alt="login image"
+        fill
+        quality={100}
+        className={``}
+        priority
+        sizes='(max-width: 768px) 100vw'
+      /> : */}
+      <Image
+          src="/images/darkLOGIN (2).png"
           alt="login image"
           fill
           quality={100}
@@ -100,28 +123,59 @@ export default function LoginPage() {
 
       {/* Left Column Form */}
       <section
-        className={`p-6 flex flex-col items-center justify-center w-1/2 h-full gap-12`}
-      >
-        <ThemeButton/>
-        <img src="/images/Logo.png" alt="" className={`lg:w-24`} />
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9`}
 
-        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-3x1`}>
+      {/* Button Dark Theme */}
+      <div className="fixed top-5 right-10 duration-100 bg-blue-200 dark:bg-blue-200 py-2 px-3 rounded">
+        
+        <button 
+          onClick={()=>{
+            setDarkMode(!darkMode);
+        }} 
+        >
+        {darkMode ? <BsMoonFill /> : <BsFillSunFill /> }
+        </button> 
+        
+        {/* {darkMode ? <Image
+          src="/images/Login.png"
+          alt="login image"
+          fill
+          quality={100}
+          className={``}
+          priority
+          sizes='(max-width: 768px) 100vw'
+        /> : <Image
+        src="/images/darklogin.png"
+        alt="login image"
+        fill
+        quality={100}
+        className={``}
+        priority
+        sizes='(max-width: 768px) 100vw'
+      /> } */}
+
+      </div>
+      
+      
+        <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} />
+
+        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-5xl xl:text-5xl`}>
           Login
         </h1>
-        <p className={`font-regular text-lg md:text-sm`}>
+        <p className={`font-regular text-lg text-center dark:text-white`}>
           Conecte-se usando o usuário de administrador
         </p>
 
         <form
           onSubmit={handleSubmit(handleForm)}
-          className={`flex flex-col items-center gap-10 w-full lg:w-1/2 xl:1/2`}
+          className={`flex flex-col items-center gap-8 w-full lg:w-1/2 xl:1/2`}
         >
           {/* Campo Usuário */}
           <InputLogin
             //Registrando campo na hook
             {...register('user', { required: true })}
-            //Pros
-            placeholder="Digite sua senha ..."
+          //Pros
+            placeholder='Digite seu usuário'
             icon={
               <IconUser
                 size={30}
@@ -132,7 +186,7 @@ export default function LoginPage() {
                 }
               />
             }
-            label="Usuário:"
+            // label="Usuário:"
             helperText={errors.user?.message}
           />
 
@@ -140,8 +194,8 @@ export default function LoginPage() {
           <InputLogin
             // Registrando campo na hook
             {...register('password', { required: true })}
-            //Props
-            placeholder="Digite sua senha ..."
+          //Props
+          placeholder='Digite sua senha'
             type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <IconLock
@@ -153,14 +207,12 @@ export default function LoginPage() {
                 }
               />
             }
-            label="Senha:"
+            // label="Senha:"
             helperText={errors.password?.message}
             //Botao icone de esconder a senha
             actionIcon={
               <ButtonIcon
-                className={`absolute right-3 ${
-                  errors.password?.message ? `bottom-9` : `bottom-2`
-                }`}
+              className={`absolute right-3 ${errors.password?.message ? `bottom-12` : `bottom-2`}`}
                 icon={
                   isPasswordVisible ? (
                     <IconOpenPassword
@@ -186,59 +238,29 @@ export default function LoginPage() {
               />
             }
           />
-
-          <Button btnName="ENTRAR" className={`botao-primary`} />
+          <Button btnName="ENTRAR" className={`botao-primary lg:px-10 xl:px-10`}/>
         </form>
         {/* Link */}
-        <Button
-          btnName="Esqueceu a senha?"
-          type="button"
-          onClick={toggleModalVisibility}
-        />
-        <Link href="/Dashboard">Dashboard</Link>
+        <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility} className = "dark:text-white"/>
       </section>
 
-      {/*Esqueleto da modal*/}
-      <Modal.Root open={open} onClose={setOpen}>
-        {/*Parte de cima da modal - Action de fechar a modal*/}
-        <Modal.CloseTop>
-          <ButtonIcon
-            onClick={toggleModalVisibility}
-            icon={<XCircleIcon width={25} height={25} className={``} />}
-          />
-        </Modal.CloseTop>
-
-        {/*Corpo da modal*/}
-        <Modal.MainSection>
-          {/*Icone da modal*/}
-          <Modal.Icon
-            icon={<IconUser size={50} color={`var(--color-primary)`} />}
-          />
-
-          {/*Titulo da modal*/}
-          <Modal.Title title={`Teste`} />
-
-          {/*Conteudo da modal*/}
-          <Modal.Content>
-            <InputLogin
-              icon={<IconUser size={30} color={`var(--color-primary)`} />}
-              placeholder="testeeeeee"
-              label="Testee"
-            />
-          </Modal.Content>
-        </Modal.MainSection>
-
-        {/*Parte de baixo da modal - seção de botões*/}
-        <Modal.Actions>
-          {/*Botões da modal*/}
-          <Modal.Action btnName="Clica ae" onClick={toggleModalVisibility} />
-          <Modal.Action
-            btnName="Clica ae"
-            className="botao-cancel"
-            onClick={toggleModalVisibility}
-          />
-        </Modal.Actions>
-      </Modal.Root>
+     <Modal.Root open={open} onClose={setOpen}>
+      <Modal.CloseTop>
+      <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-white`}/>}  />                            
+      </Modal.CloseTop>
+      <Modal.MainSection>
+       <Modal.Icon icon={<IconLost size={50} color={`var(--color-primary)`}/>}/>
+       <Modal.Title title={`Redefinição de senha`} />
+            <p>Por favor insira seu e-mail de recuperação</p>
+       <Modal.Content>
+        <InputLogin icon={<IconUser size={30} color={`#05AFF2`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
+       </Modal.Content>
+      </Modal.MainSection>
+      <Modal.Actions>
+        <Modal.Action btnName='Sair' className='botao-danger' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Reset' className='botao-reset' onClick={toggleModalVisibility}/>
+      </Modal.Actions>
+     </Modal.Root>
     </main>
   );
 }
