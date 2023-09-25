@@ -16,7 +16,8 @@ import IconLost from '../components/Icons/icon-lostpass';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Modal } from 'components/Modals';
-import { BsMoonFill } from "react-icons/bs";
+import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
+
 
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -97,8 +98,17 @@ export default function LoginPage() {
     <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black`}>
       {/* Right Column Image */}
       <picture className={`w-1/2 h-screen hidden lg:block xl:block relative`}>
-        <Image
-          src="/images/Login.png"
+        {/* {darkMode ? <Image
+        src="/images/darklogin.png"
+        alt="login image"
+        fill
+        quality={100}
+        className={``}
+        priority
+        sizes='(max-width: 768px) 100vw'
+      /> : */}
+      <Image
+          src="/images/darkLOGIN (2).png"
           alt="login image"
           fill
           quality={100}
@@ -114,15 +124,34 @@ export default function LoginPage() {
       >
       
       {/* Button Dark Theme */}
-      <div className="fixed top-5 right-10 duration-100 dark:bg-slate-700 bg-gray-100 rounded">
+      <div className="fixed top-5 right-10 duration-100 bg-blue-200 dark:bg-blue-200 py-2 px-3 rounded">
+        
         <button 
           onClick={()=>{
             setDarkMode(!darkMode);
         }} 
         >
-          <BsMoonFill />
-        {darkMode ? "Light" : "Dark"} Mode
-        </button>
+        {darkMode ? <BsMoonFill /> : <BsFillSunFill /> }
+        </button> 
+        
+        {/* {darkMode ? <Image
+          src="/images/Login.png"
+          alt="login image"
+          fill
+          quality={100}
+          className={``}
+          priority
+          sizes='(max-width: 768px) 100vw'
+        /> : <Image
+        src="/images/darklogin.png"
+        alt="login image"
+        fill
+        quality={100}
+        className={``}
+        priority
+        sizes='(max-width: 768px) 100vw'
+      /> } */}
+
       </div>
       
       
