@@ -1,4 +1,4 @@
-import { ButtonIcon } from './../Buttons/Button-icon/button-icon';
+import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ReactNode } from 'react';
 
