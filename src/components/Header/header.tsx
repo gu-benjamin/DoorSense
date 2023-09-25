@@ -1,4 +1,3 @@
-import IconMoon from 'components/Icons/🦆 icon-moon';
 import Image from 'next/image';
 import { LuLogOut } from 'react-icons/lu'; // Importar o ícone de logout do react-icons
 
@@ -21,7 +20,7 @@ export default function Header() {
         {/* Botão de alternância de tema */}
         <ThemeButton />
         {/* Botão de Logout */}
-        <ButtonIcon icon={<LuLogOut size={28} color="#000" />}/>
+        <ButtonIcon icon={<LuLogOut size={28} />}/>
         
       </div>
     </header>
