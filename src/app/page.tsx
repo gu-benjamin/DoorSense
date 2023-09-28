@@ -13,12 +13,9 @@ import { Button } from './../components/Buttons/Button/button';
 import { useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
-import IconOpenPassword from './../components/Icons/icon-password-open';
-import IconClosePassword from './../components/Icons/icon-password-close';
 import IconLost from '../components/Icons/icon-lostpass';
 import Image from 'next/image';
-import { Modal } from 'components/Modals';
-import { BsMoonFill, BsFillSunFill } from "react-icons/bs";
+import { Modal } from 'components/Modal';
 
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -54,12 +51,12 @@ export default function LoginPage() {
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
 
-    // console.log(data);
-    const body = data
-    const res = await fetch('https:/localhost:3000/api/login',{
-      method: 'POST',
-      body: body
-    });
+    console.log(data);
+    // const body = data
+    // const res = await fetch('https:/localhost:3000/api/login',{
+    //   method: 'POST',
+    //   body: body
+    // });
     
     resetField('user');
     resetField('password');
@@ -86,14 +83,6 @@ export default function LoginPage() {
 
   //Dark Theme
   let [darkMode, setDarkMode] = useState(false);
-
-  useEffect(()=>{
-    if (darkMode){
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
   //End
 
   // Front da página
@@ -122,40 +111,12 @@ export default function LoginPage() {
       </picture>
 
       {/* Left Column Form */}
-      <section
-        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9`}
+      <section className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9`}>
 
       {/* Button Dark Theme */}
-      <div className="fixed top-5 right-10 duration-100 bg-blue-200 dark:bg-blue-200 py-2 px-3 rounded">
-        
-        <button 
-          onClick={()=>{
-            setDarkMode(!darkMode);
-        }} 
-        >
-        {darkMode ? <BsMoonFill /> : <BsFillSunFill /> }
-        </button> 
-        
-        {/* {darkMode ? <Image
-          src="/images/Login.png"
-          alt="login image"
-          fill
-          quality={100}
-          className={``}
-          priority
-          sizes='(max-width: 768px) 100vw'
-        /> : <Image
-        src="/images/darklogin.png"
-        alt="login image"
-        fill
-        quality={100}
-        className={``}
-        priority
-        sizes='(max-width: 768px) 100vw'
-      /> } */}
-
-      </div>
-      
+        <div className="fixed top-5 right-10 duration-100 bg-blue-200 dark:bg-blue-200 py-2 px-3 rounded">
+         <ThemeButton/>
+        </div>  
       
         <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} />
 
@@ -258,7 +219,7 @@ export default function LoginPage() {
       </Modal.MainSection>
       <Modal.Actions>
         <Modal.Action btnName='Sair' className='botao-danger' onClick={toggleModalVisibility}/>
-        <Modal.Action btnName='Reset' className='botao-reset' onClick={toggleModalVisibility}/>
+        <Modal.Action btnName='Enviar' className='botao-reset' onClick={toggleModalVisibility}/>
       </Modal.Actions>
      </Modal.Root>
     </main>

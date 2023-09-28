@@ -7,12 +7,12 @@ const config: Config = {
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  darkMode: 'class',
   theme: {
     extend: {
       colors:{
         primary: {
           50: '#DAF3FD',
+          70: '#05AFF2',
           100:'#05AFF2'
         },
         secondary: '#F0F5F9',
