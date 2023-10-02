@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import IconHome from 'components/Icons/🦆 icon-home'; // Importar o ícone para a página
+import IconHome from 'components/Icons/icon-home'; // Importar o ícone para a página
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { TiEdit } from 'react-icons/ti';
 import { BiTrash } from 'react-icons/bi';
