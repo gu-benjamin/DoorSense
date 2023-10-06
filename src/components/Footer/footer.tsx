@@ -15,7 +15,7 @@ export default function Footer(props: FooterProps) {
       <div className="max-w-3xl mx-auto py-4">
         <div className="text-center">
           <div className="flex justify-center">
-            {resolvedTheme === 'dark' ? <IconLogoEquipe size={20}/> : <IconLogoEquipeDark size={20}/>}
+            {resolvedTheme === 'dark' ? <IconLogoEquipe size={100}/> : <IconLogoEquipeDark size={100}/>}
           </div>
           <div className="flex justify-center my-10">
             <div className="flex items-center w-auto rounded-lg px-4 w-52 mx-2">

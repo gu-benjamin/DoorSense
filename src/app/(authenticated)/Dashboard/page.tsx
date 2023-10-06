@@ -1,5 +1,4 @@
 'use client';
-
 import React, { useState, useEffect } from 'react';
 import IconHome from 'components/Icons/icon-home'; // Importar o ícone para a página
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
@@ -9,16 +8,17 @@ import { AiOutlinePlus, AiFillCloseCircle, AiFillCheckCircle } from 'react-icons
 import { PiMagnifyingGlassBold } from 'react-icons/pi'; 
 import { BiFilter } from 'react-icons/bi'; // Importar o ícone BiFilter do react-icons/bi
 import { MdKeyboardArrowDown } from 'react-icons/md'; 
+import Card from 'components/Card-table/card';
 
 
 
 
 export default function HomePage() {
-  const [isDropdownOpenCard1, setIsDropdownOpenCard1] = useState(false);
+  const [isDropdownOpenCard, setIsDropdownOpenCard] = useState(false);
   const [isDropdownOpenCard2, setIsDropdownOpenCard2] = useState(false);
 
-  const handleDropdownToggleCard1 = () => {
-    setIsDropdownOpenCard1(!isDropdownOpenCard1);
+  const handleDropdownToggleCard = () => {
+    setIsDropdownOpenCard(!isDropdownOpenCard);
   };
 
   const handleDropdownToggleCard2 = () => {
@@ -83,45 +83,11 @@ export default function HomePage() {
         {/* Cards Section */}
         <div className="flex flex-col gap-4 mt-4 ">
           {/* Card 1 */}
-          <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
-            <p className={`text-center dark:text-white `}>Laboratório</p>
-            <p className={`text-center dark:text-white `}>1</p>
-            <p className={` dark:text-white text-center sm:text-left`}>
-              A2C4E6G8
-            </p>
+          <Card
+            handleDropdownToggleCard={handleDropdownToggleCard} // Pass the callback function
+            isDropdownOpenCard={isDropdownOpenCard} // Pass a boolean value for isDropdownOpenCard
+          />
 
-            <div className={`hidden sm:flex sm:gap-2 items-center`}>
-              <AiFillCheckCircle size={16} color="#00D715" />
-              <p className={' text-green-500'}>Ativo</p>
-            </div>
-
-            <div className={`flex gap-2 sm:hidden `}>
-              <AiFillCheckCircle size={16} color="#00D715" />
-              <p className={'text-green-500'}>Ativo</p>
-              <ButtonIcon
-                icon={<MdKeyboardArrowDown size={18} color="#05AFF2" />}
-                onClick={handleDropdownToggleCard1}
-              />
-            </div>
-
-            {isDropdownOpenCard1 && (
-              <div className="absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-darkcard bg-rounded shadow-lg z-10">
-                {/* Aqui é o conteúdo do dropdown */}
-                <div className="flex gap-2">
-                  <ButtonIcon icon={<TiEdit size={25} color="#05AFF2" />} />
-                  <div className="w-px bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-                  <ButtonIcon icon={<BiTrash size={25} color="#FF0F00" />} /> {/* Substituir IconTrash por BiTrash */}
-                  {/* Se tiver outras opções, colocar aqui */}
-                </div>
-              </div>
-            )}
-
-            <div className={`gap-2 items-center hidden sm:flex`}>
-              <ButtonIcon icon={<TiEdit size={35} color="#05AFF2" />} />
-              <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-              <ButtonIcon icon={<BiTrash size={35} color="#FF0F00" />} />
-            </div>
-          </div>
 
           {/* Card 2 */}
           <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
