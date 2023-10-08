@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { AiFillCheckCircle, MdKeyboardArrowDown, TiEdit, BiTrash } from 'react-icons/ai';
-import ButtonIcon from 'components/Buttons/Button-icon/button-icon';
-interface CardProps {
+import { AiFillCheckCircle} from 'react-icons/ai';
+import { TiEdit } from 'react-icons/ti';
+import { BiTrash } from 'react-icons/bi';
+import { MdKeyboardArrowDown } from 'react-icons/md'; 
+import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 
-}
 
-
-export default function Card(props: CardProps){
+export default function Card(){
   const [isDropdownOpenCard, setIsDropdownOpenCard] = useState(false);
   
   const handleDropdownToggleCard = () => {
