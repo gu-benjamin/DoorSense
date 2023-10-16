@@ -1,6 +1,6 @@
 import IconHome from "components/Icons/icon-home";
 
-export default function Lista(){
+export default function TopSection(){
     return(
         <div className=" py-4 text-left flex items-center">
           <IconHome size={75} color="" />
