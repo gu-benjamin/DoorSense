@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import IconUser from 'components/Icons/icon-user';
 import IconLock from 'components/Icons/icon-lock';
 import IconOpenPassword from './../components/Icons/icon-password-open';
@@ -10,13 +11,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { InputLogin } from './../components/Inputs/Input-login/input-login';
 import { Button } from './../components/Buttons/Button/button';
-import { useState } from 'react';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from './../components/Buttons/Button-icon/button-icon';
 import IconLost from '../components/Icons/icon-lostpass';
 import Image from 'next/image';
 import { Modal } from 'components/Modal';
-
+import LogoHome from '../components/Icons/logoSVG';
+import {useTheme} from 'next-themes'
+import LogoHomeDark from '../components/Icons/logoSVGdark';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -86,21 +88,16 @@ export default function LoginPage() {
   //End
 
   // Front da página
+
+  const {resolvedTheme} = useTheme();
+
   return (
     <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black`}>
-      {/* Right Column Image */}
+      {/* Left Column Image */}
       <picture className={`w-1/2 h-screen hidden lg:block xl:block relative`}>
-        {/* {darkMode ? <Image
-        src="/images/darklogin.png"
-        alt="login image"
-        fill
-        quality={100}
-        className={``}
-        priority
-        sizes='(max-width: 768px) 100vw'
-      /> : */}
+    
       <Image
-          src="/images/darkLOGIN (2).png"
+          src="/images/LoginImage.png"
           alt="login image"
           fill
           quality={100}
@@ -110,7 +107,7 @@ export default function LoginPage() {
         />
       </picture>
 
-      {/* Left Column Form */}
+      {/* Right Column Form */}
       <section className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9`}>
 
       {/* Button Dark Theme */}
@@ -118,7 +115,9 @@ export default function LoginPage() {
          <ThemeButton/>
         </div>  
       
-        <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} />
+        {/* <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} /> */}
+
+      {resolvedTheme === 'dark' ? <LogoHomeDark size={170}/> : <LogoHome size={170}/> }
 
         <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-5xl xl:text-5xl`}>
           Login
