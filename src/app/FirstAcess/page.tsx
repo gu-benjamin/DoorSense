@@ -108,7 +108,7 @@ export default function LoginPage() {
 
   return (
     <main
-      className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black`}
+      className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black bg-secondary`}
     >
       {/* Left Column Image */}
       <picture
