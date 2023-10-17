@@ -94,7 +94,7 @@ export default function LoginPage() {
   return (
     <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black`}>
       {/* Left Column Image */}
-      <picture className={`w-1/2 h-screen hidden lg:block xl:block relative`}>
+      <picture className={`w-1/2 h-screen hidden lg:block xl:block relative ml-20`}>
     
       <Image
           src="/images/LoginImage.png"
