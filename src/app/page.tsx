@@ -17,7 +17,7 @@ import IconLost from '../components/Icons/icon-lostpass';
 import Image from 'next/image';
 import { Modal } from 'components/Modal';
 import LogoHome from '../components/Icons/logoSVG';
-import {useTheme} from 'next-themes'
+import { useTheme } from 'next-themes';
 import LogoHomeDark from '../components/Icons/logoSVGdark';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -52,14 +52,13 @@ export default function LoginPage() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-
     console.log(data);
     // const body = data
     // const res = await fetch('https:/localhost:3000/api/login',{
     //   method: 'POST',
     //   body: body
     // });
-    
+
     resetField('user');
     resetField('password');
   };
@@ -89,14 +88,17 @@ export default function LoginPage() {
 
   // Front da página
 
-  const {resolvedTheme} = useTheme();
+  const { resolvedTheme } = useTheme();
 
   return (
-    <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black bg-secondary`}>
+    <main
+      className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black bg-secondary`}
+    >
       {/* Left Column Image */}
-      <picture className={`w-1/2 h-screen hidden lg:block xl:block relative ml-20`}>
-    
-      <Image
+      <picture
+        className={`w-1/2 h-screen hidden lg:block xl:block relative ml-20`}
+      >
+        <Image
           src="/images/LoginImage.png"
           alt="login image"
           fill
@@ -108,18 +110,25 @@ export default function LoginPage() {
       </picture>
 
       {/* Right Column Form */}
-      <section className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9 bg-secondary dark:bg-black`}>
-
-      {/* Button Dark Theme */}
+      <section
+        className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9 bg-secondary dark:bg-black`}
+      >
+        {/* Button Dark Theme */}
         <div className="fixed top-5 right-10">
-         <ThemeButton/>
-        </div>  
-      
+          <ThemeButton />
+        </div>
+
         {/* <img src="/images/Logo.png" alt="" className={`w-24 lg:w-36 xl:w-36`} /> */}
 
-      {resolvedTheme === 'dark' ? <LogoHomeDark size={170}/> : <LogoHome size={170}/> }
+        {resolvedTheme === 'dark' ? (
+          <LogoHomeDark size={170} />
+        ) : (
+          <LogoHome size={170} />
+        )}
 
-        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-6xl xl:text-6xl`}>
+        <h1
+          className={`text-primary-100 font-extrabold text-5xl lg:text-6xl xl:text-6xl`}
+        >
           Login
         </h1>
         <p className={`font-light text-lg text-center dark:text-white`}>
@@ -134,8 +143,8 @@ export default function LoginPage() {
           <InputLogin
             //Registrando campo na hook
             {...register('user', { required: true })}
-          //Pros
-            placeholder='Digite seu usuário'
+            //Pros
+            placeholder="Digite seu usuário"
             icon={
               <IconUser
                 size={30}
@@ -154,8 +163,8 @@ export default function LoginPage() {
           <InputLogin
             // Registrando campo na hook
             {...register('password', { required: true })}
-          //Props
-          placeholder='Digite sua senha'
+            //Props
+            placeholder="Digite sua senha"
             type={isPasswordVisible ? 'text' : 'password'}
             icon={
               <IconLock
@@ -172,7 +181,9 @@ export default function LoginPage() {
             //Botao icone de esconder a senha
             actionIcon={
               <ButtonIcon
-              className={`absolute right-3 ${errors.password?.message ? `bottom-12` : `bottom-2`}`}
+                className={`absolute right-3 ${
+                  errors.password?.message ? `bottom-12` : `bottom-2`
+                }`}
                 icon={
                   isPasswordVisible ? (
                     <IconOpenPassword
@@ -198,29 +209,60 @@ export default function LoginPage() {
               />
             }
           />
-          <Button btnName="ENTRAR" className={`botao-primary lg:px-10 xl:px-10`}/>
+          <Button
+            btnName="ENTRAR"
+            className={`botao-primary lg:px-10 xl:px-10`}
+          />
         </form>
         {/* Link */}
-        <Button btnName='Esqueceu a senha?' type="button" onClick={toggleModalVisibility} className = "dark:text-white"/>
+        <Button
+          btnName="Esqueceu a senha?"
+          type="button"
+          onClick={toggleModalVisibility}
+          className="dark:text-white"
+        />
       </section>
 
-     <Modal.Root open={open} onClose={setOpen}>
-      <Modal.CloseTop>
-      <ButtonIcon onClick={toggleModalVisibility} icon={<XCircleIcon width={25} height={25} className={`hover:fill-white`}/>}  />                            
-      </Modal.CloseTop>
-      <Modal.MainSection>
-       <Modal.Icon icon={<IconLost size={50} color={`var(--color-primary)`}/>}/>
-       <Modal.Title title={`Redefinição de senha`} />
-            <p>Por favor insira seu e-mail de recuperação</p>
-       <Modal.Content>
-        <InputLogin icon={<IconUser size={30} color={`#05AFF2`}/>} placeholder='Digite seu E-mail' label='E-mail'/>
-       </Modal.Content>
-      </Modal.MainSection>
-      <Modal.Actions>
-        <Modal.Action btnName='Sair' className='botao-danger' onClick={toggleModalVisibility}/>
-        <Modal.Action btnName='Enviar' className='botao-reset' onClick={toggleModalVisibility}/>
-      </Modal.Actions>
-     </Modal.Root>
+      <Modal.Root open={open} onClose={setOpen}>
+        <Modal.CloseTop>
+          <ButtonIcon
+            onClick={toggleModalVisibility}
+            icon={
+              <XCircleIcon
+                width={25}
+                height={25}
+                className={`hover:fill-white`}
+              />
+            }
+          />
+        </Modal.CloseTop>
+        <Modal.MainSection>
+          <Modal.Icon
+            icon={<IconLost size={50} color={`var(--color-primary)`} />}
+          />
+          <Modal.Title title={`Redefinição de senha`} />
+          <p>Por favor insira seu e-mail de recuperação</p>
+          <Modal.Content>
+            <InputLogin
+              icon={<IconUser size={30} color={`#05AFF2`} />}
+              placeholder="Digite seu E-mail"
+              label="E-mail"
+            />
+          </Modal.Content>
+        </Modal.MainSection>
+        <Modal.Actions>
+          <Modal.Action
+            btnName="Sair"
+            className="botao-danger"
+            onClick={toggleModalVisibility}
+          />
+          <Modal.Action
+            btnName="Enviar"
+            className="botao-reset"
+            onClick={toggleModalVisibility}
+          />
+        </Modal.Actions>
+      </Modal.Root>
     </main>
   );
 }

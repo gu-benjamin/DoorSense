@@ -21,28 +21,28 @@ import { useTheme } from 'next-themes';
 import LogoHomeDark from '../../components/Icons/logoSVGdark';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
-const schema = z.
-  object({
-  user: z
-    .string({
-      required_error: 'Este campo é obrigatório'
-    })
-    .min(3, 'Por favor insira um usuário válido'),
-  password: z
-    .string({
-      required_error: 'Este campo é obrigatório'
-    })
-    .min(5, 'Por favor insira uma senha válida'),
-  confirmPassword: z
-  .string({
-    required_error: 'Este campo é obrigatório'
+const schema = z
+  .object({
+    user: z
+      .string({
+        required_error: 'Este campo é obrigatório'
+      })
+      .min(3, 'Por favor insira um usuário válido'),
+    password: z
+      .string({
+        required_error: 'Este campo é obrigatório'
+      })
+      .min(5, 'Por favor insira uma senha válida'),
+    confirmPassword: z
+      .string({
+        required_error: 'Este campo é obrigatório'
+      })
+      .min(5, 'Por favor insira uma senha válida')
   })
-  .min(5, 'Por favor insira uma senha válida')
-  })
-  .refine((fields)=> fields.password === fields.confirmPassword, {
+  .refine((fields) => fields.password === fields.confirmPassword, {
     path: ['confirmPassword'],
     message: 'As senhas precisam ser iguais'
-  })
+  });
 
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
 type FormProps = z.infer<typeof schema>;
@@ -72,13 +72,13 @@ export default function LoginPage() {
     resetField('user');
     resetField('password');
     resetField('confirmPassword');
-
   };
 
   // STATES
   //para mudar a visibilidade da senha
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
   //para mudar a visibilidade da modal
   const [open, setOpen] = useState(false);
 
@@ -147,7 +147,9 @@ export default function LoginPage() {
         >
           Bem-vindo
         </h1>
-        <p className={`font-light text-sm text-center lg:text-lg xl:text-lg dark:text-white`}>
+        <p
+          className={`font-light text-sm text-center lg:text-lg xl:text-lg dark:text-white`}
+        >
           Primeiro acesso? Crie seu login e senha!
         </p>
 
