@@ -143,11 +143,11 @@ export default function LoginPage() {
         )}
 
         <h1
-          className={`text-primary-100 font-extrabold text-5xl lg:text-5xl xl:text-5xl`}
+          className={`text-primary-100 font-extrabold text-3xl lg:text-5xl xl:text-5xl`}
         >
           Bem-vindo
         </h1>
-        <p className={`font-regular text-lg text-center dark:text-white`}>
+        <p className={`font-light text-sm text-center lg:text-lg xl:text-lg dark:text-white`}>
           Primeiro acesso? Crie seu login e senha!
         </p>
 
