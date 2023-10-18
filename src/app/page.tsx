@@ -92,7 +92,7 @@ export default function LoginPage() {
   const {resolvedTheme} = useTheme();
 
   return (
-    <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black`}>
+    <main className={`w-screen h-screen flex items-center justify-center mx-auto md:h-screen dark:bg-black bg-secondary`}>
       {/* Left Column Image */}
       <picture className={`w-1/2 h-screen hidden lg:block xl:block relative ml-20`}>
     
@@ -119,10 +119,10 @@ export default function LoginPage() {
 
       {resolvedTheme === 'dark' ? <LogoHomeDark size={170}/> : <LogoHome size={170}/> }
 
-        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-5xl xl:text-5xl`}>
+        <h1 className={`text-primary-100 font-extrabold text-5xl lg:text-6xl xl:text-6xl`}>
           Login
         </h1>
-        <p className={`font-regular text-lg text-center dark:text-white`}>
+        <p className={`font-light text-lg text-center dark:text-white`}>
           Conecte-se usando o usuário de administrador
         </p>
 
