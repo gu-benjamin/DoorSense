@@ -130,7 +130,7 @@ export default function LoginPage() {
         className={`flex flex-col items-center justify-center w-1/2 h-full gap-6 lg:gap-6 xl:gap-9 bg-secondary dark:bg-black`}
       >
         {/* Button Dark Theme */}
-        <div className="fixed top-5 right-10 duration-100 bg-blue-200 dark:bg-blue-200 py-2 px-3 rounded">
+        <div className="fixed top-5 right-10">
           <ThemeButton />
         </div>
 
