@@ -24,9 +24,9 @@ export default function HomePage() {
           {/* Card 1 */}
           {/* <Card/> */}
           <Card.Root>
-            <Card.Data data='1'/>
-            <Card.Data data='1'/>
-            <Card.Data data='1'/>
+            <Card.Data  data='Laboratório'/>
+            <Card.Data  data='1'/>
+            <Card.Data className='sm:text-left'  data='A2C4E6G8'/>
             <Card.Status data='Ativo'/>
           </Card.Root>
 

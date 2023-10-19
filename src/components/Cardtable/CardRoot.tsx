@@ -6,7 +6,11 @@ import { MdKeyboardArrowDown } from 'react-icons/md';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import IconUser from 'components/Icons/icon-user';
-import { XCircleIcon } from '@heroicons/react/24/solid';
+import { MdOutlineClose } from 'react-icons/md';
+import { IoWarningOutline } from 'react-icons/io5';
+import { TbHomeEdit } from 'react-icons/tb';
+import { InputLogin } from 'components/Inputs/Input-login';
+
 
 
 interface CardRootProps {
@@ -33,7 +37,7 @@ export default function CardRoot({ children }: CardRootProps) {
         <div className={`gap-2 items-center hidden sm:flex`}>
           <ButtonIcon icon={<TiEdit size={35} color="#05AFF2" />} onClick={toggleModalEditVisibility}/>
           <div className="w-px h-7 bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
-          <ButtonIcon icon={<BiTrash size={35} color="#FF0F00" />} />
+          <ButtonIcon icon={<BiTrash size={35} color="#FF0F00" />} onClick={toggleModalDeleteVisibility}/>
         </div>
       </div>
       {/*Esqueleto da modal*/}
@@ -42,7 +46,7 @@ export default function CardRoot({ children }: CardRootProps) {
         <Modal.CloseTop>
           <ButtonIcon
             onClick={toggleModalEditVisibility}
-            icon={<XCircleIcon width={25} height={25} className={``} />}
+            icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
           />
         </Modal.CloseTop>
 
@@ -50,24 +54,35 @@ export default function CardRoot({ children }: CardRootProps) {
         <Modal.MainSection>
           {/*Icone da modal*/}
           <Modal.Icon
-            icon={<IconUser size={50} color={`var(--color-primary)`} />}
+            icon={<TbHomeEdit size={50} color={`var(--color-primary)`} />}
           />
 
           {/*Titulo da modal*/}
-          <Modal.Title title={`Teste`} />
+          <Modal.Title title={`Editar Sala`} />
 
           {/*Conteudo da modal*/}
           <Modal.Content>
-            <h1>jhsvakajhdj</h1>
+            <h1>Atualize as informações da sala aqui:</h1>
+            <form className='flex flex-col gap-4'>
+              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+              placeholder='Digite'
+              label='Sala:'/>
+              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+              placeholder='Digite'
+              label='Sala:'/>
+              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+              placeholder='Digite'
+              label='Sala:'/>
+            </form>
           </Modal.Content>
         </Modal.MainSection>
 
         {/*Parte de baixo da modal - seção de botões*/}
         <Modal.Actions>
           {/*Botões da modal*/}
-          <Modal.Action btnName="Clica ae" onClick={toggleModalEditVisibility} />
+          <Modal.Action btnName="Editar" onClick={toggleModalEditVisibility} />
           <Modal.Action
-            btnName="Clica ae"
+            btnName="Cancelar"
             className="botao-cancel"
             onClick={toggleModalEditVisibility}
           />
@@ -80,7 +95,7 @@ export default function CardRoot({ children }: CardRootProps) {
         <Modal.CloseTop>
           <ButtonIcon
             onClick={toggleModalDeleteVisibility}
-            icon={<XCircleIcon width={25} height={25} className={``} />}
+            icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
           />
         </Modal.CloseTop>
 
@@ -88,24 +103,24 @@ export default function CardRoot({ children }: CardRootProps) {
         <Modal.MainSection>
           {/*Icone da modal*/}
           <Modal.Icon
-            icon={<IconUser size={50} color={`var(--color-primary)`} />}
+            icon={<IoWarningOutline size={50} color={`var(--color-primary)`} />}
           />
 
           {/*Titulo da modal*/}
-          <Modal.Title title={`Teste`} />
+          <Modal.Title title={`Aviso! Você está deletando uma Sala`} />
 
           {/*Conteudo da modal*/}
           <Modal.Content>
-            <h1>jhsvakajhdj</h1>
+            <h1>Tem certeza que quer deletar essa sala?</h1>
           </Modal.Content>
         </Modal.MainSection>
 
         {/*Parte de baixo da modal - seção de botões*/}
         <Modal.Actions>
           {/*Botões da modal*/}
-          <Modal.Action btnName="Clica ae" onClick={toggleModalDeleteVisibility} />
+          <Modal.Action btnName="Deletar" onClick={toggleModalDeleteVisibility} />
           <Modal.Action
-            btnName="Clica ae"
+            btnName="Cancelar"
             className="botao-cancel"
             onClick={toggleModalDeleteVisibility}
           />

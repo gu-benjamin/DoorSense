@@ -11,7 +11,7 @@ const CardData = forwardRef<HTMLInputElement, CardDataProps>(
       <>
         <p
           className={twMerge(
-            ` dark:text-white text-center sm:text-left`,
+            `text-center dark:text-white`,
             props.className
           )}
         >
