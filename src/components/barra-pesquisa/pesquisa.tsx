@@ -10,7 +10,7 @@ export default function Barra(){
                 <input
                   type="search"
                   placeholder="Buscar..."
-                  className="w-full"
+                  className="w-full focus:outline-none"
                 />
               </label>
               <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
@@ -21,7 +21,7 @@ export default function Barra(){
 
           <div className="bg-thirdy p-3 w-fit mt-2 sm:mt-0 sm:w-auto rounded-2xl flex sm:items-center dark:bg-darkbusc">
             <button
-              className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center"
+              className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center transform hover:scale-95"
               style={{ whiteSpace: 'nowrap' }}
             >
               <AiOutlinePlus size={20} />

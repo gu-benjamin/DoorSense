@@ -9,6 +9,9 @@ import { Modal } from 'components/Modal';
 import IconUser from 'components/Icons/icon-user';
 import { XCircleIcon } from '@heroicons/react/24/solid';
 import { IoWarningOutline } from 'react-icons/io5';
+import { TbHomeEdit } from 'react-icons/tb';
+import { InputLogin } from 'components/Inputs/Input-login';
+import { MdOutlineClose } from 'react-icons/md';
 
 type CardStatusProps = HtmlHTMLAttributes<HTMLParagraphElement> & {
   data: string;
@@ -59,12 +62,12 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
               {/* Aqui é o conteúdo do dropdown */}
               <div className="flex gap-2">
                 <ButtonIcon
-                  icon={<TiEdit size={25} color="#05AFF2" />}
+                  icon={<TiEdit size={25} color="#05AFF2" className="transform hover:scale-110"/>}
                   onClick={toggleModalEditVisibility}
                 />
                 <div className="w-px bg-gradient-to-r from-cyan-300 to-cyan-500"></div>
                 <ButtonIcon
-                  icon={<BiTrash size={25} color="#FF0F00" />}
+                  icon={<BiTrash size={25} color="#FF0F00" className="transform hover:scale-110"/>}
                   onClick={toggleModalDeleteVisibility}
                 />
                 {/* Se tiver outras opções, colocar aqui */}
@@ -73,44 +76,52 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
           )}
         </div>
         <Modal.Root open={openEdit} onClose={setOpenEdit}>
-          {/*Parte de cima da modal - Action de fechar a modal*/}
-          <Modal.CloseTop>
-            <ButtonIcon
-              onClick={toggleModalEditVisibility}
-              icon={<XCircleIcon width={25} height={25} className={``} />}
-            />
-          </Modal.CloseTop>
+        {/*Parte de cima da modal - Action de fechar a modal*/}
+        <Modal.CloseTop>
+          <ButtonIcon
+            onClick={toggleModalEditVisibility}
+            icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
+          />
+        </Modal.CloseTop>
 
-          {/*Corpo da modal*/}
-          <Modal.MainSection>
-            {/*Icone da modal*/}
-            <Modal.Icon
-              icon={<IconUser size={50} color={`var(--color-primary)`} />}
-            />
+        {/*Corpo da modal*/}
+        <Modal.MainSection>
+          {/*Icone da modal*/}
+          <Modal.Icon
+            icon={<TbHomeEdit size={50} color={`var(--color-primary)`} />}
+          />
 
-            {/*Titulo da modal*/}
-            <Modal.Title title={`Teste`} />
+          {/*Titulo da modal*/}
+          <Modal.Title title={`Editar Sala`} />
 
-            {/*Conteudo da modal*/}
-            <Modal.Content>
-              <h1>jhsvakajhdj</h1>
-            </Modal.Content>
-          </Modal.MainSection>
+          {/*Conteudo da modal*/}
+          <Modal.Content>
+            <h1>Atualize as informações da sala aqui:</h1>
+            <form className='flex flex-col gap-4'>
+              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+              placeholder='Digite'
+              label='Sala:'/>
+              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+              placeholder='Digite'
+              label='Sala:'/>
+              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+              placeholder='Digite'
+              label='Sala:'/>
+            </form>
+          </Modal.Content>
+        </Modal.MainSection>
 
-          {/*Parte de baixo da modal - seção de botões*/}
-          <Modal.Actions>
-            {/*Botões da modal*/}
-            <Modal.Action
-              btnName="Clica ae"
-              onClick={toggleModalEditVisibility}
-            />
-            <Modal.Action
-              btnName="Clica ae"
-              className="botao-cancel"
-              onClick={toggleModalEditVisibility}
-            />
-          </Modal.Actions>
-        </Modal.Root>
+         {/*Parte de baixo da modal - seção de botões*/}
+        <Modal.Actions>
+          {/*Botões da modal*/}
+          <Modal.Action btnName="Editar" onClick={toggleModalEditVisibility} />
+          <Modal.Action
+            btnName="Cancelar"
+            className="botao-cancel"
+            onClick={toggleModalEditVisibility}
+          />
+        </Modal.Actions>
+      </Modal.Root>
 
         {/*Esqueleto da modal*/}
         <Modal.Root open={openDelete} onClose={setOpenDelete}>
@@ -118,7 +129,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
           <Modal.CloseTop>
             <ButtonIcon
               onClick={toggleModalDeleteVisibility}
-              icon={<XCircleIcon width={25} height={25} className={``} />}
+              icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
             />
           </Modal.CloseTop>
 
