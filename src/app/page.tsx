@@ -96,7 +96,7 @@ export default function LoginPage() {
     >
       {/* Left Column Image */}
       <picture
-        className={`w-1/2 h-screen hidden lg:block xl:block relative ml-20`}
+        className={`w-2/3 h-screen hidden lg:block xl:block relative`}
       >
         <Image
           src="/images/LoginImage.png"
@@ -211,7 +211,7 @@ export default function LoginPage() {
           />
           <Button
             btnName="ENTRAR"
-            className={`botao-primary lg:px-10 xl:px-10`}
+            className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
           />
         </form>
         {/* Link */}

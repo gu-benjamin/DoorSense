@@ -281,7 +281,7 @@ export default function LoginPage() {
 
           <Button
             btnName="ENTRAR"
-            className={`botao-primary lg:px-10 xl:px-10`}
+            className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
           />
         </form>
       </section>
