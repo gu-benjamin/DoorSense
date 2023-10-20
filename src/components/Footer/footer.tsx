@@ -11,7 +11,7 @@ export default function Footer(props: FooterProps) {
 
   return (
     
-    <div className="mt-20 bg-white dark:bg-darkheader">
+    <div className="mt-20 bg-white dark:bg-black">
       <div className="max-w-3xl mx-auto py-4">
         <div className="text-center">
           <div className="flex justify-center">

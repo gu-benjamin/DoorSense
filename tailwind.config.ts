@@ -17,7 +17,6 @@ const config: Config = {
         secondary: '#F0F5F9',
         thirdy: '#E0EFF5',
         dark: '#393939',
-        darkheader: '#000000',
         darkcard: '#4F4F4F',
         darkbusc: '#4F4F4F',
         'light-red': 'hsl(0, 100%, 67%)',
