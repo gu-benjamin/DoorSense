@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes, ReactNode, forwardRef, useState } from 'react';
+import { HtmlHTMLAttributes, ReactNode, forwardRef, useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
@@ -26,6 +26,21 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
     };
     const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
+    const [message, setMessage] = useState<string | null>();
+    const [Segundos, setSegundos] = useState(0);
+
+    // Função para iniciar a contagem regressiva
+    useEffect(() => {
+      if (message) {
+        const timer = setInterval(() => {
+          setSegundos((prevSeconds) => prevSeconds - 1);
+        }, 1000);
+
+        return () => {
+          clearInterval(timer);
+        };
+      }
+    }, [message]);
 
     // Função visibilidade da modal
     function toggleModalEditVisibility() {
@@ -35,8 +50,35 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
     function toggleModalDeleteVisibility() {
       setOpenDelete((prevState) => !prevState);
     }
+
+    function Delete() {
+      setOpenDelete(false);
+      setMessage('Sala Removida com Sucesso');
+      setTimeout(() => setMessage(null), 5000);
+      setSegundos(5);
+    }
+      function Editar() {
+      setOpenEdit(false);
+      setMessage('Sala Editada com Sucesso');
+      setTimeout(() => setMessage(null), 5000);
+      setSegundos(5);
+    }
+  
+    const progressBarStyle = {
+      width: `${(5 - Segundos) * 20}%`, // Aumenta a largura em 20% a cada segundo
+    };
     return (
       <>
+      {/* Renderização da mensagem com a barra de progresso */}
+        {message && (
+            <div className="bg-primary-100 p-3 rounded justify-self-center text-white relative">
+              {message} ({Segundos})
+              <div className=" h-1 absolute bottom-1 left-0 right-0">
+                <div className="bg-white h-full" style={progressBarStyle}></div>
+              </div>
+            </div>
+          )}
+
         <div className={`flex sm:flex sm:gap-2 items-center`}>
           {data === 'Ativo' ? (
             <AiFillCheckCircle size={16} color="#00D715" />
@@ -114,11 +156,11 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
          {/*Parte de baixo da modal - seção de botões*/}
         <Modal.Actions>
           {/*Botões da modal*/}
-          <Modal.Action btnName="Editar" onClick={toggleModalEditVisibility} />
+          <Modal.Action btnName="Editar" onClick={Editar} />
           <Modal.Action
             btnName="Cancelar"
             className="botao-cancel"
-            onClick={toggleModalEditVisibility}
+            onClick={() => setOpenEdit(false)}
           />
         </Modal.Actions>
       </Modal.Root>
@@ -151,14 +193,14 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
 
           {/*Parte de baixo da modal - seção de botões*/}
           <Modal.Actions>
-            {/*Botões da modal*/}
-            <Modal.Action btnName="Deletar" onClick={toggleModalDeleteVisibility} />
+            {/* Botões da modal */}
+            <Modal.Action btnName="Deletar" onClick={Delete} />
             <Modal.Action
               btnName="Cancelar"
               className="botao-cancel"
-              onClick={toggleModalDeleteVisibility}
+              onClick={() => setOpenDelete(false)}
             />
-          </Modal.Actions>
+        </Modal.Actions>
         </Modal.Root>
       </>
     );

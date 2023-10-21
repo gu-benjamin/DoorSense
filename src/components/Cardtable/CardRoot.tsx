@@ -111,13 +111,13 @@ export default function CardRoot({ children }: CardRootProps) {
             <form className='flex flex-col gap-4'>
               <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
               placeholder='Digite'
-              label='Sala:'/>
+              label='Nome da Sala:'/>
               <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
               placeholder='Digite'
-              label='Sala:'/>
+              label='Número:'/>
               <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
               placeholder='Digite'
-              label='Sala:'/>
+              label='DoorSenseId:'/>
             </form>
           </Modal.Content>
         </Modal.MainSection>
