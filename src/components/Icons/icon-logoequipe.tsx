@@ -1,8 +1,7 @@
 interface IconLogoEquipeProps {
     size: number;
-    color: string;
   }
-  export default function IconLogoEquipe({ size, color }: IconLogoEquipeProps) {
+  export default function IconLogoEquipe({ size }: IconLogoEquipeProps) {
     return (                     
             <svg
             width={`${size}px`}

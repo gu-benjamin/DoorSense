@@ -77,7 +77,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
       {/* Renderização da mensagem com a barra de progresso */}
         {message && (
             <div className="bg-primary-100 p-3 rounded justify-self-center text-white relative">
-              {message} ({})
+              {message} 
               <div className=" h-1 absolute bottom-1 left-0 right-0">
                 <div className="bg-white h-full" style={progressBarStyle}></div>
               </div>

@@ -1,8 +1,7 @@
 interface IconLogoEquipeDarkProps {
     size: number;
-    color: string;
   }
-  export default function IconLogoEquipeDark({ size, color }: IconLogoEquipeDarkProps) {
+  export default function IconLogoEquipeDark({ size }: IconLogoEquipeDarkProps) {
     return (       
                 
             <svg
