@@ -33,9 +33,14 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
     useEffect(() => {
       if (message) {
         const timer = setInterval(() => {
-          setSegundos((prevSeconds) => prevSeconds - 1);
-        }, 1000);
-
+          setSegundos((prevSeconds) => {
+            if (prevSeconds > 0) {
+              return prevSeconds - 0.01; // Update the progress bar more frequently
+            }
+            return prevSeconds;
+          });
+        }, 10);
+  
         return () => {
           clearInterval(timer);
         };
@@ -54,25 +59,25 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
     function Delete() {
       setOpenDelete(false);
       setMessage('Sala Removida com Sucesso');
-      setTimeout(() => setMessage(null), 5000);
-      setSegundos(5);
+      setTimeout(() => setMessage(null), 3000);
+      setSegundos(3);
     }
       function Editar() {
       setOpenEdit(false);
       setMessage('Sala Editada com Sucesso');
-      setTimeout(() => setMessage(null), 5000);
-      setSegundos(5);
+      setTimeout(() => setMessage(null), 3000);
+      setSegundos(3);
     }
   
     const progressBarStyle = {
-      width: `${(5 - Segundos) * 20}%`, // Aumenta a largura em 20% a cada segundo
+      width: `${(3 - Segundos) * 20}%`, // Aumenta a largura em 20% a cada segundo
     };
     return (
       <>
       {/* Renderização da mensagem com a barra de progresso */}
         {message && (
             <div className="bg-primary-100 p-3 rounded justify-self-center text-white relative">
-              {message} ({Segundos})
+              {message} ({})
               <div className=" h-1 absolute bottom-1 left-0 right-0">
                 <div className="bg-white h-full" style={progressBarStyle}></div>
               </div>
