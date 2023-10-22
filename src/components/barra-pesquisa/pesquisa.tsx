@@ -8,13 +8,11 @@ export default function Barra(){
         <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base">
           <div className="relative w-full sm:mr-4 sm:mb-0">
             <div className="bg-thirdy p-4 rounded-2xl flex dark:bg-darkbusc">
-              <label className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark">
                 <input
                   type="search"
                   placeholder="Buscar..."
-                  className="w-full focus:outline-none"
+                  className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark focus:outline-none"
                 />
-              </label>
               <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
                 <BiFilter size={24} color="" /> Filtros
               </button>

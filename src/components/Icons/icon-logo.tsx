@@ -1,3 +1,4 @@
+
 interface IconLogoProps {
   size: number;
 }
