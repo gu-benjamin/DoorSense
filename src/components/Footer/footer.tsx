@@ -1,12 +1,10 @@
 'use client';
+
 import IconLogoEquipe from 'components/Icons/icon-logoequipe';
 import IconLogoEquipeDark from 'components/Icons/icon-logoequipedark';
 import { useTheme } from 'next-themes'; // Importar useTheme do next-themes
-interface FooterProps {
 
-}
-
-export default function Footer(props: FooterProps) {
+export default function Footer() {
   const { resolvedTheme } = useTheme(); // Obter o tema resolvido
 
   return (

@@ -1,5 +1,5 @@
 'use client';
-import Image from 'next/image';
+
 import { LuLogOut } from 'react-icons/lu'; // Importar o ícone de logout do react-icons
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import { ButtonIcon } from './../Buttons/Button-icon/button-icon';
