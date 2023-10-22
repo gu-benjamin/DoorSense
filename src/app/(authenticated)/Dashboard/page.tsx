@@ -5,7 +5,7 @@ import TopSection from 'components/Lista-de-Salas/lista';
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col items-center justify-center">
+    <main className="flex flex-col h-full items-center justify-center ">
       <div className="w-full sm:w-10/12 p-4">
         {/*IconHome, Salas e Lista das salas criadas */}
         <TopSection/>
