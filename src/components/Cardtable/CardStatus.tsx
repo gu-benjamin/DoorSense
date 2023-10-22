@@ -1,3 +1,5 @@
+'use client'
+
 import { HtmlHTMLAttributes, ReactNode, forwardRef, useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';

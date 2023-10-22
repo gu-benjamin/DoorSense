@@ -50,12 +50,7 @@ export default function LoginPage() {
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
 
-    // console.log(data);
-    const body = data
-    const res = await fetch('https:/localhost:3000/api/login',{
-      method: 'POST',
-      body: body
-    });
+    console.log(data)
     
     resetField('user');
     resetField('password');

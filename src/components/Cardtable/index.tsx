@@ -1,6 +1,6 @@
 import CardRoot from "./CardRoot";
 import { CardStatus } from "./CardStatus";
-import  CardData  from "./Carddata";
+import  CardData  from "./CardData";
 
 const Card= {
     Root: CardRoot,

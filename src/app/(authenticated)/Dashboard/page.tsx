@@ -1,5 +1,3 @@
-'use client';
-import React, { useState, useEffect } from 'react';
 import Card from 'components/Cardtable/';
 import Cabecalho from 'components/Cabecalho/cabecalho';
 import Barra from 'components/barra-pesquisa/pesquisa';
@@ -18,7 +16,6 @@ export default function HomePage() {
         {/* Dashboard - Cabeçalho */}      
         <Cabecalho/>    
         
-
         {/* Os cards abaixo do cabeçalho */}
         <div className="flex flex-col gap-4 mt-4 ">
           {/* Card 1 */}

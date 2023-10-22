@@ -1,3 +1,5 @@
+'use client'
+
 import { BiFilter } from 'react-icons/bi'; // Importar o ícone BiFilter do react-icons/bi
 import { AiOutlinePlus} from 'react-icons/ai';
 

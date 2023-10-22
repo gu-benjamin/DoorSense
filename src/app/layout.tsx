@@ -4,7 +4,7 @@ import { Mplus } from './../utils/fonts';
 import Providers from '../contexts/dark-theme';
 
 export const metadata: Metadata = {
-  title: 'DoorSense',
+  title: 'DoorSense - Login',
   description: 'A experiência sensorial da inclusão'
 };
 

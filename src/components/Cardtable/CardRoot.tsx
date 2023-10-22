@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useState, ReactNode, SetStateAction, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { TiEdit } from 'react-icons/ti';
@@ -16,7 +18,6 @@ import { InputLogin } from 'components/Inputs/Input-login';
 interface CardRootProps {
   children: ReactNode;
 }
-
 
 export default function CardRoot({ children }: CardRootProps) {
   const [openEdit, setOpenEdit] = useState(false)

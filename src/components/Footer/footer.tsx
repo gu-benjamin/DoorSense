@@ -18,7 +18,7 @@ export default function Footer(props: FooterProps) {
             {resolvedTheme === 'dark' ? <IconLogoEquipe size={100}/> : <IconLogoEquipeDark size={100}/>}
           </div>
           <div className="flex justify-center my-10">
-            <div className="flex items-center w-auto rounded-lg px-4 w-52 mx-2">
+            <div className="flex items-center w-auto rounded-lg px-4 mx-2">
               {/* */}
               <div className="text-center ml-3">
                 <p className='text-lg text-gray-500 dark:text-white'>Sensores inteligentes, conectando um mundo acessível para todos.</p>
