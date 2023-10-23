@@ -109,12 +109,11 @@ export default function LoginPage() {
           <ThemeButton />
         </div>
 
-        {/* {resolvedTheme === 'dark' ? (
+        {resolvedTheme === 'dark' ? (
           <LogoHomeDark size={170} />
         ) : (
           <LogoHome size={170} />
-        )} */}
-        <LogoHomeDark size={170} />
+        )}
 
         <h1
           className={`text-primary-100 font-extrabold text-5xl lg:text-6xl xl:text-6xl`}

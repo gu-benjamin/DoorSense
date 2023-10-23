@@ -107,7 +107,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
             />
           </div>
           {isDropdownOpenCard && (
-            <div className="sm:hidden absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-darkcard bg-rounded shadow-lg z-10">
+            <div className="sm:hidden absolute right-4 bottom-[-40px] bg-white p-2 dark:bg-dark-200 bg-rounded shadow-lg z-10">
               {/* Aqui é o conteúdo do dropdown */}
               <div className="flex gap-2">
                 <ButtonIcon

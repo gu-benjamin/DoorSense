@@ -82,7 +82,7 @@ export default function CardRoot({ children }: CardRootProps) {
         </div>
       )}
 
-      <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
+      <div className="relative bg-white dark:bg-dark-200 text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
         {children}
         <div className={`gap-2 items-center hidden sm:flex`}>
           <ButtonIcon icon={<TiEdit size={35} color="#05AFF2"/>} className="transform hover:scale-110" onClick={toggleModalEditVisibility} />
