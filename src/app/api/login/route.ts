@@ -2,34 +2,34 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 
 export async function POST(request: Request) {
-  const headersList = {
-    'User-Agent': 'http://localhost:3000',
-    'Content-Type': 'application/json'
-  };
+    const headersList = {
+      Accept: '*/*',
+      'Content-Type': 'application/json'
+    };
+
+  const reqData = await request.json();
 
   try {
-    const reqData = await request.json();
-    
-    const body = reqData.body;
-    console.log(body.username)
 
-    const res = await fetch('https:/localhost/doorsense_backend/api/login', {
+    console.log(reqData)
+
+    const res = await fetch('http://localhost/doorsense_backend/api/login/', {
       method: 'POST',
-      body: body,
+      body: JSON.stringify(reqData),
       headers: headersList
     });
 
     const data = await res.json();
 
     console.log(data)
-    // if(data.status === '200 Ok'){
-    //   cookies().set('token', data.token);
+    if(data.status === '200 OK'){
+      cookies().set('token', data.token);
+    }
 
-    // }
     return NextResponse.json(
       { message: data.message },
       {
-        status: data.status
+        status: 200
       }
     );
 

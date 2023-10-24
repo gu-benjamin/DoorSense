@@ -55,31 +55,31 @@ export default function LoginForm() {
     console.log(data);
     const body = data;
 
-    // const res = await fetch('/api/login', {
-    //   method: 'post',
-    //   body: JSON.stringify({ body }),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   }
-    // });
-
-    const res = await fetch('https:/localhost/doorsense_backend/api/login', {
-      method: 'POST',
-      body: JSON.stringify({body}),
-      headers: headersList
+    const res = await fetch('/api/login', {
+      method: 'post',
+      body: JSON.stringify(body),
+      headers: {
+        'Content-Type': 'application/json'
+      }
     });
 
-    // if (!res.ok) {
-    //   throw new Error('Falha ao autenticar');
-    // }
+    // const res = await fetch('http://localhost/doorsense_backend/api/login/', {
+    //   method: 'POST',
+    //   body: JSON.stringify(body),
+    //   headers: headersList
+    // });
+
+    if (!res.ok) {
+      throw new Error('Falha ao autenticar');
+    }
     const json = await res.json();
     console.log(json)
 
-    // resetField('username');
-    // resetField('password');
+    resetField('username');
+    resetField('password');
 
-    // router.refresh();
-    // router.push('/Dashboard');
+    router.refresh();
+    router.push('/Dashboard');
   };
 
   // STATES
