@@ -1,6 +1,6 @@
+import dynamic from 'next/dynamic';
+const LoginUI = dynamic(() => import('components/LoginPage'), { ssr: false });
 
-import LoginUI from 'components/LoginPage';
-
-export default function LoginPage() {
+export default async function LoginPage() {
   return <LoginUI />;
 }

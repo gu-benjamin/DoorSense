@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useState } from 'react';
 import IconUser from 'components/Icons/icon-user';
@@ -11,11 +11,11 @@ import { z } from 'zod';
 import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
-
+import { useRouter } from 'next/navigation';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
-  user: z
+  username: z
     .string({
       required_error: 'Este campo é obrigatório'
     })
@@ -31,6 +31,8 @@ const schema = z.object({
 type FormProps = z.infer<typeof schema>;
 
 export default function LoginForm() {
+  const router = useRouter();
+
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
@@ -44,11 +46,40 @@ export default function LoginForm() {
   });
 
   //Função acionada ao dar submit do formulário
-  const handleForm = (data: FormProps) => {
-    console.log(data);
+  const handleForm = async (data: FormProps) => {
+    const headersList = {
+      "Accept": "*/*",
+      'Content-Type': 'application/json'
+    };
 
-    resetField('user');
-    resetField('password');
+    console.log(data);
+    const body = data;
+
+    // const res = await fetch('/api/login', {
+    //   method: 'post',
+    //   body: JSON.stringify({ body }),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // });
+
+    const res = await fetch('https:/localhost/doorsense_backend/api/login', {
+      method: 'POST',
+      body: JSON.stringify({body}),
+      headers: headersList
+    });
+
+    // if (!res.ok) {
+    //   throw new Error('Falha ao autenticar');
+    // }
+    const json = await res.json();
+    console.log(json)
+
+    // resetField('username');
+    // resetField('password');
+
+    // router.refresh();
+    // router.push('/Dashboard');
   };
 
   // STATES
@@ -78,21 +109,21 @@ export default function LoginForm() {
         {/* Campo Usuário */}
         <InputLogin
           //Registrando campo na hook
-          {...register('user', { required: true })}
+          {...register('username', { required: true })}
           //Pros
           placeholder="Digite seu usuário"
           icon={
             <IconUser
               size={30}
               color={
-                errors.user?.message
+                errors.username?.message
                   ? `var(--color-error)`
                   : `var(--color-primary)`
               }
             />
           }
           // label="Usuário:"
-          helperText={errors.user?.message}
+          helperText={errors.username?.message}
         />
 
         {/* Campo password */}

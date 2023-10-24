@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IconUser from 'components/Icons/icon-user';
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import { InputLogin } from '../Inputs/Input-login/input-login';
@@ -16,17 +16,23 @@ import LogoHomeDark from '../Icons/logoSVGdark';
 import LoginForm from './loginForm';
 
 export default function LoginUI() {
-
   const [open, setOpen] = useState(false);
-
+  
   // Função visibilidade da modal
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
   }
-
-  // Front da página
-
+  
   const { resolvedTheme } = useTheme();
+  
+  // const [mounted, setMounted] = useState(false);
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, []);
+
+  // if (!mounted) {
+  //   return null;
+  // }
 
   return (
     <main
@@ -60,8 +66,8 @@ export default function LoginUI() {
           <LogoHome size={170} />
         )}
 
-        <LoginForm/>
-    
+        <LoginForm />
+
         {/* Link */}
         <Button
           btnName="Esqueceu a senha?"
