@@ -6,9 +6,28 @@ import { ButtonIcon } from './../Buttons/Button-icon/button-icon';
 import { useTheme } from 'next-themes'; // Importar useTheme do next-themes
 import IconLogo from 'components/Icons/icon-logo';
 import IconLogoDark from 'components/Icons/icon-logodark';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
+  
+  const router = useRouter();
   const { resolvedTheme } = useTheme(); // Obter o tema resolvido
+
+  const Logout = async () =>{
+    const res = await fetch('/api/login',{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (!res.ok) {
+      throw new Error('Falha ao autenticar');
+    }
+
+    router.refresh()
+    router.push('/')
+  }
 
   return (
     <header
@@ -26,7 +45,7 @@ export default function Header() {
         {/* Botão de alternância de tema */}
         <ThemeButton />
         {/* Botão de Logout */}
-        <ButtonIcon icon={<LuLogOut size={28} />}/>
+        <ButtonIcon icon={<LuLogOut size={28} />} onClick={Logout}/>
       </div>
     </header>
   );

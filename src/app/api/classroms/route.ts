@@ -1,35 +1,31 @@
-import { cookies } from "next/headers";
-import { NextResponse } from "next/server";
-cookies
+import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 
-export async function GET(request: Request){
+export async function GET() {
+  try {
+    const token = cookies().get('token');
     const headersList = {
-      Accept: '*/*',
+      "Authorization": `Bearer ${token?.value}`,
       'Content-Type': 'application/json'
     };
-    
-    try {
 
-    const res = await fetch('http://localhost/doorsense_backend/api//', {
-      method: 'POST',
-      body: JSON.stringify(reqData),
+    console.log(token)
+
+    const res = await fetch('http://localhost/doorsense_backend/api/salas/', {
+      method: 'GET',
       headers: headersList
     });
 
     const data = await res.json();
 
-    console.log(data)
-    if(data.status === '200 OK'){
-      cookies().set('token', data.token);
-    }
+    // console.log(data)
 
     return NextResponse.json(
-      { message: data.message },
+      { data: data },
       {
         status: 200
       }
     );
-
   } catch (error) {
     return NextResponse.json(
       { message: 'Deu ruim men', error },

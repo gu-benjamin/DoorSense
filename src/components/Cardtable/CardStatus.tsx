@@ -98,7 +98,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
               data === 'Ativo' ? 'text-green-500' : 'text-red-500'
             }`}
           >
-            {data}
+            {data === 'Ativo' ? data : 'Inativo'}
           </p>
           <div className="sm:hidden">
             <ButtonIcon

@@ -17,7 +17,7 @@ const CardData = forwardRef<HTMLInputElement, CardDataProps>(
             props.className
           )}
         >
-          {data}
+          {data !== null ? data : '---'}
         </p>
       </>
     );

@@ -141,10 +141,10 @@ export default function CardRoot({ children }: CardRootProps) {
       </Modal.Root>
 
       {/* Esqueleto da modal */}
-      <Modal.Root open={openDelete} onClose={() => setOpenDelete(false)}>
+      <Modal.Root open={openDelete} onClose={() => setOpenDelete}>
         <Modal.CloseTop>
             <ButtonIcon
-              onClick={toggleModalEditVisibility}
+              onClick={toggleModalDeleteVisibility}
               icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
             />
         </Modal.CloseTop>
