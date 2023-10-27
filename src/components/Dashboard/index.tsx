@@ -20,7 +20,7 @@ export default function HomeUI({ data }: any) {
   console.log(data);
 
   return (
-    <main className="flex flex-col h-full items-center justify-center pb-6 bg-secondary dark:bg-dark-300">
+    <main className="relative flex flex-col h-full items-center justify-center pb-6 bg-secondary dark:bg-dark-300">
       <div className="w-full sm:w-10/12 p-4">
         {/*IconHome, Salas e Lista das salas criadas */}
         <TopSection />

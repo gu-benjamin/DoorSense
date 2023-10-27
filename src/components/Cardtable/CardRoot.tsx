@@ -11,6 +11,7 @@ import { IoWarningOutline } from 'react-icons/io5';
 import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
 import Mensagem from 'components/Mensagem/mensagem';
+import { Dropdown } from 'components/DropDown/dropdown';
 
 
 
@@ -54,7 +55,7 @@ export default function CardRoot({ children }: CardRootProps) {
         {message && <Mensagem message={message} duration={3} />}
      
 
-      <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
+        <div className="relative bg-white dark:bg-dark-200 text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
         {children}
         <div className={`gap-2 items-center hidden sm:flex`}>
           <ButtonIcon icon={<TiEdit size={35} color="#05AFF2"/>} className="transform hover:scale-110" onClick={toggleModalEditVisibility} />
@@ -93,14 +94,11 @@ export default function CardRoot({ children }: CardRootProps) {
               <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
               placeholder='Digite'
               label='Número:'/>
-              <div className='dropdown'>
-                <label htmlFor='doorsenseIdDropdown'>DoorSenseId:</label>
-                <select id='doorsenseIdDropdown'>
-                  <option value='1b3d5f7h'>1b3d5f7h</option>
-                  <option value='ficticio1'>2d4f6h8j</option>
-                 
-                </select>
-              </div>
+              <Dropdown
+                icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
+                label='DoorSenseId:'
+                options={['Opção X', 'Opção Y', 'Opção Z']}
+              />
             </form>
           </Modal.Content>
         </Modal.MainSection>
@@ -118,10 +116,10 @@ export default function CardRoot({ children }: CardRootProps) {
       </Modal.Root>
 
       {/* Esqueleto da modal */}
-      <Modal.Root open={openDelete} onClose={() => setOpenDelete(false)}>
+      <Modal.Root open={openDelete} onClose={() => setOpenDelete}>
         <Modal.CloseTop>
             <ButtonIcon
-              onClick={toggleModalEditVisibility}
+              onClick={toggleModalDeleteVisibility}
               icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
             />
         </Modal.CloseTop>
@@ -137,7 +135,7 @@ export default function CardRoot({ children }: CardRootProps) {
 
           {/* Conteúdo da modal */}
           <Modal.Content>
-            <h1>Tem certeza que quer deletar essa sala? Essa sala será excluída <span className="text-red-700 font-bold"> Permanentemente</span></h1>
+            <h1 className='dark:text-dark-200'>Tem certeza que quer deletar essa sala? A sala será excluída <span className='text-red-500'> permanentemente</span></h1>
           </Modal.Content>
         </Modal.MainSection>
 

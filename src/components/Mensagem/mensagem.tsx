@@ -31,7 +31,7 @@ const Mensagem: React.FC<MensagemProps> = ({ message, duration }) => {
   };
 
   return (
-      <div className="absolute rounded-b-lg top-32 left-5 p-3 w-1/3 bg-message-100">
+      <div className="absolute rounded-b-lg top-0 left-5 p-3 w-1/4 bg-message-100">
         <div className='flex align-center'>
           <AiFillCheckCircle color='#00D715' size='20' />
           <span className='mr-1'></span>
