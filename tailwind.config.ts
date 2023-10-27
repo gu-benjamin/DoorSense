@@ -11,16 +11,17 @@ const config: Config = {
     extend: {
       colors:{
         primary: {
+          60: '#39C7FF',
           50: '#DAF3FD',
-          70: '#05AFF2',
           100:'#05AFF2'
         },
         secondary: '#F0F5F9',
         thirdy: '#E0EFF5',
-        dark: '#393939',
-        darkheader: '#000000',
-        darkcard: '#4F4F4F',
-        darkbusc: '#4F4F4F',
+        dark:{
+          100: '#4F4F4F',
+          200: '#393939',
+          300: '#121212',
+        }, 
         'light-red': 'hsl(0, 100%, 67%)',
       },
       

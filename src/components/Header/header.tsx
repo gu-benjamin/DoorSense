@@ -1,17 +1,41 @@
-import IconMoon from 'components/Icons/🦆 icon-moon';
-import Image from 'next/image';
-import { LuLogOut } from 'react-icons/lu'; // Importar o ícone de logout do react-icons
+'use client';
 
+import { LuLogOut } from 'react-icons/lu'; // Importar o ícone de logout do react-icons
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import { ButtonIcon } from './../Buttons/Button-icon/button-icon';
+import { useTheme } from 'next-themes'; // Importar useTheme do next-themes
+import IconLogo from 'components/Icons/icon-logo';
+import IconLogoDark from 'components/Icons/icon-logodark';
+import { useRouter } from 'next/navigation';
 
 export default function Header() {
+  
+  const router = useRouter();
+  const { resolvedTheme } = useTheme(); // Obter o tema resolvido
+
+  const Logout = async () =>{
+    const res = await fetch('/api/login',{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    if (!res.ok) {
+      throw new Error('Falha ao autenticar');
+    }
+
+    router.refresh()
+    router.push('/')
+  }
+
   return (
     <header
-      className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white dark:bg-darkheader font-bold`}
+      className={`flex justify-between px-4 sm:px-6 lg:px-8 py-4 items-center dark:bg-nav-dark bg-white dark:bg-black font-bold`}
     >
+      
       <div className={`flex items-center`}>
-        <Image src='/images/Logo.png' alt='Logo' width={48} height={48} className={`w-12 sm:w-20`} />
+          {resolvedTheme === 'dark' ? <IconLogo size={100}/> : <IconLogoDark size={100}/>}
         <div className={`ml-2 sm:ml-4`}>
           <p className={`text-base sm:text-2xl`}>Door<span className="text-primary-100">Sense</span></p>
           <p className={`text-xs sm:text-sm`}>A experiência sensorial da inclusão</p>
@@ -21,8 +45,7 @@ export default function Header() {
         {/* Botão de alternância de tema */}
         <ThemeButton />
         {/* Botão de Logout */}
-        <ButtonIcon icon={<LuLogOut size={28} color="#000" />}/>
-        
+        <ButtonIcon icon={<LuLogOut size={28} />} onClick={Logout}/>
       </div>
     </header>
   );

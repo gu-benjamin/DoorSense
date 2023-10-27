@@ -1,20 +1,22 @@
-import IconLogoEquipe from 'components/Icons/icon-logo-equipe';
+'use client';
 
-interface FooterProps {
+import IconLogoEquipe from 'components/Icons/icon-logoequipe';
+import IconLogoEquipeDark from 'components/Icons/icon-logoequipedark';
+import { useTheme } from 'next-themes'; // Importar useTheme do next-themes
 
-}
+export default function Footer() {
+  const { resolvedTheme } = useTheme(); // Obter o tema resolvido
 
-export default function Footer(props: FooterProps) {
   return (
     
-    <div className="mt-20 bg-white dark:bg-darkheader">
+    <div className="bg-white dark:bg-black">
       <div className="max-w-3xl mx-auto py-4">
         <div className="text-center">
           <div className="flex justify-center">
-            <IconLogoEquipe size={100} color="" /> {/* Ajuste o tamanho e a cor aqui */}
+            {resolvedTheme === 'dark' ? <IconLogoEquipe size={100}/> : <IconLogoEquipeDark size={100}/>}
           </div>
           <div className="flex justify-center my-10">
-            <div className="flex items-center w-auto rounded-lg px-4 w-52 mx-2">
+            <div className="flex items-center w-auto rounded-lg px-4 mx-2">
               {/* */}
               <div className="text-center ml-3">
                 <p className='text-lg text-gray-500 dark:text-white'>Sensores inteligentes, conectando um mundo acessível para todos.</p>
