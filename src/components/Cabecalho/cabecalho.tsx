@@ -1,5 +1,6 @@
 
 export default function Cabecalho() {
+
   return (
     <div className="p-4 border-b-2 dark:border-primary-100 border-primary-100 grid grid-flow-col justify-stretch text-sm sm:text-base text-primary-100">
       <p className={`dark:text-primary-100 text-center md:pr-6`}>
