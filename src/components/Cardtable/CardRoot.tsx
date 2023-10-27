@@ -1,5 +1,3 @@
-'use client'
-
 import React, { useState, ReactNode, SetStateAction, useEffect } from 'react';
 import { AiFillCheckCircle } from 'react-icons/ai';
 import { TiEdit } from 'react-icons/ti';
@@ -12,6 +10,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { IoWarningOutline } from 'react-icons/io5';
 import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
+import Mensagem from 'components/Mensagem/mensagem';
 
 
 
@@ -19,29 +18,12 @@ interface CardRootProps {
   children: ReactNode;
 }
 
+
 export default function CardRoot({ children }: CardRootProps) {
   const [openEdit, setOpenEdit] = useState(false)
   const [openDelete, setOpenDelete] = useState(false)
   const [message, setMessage] = useState<string | null>();
-  const [Segundos, setSegundos] = useState(0);
 
-  // Função para iniciar a contagem regressiva
-  useEffect(() => {
-    if (message) {
-      const timer = setInterval(() => {
-        setSegundos((prevSeconds) => {
-          if (prevSeconds > 0) {
-            return prevSeconds - 0.01; // Update the progress bar more frequently
-          }
-          return prevSeconds;
-        });
-      }, 10);
-
-      return () => {
-        clearInterval(timer);
-      };
-    }
-  }, [message]);
 
    // Função visibilidade da modal
    function toggleModalEditVisibility() {
@@ -57,32 +39,22 @@ export default function CardRoot({ children }: CardRootProps) {
     setOpenDelete(false);
     setMessage('Sala Removida com Sucesso');
     setTimeout(() => setMessage(null), 3000);
-    setSegundos(3);
   }
-    function Editar() {
+
+  function Editar() {
     setOpenEdit(false);
     setMessage('Sala Editada com Sucesso');
     setTimeout(() => setMessage(null), 3000);
-    setSegundos(3);
   }
-
-  const progressBarStyle = {
-    width: `${(3 - Segundos) * 33.33}%`, // Aumenta a largura em 20% a cada segundo
-  };
 
   return (
     <>
-    {/* Renderização da mensagem com a barra de progresso */}
-    {message && (
-        <div className="bg-primary-100 p-3 rounded justify-self-center text-white relative">
-          {message} ({})
-          <div className=" h-1 absolute bottom-1 left-0 right-0">
-            <div className="bg-white h-full" style={progressBarStyle}></div>
-          </div>
-        </div>
-      )}
+   
+        {/* Renderização da mensagem com a barra de progresso */}
+        {message && <Mensagem message={message} duration={3} />}
+     
 
-      <div className="relative bg-white dark:bg-dark-200 text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
+      <div className="relative bg-white dark:bg-darkcard text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
         {children}
         <div className={`gap-2 items-center hidden sm:flex`}>
           <ButtonIcon icon={<TiEdit size={35} color="#05AFF2"/>} className="transform hover:scale-110" onClick={toggleModalEditVisibility} />
@@ -121,9 +93,14 @@ export default function CardRoot({ children }: CardRootProps) {
               <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
               placeholder='Digite'
               label='Número:'/>
-              <InputLogin icon={<TbHomeEdit size={30} color={`var(--color-primary)`}/>}
-              placeholder='Digite'
-              label='DoorSenseId:'/>
+              <div className='dropdown'>
+                <label htmlFor='doorsenseIdDropdown'>DoorSenseId:</label>
+                <select id='doorsenseIdDropdown'>
+                  <option value='1b3d5f7h'>1b3d5f7h</option>
+                  <option value='ficticio1'>2d4f6h8j</option>
+                 
+                </select>
+              </div>
             </form>
           </Modal.Content>
         </Modal.MainSection>
@@ -141,10 +118,10 @@ export default function CardRoot({ children }: CardRootProps) {
       </Modal.Root>
 
       {/* Esqueleto da modal */}
-      <Modal.Root open={openDelete} onClose={() => setOpenDelete}>
+      <Modal.Root open={openDelete} onClose={() => setOpenDelete(false)}>
         <Modal.CloseTop>
             <ButtonIcon
-              onClick={toggleModalDeleteVisibility}
+              onClick={toggleModalEditVisibility}
               icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
             />
         </Modal.CloseTop>
@@ -160,7 +137,7 @@ export default function CardRoot({ children }: CardRootProps) {
 
           {/* Conteúdo da modal */}
           <Modal.Content>
-            <h1>Tem certeza que quer deletar essa sala?</h1>
+            <h1>Tem certeza que quer deletar essa sala? Essa sala será excluída <span className="text-red-700 font-bold"> Permanentemente</span></h1>
           </Modal.Content>
         </Modal.MainSection>
 
