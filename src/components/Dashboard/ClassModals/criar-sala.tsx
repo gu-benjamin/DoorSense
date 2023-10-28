@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, SetStateAction, ReactNode, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
 import { TbHomeEdit } from 'react-icons/tb';
 import { MdOutlineClose } from 'react-icons/md';
@@ -8,7 +9,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
-import { Button } from 'components/Buttons/Button/button';
 import { Modal } from 'components/Modal';
 
 interface ModalCreateClassProps {
@@ -35,6 +35,8 @@ export default function ModalCreateClass({
   open,
   setOpen
 }: ModalCreateClassProps) {
+  const router = useRouter();
+
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
@@ -49,6 +51,8 @@ export default function ModalCreateClass({
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
+    resetField('nome');
+    resetField('numero');
   }
 
   //Função acionada ao dar submit do formulário
@@ -57,8 +61,8 @@ export default function ModalCreateClass({
     console.log(data);
     const body = data;
 
-    const res = await fetch('http://localhost:3000/api/classroms', {
-      method: 'post',
+    const res = await fetch('/api/classroms', {
+      method: 'POST',
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
@@ -66,13 +70,14 @@ export default function ModalCreateClass({
     });
 
     if (!res.ok) {
-      throw new Error('Falha ao autenticar');
+      throw new Error('Falha ao criar sala');
     }
+
     const json = await res.json();
     console.log(json)
 
-    resetField('nome');
-    resetField('numero');
+    toggleModalVisibility()
+    router.refresh();
   };
 
   return (
@@ -101,7 +106,6 @@ export default function ModalCreateClass({
           <form
             onSubmit={handleSubmit(handleForm)}
             className="flex flex-col gap-4"
-            id="form-create"
           >
             <InputLogin
               {...register('nome', { required: true })}
@@ -138,10 +142,11 @@ export default function ModalCreateClass({
               helperText={errors.numero?.message}
             />
 
-            <Button
-              btnName="ENTRAR"
+            {/* <Button
+              btnName="EDITAR"
               className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
-            />
+            /> */}
+
           </form>
         </Modal.Content>
       </Modal.MainSection>
@@ -149,7 +154,7 @@ export default function ModalCreateClass({
       {/*Parte de baixo da modal - seção de botões*/}
       <Modal.Actions>
         {/*Botões da modal*/}
-        <Modal.Action btnName="Editar" type="submit" id="form-create" />
+        <Modal.Action btnName="Criar" type="submit" onClick={handleSubmit(handleForm)} />
         <Modal.Action
           btnName="Cancelar"
           className="botao-cancel"

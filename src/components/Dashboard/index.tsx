@@ -6,6 +6,15 @@ import Cabecalho from 'components/Cabecalho/cabecalho';
 import Barra from 'components/barra-pesquisa/pesquisa';
 import TopSection from 'components/Lista-de-Salas/lista';
 
+
+type sala = {
+  id: string,
+  nome: string,
+  numero: string, 
+  arduino: string, 
+  status: string 
+}
+
 export default function HomeUI({ data }: any) {
   // const [mounted, setMounted] = useState(false);
 
@@ -17,10 +26,8 @@ export default function HomeUI({ data }: any) {
   //   return null;
   // }
 
-  console.log(data);
-
   return (
-    <main className="flex flex-col h-full items-center justify-center pb-6 bg-secondary dark:bg-dark-300">
+    <main className="flex flex-col h-screen items-center justify-center pb-6 bg-secondary dark:bg-dark-300">
       <div className="w-full sm:w-10/12 p-4">
         {/*IconHome, Salas e Lista das salas criadas */}
         <TopSection />
@@ -35,13 +42,13 @@ export default function HomeUI({ data }: any) {
         <div className="flex flex-col gap-4 mt-4 ">
           {/* Card 1 */}
 
-          {data && data.salas.map((sala) => {
+          {data && data.salas.map((sala: sala) => {
             return (
-              <Card.Root key={sala.id}>
+              <Card.Root key={sala.id} classData={sala}>
                 <Card.Data data={sala.nome} />
                 <Card.Data data={sala.numero} />
                 <Card.Data className="sm:text-left" data={sala.arduino} />
-                <Card.Status data={sala.status} />
+                <Card.Status data={sala.status} classData={sala} />
               </Card.Root>
             );
           })}
