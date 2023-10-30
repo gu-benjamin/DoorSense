@@ -61,23 +61,23 @@ export default function ModalDeleteClass({
       />
 
       {/* Título da modal */}
-      <Modal.Title title={`Aviso! Você está deletando uma Sala`} />
+      <Modal.Title className='dark:text-white' title={`Aviso! Você está deletando uma Sala`} />
 
       {/* Conteúdo da modal */}
       <Modal.Content>
-        <h1>Tem certeza que quer deletar essa sala?</h1>
+        <h1>Tem certeza que quer deletar essa sala? Essa sala será excluída <span className='text-red-500 font-bold'>permanentemente</span></h1>
       </Modal.Content>
     </Modal.MainSection>
 
     {/* Parte de baixo da modal - seção de botões */}
     <Modal.Actions>
       {/* Botões da modal */}
-      <Modal.Action btnName="Deletar" onClick={deleteClass} />
       <Modal.Action
         btnName="Cancelar"
-        className="botao-cancel"
+        className="botao-danger"
         onClick={toggleModalVisibility}
       />
+      <Modal.Action btnName="Deletar" className="botao-reset" onClick={deleteClass} />
     </Modal.Actions>
   </Modal.Root>
   );

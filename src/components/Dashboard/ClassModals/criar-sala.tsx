@@ -86,7 +86,7 @@ export default function ModalCreateClass({
       <Modal.CloseTop>
         <ButtonIcon
           onClick={toggleModalVisibility}
-          icon={<MdOutlineClose size={30} className={``} color="#D3D3D3" />}
+          icon={<MdOutlineClose size={30} className=" hover:scale-110" color="#D3D3D3" />}
         />
       </Modal.CloseTop>
 
@@ -98,7 +98,7 @@ export default function ModalCreateClass({
         />
 
         {/*Titulo da modal*/}
-        <Modal.Title title={`Criar nova Sala`} />
+        <Modal.Title className='dark:text-white' title={`Criar nova Sala`} />
 
         {/*Conteudo da modal*/}
         <Modal.Content>
@@ -154,12 +154,12 @@ export default function ModalCreateClass({
       {/*Parte de baixo da modal - seção de botões*/}
       <Modal.Actions>
         {/*Botões da modal*/}
-        <Modal.Action btnName="Criar" type="submit" onClick={handleSubmit(handleForm)} />
         <Modal.Action
           btnName="Cancelar"
-          className="botao-cancel"
+          className="botao-danger"
           onClick={toggleModalVisibility}
         />
+        <Modal.Action btnName="Criar" type="submit" className="botao-reset" onClick={handleSubmit(handleForm)} />
       </Modal.Actions>
     </Modal.Root>
   );

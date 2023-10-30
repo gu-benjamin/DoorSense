@@ -121,11 +121,11 @@ export default function ModalEditClass({
         />
 
         {/*Titulo da modal*/}
-        <Modal.Title title={`Editar Sala`} />
+        <Modal.Title className='dark:text-white' title={`Editar Sala`} />
 
         {/*Conteudo da modal*/}
         <Modal.Content>
-          <h1>Insira os seguintes valores abaixo:</h1>
+          <h1 className='dark:text-white'>Insira os seguintes valores abaixo:</h1>
           <form
             onSubmit={handleSubmit(handleForm)}
             className="flex flex-col gap-4"
@@ -167,23 +167,7 @@ export default function ModalEditClass({
               helperText={errors.numero?.message}
             />
 
-            <InputLogin
-              {...register('arduino')}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.arduino?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
-              defaultValue={inputArduino}
-              placeholder="Selecione o DoorSense ..."
-              label="Doorsense:"
-              helperText={errors.arduino?.message}
-            />
+          
 
           </form>
         </Modal.Content>
@@ -193,14 +177,15 @@ export default function ModalEditClass({
       <Modal.Actions>
         {/*Botões da modal*/}
         <Modal.Action
-          btnName="Editar"
-          type="submit"
-          onClick={handleSubmit(handleForm)}
+          btnName="Cancelar"
+          className="botao-danger"
+          onClick={toggleModalVisibility}
         />
         <Modal.Action
-          btnName="Cancelar"
-          className="botao-cancel"
-          onClick={toggleModalVisibility}
+          btnName="Editar"
+          className="botao-reset"
+          type="submit"
+          onClick={handleSubmit(handleForm)}
         />
       </Modal.Actions>
     </Modal.Root>
