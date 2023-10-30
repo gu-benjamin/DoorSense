@@ -4,13 +4,6 @@ import { cookies } from 'next/headers';
 
 export default async function HomePage() {
 
-  // const res = await fetch('http://localhost:3000/api/classroms',{
-  //   method: 'GET',
-  //   headers:{
-  //     'Content-Type': 'application/json'
-  //   }
-  // })
-
   const token = cookies().get('token');
   const headersList = {
     "Authorization": `Bearer ${token?.value}`,

@@ -8,6 +8,7 @@ import { Modal } from 'components/Modal';
 import { MdOutlineClose } from 'react-icons/md';
 import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
+import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
 
 export default function Barra() {
   const [open, setOpen] = useState(false);
@@ -45,59 +46,7 @@ export default function Barra() {
         </div>
       </div>
 
-      <Modal.Root open={open} onClose={setOpen}>
-        {/*Parte de cima da modal - Action de fechar a modal*/}
-        <Modal.CloseTop>
-          <ButtonIcon
-            onClick={toggleModalVisibility}
-            icon={<MdOutlineClose size={30} className={``} color="#D3D3D3" />}
-          />
-        </Modal.CloseTop>
-
-        {/*Corpo da modal*/}
-        <Modal.MainSection>
-          {/*Icone da modal*/}
-          <Modal.Icon
-            icon={<TbHomeEdit size={50} color={`var(--color-primary)`} />}
-          />
-
-          {/*Titulo da modal*/}
-          <Modal.Title title={`Criar Sala`} />
-
-          {/*Conteudo da modal*/}
-          <Modal.Content>
-            <h1>Atualize as informações da sala aqui:</h1>
-            <form className="flex flex-col gap-4">
-              <InputLogin
-                icon={<TbHomeEdit size={30} color={`var(--color-primary)`} />}
-                placeholder="Digite"
-                label="Sala:"
-              />
-              <InputLogin
-                icon={<TbHomeEdit size={30} color={`var(--color-primary)`} />}
-                placeholder="Digite"
-                label="Sala:"
-              />
-              <InputLogin
-                icon={<TbHomeEdit size={30} color={`var(--color-primary)`} />}
-                placeholder="Digite"
-                label="Sala:"
-              />
-            </form>
-          </Modal.Content>
-        </Modal.MainSection>
-
-        {/*Parte de baixo da modal - seção de botões*/}
-        <Modal.Actions>
-          {/*Botões da modal*/}
-          <Modal.Action btnName="Editar" onClick={() => setOpen(false)} />
-          <Modal.Action
-            btnName="Cancelar"
-            className="botao-cancel"
-            onClick={() => setOpen(false)}
-          />
-        </Modal.Actions>
-      </Modal.Root>
+      <ModalCreateClass open={open} setOpen={setOpen}/>
     </>
   );
 }

@@ -47,11 +47,7 @@ export default function LoginForm() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    const headersList = {
-      "Accept": "*/*",
-      'Content-Type': 'application/json'
-    };
-
+    
     console.log(data);
     const body = data;
 
@@ -62,12 +58,6 @@ export default function LoginForm() {
         'Content-Type': 'application/json'
       }
     });
-
-    // const res = await fetch('http://localhost/doorsense_backend/api/login/', {
-    //   method: 'POST',
-    //   body: JSON.stringify(body),
-    //   headers: headersList
-    // });
 
     if (!res.ok) {
       throw new Error('Falha ao autenticar');
