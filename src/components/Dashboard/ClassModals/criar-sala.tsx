@@ -86,7 +86,7 @@ export default function ModalCreateClass({
       <Modal.CloseTop>
         <ButtonIcon
           onClick={toggleModalVisibility}
-          icon={<MdOutlineClose size={30} className=" hover:scale-110" color="#D3D3D3" />}
+          icon={<MdOutlineClose size={30} className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"  />}
         />
       </Modal.CloseTop>
 
@@ -94,7 +94,7 @@ export default function ModalCreateClass({
       <Modal.MainSection>
         {/*Icone da modal*/}
         <Modal.Icon
-          icon={<TbHomeEdit size={50} color={`var(--color-primary)`} />}
+          icon={<TbHomeEdit size={45} color={`var(--color-primary)`} />}
         />
 
         {/*Titulo da modal*/}

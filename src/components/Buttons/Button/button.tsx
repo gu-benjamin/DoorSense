@@ -12,7 +12,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({type='submit'
             {/*Botao*/}
             <button
             type={type}
-            className={twMerge(`hover:scale-150 text-sm`, props.className)}
+            className={twMerge(`hover:scale-150 text-sm focus:outline-none`, props.className)}
             {...props}
             ref={ref}
             >

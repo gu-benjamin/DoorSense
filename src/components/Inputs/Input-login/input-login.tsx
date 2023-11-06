@@ -32,7 +32,7 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
 
            {/* Label */}
         <label
-          className={twMerge(`text-base ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-400`}
+          className={twMerge(`text-base ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-200`}
                               duration-300  transform peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
                               peer-focus:dark:${hasError ? `text-light-red` : `text-primary`}
                               `,props.className)}
@@ -49,7 +49,7 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
           className={`px-9 lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
                       bg-transparent outline-none
                       peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
-                      dark:text-gray-500 dark:placeholder:${hasError ? `text-light-red` : `text-neutral-500`} 
+                      dark:text-gray-200 dark:placeholder:${hasError ? `text-light-red` : `text-gray-100`} 
                       dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`} text-base`}
           id={inputId}
           {...props}

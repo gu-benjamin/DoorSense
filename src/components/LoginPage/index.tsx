@@ -7,13 +7,14 @@ import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { XCircleIcon } from '@heroicons/react/24/outline';
 import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
-import IconLost from '../Icons/icon-lostpass';
+import {LuMail} from 'react-icons/lu';
 import Image from 'next/image';
 import { Modal } from 'components/Modal';
 import LogoHome from '../Icons/logoSVG';
 import { useTheme } from 'next-themes';
 import LogoHomeDark from '../Icons/logoSVGdark';
 import LoginForm from './loginForm';
+import { MdOutlineClose } from 'react-icons/md';
 
 export default function LoginUI() {
   const [open, setOpen] = useState(false);
@@ -73,7 +74,7 @@ export default function LoginUI() {
           btnName="Esqueceu a senha?"
           type="button"
           onClick={toggleModalVisibility}
-          className="dark:text-white"
+          className="dark:text-white focus:outline-none"
         />
       </section>
 
@@ -81,18 +82,18 @@ export default function LoginUI() {
         <Modal.CloseTop>
           <ButtonIcon
             onClick={toggleModalVisibility}
-            icon={<XCircleIcon width={25} height={25} />}
+            icon={<MdOutlineClose size={30} className="text-gray-500  hover:text-red-500 hover:scale-110 focus:outline-none" />}
           />
         </Modal.CloseTop>
         <Modal.MainSection>
           <Modal.Icon
-            icon={<IconLost size={50} color={`var(--color-primary)`} />}
+            icon={<LuMail size={45} color={`var(--color-primary)`} />}
           />
-          <Modal.Title title={`Redefinição de senha`} />
+          <Modal.Title title={`Redefinição de senha`}  className='dark:text-white'/>
           <Modal.Content>
             <p>Por favor insira seu e-mail de recuperação</p>
             <InputLogin
-              icon={<IconUser size={30} color={`#05AFF2`} />}
+              icon={<LuMail size={30} color={`var(--color-primary)`} />}
               placeholder="Digite seu E-mail"
               label="E-mail"
             />
@@ -100,7 +101,7 @@ export default function LoginUI() {
         </Modal.MainSection>
         <Modal.Actions>
           <Modal.Action
-            btnName="Sair"
+            btnName="Cancelar"
             className="botao-danger"
             onClick={toggleModalVisibility}
           />

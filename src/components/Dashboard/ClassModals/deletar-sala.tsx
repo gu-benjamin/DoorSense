@@ -50,8 +50,8 @@ export default function ModalDeleteClass({
     <Modal.CloseTop>
         <ButtonIcon
           onClick={toggleModalVisibility}
-          icon={<MdOutlineClose size={30} className={``} color='#D3D3D3'/>}
-        />
+          icon={<MdOutlineClose size={30} className={`text-gray-400 hover:text-red-500 hover:scale-110 focus:outline-none`}/>}
+        /> 
     </Modal.CloseTop>
     {/* Corpo da modal */}
     <Modal.MainSection>

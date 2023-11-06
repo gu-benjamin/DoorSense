@@ -2,12 +2,7 @@ import React, { useState, ReactNode, SetStateAction, useEffect } from 'react';
 import { TiEdit } from 'react-icons/ti';
 import { BiTrash } from 'react-icons/bi';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
-import { Modal } from 'components/Modal';
-import { MdOutlineClose } from 'react-icons/md';
-import { TbHomeEdit } from 'react-icons/tb';
-import { InputLogin } from 'components/Inputs/Input-login';
-import Mensagem from 'components/Mensagem/mensagem';
-import { Dropdown } from 'components/DropDown/dropdown';
+
 
 import ModalDeleteClass from './../Dashboard/ClassModals/deletar-sala';
 import ModalEditClass from './../Dashboard/ClassModals/editar-sala';
@@ -28,7 +23,7 @@ interface CardRootProps {
 export default function CardRoot({ children, classData }: CardRootProps) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
-  const [message, setMessage] = useState<string | null>();
+
 
   // Função visibilidade da modal
   function toggleModalEditVisibility() {
