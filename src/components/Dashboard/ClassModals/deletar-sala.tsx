@@ -10,12 +10,14 @@ import { IoWarningOutline } from 'react-icons/io5';
 interface ModalDeleteClassProps {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  id: number
+  setMessage: React.Dispatch<SetStateAction<string>>;
+  id: number;
 }
 
 export default function ModalDeleteClass({
   open,
   setOpen,
+  setMessage,
   id
 }: ModalDeleteClassProps) {
 
@@ -39,7 +41,8 @@ export default function ModalDeleteClass({
       }
   
       const json = await res.json();
-      console.log(json)
+      setMessage(json.data.message);
+      setTimeout(() => setMessage(''), 3000);
 
       toggleModalVisibility();
       router.refresh();

@@ -9,8 +9,10 @@ import { MdOutlineClose } from 'react-icons/md';
 import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
 import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
+import Mensagem from 'components/Mensagem';
 
 export default function Barra() {
+  const [message, setMessage] = useState('');
   const [open, setOpen] = useState(false);
 
   function toggleModalVisibility() {
@@ -19,6 +21,7 @@ export default function Barra() {
 
   return (
     <>
+    {message && <Mensagem message={message} duration={3} />}
       <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base">
         <div className="relative w-full sm:mr-4 sm:mb-0">
           <div className="bg-thirdy p-4 rounded-2xl flex dark:bg-dark-100">
@@ -27,8 +30,7 @@ export default function Barra() {
               placeholder="Buscar..."
               className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
             />
-            <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded"
-            >
+            <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
               <BiFilter size={24} color="" /> Filtros
             </button>
           </div>
@@ -46,7 +48,7 @@ export default function Barra() {
         </div>
       </div>
 
-      <ModalCreateClass open={open} setOpen={setOpen}/>
+      <ModalCreateClass open={open} setOpen={setOpen} setMessage={setMessage} />
     </>
   );
 }

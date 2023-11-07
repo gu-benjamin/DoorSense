@@ -14,6 +14,7 @@ import { Modal } from 'components/Modal';
 interface ModalCreateClassProps {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  setMessage: React.Dispatch<SetStateAction<string>>;
 }
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -33,7 +34,8 @@ type FormProps = z.infer<typeof schema>;
 
 export default function ModalCreateClass({
   open,
-  setOpen
+  setOpen,
+  setMessage
 }: ModalCreateClassProps) {
   const router = useRouter();
 
@@ -58,7 +60,7 @@ export default function ModalCreateClass({
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
 
-    console.log(data);
+    // console.log(data);
     const body = data;
 
     const res = await fetch('/api/classroms', {
@@ -74,93 +76,92 @@ export default function ModalCreateClass({
     }
 
     const json = await res.json();
-    console.log(json)
+    console.log(json.data.message)
+    setMessage(json.data.message)
+    setTimeout(() => setMessage(''), 3000);
 
     toggleModalVisibility()
     router.refresh();
   };
 
   return (
-    <Modal.Root open={open} onClose={setOpen}>
-      {/*Parte de cima da modal - Action de fechar a modal*/}
-      <Modal.CloseTop>
-        <ButtonIcon
-          onClick={toggleModalVisibility}
-          icon={<MdOutlineClose size={30} className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"  />}
-        />
-      </Modal.CloseTop>
+    <>
+      <Modal.Root open={open} onClose={setOpen}>
+        {/*Parte de cima da modal - Action de fechar a modal*/}
+        <Modal.CloseTop>
+          <ButtonIcon
+            onClick={toggleModalVisibility}
+            icon={<MdOutlineClose size={30} className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"  />}
+          />
+        </Modal.CloseTop>
 
-      {/*Corpo da modal*/}
-      <Modal.MainSection>
-        {/*Icone da modal*/}
-        <Modal.Icon
-          icon={<TbHomeEdit size={45} color={`var(--color-primary)`} />}
-        />
+        {/*Corpo da modal*/}
+        <Modal.MainSection>
+          {/*Icone da modal*/}
+          <Modal.Icon
+            icon={<TbHomeEdit size={45} color={`var(--color-primary)`} />}
+          />
 
-        {/*Titulo da modal*/}
-        <Modal.Title className='dark:text-white' title={`Criar nova Sala`} />
+          {/*Titulo da modal*/}
+          <Modal.Title className='dark:text-white' title={`Criar nova Sala`} />
 
-        {/*Conteudo da modal*/}
-        <Modal.Content>
-          <h1>Insira os seguintes valores abaixo:</h1>
-          <form
-            onSubmit={handleSubmit(handleForm)}
-            className="flex flex-col gap-4"
-          >
-            <InputLogin
-              {...register('nome', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.nome?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
-              placeholder="Digite o nome da sala ..."
-              label="Nome da Sala:"
-              helperText={errors.nome?.message}
-            />
+          {/*Conteudo da modal*/}
+          <Modal.Content>
+            <h1>Insira os seguintes valores abaixo:</h1>
+            <form
+              onSubmit={handleSubmit(handleForm)}
+              className="flex flex-col gap-4"
+            >
+              <InputLogin
+                {...register('nome', { required: true })}
+                icon={
+                  <TbHomeEdit
+                    size={30}
+                    color={
+                      errors.nome?.message
+                        ? `var(--color-error)`
+                        : `var(--color-primary)`
+                    }
+                  />
+                }
+                placeholder="Digite o nome da sala ..."
+                label="Nome da Sala:"
+                helperText={errors.nome?.message}
+              />
 
-            <InputLogin
-              {...register('numero', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.numero?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
-              placeholder="Digite o número da sala ..."
-              type="number"
-              label="Número da sala:"
-              helperText={errors.numero?.message}
-            />
+              <InputLogin
+                {...register('numero', { required: true })}
+                icon={
+                  <TbHomeEdit
+                    size={30}
+                    color={
+                      errors.numero?.message
+                        ? `var(--color-error)`
+                        : `var(--color-primary)`
+                    }
+                  />
+                }
+                placeholder="Digite o número da sala ..."
+                type="number"
+                label="Número da sala:"
+                helperText={errors.numero?.message}
+              />
 
-            {/* <Button
-              btnName="EDITAR"
-              className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
-            /> */}
+            </form>
+          </Modal.Content>
+        </Modal.MainSection>
 
-          </form>
-        </Modal.Content>
-      </Modal.MainSection>
-
-      {/*Parte de baixo da modal - seção de botões*/}
-      <Modal.Actions>
-        {/*Botões da modal*/}
-        <Modal.Action
-          btnName="Cancelar"
-          className="botao-danger"
-          onClick={toggleModalVisibility}
-        />
-        <Modal.Action btnName="Criar" type="submit" className="botao-reset" onClick={handleSubmit(handleForm)} />
-      </Modal.Actions>
-    </Modal.Root>
+        {/*Parte de baixo da modal - seção de botões*/}
+        <Modal.Actions>
+          {/*Botões da modal*/}
+          <Modal.Action
+            btnName="Cancelar"
+            className="botao-danger"
+            onClick={toggleModalVisibility}
+          />
+          <Modal.Action btnName="Criar" type="submit" className="botao-reset" onClick={handleSubmit(handleForm)} />
+        </Modal.Actions>
+      </Modal.Root>
+    </>
   );
 }

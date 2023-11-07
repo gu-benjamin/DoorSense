@@ -11,19 +11,19 @@ import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 
-
-type classData ={
-  id: string,
-  nome: string,
-  numero?: string, 
-  arduino?: string, 
-  status: string 
-}
+type classData = {
+  id: string;
+  nome: string;
+  numero?: string;
+  arduino?: string;
+  status: string;
+};
 
 interface ModalEditClassProps {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  classData: classData
+  setMessage: React.Dispatch<SetStateAction<string>>;
+  classData: classData;
 }
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -36,10 +36,9 @@ const schema = z.object({
   numero: z.string({
     required_error: 'Este campo é obrigatório'
   }),
-  arduino: z
-  .string({
+  arduino: z.string({
     required_error: 'Este campo é obrigatório'
-  }),
+  })
 });
 
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
@@ -48,9 +47,9 @@ type FormProps = z.infer<typeof schema>;
 export default function ModalEditClass({
   open,
   setOpen,
+  setMessage,
   classData
 }: ModalEditClassProps) {
-
   const router = useRouter();
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -82,7 +81,7 @@ export default function ModalEditClass({
       ...data
     };
 
-    console.log(body)
+    console.log(body);
 
     const res = await fetch('/api/classroms', {
       method: 'PUT',
@@ -97,7 +96,8 @@ export default function ModalEditClass({
     }
 
     const json = await res.json();
-    console.log(json);
+    setMessage(json.data.message);
+    setTimeout(() => setMessage(''), 3000);
 
     toggleModalVisibility();
     router.refresh();
@@ -121,11 +121,13 @@ export default function ModalEditClass({
         />
 
         {/*Titulo da modal*/}
-        <Modal.Title className='dark:text-white' title={`Editar Sala`} />
+        <Modal.Title className="dark:text-white" title={`Editar Sala`} />
 
         {/*Conteudo da modal*/}
         <Modal.Content>
-          <h1 className='dark:text-white'>Insira os seguintes valores abaixo:</h1>
+          <h1 className="dark:text-white">
+            Insira os seguintes valores abaixo:
+          </h1>
           <form
             onSubmit={handleSubmit(handleForm)}
             className="flex flex-col gap-4"
@@ -166,9 +168,6 @@ export default function ModalEditClass({
               label="Número da sala:"
               helperText={errors.numero?.message}
             />
-
-          
-
           </form>
         </Modal.Content>
       </Modal.MainSection>
