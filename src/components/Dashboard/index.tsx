@@ -6,6 +6,10 @@ import Cabecalho from 'components/Cabecalho/cabecalho';
 import Barra from 'components/barra-pesquisa/pesquisa';
 import TopSection from 'components/Lista-de-Salas/lista';
 
+type Datas = {
+  data: Object[],
+  doorsenses: string[],
+}
 
 type sala = {
   id: string,
@@ -15,7 +19,7 @@ type sala = {
   status: string 
 }
 
-export default function HomeUI({ data }: any) {
+export default function HomeUI({ data, doorsenses }: Datas) {
   // const [mounted, setMounted] = useState(false);
 
   // useEffect(() => {

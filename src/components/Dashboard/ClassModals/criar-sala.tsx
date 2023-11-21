@@ -76,9 +76,8 @@ export default function ModalCreateClass({
     }
 
     const json = await res.json();
-    console.log(json.data.message)
     setMessage(json.data.message)
-    setTimeout(() => setMessage(''), 3000);
+    setTimeout(() => setMessage(''), 5000);
 
     toggleModalVisibility()
     router.refresh();
