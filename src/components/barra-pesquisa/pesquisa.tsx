@@ -9,7 +9,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
 import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
-import FiltrosModal from './modalFilter';
+import toggleSelect from './modalFilter';
 
 export default function Barra() {
   const [open, setOpen] = useState(false);
@@ -28,7 +28,7 @@ export default function Barra() {
               placeholder="Buscar..."
               className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
             />
-            <button onClick={toggleModalVisibility} className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
+            <button onClick={toggleSelect} className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
               <BiFilter size={24} color="" /> Filtros
             </button>
           </div>
@@ -38,7 +38,7 @@ export default function Barra() {
           <button
             className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center transform hover:scale-95"
             style={{ whiteSpace: 'nowrap' }}
-            // onClick={toggleModalVisibility}
+            onClick={toggleModalVisibility}
           >
             <AiOutlinePlus size={20} />
             Nova Sala
