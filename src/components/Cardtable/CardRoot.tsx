@@ -36,7 +36,7 @@ export default function CardRoot({ children, classData }: CardRootProps) {
 
   return (
     <>
-      {message && <Mensagem message={message} duration={3} />}
+      {message && <Mensagem message={message} duration={5} />}
       <div className="relative bg-white dark:bg-dark-200 text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
         {children}
         <div className={`gap-2 items-center hidden sm:flex`}>

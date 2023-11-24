@@ -3,6 +3,7 @@
 import React, { useState, SetStateAction, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
+import { Dropdown } from 'components/DropDown/dropdown';
 import { TbHomeEdit } from 'react-icons/tb';
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
@@ -10,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
+
 
 type classData = {
   id: string;
@@ -50,7 +52,9 @@ export default function ModalEditClass({
   setMessage,
   classData
 }: ModalEditClassProps) {
+
   const router = useRouter();
+
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
@@ -60,7 +64,10 @@ export default function ModalEditClass({
   } = useForm<FormProps>({
     mode: 'all',
     reValidateMode: 'onBlur',
-    resolver: zodResolver(schema)
+    resolver: zodResolver(schema),
+    defaultValues:{
+      arduino: ''
+    }
   });
 
   const inputNumber = classData.numero !== null ? classData.numero : '';
@@ -97,7 +104,7 @@ export default function ModalEditClass({
 
     const json = await res.json();
     setMessage(json.data.message);
-    setTimeout(() => setMessage(''), 3000);
+    setTimeout(() => setMessage(''), 5000);
 
     toggleModalVisibility();
     router.refresh();
@@ -166,6 +173,25 @@ export default function ModalEditClass({
               placeholder="Digite o número da sala ..."
               type="number"
               label="Número da sala:"
+              helperText={errors.numero?.message}
+            />
+
+            <Dropdown
+              {...register('arduino', { required: true })}
+              icon={
+                <TbHomeEdit
+                  size={30}
+                  color={
+                    errors.numero?.message
+                      ? `var(--color-error)`
+                      : `var(--color-primary)`
+                  }
+                />
+              }
+              placeholder="Digite o número da sala ..."
+              type="number"
+              label="Doorsense ID:"
+              options={[ '00 11 22 33 44 55 66 77 88', 'FF EE DD CC BB AA 00 11 22' ]}
               helperText={errors.numero?.message}
             />
           </form>

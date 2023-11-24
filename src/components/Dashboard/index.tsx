@@ -7,6 +7,11 @@ import TopSection from 'components/Lista-de-Salas/lista';
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 
+type Datas = {
+  data: Object[],
+  doorsenses: string[],
+}
+
 type sala = {
   id: string,
   nome: string,
@@ -15,12 +20,14 @@ type sala = {
   status: string 
 }
 
-export default function HomeUI({ data }: any) {
-  const [limite, setLimite] = useState(0);
+  export default function HomeUI({ data, doorsenses }: Datas) {
+    // const [mounted, setMounted] = useState(false);
+    const [limite, setLimite] = useState(0);
+    const [list, setList] = useState(data);
 
   const Proximo = () => {
     const novoLimite = limite + 4;
-    if (novoLimite < data.salas.length) {
+    if (novoLimite < list.salas.length) {
       setLimite(novoLimite);
     }
   };
@@ -30,17 +37,17 @@ export default function HomeUI({ data }: any) {
     setLimite(novoLimite);
   };
 
-  const mostrarBotoes = data && data.salas.length > 4;
+  const mostrarBotoes = list && list.salas.length > 4;
 
   return (
     <main className="relative flex flex-col h-screen items-center pb-6 bg-secondary dark:bg-dark-300">
       <div className="w-full sm:w-10/12 ">
         <TopSection />
-        <Barra />
+        <Barra setList={setList} data={data} />
         <Cabecalho />
         <div className="flex flex-col gap-4 mt-4">
-          {data &&
-            data.salas.slice(limite, limite + 4).map((sala: sala) => (
+          {list &&
+            list.salas.slice(limite, limite + 4).map((sala: sala) => (
               <Card.Root key={sala.id} classData={sala}>
                 <Card.Data data={sala.nome} />
                 <Card.Data data={sala.numero} />
@@ -55,7 +62,7 @@ export default function HomeUI({ data }: any) {
                   <FaArrowLeft size={20} className='text-primary-100 dark:text-white'/>
                 </span>
               )}
-              {limite + 4 < data.salas.length && (
+              {limite + 4 < list.salas.length && (
                 <span onClick={Proximo}>
                   <FaArrowRight size={20} className='text-primary-100 dark:text-white'/>
                 </span>

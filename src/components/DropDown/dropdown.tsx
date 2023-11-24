@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge';
 type DropdownProps = {
   label?: string;
   helperText?: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   actionIcon?: ReactNode;
   options: string[]; // Adicione as opções do dropdown aqui
 };
@@ -44,7 +44,7 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
           onChange={(e) => setSelectedOption(e.target.value)}
           {...props}
         >
-          <option value="" disabled>Escolha uma opção</option>
+          <option value="" >Selecione um Doorsense</option>
           {options.map((option) => (
             <option key={option} value={option}>
               {option}
