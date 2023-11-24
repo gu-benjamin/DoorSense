@@ -9,7 +9,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
 import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
-import toggleSelect from './modalFilter';
+// import toggleSelect from './modalFilter';
 
 export default function Barra() {
   const [open, setOpen] = useState(false);

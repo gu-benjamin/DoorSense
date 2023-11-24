@@ -30,6 +30,7 @@
     "react-hook-form": "^7.47.0",
     "react-icons": "^4.11.0",
     "react-responsive": "^9.0.2",
+    "react-select": "^5.8.0",
     "tailwind-merge": "^1.14.0",
     "typescript": "^5.1.6",
     "yarn": "^1.22.19",
