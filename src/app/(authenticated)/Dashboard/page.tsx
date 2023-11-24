@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 const HomeUI = dynamic(() => import('./../../../components/Dashboard/index'), { ssr: false });
 import { cookies } from 'next/headers';
+import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export default async function HomePage() {
 
@@ -10,13 +11,13 @@ export default async function HomePage() {
     'Content-Type': 'application/json'
   };
 
-  const resSalas = await fetch('http://localhost/doorsense_backend/api/salas/', {
+  const resSalas = await fetch(`${DEV_API_ENDPOINT}salas/`, {
     method: 'GET',
     headers: headersList
   });
 
   const resDoorsenses = await fetch(
-    'http://localhost/doorsense_backend/api/doorsenses/',
+    `${DEV_API_ENDPOINT}doorsenses/`,
     {
       method: 'GET',
       headers: headersList
