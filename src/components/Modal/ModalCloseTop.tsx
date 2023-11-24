@@ -6,7 +6,7 @@ interface ModalCloseTopProps {
 
 export default function ModalCloseTop({ children }: ModalCloseTopProps) {
   return (
-    <div className={`bg-secondary flex flex-row-reverse p-[6px]`}>
+    <div className={`bg-secondary dark:bg-dark-200  flex flex-row-reverse p-[6px]`}>
       {children}
     </div>
   );

@@ -7,7 +7,7 @@ interface ModalIconProps extends HtmlHTMLAttributes<HTMLDivElement> {
 
 export default function ModalIcon({ icon, ...props }: ModalIconProps) {
   return (
-    <div className={twMerge(`mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full`, props.className)}>
+    <div className={twMerge(`mx-auto flex h-16 w-16 flex-shrink-0 items-center justify-center rounded-full bg-primary-50 dark:bg-cyan-950 `, props.className)}>
       {icon}
     </div>
   );

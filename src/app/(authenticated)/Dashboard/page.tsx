@@ -10,12 +10,24 @@ export default async function HomePage() {
     'Content-Type': 'application/json'
   };
 
-  const res = await fetch('http://localhost/doorsense_backend/api/salas/', {
+  const resSalas = await fetch('http://localhost/doorsense_backend/api/salas/', {
     method: 'GET',
     headers: headersList
   });
 
-  const data = await res.json()
+  const resDoorsenses = await fetch(
+    'http://localhost/doorsense_backend/api/doorsenses/',
+    {
+      method: 'GET',
+      headers: headersList
+    }
+  );
 
-  return <HomeUI data={data.data} />
+  const dataSalas = await resSalas.json()
+
+  const dataDoorsenses = await resDoorsenses.json()
+
+  const filterDoorsenses = dataDoorsenses.data.doorsenses.map(doorsense => doorsense.uniqueId)
+
+  return <HomeUI data={dataSalas.data} doorsenses={filterDoorsenses} />
 }

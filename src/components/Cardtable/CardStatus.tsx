@@ -1,13 +1,8 @@
-'use client';
-
 import {
   HtmlHTMLAttributes,
-  ReactNode,
   forwardRef,
   useState,
-  useEffect
 } from 'react';
-import { twMerge } from 'tailwind-merge';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { MdKeyboardArrowDown } from 'react-icons/md';
@@ -15,6 +10,8 @@ import { TiEdit } from 'react-icons/ti';
 import { BiTrash } from 'react-icons/bi';
 import ModalDeleteClass from './../Dashboard/ClassModals/deletar-sala';
 import ModalEditClass from './../Dashboard/ClassModals/editar-sala';
+import Mensagem from 'components/Mensagem';
+
 
 type classData = {
   id: string;
@@ -38,26 +35,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
     };
     const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
-    const [message, setMessage] = useState<string | null>();
-    const [Segundos, setSegundos] = useState(0);
-
-    // Função para iniciar a contagem regressiva
-    useEffect(() => {
-      if (message) {
-        const timer = setInterval(() => {
-          setSegundos((prevSeconds) => {
-            if (prevSeconds > 0) {
-              return prevSeconds - 0.01; // Update the progress bar more frequently
-            }
-            return prevSeconds;
-          });
-        }, 10);
-
-        return () => {
-          clearInterval(timer);
-        };
-      }
-    }, [message]);
+    const [message, setMessage] = useState('');
 
     // Função visibilidade da modal
     function toggleModalEditVisibility() {
@@ -68,34 +46,9 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
       setOpenDelete((prevState) => !prevState);
     }
 
-    // function Delete() {
-    //   setOpenDelete(false);
-    //   setMessage('Sala Removida com Sucesso');
-    //   setTimeout(() => setMessage(null), 3000);
-    //   setSegundos(3);
-    // }
-    //   function Editar() {
-    //   setOpenEdit(false);
-    //   setMessage('Sala Editada com Sucesso');
-    //   setTimeout(() => setMessage(null), 3000);
-    //   setSegundos(3);
-    // }
-
-    // const progressBarStyle = {
-    //   width: `${(3 - Segundos) * 20}%`, // Aumenta a largura em 20% a cada segundo
-    // };
-
     return (
       <>
-        {/* Renderização da mensagem com a barra de progresso
-        {message && (
-            <div className="bg-primary-100 p-3 rounded justify-self-center text-white relative">
-              {message} 
-              <div className=" h-1 absolute bottom-1 left-0 right-0">
-                <div className="bg-white h-full" style={progressBarStyle}></div>
-              </div>
-            </div>
-          )} */}
+        {message && <Mensagem message={message} duration={5} />}
 
         <div className={`flex sm:flex sm:gap-2 items-center`}>
           {data === 'Ativo' ? (
@@ -151,6 +104,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
         <ModalEditClass
           open={openEdit}
           setOpen={setOpenEdit}
+          setMessage={setMessage}
           classData={classData}
         />
 
@@ -158,6 +112,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
         <ModalDeleteClass
           open={openDelete}
           setOpen={setOpenDelete}
+          setMessage={setMessage}
           id={parseInt(classData.id)}
         />
       </>

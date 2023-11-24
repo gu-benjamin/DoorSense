@@ -9,8 +9,8 @@ export default function Footer() {
 
   return (
     
-    <div className="bg-white dark:bg-black">
-      <div className="max-w-3xl mx-auto py-4">
+    <footer className="bg-white dark:bg-black mt-44 sm:mt-40 ">
+      <div className="max-w-3xl mx-auto">
         <div className="text-center">
           <div className="flex justify-center">
             {resolvedTheme === 'dark' ? <IconLogoEquipe size={100}/> : <IconLogoEquipeDark size={100}/>}
@@ -34,6 +34,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </div>
+    </footer>
   );
 }

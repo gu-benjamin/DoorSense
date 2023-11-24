@@ -1,11 +1,16 @@
 'use client';
-
 import { useEffect, useState } from 'react';
 import Card from 'components/Cardtable/';
 import Cabecalho from 'components/Cabecalho/cabecalho';
 import Barra from 'components/barra-pesquisa/pesquisa';
 import TopSection from 'components/Lista-de-Salas/lista';
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
 
+type Datas = {
+  data: Object[],
+  doorsenses: string[],
+}
 
 type sala = {
   id: string,
@@ -15,45 +20,58 @@ type sala = {
   status: string 
 }
 
-export default function HomeUI({ data }: any) {
-  // const [mounted, setMounted] = useState(false);
+  export default function HomeUI({ data, doorsenses }: Datas) {
+    // const [mounted, setMounted] = useState(false);
+    const [limite, setLimite] = useState(0);
+    const [list, setList] = useState(data);
 
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
+  const Proximo = () => {
+    const novoLimite = limite + 4;
+    if (novoLimite < list.salas.length) {
+      setLimite(novoLimite);
+    }
+  };
 
-  // if (!mounted) {
-  //   return null;
-  // }
+  const Anterior = () => {
+    const novoLimite = Math.max(0, limite - 4);
+    setLimite(novoLimite);
+  };
+
+  const mostrarBotoes = list && list.salas.length > 4;
 
   return (
-    <main className="flex flex-col h-screen items-center justify-center pb-6 bg-secondary dark:bg-dark-300">
-      <div className="w-full sm:w-10/12 p-4">
-        {/*IconHome, Salas e Lista das salas criadas */}
+    <main className="relative flex flex-col h-screen items-center pb-6 bg-secondary dark:bg-dark-300">
+      <div className="w-full sm:w-10/12 ">
         <TopSection />
-
-        {/* Barra de pesquisa e botão Nova Sala */}
-        <Barra />
-
-        {/* Dashboard - Cabeçalho */}
+        <Barra setList={setList} data={data} />
         <Cabecalho />
-
-        {/* Os cards abaixo do cabeçalho */}
-        <div className="flex flex-col gap-4 mt-4 ">
-          {/* Card 1 */}
-
-          {data && data.salas.map((sala: sala) => {
-            return (
+        <div className="flex flex-col gap-4 mt-4">
+          {list &&
+            list.salas.slice(limite, limite + 4).map((sala: sala) => (
               <Card.Root key={sala.id} classData={sala}>
                 <Card.Data data={sala.nome} />
                 <Card.Data data={sala.numero} />
                 <Card.Data className="sm:text-left" data={sala.arduino} />
                 <Card.Status data={sala.status} classData={sala} />
               </Card.Root>
-            );
-          })}
+            ))}
+          {mostrarBotoes && (
+            <div className="flex justify-between mt-1">
+              {limite > 0 && (
+                <span onClick={Anterior}>      
+                  <FaArrowLeft size={20} className='text-primary-100 dark:text-white'/>
+                </span>
+              )}
+              {limite + 4 < list.salas.length && (
+                <span onClick={Proximo}>
+                  <FaArrowRight size={20} className='text-primary-100 dark:text-white'/>
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </main>
   );
 }
+

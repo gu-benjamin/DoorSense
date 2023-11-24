@@ -23,6 +23,10 @@ const config: Config = {
           300: '#121212',
         }, 
         'light-red': 'hsl(0, 100%, 67%)',
+        message:{
+          100: '#B4FFC0',
+          200: '#00D715',
+        }
       },
       
     },
