@@ -20,10 +20,11 @@ type sala = {
   status: string 
 }
 
-  export default function HomeUI({ data, doorsenses }: Datas) {
-    // const [mounted, setMounted] = useState(false);
-    const [limite, setLimite] = useState(0);
-    const [list, setList] = useState(data);
+// ... (importações e tipos)
+
+export default function HomeUI({ data, doorsenses }: Datas) {
+  const [limite, setLimite] = useState(0);
+  const [list, setList] = useState(data);
 
   const Proximo = () => {
     const novoLimite = limite + 4;
@@ -37,7 +38,7 @@ type sala = {
     setLimite(novoLimite);
   };
 
-  const mostrarBotoes = list && list.salas.length > 4;
+  const mostrarBotoes = list && list.salas.length > 0;
 
   return (
     <main className="relative flex flex-col h-screen items-center pb-6 bg-secondary dark:bg-dark-300">
@@ -55,20 +56,18 @@ type sala = {
                 <Card.Status data={sala.status} classData={sala} />
               </Card.Root>
             ))}
-          {mostrarBotoes && (
-            <div className="flex justify-between mt-1">
-              {limite > 0 && (
-                <span onClick={Anterior}>      
-                  <FaArrowLeft size={20} className='text-primary-100 dark:text-white'/>
-                </span>
-              )}
-              {limite + 4 < list.salas.length && (
-                <span onClick={Proximo}>
-                  <FaArrowRight size={20} className='text-primary-100 dark:text-white'/>
-                </span>
-              )}
-            </div>
-          )}
+          <div className={`flex mt-1 ${mostrarBotoes ? 'opacity-100' : 'opacity-50'}`}>
+            {limite > 0 && (
+              <span onClick={Anterior} className="mr-2">      
+                <FaArrowLeft size={20} className='text-primary-100 dark:text-white'/>
+              </span>
+            )}
+            {limite + 4 < list.salas.length && (
+              <span onClick={Proximo} className="ml-2">
+                <FaArrowRight size={20} className='text-primary-100 dark:text-white'/>
+              </span>
+            )}
+          </div>
         </div>
       </div>
     </main>
