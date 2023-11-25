@@ -1,61 +1,70 @@
 import React, { useState, useEffect } from 'react';
-import { Props, Item } from './interface';
-import Select from "react-select";
-import { BiChevronDown, BiFilter } from 'react-icons/bi';
-
-type Datas = {
-  data: Object[],
-  setList: React.Dispatch<SetStateAction<Object[]>>;
+import Select from 'react-select';
+import { BiFilter } from 'react-icons/bi';
+interface Datas {
+  data: {
+    salas: Item[];
+  };
+  setList: React.Dispatch<React.SetStateAction<Datas['data']>>;
+}
+interface Item {
+  nome: string;
+  numero: number;
+  status: 'ativo' | 'inativo';
 }
 
 const orderByName = (itens: Item[]): Item[] => {
   return itens.sort((a, b) => a.nome.localeCompare(b.nome));
 };
-
-//  Para usar a função de ordenação:
-const itensOrderByName: Item[] = orderByName();
-
 const orderByNumbers = (itens: Item[]): Item[] => {
   return itens.sort((a, b) => a.numero - b.numero);
 };
-
-//  Para usar a função de ordenação:
-const itensOrderByNumbers: Item[] = orderByNumbers();
-
 const filterStatus = (itens: Item[], status: 'ativo' | 'inativo'): Item[] => {
   return itens.filter((item) => item.status === status);
 };
 
-//  Para usar a função de filtragem por status ativo:
-const itensAtivos: Item[] = filterStatus(itens, 'ativo');
+export default function SelectFilter({ data, setList }: Datas) {
+  const [filter, setFilter] = useState({
+    type: '',
+    value: ''
+  });
 
-//  Para usar a função de filtragem por status inativo:
-const itensInativos: Item[] = filterStatus(itens, 'inativo')
+  const options = [
+    { value: 'alfabetico', label: 'Ordem Alfabética' },
+    { value: 'numerico', label: 'Ordem Numérica' },
+    { value: 'ativo', label: 'Ativo' },
+    { value: 'inativo', label: 'Inativo' }
+  ];
 
-const options = [
-  {value: itensOrderByName, label: "Ordem Alfabética"},
-  {value: itensOrderByNumbers, label: "Ordem Numérica"},
-  {value: itensAtivos, label: "Ativo"},
-  {value: itensInativos, label: "Inativo"},
-];
-
-export default function SelectFilter({data, setList}: Datas) {
-  const [filter, setFilter] = useState('');
-
-    useEffect(() => {
-      if (filter === '') {
-        setList(data);
-      } else {
-        setList({...data, salas: data.salas.filter((itens) => ) }
-        );
+  useEffect(() => {
+    if (filter.value === '') {
+      setList(data);
+    } else {
+      switch (filter.type) {
+        case 'alfabetico':
+          setList({ ...data, salas: orderByName(data.salas) });
+          break;
+        case 'numerico':
+          setList({ ...data, salas: orderByNumbers(data.salas) });
+          break;
+        case 'ativo':
+        case 'inativo':
+          setList({ ...data, salas: filterStatus(data.salas, filter.type) });
+          break;
+        default:
+          // Lógica padrão ou tratamento de erro
+          break;
       }
-    }, [filter]);
-  
+    }
+  }, [filter]);
+
   return (
-    <div className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
-        <BiFilter size={24} color="" /> Filtros
-        <BiChevronDown size = {20} className="ml-3"/>
-          <Select options={options}/>
-      </div>
-    )
-  }
+    <div>
+      {/* <BiFilter size={24} color="" /> Filtros */}
+      <Select
+        options={options}
+        className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded"
+      />
+    </div>
+  );
+}
