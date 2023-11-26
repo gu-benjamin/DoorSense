@@ -189,7 +189,6 @@ export default function ModalEditClass({
                 />
               }
               placeholder="Digite o número da sala ..."
-              type="number"
               label="Doorsense ID:"
               options={[ '00 11 22 33 44 55 66 77 88', 'FF EE DD CC BB AA 00 11 22' ]}
               helperText={errors.numero?.message}

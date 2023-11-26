@@ -11,13 +11,13 @@ export default async function HomePage() {
     'Content-Type': 'application/json'
   };
 
-  const resSalas = await fetch(`${DEV_API_ENDPOINT}salas/`, {
+  const resSalas = await fetch(`${LOCAL_ENDPOINT}salas/`, {
     method: 'GET',
     headers: headersList
   });
 
   const resDoorsenses = await fetch(
-    `${DEV_API_ENDPOINT}doorsenses/`,
+    `${LOCAL_ENDPOINT}doorsenses/`,
     {
       method: 'GET',
       headers: headersList
@@ -30,5 +30,10 @@ export default async function HomePage() {
 
   const filterDoorsenses = dataDoorsenses.data.doorsenses.map(doorsense => doorsense.uniqueId)
 
-  return <HomeUI data={dataSalas.data} doorsenses={filterDoorsenses} />
+  const allApiData = {
+    data: dataSalas.data,
+    doorsenses: filterDoorsenses
+  }
+
+  return <HomeUI datas={dataSalas.data} doorsenses={filterDoorsenses} />
 }

@@ -12,7 +12,7 @@ export async function POST(request: Request) {
 
   try {
 
-    const res = await fetch(`${DEV_API_ENDPOINT}login/forgot-password/`, {
+    const res = await fetch(`${LOCAL_ENDPOINT}login/forgot-password/`, {
       method: 'POST',
       body: JSON.stringify(reqData),
       headers: headersList
