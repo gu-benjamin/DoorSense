@@ -42,10 +42,12 @@ export default function ModalDeleteClass({
     // const json = await res.json();
     
     setMessage('Sala deletada com sucesso');
-    setTimeout(() => setMessage(''), 5000);
-
     toggleModalVisibility();
-    router.refresh();
+    setTimeout(() => {
+      router.refresh();
+      setMessage('')
+    }, 5000);
+
   }
 
   return (

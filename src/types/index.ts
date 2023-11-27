@@ -1,6 +1,6 @@
 import { SetStateAction } from 'react';
 
-type Datas = {
+interface HomeUIProps {
   datas: ApiData;
   doorsenses: string[];
 };
@@ -13,19 +13,18 @@ type sala = {
   status: string;
 };
 
+type doorsense = {
+  id: string,
+  uniqueId: string,
+  status: string,
+  lastUpdate: string
+}
+
 type ApiData = {
   total: number;
   salas: sala[];
 };
 
-type ContextValues =  null | {
-  data: ContextStateValues;
-  setData: React.Dispatch<SetStateAction<ContextStateValues>>
-}
 
-type ContextStateValues = null | {
-  data: null | ApiData;
-  doorsenses: null | string[];
-}
 
-export type {Datas, sala, ApiData, ContextValues, ContextStateValues};
+export type { HomeUIProps, sala, doorsense, ApiData };

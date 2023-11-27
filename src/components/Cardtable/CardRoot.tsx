@@ -17,9 +17,10 @@ type classData = {
 interface CardRootProps {
   children: ReactNode;
   classData: classData;
+  doorsenses: string[];
 }
 
-export default function CardRoot({ children, classData }: CardRootProps) {
+export default function CardRoot({ children, classData, doorsenses }: CardRootProps) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [message, setMessage] = useState('');
@@ -60,6 +61,7 @@ export default function CardRoot({ children, classData }: CardRootProps) {
         setOpen={setOpenEdit}
         setMessage={setMessage}
         classData={classData}
+        doorsenses={doorsenses}
       />
 
       {/* Delete Modal */}

@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 
-
 type classData = {
   id: string;
   nome: string;
@@ -26,6 +25,7 @@ interface ModalEditClassProps {
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   setMessage: React.Dispatch<SetStateAction<string>>;
   classData: classData;
+  doorsenses: string[];
 }
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
@@ -50,7 +50,8 @@ export default function ModalEditClass({
   open,
   setOpen,
   setMessage,
-  classData
+  classData,
+  doorsenses,
 }: ModalEditClassProps) {
 
   const router = useRouter();
@@ -71,7 +72,7 @@ export default function ModalEditClass({
   });
 
   const inputNumber = classData.numero !== null ? classData.numero : '';
-  const inputArduino = classData.arduino !== null ? classData.arduino : '';
+  // const inputArduino = classData.arduino !== null ? classData.arduino : '';
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
@@ -190,7 +191,7 @@ export default function ModalEditClass({
               }
               placeholder="Digite o número da sala ..."
               label="Doorsense ID:"
-              options={[ '00 11 22 33 44 55 66 77 88', 'FF EE DD CC BB AA 00 11 22' ]}
+              options={doorsenses}
               helperText={errors.numero?.message}
             />
           </form>
