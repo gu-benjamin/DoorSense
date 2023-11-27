@@ -30,7 +30,7 @@ export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
   };
 
   return (
-    <main className="relative flex flex-col items-center pb-16 bg-secondary dark:bg-dark-300 px-4 sm:px-0">
+    <main className="relative flex flex-col items-center pb-16 h-full bg-secondary dark:bg-dark-300 px-4 sm:px-0">
       <div className="w-full sm:w-10/12 ">
         <TopSection />
         <Barra setList={setList} data={datas} />
