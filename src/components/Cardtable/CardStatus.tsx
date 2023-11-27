@@ -24,10 +24,11 @@ type classData = {
 type CardStatusProps = HtmlHTMLAttributes<HTMLParagraphElement> & {
   data: string;
   classData: classData;
+  doorsenses: string[];
 };
 
 export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
-  ({ data, classData, ...props }, ref) => {
+  ({ data, classData, doorsenses, ...props }, ref) => {
     const [isDropdownOpenCard, setIsDropdownOpenCard] = useState(false);
 
     const handleDropdownToggleCard = () => {
@@ -106,6 +107,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
           setOpen={setOpenEdit}
           setMessage={setMessage}
           classData={classData}
+          doorsenses={doorsenses}
         />
 
         {/* Delete Modal */}

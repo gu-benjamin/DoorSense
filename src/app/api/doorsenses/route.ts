@@ -1,12 +1,13 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export async function GET() {
   const token = cookies().get('token');
 
   try {
     const res = await fetch(
-      'http://localhost/doorsense_backend/api/doorsenses/',
+      `${LOCAL_ENDPOINT}doorsenses/`,
       {
         method: 'GET',
         headers: {

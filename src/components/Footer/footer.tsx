@@ -9,7 +9,7 @@ export default function Footer() {
 
   return (
     
-    <footer className="bg-white dark:bg-black mt-44 sm:mt-40 ">
+    <footer className="bg-white dark:bg-black mt-20 sm:mt-20 ">
       <div className="max-w-3xl mx-auto">
         <div className="text-center">
           <div className="flex justify-center">
