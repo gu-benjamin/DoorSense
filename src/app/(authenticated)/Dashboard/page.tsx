@@ -12,13 +12,13 @@ export default async function HomePage() {
     'Content-Type': 'application/json'
   };
 
-  const resSalas = await fetch(`${LOCAL_ENDPOINT}salas/`, {
+  const resSalas = await fetch(`${DEV_API_ENDPOINT}salas/`, {
     method: 'GET',
     headers: headersList
   });
 
   const resDoorsenses = await fetch(
-    `${LOCAL_ENDPOINT}doorsenses/`,
+    `${DEV_API_ENDPOINT}doorsenses/`,
     {
       method: 'GET',
       headers: headersList
