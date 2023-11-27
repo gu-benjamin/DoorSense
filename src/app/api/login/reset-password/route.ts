@@ -2,19 +2,16 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
-export async function POST(request: Request) {
+export async function POST() {
     const headersList = {
       Accept: '*/*',
       'Content-Type': 'application/json'
     };
 
-  const reqData = await request.json();
-
   try {
 
-    const res = await fetch(`${LOCAL_ENDPOINT}login/forgot-password/`, {
+    const res = await fetch(`${DEV_API_ENDPOINT}login/forgot-password/`, {
       method: 'POST',
-      body: JSON.stringify(reqData),
       headers: headersList
     });
 

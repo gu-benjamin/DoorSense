@@ -1,20 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import IconUser from 'components/Icons/icon-user';
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
-import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
-import { XCircleIcon } from '@heroicons/react/24/outline';
-import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
-import {LuMail} from 'react-icons/lu';
 import Image from 'next/image';
-import { Modal } from 'components/Modal';
 import LogoHome from '../Icons/logoSVG';
 import { useTheme } from 'next-themes';
 import LogoHomeDark from '../Icons/logoSVGdark';
 import LoginForm from './loginForm';
-import { MdOutlineClose } from 'react-icons/md';
+import ModalLoginForm from './LoginModal/forgot-password';
 
 export default function LoginUI() {
   const [open, setOpen] = useState(false);
@@ -78,40 +72,7 @@ export default function LoginUI() {
         />
       </section>
 
-      <Modal.Root open={open} onClose={setOpen}>
-        <Modal.CloseTop>
-          <ButtonIcon
-            onClick={toggleModalVisibility}
-            icon={<MdOutlineClose size={30} className="text-gray-500  hover:text-red-500 hover:scale-110 focus:outline-none" />}
-          />
-        </Modal.CloseTop>
-        <Modal.MainSection>
-          <Modal.Icon
-            icon={<LuMail size={45} color={`var(--color-primary)`} />}
-          />
-          <Modal.Title title={`Redefinição de senha`}  className='dark:text-white'/>
-          <Modal.Content>
-            <p>Por favor insira seu e-mail de recuperação</p>
-            <InputLogin
-              icon={<LuMail size={30} color={`var(--color-primary)`} />}
-              placeholder="Digite seu E-mail"
-              label="E-mail"
-            />
-          </Modal.Content>
-        </Modal.MainSection>
-        <Modal.Actions>
-          <Modal.Action
-            btnName="Cancelar"
-            className="botao-danger"
-            onClick={toggleModalVisibility}
-          />
-          <Modal.Action
-            btnName="Enviar"
-            className="botao-reset"
-            onClick={toggleModalVisibility}
-          />
-        </Modal.Actions>
-      </Modal.Root>
+      <ModalLoginForm open={open} setOpen={setOpen} />
     </main>
   );
 }
