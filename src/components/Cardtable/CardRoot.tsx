@@ -20,11 +20,14 @@ interface CardRootProps {
   doorsenses: string[];
 }
 
-export default function CardRoot({ children, classData, doorsenses }: CardRootProps) {
+export default function CardRoot({
+  children,
+  classData,
+  doorsenses
+}: CardRootProps) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [message, setMessage] = useState('');
-
 
   // Função visibilidade da modal
   function toggleModalEditVisibility() {
@@ -38,9 +41,9 @@ export default function CardRoot({ children, classData, doorsenses }: CardRootPr
   return (
     <>
       {message && <Mensagem message={message} duration={5} />}
-      <div className="relative bg-white dark:bg-dark-200 text-xs sm:text-sm p-4 rounded-md flex items-center justify-around">
+      <div className="grid sm:grid-cols-5 grid-cols-4 relative bg-white dark:bg-dark-200 text-xs sm:text-sm p-4 rounded-md items-center justify-around">
         {children}
-        <div className={`gap-2 items-center hidden sm:flex`}>
+        <div className={`gap-2 items-center hidden sm:flex justify-center`}>
           <ButtonIcon
             icon={<TiEdit size={35} color="#05AFF2" />}
             className="transform hover:scale-110"

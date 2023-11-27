@@ -51,7 +51,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
       <>
         {message && <Mensagem message={message} duration={5} />}
 
-        <div className={`flex sm:flex sm:gap-2 items-center`}>
+        <div className={`flex sm:gap-2 items-center justify-center`}>
           {data === 'Ativo' ? (
             <AiFillCheckCircle size={16} color="#00D715" />
           ) : (

@@ -56,7 +56,7 @@ export default function Barra({data, setList}: Datas) {
               onChange={(e) => setSearch(e.target.value)}
               type="search"
               placeholder="Buscar..."
-              className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
+              className="pl-10 pr-3 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
             />
             <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
               <BiFilter size={24} color="" /> Filtros
