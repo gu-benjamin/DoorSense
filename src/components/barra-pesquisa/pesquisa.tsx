@@ -10,7 +10,7 @@ import { TbHomeEdit } from 'react-icons/tb';
 import { InputLogin } from 'components/Inputs/Input-login';
 import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
 import Mensagem from 'components/Mensagem';
-import SelectFilter from './modalFilter';
+import SelectFilter from './filter';
 import { ApiData } from 'types';
 
 type Datas = {

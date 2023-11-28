@@ -47,13 +47,13 @@ useEffect(() => {
 
 
   return (
-    <div className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent font-semibold py-1 px-4 rounded"
+    <div
     >
-      {/* <BiFilter size={24} color="" /> Filtros */}
+      <BiFilter size={24} color="" /> Filtros
       <select
         value={filter}
         onChange={e => setFilter(e.target.value)}
-        
+        className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent font-semibold py-1 px-4 rounded"
       >
         <option value="numerico">Ordem Numérica</option>
         <option value="alfabetico">Ordem Alfabética</option>
