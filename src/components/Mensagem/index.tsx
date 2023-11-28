@@ -31,13 +31,13 @@ const Mensagem: React.FC<MensagemProps> = ({ message, duration }) => {
   };
 
   return (
-      <div className="absolute rounded-b-lg top-0 left-5 p-3 w-1/4 bg-message-100 border-l-8 border-message-200">
+      <div className="absolute rounded-b-lg top-0 left-5 p-3 w-1/4 bg-message-100 dark:bg-dark-200 border-l-8 border-message-200">
         <div className='flex align-center'>
           <AiFillCheckCircle color='#00D715' size='20' />
           <span className='mr-1'></span>
           {message}
         </div>
-        <div className="h-1 rounded-md bg-white" style={progressBarStyle}></div>
+        <div className="h-1 rounded-md bg-white dark:bg-message-200" style={progressBarStyle}></div>
       </div>
   );
   
