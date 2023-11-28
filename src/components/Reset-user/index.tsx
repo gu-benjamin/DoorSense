@@ -2,17 +2,20 @@
 
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import Image from 'next/image';
-import LogoHome from '../../components/Icons/logoSVG';
+import LogoHome from '../Icons/logoSVG';
 import { useTheme } from 'next-themes';
-import LogoHomeDark from '../../components/Icons/logoSVGdark';
+import LogoHomeDark from '../Icons/logoSVGdark';
 import FirstAcessForm from './firstAcessform';
+import ResetPasswordForm from './reset-passwordForm';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
-export default function FirstAcessUI() {
- 
+export default function ResetUserUI() {
   const { resolvedTheme } = useTheme();
+  const pathname = usePathname();
+
   // const [mounted, setMounted] = useState(false);
-  
+
   // useEffect(() => {
   //   setMounted(true);
   // }, []);
@@ -49,14 +52,14 @@ export default function FirstAcessUI() {
           <ThemeButton />
         </div>
 
-
         {resolvedTheme === 'dark' ? (
           <LogoHomeDark size={170} />
         ) : (
           <LogoHome size={170} />
         )}
 
-        <FirstAcessForm/>
+        {pathname === '/FirstAcess' ? <FirstAcessForm /> : <ResetPasswordForm />}
+        
       </section>
     </main>
   );
