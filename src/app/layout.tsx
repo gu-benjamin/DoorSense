@@ -6,7 +6,7 @@ import { Mplus } from './../utils/fonts';
 import Providers from '../contexts/dark-theme';
 import { usePathname } from 'next/navigation';
 import { checkIsPublicPage } from 'functions/checkIsPublicPage';
-import PrivateRoute from './../components/PrivateRoute/index';
+import {PrivateFARoute, PrivateRPRoute} from './../components/PrivateRoute/index';
 
 export const metadata: Metadata = {
   title: 'DoorSense - Login',
@@ -22,14 +22,17 @@ export default function RootLayout({
   const pathname = usePathname();
   const IsPublicPage = checkIsPublicPage(pathname!);
 
-  console.log(IsPublicPage);
+  const IsFirstAcess = !IsPublicPage && pathname === '/FirstAcess'
 
   return (
     <html lang="pt-br" className="light" style={{ colorScheme: 'light' }}>
       <body className={Mplus.className}>
         <Providers>
-          {IsPublicPage && children}
-          {!IsPublicPage && <PrivateRoute pathname={pathname}>{children}</PrivateRoute>}
+          {/* {IsPublicPage && children}
+          {pathname === '/Dashboard' && children}
+          {IsFirstAcess && <PrivateFARoute pathname={pathname}>{children}</PrivateFARoute>}
+          {!IsPublicPage && <PrivateRPRoute pathname={pathname}>{children}</PrivateRPRoute>} */}
+          {children}
         </Providers>
       </body>
     </html>

@@ -33,7 +33,7 @@ export async function POST() {
 }
 
 export async function PUT(request: Request) {
-  const ticket = cookies().get('ticket');
+  const ticket = cookies().get('ticketFA');
   const reqData = await request.json();
 
   try {

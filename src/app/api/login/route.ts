@@ -23,7 +23,7 @@ export async function POST(request: Request) {
       if (data.token) {
         cookies().set('token', data.token);
       } else {
-        cookies().set('ticket', data.ticket);
+        cookies().set('ticketFA', data.ticket);
       }
     }
 
