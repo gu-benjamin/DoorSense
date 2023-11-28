@@ -9,6 +9,7 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import {HomeUIProps, ApiData, sala } from 'types';
 import NahSalas from 'components/Nah_Salas';
+import Loading from 'app/(authenticated)/Dashboard/loading';
 
 export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
   const [limite, setLimite] = useState(0);
@@ -40,17 +41,21 @@ export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
         <Barra setList={setList} data={datas} />
         <Cabecalho />
         <div className="flex flex-col gap-4 mt-4">
-          {list && list.salas.length > 0 ? (
-            list.salas.slice(limite, limite + 4).map((sala: sala) => (
-              <Card.Root key={sala.id} classData={sala} doorsenses={doorsenses}>
-                <Card.Data data={sala.nome} />
-                <Card.Data data={sala.numero} />
-                <Card.Data data={sala.arduino} />
-                <Card.Status data={sala.status} classData={sala} doorsenses={doorsenses} />
-              </Card.Root>
-            ))
+          {list ? (
+            list.salas.length > 0 ? (
+              list.salas.slice(limite, limite + 4).map((sala: sala) => (
+                <Card.Root key={sala.id} classData={sala} doorsenses={doorsenses}>
+                  <Card.Data data={sala.nome} />
+                  <Card.Data data={sala.numero} />
+                  <Card.Data data={sala.arduino} />
+                  <Card.Status data={sala.status} classData={sala} doorsenses={doorsenses} />
+                </Card.Root>
+              ))
+            ) : (
+              <NahSalas />
+            )
           ) : (
-            <NahSalas />
+            <Loading />
           )}
           {list && list.salas.length > 4 && (
             <div className="flex mt-1 justify-between items-center">

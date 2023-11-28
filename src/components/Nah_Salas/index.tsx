@@ -6,7 +6,7 @@ const NahSalas: React.FC = () => {
   return (
     <div className="flex flex-col items-center mt-8">
       <RiEmotionSadFill color="#05AFF2" size={50}/>
-      <p className="mt-2 text-gray-500 dark:text-gray-400">Não há salas cadastrados.</p>
+      <p className="mt-2 text-gray-500 dark:text-gray-400">Não há salas cadastradas.</p>
     </div>
   );
 };
