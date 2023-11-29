@@ -7,7 +7,7 @@ export async function GET() {
 
   try {
     const res = await fetch(
-      `${LOCAL_ENDPOINT}doorsenses/`,
+      `${DEV_API_ENDPOINT}doorsenses/`,
       {
         method: 'GET',
         headers: {

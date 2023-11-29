@@ -10,7 +10,7 @@ export async function POST(request: Request) {
 
   try {
     const res = await fetch(
-      `${LOCAL_ENDPOINT}salas/create/`,
+      `${DEV_API_ENDPOINT}salas/create/`,
       {
         method: 'POST',
         body: JSON.stringify(reqData),
@@ -47,7 +47,7 @@ export async function PUT(request: Request) {
 
   try {
     const res = await fetch(
-      `${LOCAL_ENDPOINT}salas/update/`,
+      `${DEV_API_ENDPOINT}salas/update/`,
       {
         method: 'PUT',
         body: JSON.stringify(reqData),
@@ -84,7 +84,7 @@ export async function DELETE(request: Request) {
 
   try {
     const res = await fetch(
-      `${LOCAL_ENDPOINT}salas/delete/`,
+      `${DEV_API_ENDPOINT}salas/delete/`,
       {
         method: 'DELETE',
         body: JSON.stringify(reqData),

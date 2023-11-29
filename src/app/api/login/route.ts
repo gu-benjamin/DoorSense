@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   const reqData = await request.json();
 
   try {
-    const res = await fetch(`${LOCAL_ENDPOINT}login/`, {
+    const res = await fetch(`${DEV_API_ENDPOINT}login/`, {
       method: 'POST',
       body: JSON.stringify(reqData),
       headers: headersList
