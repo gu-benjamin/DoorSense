@@ -64,7 +64,7 @@ export default function FirstAcessForm() {
     };
 
     const res = await fetch('/api/login/register-user', {
-      method: 'post',
+      method: 'PUT',
       body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'

@@ -7,6 +7,8 @@ export async function GET() {
   try {
     const hasTicketFA = checkHasTicketFA();
 
+    console.log(hasTicketFA);
+    
     const cookies = {
       ticket_fa: hasTicketFA,
     };

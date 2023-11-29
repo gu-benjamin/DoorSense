@@ -32,6 +32,7 @@ export default function RootLayout({
           {pathname === '/Dashboard' && children}
           {IsFirstAcess && <PrivateFARoute pathname={pathname}>{children}</PrivateFARoute>}
           {!IsPublicPage && <PrivateRPRoute pathname={pathname}>{children}</PrivateRPRoute>}
+          {/* {children} */}
         </Providers>
       </body>
     </html>

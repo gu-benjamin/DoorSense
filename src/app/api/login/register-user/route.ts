@@ -2,21 +2,25 @@ import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
-export async function POST(request: Request) {
+export async function PUT(request: Request) {
   const reqData = await request.json();
-  const token = cookies().get('ticketFA');
+  console.log(reqData)
+  const ticket = cookies().get('ticketFA');
+  console.log(ticket?.value)
 
   try {
-    const res = await fetch(`${DEV_API_ENDPOINT}login/create-user`, {
-      method: 'POST',
+    const res = await fetch(`${DEV_API_ENDPOINT}login/register-user/`, {
+      method: 'PUT',
       body: JSON.stringify(reqData),
       headers: {
-        Authorization: `Bearer ${token?.value}`,
+        Authorization: `Bearer ${ticket?.value}`,
         'Content-Type': 'application/json'
       }
     });
 
     const data = await res.json();
+
+    console.log(data)
 
     if (data.status === '200 OK') {
       cookies().delete('ticketFA');
