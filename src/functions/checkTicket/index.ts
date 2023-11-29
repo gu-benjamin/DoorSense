@@ -1,7 +1,7 @@
 export const checkTicket = async (ticket: string | string[]) => {
   const body = ticket;
   try {
-    const res = await fetch('/api/check-cookies', {
+    const res = await fetch('/api/verify-ticket', {
       method: 'POST',
       body: JSON.stringify(body),
       headers: {

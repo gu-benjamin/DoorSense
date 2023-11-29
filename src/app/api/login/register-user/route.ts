@@ -4,9 +4,7 @@ import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export async function PUT(request: Request) {
   const reqData = await request.json();
-  console.log(reqData)
   const ticket = cookies().get('ticketFA');
-  console.log(ticket?.value)
 
   try {
     const res = await fetch(`${DEV_API_ENDPOINT}login/register-user/`, {

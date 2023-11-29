@@ -1,12 +1,13 @@
-'use client'
+'use client';
 
 import './globals.css';
 import type { Metadata } from 'next';
 import { Mplus } from './../utils/fonts';
 import Providers from '../contexts/dark-theme';
-import { usePathname } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import { checkIsPublicPage } from 'functions/checkIsPublicPage';
-import {PrivateFARoute, PrivateRPRoute} from './../components/PrivateRoute/index';
+import PrivateFARoute  from '../components/PrivateRoutes/FirstAcess/';
+import PrivateRPRoute  from '../components/PrivateRoutes/ResetPassword/';
 
 export const metadata: Metadata = {
   title: 'DoorSense - Login',
@@ -18,11 +19,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   const pathname = usePathname();
-  const IsPublicPage = checkIsPublicPage(pathname!);
+  const params = useParams();
 
-  const IsFirstAcess = !IsPublicPage && pathname === '/FirstAcess'
+  const IsPublicPage = checkIsPublicPage(pathname!);
+  const IsFirstAcess = ((!IsPublicPage) && (pathname === '/FirstAcess'));
+  const IsResetPassword = ((!IsPublicPage) && (params.ticket));
 
   return (
     <html lang="pt-br" className="light" style={{ colorScheme: 'light' }}>
@@ -30,8 +32,10 @@ export default function RootLayout({
         <Providers>
           {IsPublicPage && children}
           {pathname === '/Dashboard' && children}
-          {IsFirstAcess && <PrivateFARoute pathname={pathname}>{children}</PrivateFARoute>}
-          {!IsPublicPage && <PrivateRPRoute pathname={pathname}>{children}</PrivateRPRoute>}
+          {IsFirstAcess && (
+            <PrivateFARoute pathname={pathname}>{children}</PrivateFARoute>
+          )}
+          {IsResetPassword && <PrivateRPRoute pathname={pathname}>{children}</PrivateRPRoute>}
           {/* {children} */}
         </Providers>
       </body>
