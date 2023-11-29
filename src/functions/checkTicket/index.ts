@@ -1,4 +1,4 @@
-export const checkTicket = async (ticket: string) => {
+export const checkTicket = async (ticket: string | string[]) => {
   const body = ticket;
   try {
     const res = await fetch('/api/check-cookies', {

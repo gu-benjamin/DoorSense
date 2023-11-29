@@ -1,4 +1,4 @@
-export const getCookies = async () => {
+export const getFACookie = async () => {
   try {
     const res = await fetch('/api/check-cookies', {
       method: 'GET',

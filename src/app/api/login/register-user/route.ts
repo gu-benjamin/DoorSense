@@ -3,28 +3,23 @@ import { cookies } from 'next/headers';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export async function POST(request: Request) {
-  const headersList = {
-    Accept: '*/*',
-    'Content-Type': 'application/json'
-  };
-
   const reqData = await request.json();
+  const token = cookies().get('ticketFA');
 
   try {
-    const res = await fetch(`${DEV_API_ENDPOINT}login/register-user`, {
+    const res = await fetch(`${DEV_API_ENDPOINT}login/create-user`, {
       method: 'POST',
       body: JSON.stringify(reqData),
-      headers: headersList
+      headers: {
+        Authorization: `Bearer ${token?.value}`,
+        'Content-Type': 'application/json'
+      }
     });
 
     const data = await res.json();
 
     if (data.status === '200 OK') {
-      if (data.token) {
-        cookies().set('token', data.token);
-      } else {
-        cookies().set('ticket', data.ticket);
-      }
+      cookies().delete('ticketFA');
     }
 
     return NextResponse.json(
@@ -35,25 +30,9 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao fazer a requisição', error },
       { status: 500 }
     );
   }
 }
 
-export async function DELETE() {
-  try {
-    cookies().delete('token');
-    return NextResponse.json(
-      { message: 'Logout efetuado com sucesso' },
-      {
-        status: 200
-      }
-    );
-  } catch (error) {
-    return NextResponse.json(
-      { message: 'Deu ruim men', error },
-      { status: 500 }
-    );
-  }
-}

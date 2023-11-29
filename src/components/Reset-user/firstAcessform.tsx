@@ -15,7 +15,7 @@ import { useRouter } from 'next/navigation';
 
 const schema = z
   .object({
-    user: z
+    username: z
       .string({
         required_error: 'Este campo é obrigatório'
       })
@@ -58,7 +58,10 @@ export default function FirstAcessForm() {
   const handleForm = async (data: FormProps) => {
     
     console.log(data);
-    const body = data;
+    const body = {
+      username: data.username,
+      password: data.password
+    };
 
     const res = await fetch('/api/login/register-user', {
       method: 'post',
@@ -74,7 +77,7 @@ export default function FirstAcessForm() {
     const json = await res.json();
     console.log(json)
 
-    resetField('user');
+    resetField('username');
     resetField('password');
     resetField('confirmPassword');
 
@@ -114,21 +117,21 @@ export default function FirstAcessForm() {
         {/* Campo Usuário */}
         <InputLogin
           //Registrando campo na hook
-          {...register('user', { required: true })}
+          {...register('username', { required: true })}
           //Pros
           placeholder="Digite um e-mail ..."
           icon={
             <IconUser
               size={30}
               color={
-                errors.user?.message
+                errors.username?.message
                   ? `var(--color-error)`
                   : `var(--color-primary)`
               }
             />
           }
           // label="Usuário:"
-          helperText={errors.user?.message}
+          helperText={errors.username?.message}
         />
 
         {/* Campo password */}

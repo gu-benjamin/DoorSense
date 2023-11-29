@@ -14,19 +14,19 @@ import { useRouter } from 'next/navigation';
 
 const schema = z
   .object({
-    password: z
+    newPassword: z
       .string({
         required_error: 'Este campo é obrigatório'
       })
       .min(5, 'Por favor insira uma senha válida'),
-    confirmPassword: z
+      confirmNewPassword: z
       .string({
         required_error: 'Este campo é obrigatório'
       })
       .min(5, 'Por favor insira uma senha válida')
   })
-  .refine((fields) => fields.password === fields.confirmPassword, {
-    path: ['confirmPassword'],
+  .refine((fields) => fields.newPassword === fields.confirmNewPassword, {
+    path: ['confirmNewPassword'],
     message: 'As senhas precisam ser iguais.'
   });
 
@@ -52,11 +52,11 @@ export default function ResetPasswordForm() {
   const handleForm = async (data: FormProps) => {
     
     console.log(data);
-    const body = data.password;
+    const body = data.newPassword;
 
     const res = await fetch('/api/login/reset-password', {
       method: 'PUT',
-      body: JSON.stringify(body),
+      body: JSON.stringify({body}),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -68,8 +68,8 @@ export default function ResetPasswordForm() {
     const json = await res.json();
     console.log(json)
 
-    resetField('password');
-    resetField('confirmPassword');
+    resetField('newPassword');
+    resetField('confirmNewPassword');
 
     router.refresh();
     router.push('/');
@@ -107,7 +107,7 @@ export default function ResetPasswordForm() {
         {/* Campo password */}
         <InputLogin
           // Registrando campo na hook
-          {...register('password', { required: true })}
+          {...register('newPassword', { required: true })}
           //Props
           placeholder="Digite uma senha ..."
           type={isPasswordVisible ? 'text' : 'password'}
@@ -115,26 +115,26 @@ export default function ResetPasswordForm() {
             <IconLock
               size={30}
               color={
-                errors.password?.message
+                errors.newPassword?.message
                   ? `var(--color-error)`
                   : `var(--color-primary)`
               }
             />
           }
           // label="Senha:"
-          helperText={errors.password?.message}
+          helperText={errors.newPassword?.message}
           //Botao icone de esconder a senha
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
-                errors.password?.message ? `bottom-12` : `bottom-2`
+                errors.newPassword?.message ? `bottom-12` : `bottom-2`
               }`}
               icon={
                 isPasswordVisible ? (
                   <IconOpenPassword
                     size={30}
                     color={
-                      errors.password?.message
+                      errors.newPassword?.message
                         ? `var(--color-error)`
                         : `var(--color-primary)`
                     }
@@ -143,7 +143,7 @@ export default function ResetPasswordForm() {
                   <IconClosePassword
                     size={30}
                     color={
-                      errors.password?.message
+                      errors.newPassword?.message
                         ? `var(--color-error)`
                         : `var(--color-primary)`
                     }
@@ -158,7 +158,7 @@ export default function ResetPasswordForm() {
         {/* Campo CONFIRM password */}
         <InputLogin
           // Registrando campo na hook
-          {...register('confirmPassword', { required: true })}
+          {...register('confirmNewPassword', { required: true })}
           //Props
           placeholder="Confirme a nova senha ..."
           type={isConfirmPasswordVisible ? 'text' : 'password'}
@@ -166,26 +166,26 @@ export default function ResetPasswordForm() {
             <IconLock
               size={30}
               color={
-                errors.confirmPassword?.message
+                errors.confirmNewPassword?.message
                   ? `var(--color-error)`
                   : `var(--color-primary)`
               }
             />
           }
           // label="Senha:"
-          helperText={errors.confirmPassword?.message}
+          helperText={errors.confirmNewPassword?.message}
           //Botao icone de esconder a senha
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
-                errors.confirmPassword?.message ? `bottom-12` : `bottom-2`
+                errors.confirmNewPassword?.message ? `bottom-12` : `bottom-2`
               }`}
               icon={
                 isConfirmPasswordVisible ? (
                   <IconOpenPassword
                     size={30}
                     color={
-                      errors.confirmPassword?.message
+                      errors.confirmNewPassword?.message
                         ? `var(--color-error)`
                         : `var(--color-primary)`
                     }
@@ -194,7 +194,7 @@ export default function ResetPasswordForm() {
                   <IconClosePassword
                     size={30}
                     color={
-                      errors.confirmPassword?.message
+                      errors.confirmNewPassword?.message
                         ? `var(--color-error)`
                         : `var(--color-primary)`
                     }

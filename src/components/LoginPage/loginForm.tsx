@@ -69,6 +69,11 @@ export default function LoginForm() {
     resetField('password');
 
     router.refresh();
+    // if(json.message === 'Login realizado com sucesso / Crie Usuário'){
+    //   router.push('/FirstAcess');
+    // }else {
+    //   router.push('/Dashboard');
+    // }
     router.push('/Dashboard');
   };
 

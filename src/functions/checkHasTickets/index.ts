@@ -6,8 +6,8 @@ export const checkHasTicketFA = () => {
   return !!ticket;
 };
 
-export const checkHasTicketRP = () => {
-  const ticket = cookies().get('ticket')?.value;
+// export const checkHasTicketRP = () => {
+//   const ticket = cookies().get('ticket')?.value;
 
-  return !!ticket;
-};
+//   return !!ticket;
+// };

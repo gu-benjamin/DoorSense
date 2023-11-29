@@ -28,11 +28,10 @@ export default function RootLayout({
     <html lang="pt-br" className="light" style={{ colorScheme: 'light' }}>
       <body className={Mplus.className}>
         <Providers>
-          {/* {IsPublicPage && children}
+          {IsPublicPage && children}
           {pathname === '/Dashboard' && children}
           {IsFirstAcess && <PrivateFARoute pathname={pathname}>{children}</PrivateFARoute>}
-          {!IsPublicPage && <PrivateRPRoute pathname={pathname}>{children}</PrivateRPRoute>} */}
-          {children}
+          {!IsPublicPage && <PrivateRPRoute pathname={pathname}>{children}</PrivateRPRoute>}
         </Providers>
       </body>
     </html>

@@ -12,10 +12,6 @@ export default async function FirstAcess({
   params: { ticket: string };
 }) {
   const urlTicket = params.ticket;
-  const hasTicketToken = cookies().has('ticket');
-
-  if (hasTicketToken) {
-  }
 
   console.log(urlTicket);
 
