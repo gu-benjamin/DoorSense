@@ -6,6 +6,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import { IoWarningOutline } from 'react-icons/io5';
+import Loading from 'app/(authenticated)/Dashboard/loading';
 
 interface ModalDeleteClassProps {
   open: boolean;
@@ -21,34 +22,43 @@ export default function ModalDeleteClass({
   id
 }: ModalDeleteClassProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
   }
 
-  async function deleteClass() {
-    const res = await fetch('/api/classroms', {
-      method: 'DELETE',
-      body: JSON.stringify({ id: id }),
-      headers: {
-        'Content-Type': 'application/json'
+  const deleteClass = async () => {
+    setLoading(true);
+
+    try {
+      const res = await fetch('/api/classroms', {
+        method: 'DELETE',
+        body: JSON.stringify({ id: id }),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Falha ao deletar');
       }
-    });
 
-    if (!res.ok) {
-      throw new Error('Falha ao deletar');
+      // const json = await res.json();
+
+      setMessage('Sala deletada com sucesso');
+      toggleModalVisibility();
+      setTimeout(() => {
+        router.refresh();
+        setMessage('');
+      }, 5000);
+    } catch (error) {
+      console.error('Erro ao deletar sala:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
-
-    // const json = await res.json();
-    
-    setMessage('Sala deletada com sucesso');
-    toggleModalVisibility();
-    setTimeout(() => {
-      router.refresh();
-      setMessage('')
-    }, 5000);
-
-  }
+  };
 
   return (
     <Modal.Root open={open} onClose={setOpen}>
@@ -94,9 +104,10 @@ export default function ModalDeleteClass({
           onClick={toggleModalVisibility}
         />
         <Modal.Action
-          btnName="Deletar"
-          className="botao-reset"
+          btnName={loading ? <Loading /> : 'Deletar'}
+          className={`botao-reset ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
           onClick={deleteClass}
+          disabled={loading}
         />
       </Modal.Actions>
     </Modal.Root>

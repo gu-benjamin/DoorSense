@@ -12,6 +12,7 @@ import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { useRouter } from 'next/navigation';
+import Loading from 'app/(authenticated)/Dashboard/loading';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -32,6 +33,7 @@ type FormProps = z.infer<typeof schema>;
 
 export default function LoginForm() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -47,29 +49,37 @@ export default function LoginForm() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    
-    console.log(data);
-    const body = data;
+    setLoading(true);
 
-    const res = await fetch('/api/login', {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+    try {
+      console.log(data);
+      const body = data;
+
+      const res = await fetch('/api/login', {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Falha ao autenticar');
       }
-    });
+      const json = await res.json();
+      console.log(json);
 
-    if (!res.ok) {
-      throw new Error('Falha ao autenticar');
+      resetField('username');
+      resetField('password');
+
+      router.refresh();
+      router.push('/Dashboard');
+    } catch (error) {
+      console.error('Erro ao processar formulário:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
-    const json = await res.json();
-    console.log(json)
-
-    resetField('username');
-    resetField('password');
-
-    router.refresh();
-    router.push('/Dashboard');
   };
 
   // STATES
@@ -167,8 +177,10 @@ export default function LoginForm() {
           }
         />
         <Button
-          btnName="ENTRAR"
+          btnName={loading ? <Loading /> : 'ENTRAR'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
+          disabled={loading}
+          type="submit"
         />
       </form>
     </>

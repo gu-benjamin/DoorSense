@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { InputLogin } from '../../components/Inputs/Input-login/input-login';
 import { Button } from '../../components/Buttons/Button/button';
 import { ButtonIcon } from '../../components/Buttons/Button-icon/button-icon';
+import Loading from 'app/(authenticated)/Dashboard/loading';
 
 
 const schema = z
@@ -45,7 +46,7 @@ export default function FirstAcessForm() {
     register,
     handleSubmit,
     resetField,
-    formState: { errors }
+    formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
     reValidateMode: 'onBlur',
@@ -54,16 +55,22 @@ export default function FirstAcessForm() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    console.log(data);
-    // const body = data
-    // const res = await fetch('https:/localhost:3000/api/login',{
-    //   method: 'POST',
-    //   body: body
-    // });
+    setLoading(true);
 
-    resetField('user');
-    resetField('password');
-    resetField('confirmPassword');
+    try {
+      // Simulando uma requisição assíncrona (substitua por sua lógica real)
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      console.log(data);
+      resetField('user');
+      resetField('password');
+      resetField('confirmPassword');
+    } catch (error) {
+      console.error('Erro ao processar o formulário:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
+    }
   };
 
   // STATES
@@ -71,6 +78,7 @@ export default function FirstAcessForm() {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
+  const [loading, setLoading] = useState(false);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -219,8 +227,10 @@ export default function FirstAcessForm() {
         />
 
         <Button
-          btnName="ENTRAR"
+          btnName={loading ? <Loading /> : "ENTRAR"}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
+          type="submit"
+          disabled={isSubmitting || loading} // Desativar o botão durante o envio
         />
       </form>
     </>

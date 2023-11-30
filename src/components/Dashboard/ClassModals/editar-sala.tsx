@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
+import Loading from 'app/(authenticated)/Dashboard/loading';
 
 type classData = {
   id: string;
@@ -55,6 +56,7 @@ export default function ModalEditClass({
 }: ModalEditClassProps) {
 
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -83,32 +85,38 @@ export default function ModalEditClass({
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    console.log(data);
-    const body = {
-      id: parseInt(classData.id),
-      ...data
-    };
+    setLoading(true);
 
-    console.log(body);
+    try {
+      const body = {
+        id: parseInt(classData.id),
+        ...data
+      };
 
-    const res = await fetch('/api/classroms', {
-      method: 'PUT',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+      const res = await fetch('/api/classroms', {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Falha ao editar sala');
       }
-    });
 
-    if (!res.ok) {
-      throw new Error('Falha ao editar sala');
+      const json = await res.json();
+      setMessage(json.data.message);
+      setTimeout(() => setMessage(''), 5000);
+
+      toggleModalVisibility();
+      router.refresh();
+    } catch (error) {
+      console.error('Erro ao editar sala:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
-
-    const json = await res.json();
-    setMessage(json.data.message);
-    setTimeout(() => setMessage(''), 5000);
-
-    toggleModalVisibility();
-    router.refresh();
   };
 
   return (
@@ -207,10 +215,11 @@ export default function ModalEditClass({
           onClick={toggleModalVisibility}
         />
         <Modal.Action
-          btnName="Editar"
-          className="botao-reset"
+          btnName={loading ? <Loading /> : 'Editar'}
+          className={`botao-reset ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
           type="submit"
           onClick={handleSubmit(handleForm)}
+          disabled={loading}
         />
       </Modal.Actions>
     </Modal.Root>
