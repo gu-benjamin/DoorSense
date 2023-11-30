@@ -1,9 +1,9 @@
-// Loading.tsx
-
+'use client';
 import React from 'react';
+import { motion } from 'framer-motion';
 
-export default function Loading() {
- const loadingStyle = {
+const Loading = () => {
+  const loadingStyle = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -14,16 +14,22 @@ export default function Loading() {
     borderTop: '4px solid rgba(0, 0, 0, 0.1)',
     borderLeft: '4px solid rgba(0, 0, 0, 0.1)',
     borderBottom: '4px solid rgba(0, 0, 0, 0.1)',
-    borderRight: '4px solid #1a202c', // Cor principal do spinner
+    borderRight: '4px solid #1a202c',
     borderRadius: '50%',
     width: '21px',
     height: '21px',
-    animation: 'spin 1s linear infinite',
+  };
+
+  const spinnerAnimation = {
+    rotate: [0, 360],
+    transition: { duration: 2, repeat: Infinity, ease: 'linear' },
   };
 
   return (
-    <div style={loadingStyle}>
-      <div style={spinnerStyle}></div>
-    </div>
+    <motion.div style={loadingStyle}>
+      <motion.div style={spinnerStyle} animate={spinnerAnimation}></motion.div>
+    </motion.div>
   );
 };
+
+export default Loading;

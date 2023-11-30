@@ -181,7 +181,9 @@ export default function LoginForm() {
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
           disabled={loading}
           type="submit"
-        />
+        >
+        
+        </Button>
       </form>
     </>
   );
