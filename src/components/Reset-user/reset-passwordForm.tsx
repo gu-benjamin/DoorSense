@@ -10,7 +10,7 @@ import { z } from 'zod';
 import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
-import { useRouter } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 
 const schema = z
   .object({
@@ -19,7 +19,7 @@ const schema = z
         required_error: 'Este campo é obrigatório'
       })
       .min(5, 'Por favor insira uma senha válida'),
-      confirmNewPassword: z
+    confirmNewPassword: z
       .string({
         required_error: 'Este campo é obrigatório'
       })
@@ -35,6 +35,7 @@ type FormProps = z.infer<typeof schema>;
 
 export default function ResetPasswordForm() {
   const router = useRouter();
+  const { ticket } = useParams();
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -50,13 +51,15 @@ export default function ResetPasswordForm() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    
     console.log(data);
-    const body = data.newPassword;
+    const body = {
+      newPassword: data.newPassword,
+      ticket: ticket
+    };
 
     const res = await fetch('/api/login/reset-password', {
       method: 'PUT',
-      body: JSON.stringify({body}),
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json'
       }
@@ -66,7 +69,7 @@ export default function ResetPasswordForm() {
       throw new Error('Falha ao registrar nova senha');
     }
     const json = await res.json();
-    console.log(json)
+    console.log(json);
 
     resetField('newPassword');
     resetField('confirmNewPassword');
@@ -78,7 +81,8 @@ export default function ResetPasswordForm() {
   // STATES
   //para mudar a visibilidade da senha
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
+    useState(false);
 
   function togglePasswordVisibility() {
     setIsPasswordVisible((prevState) => !prevState);
@@ -92,12 +96,12 @@ export default function ResetPasswordForm() {
       <h1
         className={`text-primary-100 font-extrabold text-3xl lg:text-5xl xl:text-5xl`}
       >
-        Bem-vindo
+        Redefinir senha
       </h1>
       <p
         className={`font-light text-sm text-center lg:text-lg xl:text-lg dark:text-white`}
       >
-        Primeiro acesso? Crie seu login e senha!
+        Redefine a sua senha a seguir:
       </p>
 
       <form
@@ -109,7 +113,7 @@ export default function ResetPasswordForm() {
           // Registrando campo na hook
           {...register('newPassword', { required: true })}
           //Props
-          placeholder="Digite uma senha ..."
+          placeholder="Digite sua nova senha ..."
           type={isPasswordVisible ? 'text' : 'password'}
           icon={
             <IconLock
@@ -160,7 +164,7 @@ export default function ResetPasswordForm() {
           // Registrando campo na hook
           {...register('confirmNewPassword', { required: true })}
           //Props
-          placeholder="Confirme a nova senha ..."
+          placeholder="Confirme sua nova senha ..."
           type={isConfirmPasswordVisible ? 'text' : 'password'}
           icon={
             <IconLock

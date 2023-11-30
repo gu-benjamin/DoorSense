@@ -26,7 +26,8 @@ const schema = z.object({
     .min(3, 'A sala deve conter no mínimo 3 caracteres'),
   numero: z.string({
     required_error: 'Este campo é obrigatório'
-  })
+  }).min(1, 'A sala deve conter no mínimo 1 caracter')
+  .max(4, 'A sala deve conter no máximo 4 caracteres'),
 });
 
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
@@ -142,7 +143,6 @@ export default function ModalCreateClass({
                   />
                 }
                 placeholder="Digite o número da sala ..."
-                type="number"
                 label="Número da sala:"
                 helperText={errors.numero?.message}
               />

@@ -1,13 +1,11 @@
 import { verify } from 'jsonwebtoken';
+import { SECRET } from 'utils/envs';
 
-const readToken = (token: string) => {
-  try {
-    return verify(token, 'arduino');
-  } catch (error) {
-    throw new Error('Token inválido.');
-  }
+const readToken = (token: string | undefined) => {
+  return verify(token, SECRET);
+
 };
 
-export function verifyToken(token: string) {
+export function verifyToken(token: string | undefined) {
   return readToken(token);
 }

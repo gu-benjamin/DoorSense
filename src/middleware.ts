@@ -1,14 +1,13 @@
+// import { verifyToken } from 'functions/verifyToken';
 import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
+  // const token = request.cookies.get('token')?.value;
   const isAuthenticated = request.cookies.get('token')?.value;
-  // const isFirstAcess = request.cookies.get('ticket')?.value;
+  // const teste = verifyToken(token);
 
-  // if (isFirstAcess) {
-  //   const ticket = request.cookies.get('ticket')?.value;
-  //   return NextResponse.redirect(new URL(`/FirstAcess/${ticket}`, request.url));
-  // }
+  // console.log(teste)
 
   if (!isAuthenticated) {
     if (request.nextUrl.pathname === '/'){

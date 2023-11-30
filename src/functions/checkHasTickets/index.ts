@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
 
-export const checkHasTicketFA = () => {
-  const ticket = cookies().get('ticketFA')?.value;
+export const checkHasTicket = () => {
+  const ticket = cookies().get('ticket')?.value;
 
   return !!ticket;
 };

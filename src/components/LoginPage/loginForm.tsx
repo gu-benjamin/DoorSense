@@ -69,11 +69,10 @@ export default function LoginForm() {
     resetField('password');
 
     router.refresh();
-    // if(json.message === 'Login realizado com sucesso / Crie Usuário'){
-    //   router.push('/FirstAcess');
-    // }else {
-    //   router.push('/Dashboard');
-    // }
+    if(json.message === 'Login realizado com sucesso / Crie Usuário'){
+      router.push('/FirstAcess');
+    }
+
     router.push('/Dashboard');
   };
 
@@ -106,7 +105,7 @@ export default function LoginForm() {
           //Registrando campo na hook
           {...register('username', { required: true })}
           //Pros
-          placeholder="Digite seu usuário"
+          placeholder="Digite seu usuário ..."
           icon={
             <IconUser
               size={30}
@@ -126,7 +125,7 @@ export default function LoginForm() {
           // Registrando campo na hook
           {...register('password', { required: true })}
           //Props
-          placeholder="Digite sua senha"
+          placeholder="Digite sua senha ..."
           type={isPasswordVisible ? 'text' : 'password'}
           icon={
             <IconLock

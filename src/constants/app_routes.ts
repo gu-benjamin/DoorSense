@@ -1,12 +1,10 @@
 export const APP_ROUTES = {
   public: {
-    login: '/'
+    login: '/',
+    reset_password: '/reset-password/:ticket'
   },
   private: {
     reset_user: '/FirstAcess',
-    reset_password: '/reset-password',
-    authenticated: {
-      dashboard: '/Dashboard'
-    }
+    dashboard: '/Dashboard'
   }
 };

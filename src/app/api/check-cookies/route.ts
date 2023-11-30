@@ -1,14 +1,13 @@
-import { checkHasTicketFA } from 'functions/checkHasTickets';
-import { cookies } from 'next/headers';
+import { checkHasTicket } from 'functions/checkHasTickets';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
   try {
-    const hasTicketFA = checkHasTicketFA();
+    const hasTicket = checkHasTicket();
 
-    console.log(hasTicketFA)
+    console.log(hasTicket)
     const cookies = {
-      ticket_fa: hasTicketFA,
+      ticket: hasTicket,
     };
 
     return NextResponse.json({ cookies }, { status: 200 });

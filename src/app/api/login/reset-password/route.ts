@@ -3,13 +3,12 @@ import { cookies } from 'next/headers';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export async function POST() {
-    const headersList = {
-      Accept: '*/*',
-      'Content-Type': 'application/json'
-    };
+  const headersList = {
+    Accept: '*/*',
+    'Content-Type': 'application/json'
+  };
 
   try {
-
     const res = await fetch(`${DEV_API_ENDPOINT}login/forgot-password/`, {
       method: 'POST',
       headers: headersList
@@ -23,7 +22,6 @@ export async function POST() {
         status: 200
       }
     );
-
   } catch (error) {
     return NextResponse.json(
       { message: 'Deu ruim men', error },
@@ -33,21 +31,27 @@ export async function POST() {
 }
 
 export async function PUT(request: Request) {
-  const ticket = cookies().get('ticketFA');
   const reqData = await request.json();
+  const { ticket, newPassword } = reqData;
+  console.log(reqData);
 
   try {
-
     const res = await fetch(`${DEV_API_ENDPOINT}login/reset-password/`, {
       method: 'PUT',
-      body: JSON.stringify(reqData),
+      body: JSON.stringify({
+        "new-password": newPassword
+      }),
       headers: {
-        Authorization: `Bearer ${ticket?.value}`,
+        Authorization: `Bearer ${ticket}`,
         'Content-Type': 'application/json'
       }
     });
 
     const data = await res.json();
+
+    if(data.message === '401 Unauthorized'){
+      return NextResponse.rewrite(new URL('/', request.url))
+    }
 
     return NextResponse.json(
       { message: data.message, status: data.status },
@@ -55,10 +59,9 @@ export async function PUT(request: Request) {
         status: 200
       }
     );
-
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao enviar dados: ', error },
       { status: 500 }
     );
   }

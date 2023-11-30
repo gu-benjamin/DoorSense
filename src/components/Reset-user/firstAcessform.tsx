@@ -107,7 +107,7 @@ export default function FirstAcessForm() {
       <p
         className={`font-light text-sm text-center lg:text-lg xl:text-lg dark:text-white`}
       >
-        Primeiro acesso? Crie seu login e senha!
+        Primeiro acesso? Redefina o usuário e senha!
       </p>
 
       <form

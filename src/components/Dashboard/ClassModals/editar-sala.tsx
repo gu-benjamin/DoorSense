@@ -37,7 +37,8 @@ const schema = z.object({
     .min(3, 'A sala deve conter no mínimo 3 caracteres'),
   numero: z.string({
     required_error: 'Este campo é obrigatório'
-  }),
+  }).min(1, 'A sala deve conter no mínimo 1 caractere')
+  .max(4, 'A sala deve conter no máximo 4 caracteres'),
   arduino: z.string({
     required_error: 'Este campo é obrigatório'
   })
@@ -192,6 +193,7 @@ export default function ModalEditClass({
               placeholder="Digite o número da sala ..."
               label="Doorsense ID:"
               options={doorsenses}
+              initialDoorsense={classData.arduino}
               helperText={errors.numero?.message}
             />
           </form>

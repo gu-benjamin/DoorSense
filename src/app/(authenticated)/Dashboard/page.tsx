@@ -5,7 +5,7 @@ import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 import { doorsense } from 'types';
 
 export default async function HomePage() {
-
+  
   const token = cookies().get('token');
   const headersList = {
     "Authorization": `Bearer ${token?.value}`,

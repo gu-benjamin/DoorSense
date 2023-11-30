@@ -3,7 +3,7 @@
 import { useRouter } from 'next/navigation';
 import { ReactNode, useEffect, useState } from 'react';
 import { APP_ROUTES } from '../../../constants/app_routes';
-import { getFACookie } from 'functions/getFACookie';
+import { getTicketCookie } from 'functions/getFACookie';
 
 interface PrivateRouteProps {
   children: ReactNode;
@@ -18,9 +18,9 @@ export default function PrivateFARoute({ children, pathname }: PrivateRouteProps
   useEffect(() => {
     const fetchCookies = async () => {
       try {
-        const cookies = await getFACookie();
+        const cookies = await getTicketCookie();
 
-        const hasTicketFA = cookies.cookies.ticket_fa;
+        const hasTicketFA = cookies.cookies.ticket;
         const hasAcess = hasTicketFA && pathname === '/FirstAcess';
         if (!hasAcess) {
           push(APP_ROUTES.public.login);

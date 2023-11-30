@@ -25,6 +25,10 @@ export async function POST(request: Request) {
 
     console.log(data);
 
+    if(data.message === '401 Unauthorized'){
+      return NextResponse.rewrite(new URL('/', request.url))
+    }
+
     return NextResponse.json(
       { data },
       {
@@ -62,6 +66,10 @@ export async function PUT(request: Request) {
 
     console.log(data);
 
+    if(data.message === '401 Unauthorized'){
+      return NextResponse.rewrite(new URL('/', request.url))
+    }
+
     return NextResponse.json(
       { data },
       {
@@ -98,6 +106,10 @@ export async function DELETE(request: Request) {
     const data = await res.json();
 
     console.log(data);
+
+    if(data.message === '401 Unauthorized'){
+      return NextResponse.rewrite(new URL('/', request.url))
+    }
 
     return NextResponse.json(
       { data },

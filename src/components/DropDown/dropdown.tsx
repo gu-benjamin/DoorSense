@@ -1,6 +1,6 @@
 'use client'
 
-import { SelectHTMLAttributes, ReactNode, forwardRef, useId, useState } from 'react';
+import { SelectHTMLAttributes, ReactNode, forwardRef, useId, useState, useEffect } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 type DropdownProps = SelectHTMLAttributes<HTMLSelectElement> &{
@@ -8,13 +8,22 @@ type DropdownProps = SelectHTMLAttributes<HTMLSelectElement> &{
   helperText?: string;
   icon?: ReactNode;
   actionIcon?: ReactNode;
+  initialDoorsense?: string;
   options: string[]; // Adicione as opções do dropdown aqui
 };
 
 export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
-  ({ name = '', label, helperText = '', icon, actionIcon, options, ...props }, ref) => {
+  ({ name = '', label, helperText = '', icon, actionIcon, initialDoorsense, options, ...props }, ref) => {
     const inputId = useId();
     const hasError = helperText.length > 0;
+    const [valuesOption, setValuesOption] = useState(options)
+    
+    useEffect(() =>{
+      const indexValue = valuesOption.indexOf(initialDoorsense);
+      if (indexValue !== -1) {
+        setValuesOption(options.splice(indexValue, 1));
+      }
+    },[options])
 
     return (
       <div className={`flex flex-col justify-start relative gap-3 text-start`}>
@@ -41,8 +50,9 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
           id={inputId}
           {...props}
         >
-          <option value="" >Selecione um Doorsense</option>
-          {options.map((option) => (
+          {initialDoorsense === '' ? (<option value="" >Selecione um Doorsense</option>) : (<option value={initialDoorsense} >{initialDoorsense}</option>) }
+        
+          {valuesOption.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>

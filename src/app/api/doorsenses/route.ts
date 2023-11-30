@@ -2,7 +2,7 @@ import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
-export async function GET() {
+export async function GET(request: Request) {
   const token = cookies().get('token');
 
   try {
@@ -20,6 +20,10 @@ export async function GET() {
     const data = await res.json();
 
     console.log(data);
+
+    if(data.message === '401 Unauthorized'){
+      return NextResponse.rewrite(new URL('/', request.url))
+    }
 
     return NextResponse.json(
       { data },

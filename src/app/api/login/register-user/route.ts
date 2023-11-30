@@ -4,7 +4,7 @@ import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export async function PUT(request: Request) {
   const reqData = await request.json();
-  const ticket = cookies().get('ticketFA');
+  const ticket = cookies().get('ticket');
 
   try {
     const res = await fetch(`${DEV_API_ENDPOINT}login/register-user/`, {
@@ -20,8 +20,12 @@ export async function PUT(request: Request) {
 
     console.log(data)
 
+    if(data.message === '401 Unauthorized'){
+      return NextResponse.rewrite(new URL('/', request.url))
+    }
+
     if (data.status === '200 OK') {
-      cookies().delete('ticketFA');
+      cookies().delete('ticket');
     }
 
     return NextResponse.json(
