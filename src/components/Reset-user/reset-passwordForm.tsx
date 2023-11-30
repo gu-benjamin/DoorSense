@@ -10,7 +10,8 @@ import { z } from 'zod';
 import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+import ModalSucessForm from './ModalSucess';
 
 const schema = z
   .object({
@@ -34,8 +35,9 @@ const schema = z
 type FormProps = z.infer<typeof schema>;
 
 export default function ResetPasswordForm() {
-  const router = useRouter();
+  const pathname = usePathname();
   const { ticket } = useParams();
+  const [sucess, setSucess] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -68,14 +70,15 @@ export default function ResetPasswordForm() {
     if (!res.ok) {
       throw new Error('Falha ao registrar nova senha');
     }
+
     const json = await res.json();
     console.log(json);
 
-    resetField('newPassword');
-    resetField('confirmNewPassword');
-
-    router.refresh();
-    router.push('/');
+    if (json.status === '200 OK') {
+      resetField('newPassword');
+      resetField('confirmNewPassword');
+      setSucess((prevState) => !prevState);
+    }
   };
 
   // STATES
@@ -101,7 +104,7 @@ export default function ResetPasswordForm() {
       <p
         className={`font-light text-sm text-center lg:text-lg xl:text-lg dark:text-white`}
       >
-        Redefine a sua senha a seguir:
+        Redefina a sua senha a seguir:
       </p>
 
       <form
@@ -215,6 +218,12 @@ export default function ResetPasswordForm() {
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
         />
       </form>
+
+      <ModalSucessForm
+        open={sucess}
+        setOpen={setSucess}
+        pathname={pathname}
+      />
     </>
   );
 }

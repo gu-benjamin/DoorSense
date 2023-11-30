@@ -33,7 +33,6 @@ export async function POST() {
 export async function PUT(request: Request) {
   const reqData = await request.json();
   const { ticket, newPassword } = reqData;
-  console.log(reqData);
 
   try {
     const res = await fetch(`${DEV_API_ENDPOINT}login/reset-password/`, {

@@ -11,7 +11,8 @@ import { z } from 'zod';
 import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import ModalSucessForm from './ModalSucess/index';
 
 const schema = z
   .object({
@@ -40,7 +41,8 @@ const schema = z
 type FormProps = z.infer<typeof schema>;
 
 export default function FirstAcessForm() {
-  const router = useRouter();
+  const pathname = usePathname();
+  const [sucess, setSucess] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -77,12 +79,12 @@ export default function FirstAcessForm() {
     const json = await res.json();
     console.log(json)
 
-    resetField('username');
-    resetField('password');
-    resetField('confirmPassword');
-
-    router.refresh();
-    router.push('/');
+    if(json.status === '200 OK'){
+      resetField('username');
+      resetField('password');
+      resetField('confirmPassword');
+      setSucess((prevState) => !prevState);
+    }
   };
 
   // STATES
@@ -241,6 +243,8 @@ export default function FirstAcessForm() {
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
         />
       </form>
+
+      <ModalSucessForm open={sucess} setOpen={setSucess} pathname={pathname}/>
     </>
   );
 }

@@ -1,10 +1,11 @@
 import dynamic from 'next/dynamic';
 const HomeUI = dynamic(() => import('./../../../components/Dashboard/index'), { ssr: false });
 import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 import { doorsense } from 'types';
 
-export default async function HomePage() {
+export default async function HomePage(request: Request) {
   
   const token = cookies().get('token');
   const headersList = {
@@ -26,10 +27,11 @@ export default async function HomePage() {
   );
 
   const dataSalas = await resSalas.json()
-
   const dataDoorsenses = await resDoorsenses.json()
+
+  const hasAuthorization = dataSalas.status === '200 OK' && dataDoorsenses.status === '200 OK';
 
   const filterDoorsenses = dataDoorsenses.data.doorsenses.map((doorsense: doorsense) => doorsense.uniqueId)
 
-  return <HomeUI datas={dataSalas.data} doorsenses={filterDoorsenses} />
+  return <HomeUI datas={dataSalas.data} doorsenses={filterDoorsenses} hasAuthorization={hasAuthorization} />
 }

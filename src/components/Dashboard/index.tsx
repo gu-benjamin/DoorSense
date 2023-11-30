@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Card from 'components/Cardtable/';
 import Cabecalho from 'components/Cabecalho/cabecalho';
 import Barra from 'components/barra-pesquisa/pesquisa';
@@ -9,14 +10,18 @@ import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import {HomeUIProps, ApiData, sala } from 'types';
 
-export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
+export default function HomeUI({ datas, doorsenses, hasAuthorization }: HomeUIProps) {
+  const {push} useRouter();
 
   const [limite, setLimite] = useState(0);
   const [list, setList] = useState<ApiData>(datas);
 
   useEffect(() =>{
+    if(!hasAuthorization){
+      push('/')
+    }
     setList(datas);
-  },[datas, doorsenses])
+  },[datas, doorsenses,hasAuthorization,push])
 
   const Proximo = () => {
     const novoLimite = limite + 4;
