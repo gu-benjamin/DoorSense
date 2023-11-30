@@ -32,6 +32,8 @@ export default async function HomePage(request: Request) {
   const hasAuthorization = dataSalas.status === '200 OK' && dataDoorsenses.status === '200 OK';
 
   const filterDoorsenses = dataDoorsenses.data.doorsenses.map((doorsense: doorsense) => doorsense.uniqueId)
-
+  
+  // return <HomeUI datas={dataSalas.data} doorsenses={filterDoorsenses} hasAuthorization={hasAuthorization} />
   return <HomeUI datas={dataSalas.data} doorsenses={filterDoorsenses} hasAuthorization={hasAuthorization} />
+
 }
