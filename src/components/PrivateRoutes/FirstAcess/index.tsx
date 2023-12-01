@@ -21,7 +21,7 @@ export default function PrivateFARoute({ children, pathname }: PrivateRouteProps
         const cookies = await getTicketCookie();
 
         const hasTicketFA = cookies.cookies.ticket;
-        const hasAcess = hasTicketFA && pathname === '/FirstAcess';
+        const hasAcess = hasTicketFA && pathname === APP_ROUTES.private.reset_user;
         if (!hasAcess) {
           push(APP_ROUTES.public.login);
         }
@@ -37,7 +37,7 @@ export default function PrivateFARoute({ children, pathname }: PrivateRouteProps
   return (
     <>
       {!authToFirstAcess && null}
-      {pathname === '/Dashboard' && children}
+      {pathname === APP_ROUTES.private.dashboard && children}
       {authToFirstAcess && children}
     </>
   );

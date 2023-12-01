@@ -77,6 +77,7 @@ export default function ModalLoginForm({ open, setOpen }: ModalLoginFormProps) {
           className="dark:text-white"
         />
         <Modal.Content>
+          
           <p>
             {sucess ? 'Um e-mail de recuperação foi enviado. Por favor, verifique sua caixa de entrada.' : 'Falha ao enviar e-mail. Feche e tente novamente.'}
           </p>

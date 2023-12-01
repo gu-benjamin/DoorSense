@@ -26,7 +26,7 @@ export default function ModalSucessForm({
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
     router.refresh();
-    router.push('/');
+    router.push(APP_ROUTES.public.login);
   }
 
   return (

@@ -4,7 +4,7 @@ export const APP_ROUTES = {
     reset_password: '/reset-password/:ticket'
   },
   private: {
-    reset_user: '/FirstAcess',
-    dashboard: '/Dashboard'
+    reset_user: '/first-access',
+    dashboard: '/dashboard'
   }
 };

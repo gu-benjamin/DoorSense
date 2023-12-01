@@ -8,6 +8,7 @@ import IconLogo from 'components/Icons/icon-logo';
 import IconLogoDark from 'components/Icons/icon-logodark';
 import { useRouter } from 'next/navigation';
 import { Logout } from 'functions/Logout';
+import { APP_ROUTES } from './../../constants/app_routes';
 
 export default function Header() {
   const router = useRouter();
@@ -41,7 +42,7 @@ export default function Header() {
           onClick={() => {
             Logout();
             router.refresh();
-            router.push('/');
+            router.push(APP_ROUTES.public.login);
           }}
         />
       </div>

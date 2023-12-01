@@ -12,6 +12,7 @@ import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import ModalSucessForm from './ModalSucess';
+import { APP_ROUTES } from 'constants/app_routes';
 
 const schema = z
   .object({
@@ -73,7 +74,7 @@ export default function ResetPasswordForm() {
 
     if(json.status === '401 Unauthorized'){
       refresh();
-      push('/');
+      push(APP_ROUTES.public.login);
     }
 
     if (json.status === '200 OK') {

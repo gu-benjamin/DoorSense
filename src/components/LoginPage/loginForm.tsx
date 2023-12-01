@@ -12,6 +12,7 @@ import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { useRouter } from 'next/navigation';
+import { APP_ROUTES } from 'constants/app_routes';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -71,10 +72,10 @@ export default function LoginForm() {
 
     router.refresh();
     if(json.message === 'Login realizado com sucesso / Crie Usuário'){
-      router.push('/FirstAcess');
+      router.push(APP_ROUTES.private.reset_user);
     }
 
-    router.push('/Dashboard');
+    router.push(APP_ROUTES.private.dashboard);
   };
 
   // STATES

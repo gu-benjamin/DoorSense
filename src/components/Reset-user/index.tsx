@@ -7,22 +7,12 @@ import { useTheme } from 'next-themes';
 import LogoHomeDark from '../Icons/logoSVGdark';
 import FirstAcessForm from './firstAcessform';
 import ResetPasswordForm from './reset-passwordForm';
-import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { APP_ROUTES } from 'constants/app_routes';
 
 export default function ResetUserUI() {
   const { resolvedTheme } = useTheme();
   const pathname = usePathname();
-
-  // const [mounted, setMounted] = useState(false);
-
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
-
-  // if (!mounted) {
-  //   return null;
-  // }
 
   return (
     <main
@@ -58,7 +48,7 @@ export default function ResetUserUI() {
           <LogoHome size={170} />
         )}
 
-        {pathname === '/FirstAcess' ? <FirstAcessForm /> : <ResetPasswordForm />}
+        {pathname === APP_ROUTES.private.reset_user ? <FirstAcessForm /> : <ResetPasswordForm />}
         
       </section>
     </main>

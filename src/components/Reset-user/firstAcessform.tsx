@@ -13,6 +13,7 @@ import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
 import { usePathname, useRouter } from 'next/navigation';
 import ModalSucessForm from './ModalSucess/index';
+import { APP_ROUTES } from 'constants/app_routes';
 
 const schema = z
   .object({
@@ -79,7 +80,7 @@ export default function FirstAcessForm() {
 
     if(json.status === '401 Unauthorized' || '403 Forbidden'){
       refresh();
-      push('/');
+      push(APP_ROUTES.public.login);
     }
 
     if(json.status === '200 OK'){

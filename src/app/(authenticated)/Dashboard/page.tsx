@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-const HomeUI = dynamic(() => import('./../../../components/Dashboard/index'), {
+const HomeUI = dynamic(() => import('../../../components/Dashboard/index'), {
   ssr: false
 });
 import { cookies } from 'next/headers';
@@ -27,27 +27,24 @@ export default async function HomePage() {
   const dataSalas = await resSalas.json();
   const dataDoorsenses = await resDoorsenses.json();
 
-  const hasAuthorization = dataSalas.status === '200 OK' && dataDoorsenses.status === '200 OK';
+  const hasAuthorization =
+    dataSalas.status === '200 OK' && dataDoorsenses.status === '200 OK';
 
-  if(hasAuthorization){
-    const filterDoorsenses = dataDoorsenses.data.doorsenses.map((doorsense: doorsense) => doorsense.uniqueId)
+  if (hasAuthorization) {
+    const filterDoorsenses = dataDoorsenses.data.doorsenses.map(
+      (doorsense: doorsense) => doorsense.uniqueId
+    );
 
     return (
       <>
         {hasAuthorization ? (
-          <HomeUI
-            datas={dataSalas.data}
-            doorsenses={filterDoorsenses}
-          />
+          <HomeUI datas={dataSalas.data} doorsenses={filterDoorsenses} />
         ) : (
           <PrivateDBRoute />
         )}
       </>
     );
-  } 
+  }
 
-  return <PrivateDBRoute />
-       
+  return <PrivateDBRoute />;
 }
-
-
