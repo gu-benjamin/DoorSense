@@ -46,7 +46,7 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
           type={type}
           name={name}
           ref={ref}
-          className={`px-${icon ? '9' : '4'} lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
+          className={`${icon ? 'px-9' : 'px-4'} lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
                       bg-transparent outline-none
                       peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
                       dark:text-gray-200 dark:placeholder:${hasError ? `text-light-red` : `text-gray-100`} 

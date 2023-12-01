@@ -8,13 +8,14 @@ const Loading = () => {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100%',
+    width: '100%'
   };
 
   const spinnerStyle = {
     borderTop: '4px solid rgba(0, 0, 0, 0.1)',
     borderLeft: '4px solid rgba(0, 0, 0, 0.1)',
     borderBottom: '4px solid rgba(0, 0, 0, 0.1)',
-    borderRight: '4px solid #1a202c',
+    borderRight: '4px solid #fff',
     borderRadius: '50%',
     width: '21px',
     height: '21px',
