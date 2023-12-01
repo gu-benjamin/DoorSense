@@ -3,15 +3,14 @@
 import React, { useState, SetStateAction, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
-import { TbHomeEdit } from 'react-icons/tb';
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
-import { MdEditLocationAlt } from "react-icons/md";
+import { BsHouseAdd } from "react-icons/bs";
 import { Modal } from 'components/Modal';
-import Loading from 'app/(authenticated)/Dashboard/loading';
+import Loading from 'app/(authenticated)/loading';
 
 interface ModalCreateClassProps {
   open: boolean;
@@ -100,7 +99,12 @@ export default function ModalCreateClass({
         <Modal.CloseTop>
           <ButtonIcon
             onClick={toggleModalVisibility}
-            icon={<MdOutlineClose size={30} className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"  />}
+            icon={
+              <MdOutlineClose
+                size={30}
+                className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"
+              />
+            }
           />
         </Modal.CloseTop>
 
@@ -108,11 +112,11 @@ export default function ModalCreateClass({
         <Modal.MainSection>
           {/*Icone da modal*/}
           <Modal.Icon
-            icon={<TbHomeEdit size={45} color={`var(--color-primary)`} />}
+            icon={<BsHouseAdd size={45} color={`var(--color-primary)`} />}
           />
 
           {/*Titulo da modal*/}
-          <Modal.Title className='dark:text-white' title={`Criar nova Sala`} />
+          <Modal.Title className="dark:text-white" title={`Criar nova Sala`} />
 
           {/*Conteudo da modal*/}
           <Modal.Content>
@@ -123,16 +127,6 @@ export default function ModalCreateClass({
             >
               <InputLogin
                 {...register('nome', { required: true })}
-                icon={
-                  <MdEditLocationAlt 
-                    size={30}
-                    color={
-                      errors.nome?.message
-                        ? `var(--color-error)`
-                        : `var(--color-primary)`
-                    }
-                  />
-                }
                 placeholder="Digite o nome da sala ..."
                 label="Nome da Sala:"
                 helperText={errors.nome?.message}
@@ -141,16 +135,6 @@ export default function ModalCreateClass({
 
               <InputLogin
                 {...register('numero', { required: true })}
-                icon={
-                  <MdEditLocationAlt 
-                    size={30}
-                    color={
-                      errors.numero?.message
-                        ? `var(--color-error)`
-                        : `var(--color-primary)`
-                    }
-                  />
-                }
                 placeholder="Digite o número da sala ..."
                 type="number"
                 label="Número da sala:"
@@ -172,7 +156,9 @@ export default function ModalCreateClass({
           <Modal.Action
             btnName={loading ? <Loading /> : 'Criar'}
             type="submit"
-            className={`botao-reset ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+            className={`botao-reset ${
+              loading ? 'cursor-not-allowed opacity-50' : ''
+            }`}
             onClick={handleSubmit(handleForm)}
             disabled={loading}
           />

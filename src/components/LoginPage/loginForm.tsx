@@ -12,7 +12,7 @@ import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { useRouter } from 'next/navigation';
-import Loading from 'app/(authenticated)/Dashboard/loading';
+import Loading from 'app/(authenticated)/loading';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({

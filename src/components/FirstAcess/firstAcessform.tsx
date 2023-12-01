@@ -11,8 +11,7 @@ import { z } from 'zod';
 import { InputLogin } from '../../components/Inputs/Input-login/input-login';
 import { Button } from '../../components/Buttons/Button/button';
 import { ButtonIcon } from '../../components/Buttons/Button-icon/button-icon';
-import Loading from 'app/(authenticated)/Dashboard/loading';
-
+import Loading from 'app/(authenticated)/loading';
 
 const schema = z
   .object({

@@ -1,5 +1,5 @@
 import dynamic from 'next/dynamic';
-const HomeUI = dynamic(() => import('./../../../components/Dashboard/index'), { ssr: false });
+const HomeUI = dynamic(() => import('../../../components/Dashboard/index'), { ssr: false });
 import { cookies } from 'next/headers';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 import { doorsense } from 'types';

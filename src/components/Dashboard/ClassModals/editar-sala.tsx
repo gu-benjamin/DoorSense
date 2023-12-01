@@ -5,15 +5,15 @@ import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
 import { Dropdown } from 'components/DropDown/dropdown';
 import { TbHomeEdit } from 'react-icons/tb';
-import { FaFilePen } from "react-icons/fa6";
-import { MdEditLocationAlt } from "react-icons/md";
+import { FaFilePen } from 'react-icons/fa6';
+import { MdEditLocationAlt } from 'react-icons/md';
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
-import Loading from 'app/(authenticated)/Dashboard/loading';
+import Loading from 'app/(authenticated)/loading';
 
 type classData = {
   id: string;
@@ -54,9 +54,8 @@ export default function ModalEditClass({
   setOpen,
   setMessage,
   classData,
-  doorsenses,
+  doorsenses
 }: ModalEditClassProps) {
-
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -70,7 +69,7 @@ export default function ModalEditClass({
     mode: 'all',
     reValidateMode: 'onBlur',
     resolver: zodResolver(schema),
-    defaultValues:{
+    defaultValues: {
       arduino: ''
     }
   });
@@ -127,7 +126,12 @@ export default function ModalEditClass({
       <Modal.CloseTop>
         <ButtonIcon
           onClick={toggleModalVisibility}
-          icon={<MdOutlineClose size={30} className={`hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500`} />}
+          icon={
+            <MdOutlineClose
+              size={30}
+              className={`hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500`}
+            />
+          }
         />
       </Modal.CloseTop>
 
@@ -147,67 +151,37 @@ export default function ModalEditClass({
             Insira os seguintes valores abaixo:
           </h1>
           <form
-          onSubmit={handleSubmit(handleForm)}
-          className="flex flex-col gap-4"
-        >
-          <InputLogin
-            {...register('nome', { required: true })}
-            icon={
-              <MdEditLocationAlt
-                size={30}
-                color={
-                  errors.nome?.message
-                    ? `var(--color-error)`
-                    : `var(--color-primary)`
-                }
-              />
-            }
-            defaultValue={classData.nome}
-            placeholder="Digite o nome da sala ..."
-            label="Nome da Sala:"
-            helperText={errors.nome?.message}
-            disabled={loading}
-          />
+            onSubmit={handleSubmit(handleForm)}
+            className="flex flex-col gap-4"
+          >
+            <InputLogin
+              {...register('nome', { required: true })}
+              defaultValue={classData.nome}
+              placeholder="Digite o nome da sala ..."
+              label="Nome da Sala:"
+              helperText={errors.nome?.message}
+              disabled={loading}
+            />
 
-          <InputLogin
-            {...register('numero', { required: true })}
-            icon={
-              <MdEditLocationAlt
-                size={30}
-                color={
-                  errors.numero?.message
-                    ? `var(--color-error)`
-                    : `var(--color-primary)`
-                }
-              />
-            }
-            defaultValue={inputNumber}
-            placeholder="Digite o número da sala ..."
-            type="number"
-            label="Número da sala:"
-            helperText={errors.numero?.message}
-            disabled={loading}
-          />
+            <InputLogin
+              {...register('numero', { required: true })}
+              defaultValue={inputNumber}
+              placeholder="Digite o número da sala ..."
+              type="number"
+              label="Número da sala:"
+              helperText={errors.numero?.message}
+              disabled={loading}
+            />
 
-          <Dropdown
-            {...register('arduino', { required: true })}
-            icon={
-              <MdEditLocationAlt
-                size={30}
-                color={
-                  errors.numero?.message
-                    ? `var(--color-error)`
-                    : `var(--color-primary)`
-                }
-              />
-            }
-            placeholder="Digite o número da sala ..."
-            label="Doorsense ID:"
-            options={doorsenses}
-            helperText={errors.numero?.message}
-            disabled={loading}
-          />
-        </form>
+            <Dropdown
+              {...register('arduino', { required: true })}
+              placeholder="Digite o número da sala ..."
+              label="Doorsense ID:"
+              options={doorsenses}
+              helperText={errors.numero?.message}
+              disabled={loading}
+            />
+          </form>
         </Modal.Content>
       </Modal.MainSection>
 
@@ -221,7 +195,9 @@ export default function ModalEditClass({
         />
         <Modal.Action
           btnName={loading ? <Loading /> : 'Editar'}
-          className={`botao-reset ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+          className={`botao-reset ${
+            loading ? 'cursor-not-allowed opacity-50' : ''
+          }`}
           type="submit"
           onClick={handleSubmit(handleForm)}
           disabled={loading}

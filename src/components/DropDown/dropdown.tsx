@@ -33,7 +33,7 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
         <select
           name={name}
           ref={ref}
-          className={`px-9 lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
+          className={`px-${icon ? '9' : '4'} lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
                       bg-transparent outline-none
                       peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
                       dark:text-gray-500 dark:placeholder:${hasError ? `text-light-red` : `text-neutral-500`} 

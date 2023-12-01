@@ -6,7 +6,7 @@ import { MdOutlineClose } from 'react-icons/md';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import { IoWarningOutline } from 'react-icons/io5';
-import Loading from 'app/(authenticated)/Dashboard/loading';
+import Loading from 'app/(authenticated)/loading';
 
 interface ModalDeleteClassProps {
   open: boolean;
@@ -105,7 +105,9 @@ export default function ModalDeleteClass({
         />
         <Modal.Action
           btnName={loading ? <Loading /> : 'Deletar'}
-          className={`botao-reset ${loading ? 'cursor-not-allowed opacity-50' : ''}`}
+          className={`botao-reset ${
+            loading ? 'cursor-not-allowed opacity-50' : ''
+          }`}
           onClick={deleteClass}
           disabled={loading}
         />
