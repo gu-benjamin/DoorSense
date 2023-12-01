@@ -13,6 +13,7 @@ import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import ModalSucessForm from './ModalSucess';
 import { APP_ROUTES } from 'constants/app_routes';
+import Loading from 'app/(authenticated)/loading';
 
 const schema = z
   .object({
@@ -36,66 +37,74 @@ const schema = z
 type FormProps = z.infer<typeof schema>;
 
 export default function ResetPasswordForm() {
-  const {refresh, push} = useRouter();
+  const { refresh, push } = useRouter();
   const pathname = usePathname();
   const { ticket } = useParams();
-  const [sucess, setSucess] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
-    resetField,
-    formState: { errors }
+    reset,
+    formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
     reValidateMode: 'onBlur',
     resolver: zodResolver(schema)
   });
 
-  //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    console.log(data);
-    const body = {
-      newPassword: data.newPassword,
-      ticket: ticket
-    };
+    setLoading(true);
 
-    const res = await fetch('/api/login/reset-password', {
-      method: 'PUT',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+    try {
+      console.log(data);
+
+      const body = {
+        newPassword: data.newPassword,
+        ticket: ticket
+      };
+
+      const res = await fetch('/api/login/reset-password', {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      const json = await res.json();
+      console.log(json);
+
+      if (json.status === '401 Unauthorized') {
+        refresh();
+        push(APP_ROUTES.public.login);
       }
-    });
 
-    const json = await res.json();
-    console.log(json);
-
-    if(json.status === '401 Unauthorized'){
-      refresh();
-      push(APP_ROUTES.public.login);
-    }
-
-    if (json.status === '200 OK') {
-      resetField('newPassword');
-      resetField('confirmNewPassword');
-      setSucess((prevState) => !prevState);
+      if (json.status === '200 OK') {
+        reset(); // Resetando os campos do formulário
+        setSuccess(true);
+      }
+    } catch (error) {
+      console.error('Erro ao processar o formulário:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
   };
 
-  // STATES
-  //para mudar a visibilidade da senha
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
   const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
     useState(false);
 
-  function togglePasswordVisibility() {
+  const togglePasswordVisibility = () => {
     setIsPasswordVisible((prevState) => !prevState);
-  }
-  function toggleConfirmPasswordVisibility() {
+  };
+
+  const toggleConfirmPasswordVisibility = () => {
     setIsConfirmPasswordVisible((prevState) => !prevState);
-  }
+  };
+
 
   return (
     <>
@@ -133,6 +142,7 @@ export default function ResetPasswordForm() {
           }
           // label="Senha:"
           helperText={errors.newPassword?.message}
+          disabled={isSubmitting || loading}
           //Botao icone de esconder a senha
           actionIcon={
             <ButtonIcon
@@ -184,6 +194,7 @@ export default function ResetPasswordForm() {
           }
           // label="Senha:"
           helperText={errors.confirmNewPassword?.message}
+          disabled={isSubmitting || loading}
           //Botao icone de esconder a senha
           actionIcon={
             <ButtonIcon
@@ -217,16 +228,14 @@ export default function ResetPasswordForm() {
         />
 
         <Button
-          btnName="Enviar"
+          btnName={loading ? <Loading /> : 'Enviar'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
+          type="submit"
+          disabled={isSubmitting || loading}
         />
       </form>
 
-      <ModalSucessForm
-        open={sucess}
-        setOpen={setSucess}
-        pathname={pathname}
-      />
+      <ModalSucessForm open={success} setOpen={setSuccess} pathname={pathname} />
     </>
   );
 }
