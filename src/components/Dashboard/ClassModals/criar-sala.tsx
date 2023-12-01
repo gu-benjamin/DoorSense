@@ -9,6 +9,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
+import { MdEditLocationAlt } from "react-icons/md";
 import { Modal } from 'components/Modal';
 import Loading from 'app/(authenticated)/Dashboard/loading';
 
@@ -123,7 +124,7 @@ export default function ModalCreateClass({
               <InputLogin
                 {...register('nome', { required: true })}
                 icon={
-                  <TbHomeEdit
+                  <MdEditLocationAlt 
                     size={30}
                     color={
                       errors.nome?.message
@@ -141,7 +142,7 @@ export default function ModalCreateClass({
               <InputLogin
                 {...register('numero', { required: true })}
                 icon={
-                  <TbHomeEdit
+                  <MdEditLocationAlt 
                     size={30}
                     color={
                       errors.numero?.message

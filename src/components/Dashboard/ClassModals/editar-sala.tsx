@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
 import { Dropdown } from 'components/DropDown/dropdown';
 import { TbHomeEdit } from 'react-icons/tb';
+import { FaFilePen } from "react-icons/fa6";
+import { MdEditLocationAlt } from "react-icons/md";
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -151,7 +153,7 @@ export default function ModalEditClass({
           <InputLogin
             {...register('nome', { required: true })}
             icon={
-              <TbHomeEdit
+              <MdEditLocationAlt
                 size={30}
                 color={
                   errors.nome?.message
@@ -170,7 +172,7 @@ export default function ModalEditClass({
           <InputLogin
             {...register('numero', { required: true })}
             icon={
-              <TbHomeEdit
+              <MdEditLocationAlt
                 size={30}
                 color={
                   errors.numero?.message
@@ -190,7 +192,7 @@ export default function ModalEditClass({
           <Dropdown
             {...register('arduino', { required: true })}
             icon={
-              <TbHomeEdit
+              <MdEditLocationAlt
                 size={30}
                 color={
                   errors.numero?.message
