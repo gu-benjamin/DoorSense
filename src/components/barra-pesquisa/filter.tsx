@@ -13,28 +13,24 @@ export default function SelectFilter({ data, setList }: Datas) {
 useEffect(() => {
   switch (filter) {
     case 'alfabetico':
-      console.log('Ordering by name');
       setList({
         ...data,
         salas: data.salas.slice().sort((a, b) => a.nome.localeCompare(b.nome))
       });
       break;
     case 'numerico':
-      console.log('Ordering numerically');
       setList({
         ...data,
         salas: data.salas.slice().sort((a, b) => a.numero - b.numero)
       });
       break;
     case 'ativo':
-      console.log('Filtering by ativo');
       setList({
         ...data,
         salas: data.salas.filter((item) => item.status == 'Ativo')
       });
       break;
     case 'inativo':
-      console.log('Filtering by inativo');
       setList({
         ...data,
         salas: data.salas.filter((item) => item.status == null)
@@ -47,18 +43,20 @@ useEffect(() => {
 
 
   return (
-    <div
-    >
-      <BiFilter size={24} color="" /> Filtros
-      <select
-        value={filter}
-        onChange={e => setFilter(e.target.value)}
-        className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent font-semibold py-1 px-4 rounded"
-      >
-        <option value="numerico">Ordem Numérica</option>
-        <option value="alfabetico">Ordem Alfabética</option>
-        <option value="ativo">Ativo</option>
-        <option value="inativo">Inativo</option>
+    <div>
+      {/* <label className="mr-4">
+        <BiFilter size={24} color="" /> Filtros
+      </label> */}
+        <select
+          value={filter}
+          onChange={e => setFilter(e.target.value)}
+          className="border-2 flex border-primary-100 text-primary-100 bg-transparent font-semibold py-1 px-2 rounded focus:outline-none"
+        >
+        {/* <BiFilter size={24} color="" /> Filtros */}
+          <option value="numerico">Ordem Numérica</option>
+          <option value="alfabetico">Ordem Alfabética</option>
+          <option value="ativo">Ativo</option>
+          <option value="inativo">Inativo</option>
         </select>
     </div>
   );
