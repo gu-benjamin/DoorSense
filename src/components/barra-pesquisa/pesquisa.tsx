@@ -1,13 +1,7 @@
 'use client';
 
 import { useState, useEffect, SetStateAction } from 'react';
-import { BiFilter } from 'react-icons/bi'; // Importar o ícone BiFilter do react-icons/bi
 import { AiOutlinePlus } from 'react-icons/ai';
-import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
-import { Modal } from 'components/Modal';
-import { MdOutlineClose } from 'react-icons/md';
-import { TbHomeEdit } from 'react-icons/tb';
-import { InputLogin } from 'components/Inputs/Input-login';
 import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
 import Mensagem from 'components/Mensagem';
 import { ApiData } from 'types';

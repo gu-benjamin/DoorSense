@@ -42,7 +42,7 @@ export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
         <Barra setList={setList} data={datas} />
         <Cabecalho />
         <div className="flex flex-col gap-4 mt-4">
-          {list ? (
+          {datas ? (
             list.salas.length > 0 ? (
               list.salas.slice(limite, limite + 4).map((sala: sala) => (
                 <Card.Root

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BiFilter } from 'react-icons/bi';
-import { sala } from 'types';
+import { ApiData, sala } from 'types';
 
 type Datas = {
-  data: sala[],
-  setList: React.Dispatch<React.SetStateAction<sala[]>>;
+  data: ApiData,
+  setList: React.Dispatch<React.SetStateAction<ApiData>>;
 }
 
 export default function SelectFilter({ data, setList }: Datas) {
