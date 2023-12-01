@@ -19,10 +19,13 @@ export default async function HomePage() {
     headers: headersList
   });
 
-  const resDoorsenses = await fetch(`${DEV_API_ENDPOINT}doorsenses/`, {
-    method: 'GET',
-    headers: headersList
-  });
+  const resDoorsenses = await fetch(
+    `${DEV_API_ENDPOINT}doorsenses/`,
+    {
+      method: 'GET',
+      headers: headersList
+    }
+  );
 
   const dataSalas = await resSalas.json();
   const dataDoorsenses = await resDoorsenses.json();

@@ -5,12 +5,15 @@ import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
 import { Dropdown } from 'components/DropDown/dropdown';
 import { TbHomeEdit } from 'react-icons/tb';
+import { FaFilePen } from 'react-icons/fa6';
+import { MdEditLocationAlt } from 'react-icons/md';
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
+import Loading from 'app/(authenticated)/loading';
 
 type classData = {
   id: string;
@@ -52,10 +55,10 @@ export default function ModalEditClass({
   setOpen,
   setMessage,
   classData,
-  doorsenses,
+  doorsenses
 }: ModalEditClassProps) {
-
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -67,7 +70,7 @@ export default function ModalEditClass({
     mode: 'all',
     reValidateMode: 'onBlur',
     resolver: zodResolver(schema),
-    defaultValues:{
+    defaultValues: {
       arduino: ''
     }
   });
@@ -84,32 +87,38 @@ export default function ModalEditClass({
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    console.log(data);
-    const body = {
-      id: parseInt(classData.id),
-      ...data
-    };
+    setLoading(true);
 
-    console.log(body);
+    try {
+      const body = {
+        id: parseInt(classData.id),
+        ...data
+      };
 
-    const res = await fetch('/api/classroms', {
-      method: 'PUT',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+      const res = await fetch('/api/classroms', {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Falha ao editar sala');
       }
-    });
 
-    if (!res.ok) {
-      throw new Error('Falha ao editar sala');
+      const json = await res.json();
+      setMessage(json.data.message);
+      setTimeout(() => setMessage(''), 5000);
+
+      toggleModalVisibility();
+      router.refresh();
+    } catch (error) {
+      console.error('Erro ao editar sala:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
-
-    const json = await res.json();
-    setMessage(json.data.message);
-    setTimeout(() => setMessage(''), 5000);
-
-    toggleModalVisibility();
-    router.refresh();
   };
 
   return (
@@ -143,58 +152,31 @@ export default function ModalEditClass({
           >
             <InputLogin
               {...register('nome', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.nome?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
               defaultValue={classData.nome}
               placeholder="Digite o nome da sala ..."
               label="Nome da Sala:"
               helperText={errors.nome?.message}
+              disabled={loading}
             />
 
             <InputLogin
               {...register('numero', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.numero?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
               defaultValue={inputNumber}
               placeholder="Digite o número da sala ..."
               type="number"
               label="Número da sala:"
               helperText={errors.numero?.message}
+              disabled={loading}
             />
 
             <Dropdown
               {...register('arduino', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.numero?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
               placeholder="Digite o número da sala ..."
               label="Doorsense ID:"
               options={doorsenses}
               initialDoorsense={classData.arduino}
               helperText={errors.numero?.message}
+              disabled={loading}
             />
           </form>
         </Modal.Content>
@@ -209,10 +191,13 @@ export default function ModalEditClass({
           onClick={toggleModalVisibility}
         />
         <Modal.Action
-          btnName="Editar"
-          className="botao-reset"
+          btnName={loading ? <Loading /> : 'Editar'}
+          className={`botao-reset ${
+            loading ? 'cursor-not-allowed opacity-50' : ''
+          }`}
           type="submit"
           onClick={handleSubmit(handleForm)}
+          disabled={loading}
         />
       </Modal.Actions>
     </Modal.Root>

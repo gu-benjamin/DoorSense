@@ -3,13 +3,14 @@
 import React, { useState, SetStateAction, ReactNode, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
-import { TbHomeEdit } from 'react-icons/tb';
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
+import { BsHouseAdd } from "react-icons/bs";
 import { Modal } from 'components/Modal';
+import Loading from 'app/(authenticated)/loading';
 
 interface ModalCreateClassProps {
   open: boolean;
@@ -39,6 +40,7 @@ export default function ModalCreateClass({
   setMessage
 }: ModalCreateClassProps) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
@@ -60,29 +62,35 @@ export default function ModalCreateClass({
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
+    setLoading(true);
 
-    // console.log(data);
-    const body = data;
+    try {
+      const body = data;
 
-    const res = await fetch('/api/classroms', {
-      method: 'POST',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+      const res = await fetch('/api/classroms', {
+        method: 'POST',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Falha ao criar sala');
       }
-    });
 
-    if (!res.ok) {
-      throw new Error('Falha ao criar sala');
+      const json = await res.json();
+      setMessage(json.data.message);
+      setTimeout(() => setMessage(''), 5000);
+
+      toggleModalVisibility();
+      router.refresh();
+    } catch (error) {
+      console.error('Erro ao processar formulário:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
-
-    const json = await res.json();
-    setMessage(json.data.message)
-    setTimeout(() => setMessage(''), 5000);
-
-    toggleModalVisibility()
-    router.refresh();
-  
   };
 
   return (
@@ -92,7 +100,12 @@ export default function ModalCreateClass({
         <Modal.CloseTop>
           <ButtonIcon
             onClick={toggleModalVisibility}
-            icon={<MdOutlineClose size={30} className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"  />}
+            icon={
+              <MdOutlineClose
+                size={30}
+                className=" hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500"
+              />
+            }
           />
         </Modal.CloseTop>
 
@@ -100,11 +113,11 @@ export default function ModalCreateClass({
         <Modal.MainSection>
           {/*Icone da modal*/}
           <Modal.Icon
-            icon={<TbHomeEdit size={45} color={`var(--color-primary)`} />}
+            icon={<BsHouseAdd size={45} color={`var(--color-primary)`} />}
           />
 
           {/*Titulo da modal*/}
-          <Modal.Title className='dark:text-white' title={`Criar nova Sala`} />
+          <Modal.Title className="dark:text-white" title={`Criar nova Sala`} />
 
           {/*Conteudo da modal*/}
           <Modal.Content>
@@ -115,38 +128,19 @@ export default function ModalCreateClass({
             >
               <InputLogin
                 {...register('nome', { required: true })}
-                icon={
-                  <TbHomeEdit
-                    size={30}
-                    color={
-                      errors.nome?.message
-                        ? `var(--color-error)`
-                        : `var(--color-primary)`
-                    }
-                  />
-                }
                 placeholder="Digite o nome da sala ..."
                 label="Nome da Sala:"
                 helperText={errors.nome?.message}
+                disabled={loading} // Desativa o input enquanto o carregamento estiver ocorrendo
               />
 
               <InputLogin
                 {...register('numero', { required: true })}
-                icon={
-                  <TbHomeEdit
-                    size={30}
-                    color={
-                      errors.numero?.message
-                        ? `var(--color-error)`
-                        : `var(--color-primary)`
-                    }
-                  />
-                }
                 placeholder="Digite o número da sala ..."
                 label="Número da sala:"
                 helperText={errors.numero?.message}
+                disabled={loading}
               />
-
             </form>
           </Modal.Content>
         </Modal.MainSection>
@@ -159,7 +153,15 @@ export default function ModalCreateClass({
             className="botao-danger"
             onClick={toggleModalVisibility}
           />
-          <Modal.Action btnName="Criar" type="submit" className="botao-reset" onClick={handleSubmit(handleForm)} />
+          <Modal.Action
+            btnName={loading ? <Loading /> : 'Criar'}
+            type="submit"
+            className={`botao-reset ${
+              loading ? 'cursor-not-allowed opacity-50' : ''
+            }`}
+            onClick={handleSubmit(handleForm)}
+            disabled={loading}
+          />
         </Modal.Actions>
       </Modal.Root>
     </>

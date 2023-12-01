@@ -1,14 +1,9 @@
 'use client';
 
 import { useState, SetStateAction, ReactNode, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import { InputLogin } from 'components/Inputs/Input-login';
 import { MdOutlineClose } from 'react-icons/md';
 import { LuMail } from 'react-icons/lu';
 import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 
@@ -18,7 +13,6 @@ interface ModalLoginFormProps {
 }
 
 export default function ModalLoginForm({ open, setOpen }: ModalLoginFormProps) {
-  const router = useRouter();
 
   const[apiRes, setApiRes] = useState('');
 
@@ -76,8 +70,7 @@ export default function ModalLoginForm({ open, setOpen }: ModalLoginFormProps) {
           title={`Redefinição de senha`}
           className="dark:text-white"
         />
-        <Modal.Content>
-          
+        <Modal.Content>         
           <p>
             {sucess ? 'Um e-mail de recuperação foi enviado. Por favor, verifique sua caixa de entrada.' : 'Falha ao enviar e-mail. Feche e tente novamente.'}
           </p>

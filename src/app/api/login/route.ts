@@ -46,13 +46,14 @@ export async function DELETE() {
     cookies().delete('token');
     return NextResponse.json(
       { message: 'Autenticação removida com sucesso.' },
+
       {
         status: 200
       }
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao remover autenticação', error },
       { status: 500 }
     );
   }

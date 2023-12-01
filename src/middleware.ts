@@ -16,6 +16,7 @@ export function middleware(request: NextRequest) {
 
   if (request.nextUrl.pathname !== APP_ROUTES.private.dashboard) {
     return NextResponse.redirect(new URL(APP_ROUTES.private.dashboard, request.url));
+
   }
 }
 

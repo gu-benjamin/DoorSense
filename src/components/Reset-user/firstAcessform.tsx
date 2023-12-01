@@ -14,6 +14,8 @@ import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
 import { usePathname, useRouter } from 'next/navigation';
 import ModalSucessForm from './ModalSucess/index';
 import { APP_ROUTES } from 'constants/app_routes';
+import Loading from 'app/(authenticated)/loading';
+
 
 const schema = z
   .object({
@@ -45,13 +47,14 @@ export default function FirstAcessForm() {
   const {refresh, push} = useRouter();
   const pathname = usePathname();
   const [sucess, setSucess] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
     resetField,
-    formState: { errors }
+    formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
     reValidateMode: 'onBlur',
@@ -60,34 +63,43 @@ export default function FirstAcessForm() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
+    setLoading(true);
+
+    try {
     
-    console.log(data);
-    const body = {
-      username: data.username,
-      password: data.password
-    };
-
-    const res = await fetch('/api/login/register-user', {
-      method: 'PUT',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+      console.log(data);
+      const body = {
+        username: data.username,
+        password: data.password
+      };
+  
+      const res = await fetch('/api/login/register-user', {
+        method: 'PUT',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+  
+      const json = await res.json();
+      console.log(json)
+  
+      if(json.status === '401 Unauthorized' || '403 Forbidden'){
+        refresh();
+        push(APP_ROUTES.public.login);
       }
-    });
-
-    const json = await res.json();
-    console.log(json)
-
-    if(json.status === '401 Unauthorized' || '403 Forbidden'){
-      refresh();
-      push(APP_ROUTES.public.login);
-    }
-
-    if(json.status === '200 OK'){
-      resetField('username');
-      resetField('password');
-      resetField('confirmPassword');
-      setSucess((prevState) => !prevState);
+  
+      if(json.status === '200 OK'){
+        resetField('username');
+        resetField('password');
+        resetField('confirmPassword');
+        setSucess((prevState) => !prevState);
+      }
+    } catch (error) {
+      console.error('Erro ao processar o formulário:', error);
+      // Trate o erro conforme necessário
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -136,13 +148,14 @@ export default function FirstAcessForm() {
               }
             />
           }
-          // label="Usuário:"
+
           helperText={errors.username?.message}
+          disabled={isSubmitting || loading} // Desativar o input durante o envio
+
         />
 
         {/* Campo password */}
         <InputLogin
-          // Registrando campo na hook
           {...register('password', { required: true })}
           //Props
           placeholder="Digite uma senha ..."
@@ -157,9 +170,8 @@ export default function FirstAcessForm() {
               }
             />
           }
-          // label="Senha:"
           helperText={errors.password?.message}
-          //Botao icone de esconder a senha
+          disabled={isSubmitting || loading}
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
@@ -193,7 +205,6 @@ export default function FirstAcessForm() {
 
         {/* Campo CONFIRM password */}
         <InputLogin
-          // Registrando campo na hook
           {...register('confirmPassword', { required: true })}
           //Props
           placeholder="Confirme a nova senha ..."
@@ -208,9 +219,8 @@ export default function FirstAcessForm() {
               }
             />
           }
-          // label="Senha:"
           helperText={errors.confirmPassword?.message}
-          //Botao icone de esconder a senha
+          disabled={isSubmitting || loading}
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
@@ -243,8 +253,10 @@ export default function FirstAcessForm() {
         />
 
         <Button
-          btnName="Enviar"
+          btnName={loading ? <Loading /> : 'Enviar'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
+          type="submit"
+          disabled={isSubmitting || loading} // Desativar o botão durante o envio
         />
       </form>
 

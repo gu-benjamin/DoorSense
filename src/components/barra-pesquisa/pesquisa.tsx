@@ -49,14 +49,14 @@ export default function Barra({data, setList}: Datas) {
     <>
     {message && <Mensagem message={message} duration={3} />}
       <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base">
-        <div className="relative w-full sm:mr-4 sm:mb-0">
-          <div className="bg-thirdy p-4 rounded-2xl flex dark:bg-dark-100">
+        <div className="relative w-full sm:mr-4">
+          <div className="bg-thirdy p-2 sm:p-4 rounded-2xl flex dark:bg-dark-100">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               type="search"
               placeholder="Buscar..."
-              className="pl-10 py-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
+              className="pl-10 pr-3 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
             />
             <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
               <BiFilter size={24} color="" /> Filtros
@@ -64,9 +64,9 @@ export default function Barra({data, setList}: Datas) {
           </div>
         </div>
 
-        <div className="bg-thirdy p-3 w-fit mt-2 sm:mt-0 sm:w-auto rounded-2xl flex sm:items-center dark:bg-dark-100">
+        <div className="bg-thirdy p-2 sm:p-3 w-fit mt-2 sm:mt-0 sm:w-auto rounded-2xl flex sm:items-center dark:bg-dark-100">
           <button
-            className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-4 rounded flex items-center transform hover:scale-95"
+            className="border-primary-100 bg-primary-100 text-white font-semibold py-2 px-2 rounded flex items-center transform hover:scale-95"
             style={{ whiteSpace: 'nowrap' }}
             onClick={toggleModalVisibility}
           >

@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { twMerge } from 'tailwind-merge';
 
 interface ModalActionProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-btnName: string
+btnName: string | ReactNode
 }
 
 export default function ModalAction({btnName, ...props}: ModalActionProps) {

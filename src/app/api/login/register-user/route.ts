@@ -14,6 +14,7 @@ export async function PUT(request: Request) {
         Authorization: `Bearer ${ticket?.value}`,
         'Content-Type': 'application/json'
       }
+
     });
 
     const data = await res.json();
