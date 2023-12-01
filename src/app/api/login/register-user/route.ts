@@ -18,14 +18,32 @@ export async function PUT(request: Request) {
 
     const data = await res.json();
 
-    console.log(data)
+    console.log(data);
 
-    if(data.message === '401 Unauthorized'){
-      return NextResponse.rewrite(new URL('/', request.url))
-    }
-
-    if (data.status === '200 OK') {
+    if (
+      data.status === '200 OK' ||
+      data.status === '401 Unauthorized' ||
+      data.status === '403 Forbidden'
+    ) {
       cookies().delete('ticket');
+
+      if (data.status === '401 Unauthorized') {
+        return NextResponse.json(
+          { message: data.message, status: data.status },
+          {
+            status: 401
+          }
+        );
+      }
+
+      if (data.status === '403 Forbidden') {
+        return NextResponse.json(
+          { message: data.message, status: data.status },
+          {
+            status: 403
+          }
+        );
+      }
     }
 
     return NextResponse.json(
@@ -41,4 +59,3 @@ export async function PUT(request: Request) {
     );
   }
 }
-

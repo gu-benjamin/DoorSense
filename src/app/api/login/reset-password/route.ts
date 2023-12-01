@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
@@ -31,6 +31,8 @@ export async function POST() {
 }
 
 export async function PUT(request: Request) {
+
+  console.log(request);
   const reqData = await request.json();
   const { ticket, newPassword } = reqData;
 
@@ -48,8 +50,13 @@ export async function PUT(request: Request) {
 
     const data = await res.json();
 
-    if(data.message === '401 Unauthorized'){
-      return NextResponse.rewrite(new URL('/', request.url))
+    if(data.status === '401 Unauthorized'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
     }
 
     return NextResponse.json(

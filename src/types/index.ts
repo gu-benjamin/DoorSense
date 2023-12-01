@@ -2,8 +2,8 @@ import { SetStateAction } from 'react';
 
 interface HomeUIProps {
   datas: ApiData;
-  doorsenses: string[];
-  hasAuthorization?: boolean;
+  doorsenses: [] | string[];
+
 };
 
 type sala = {
@@ -23,9 +23,14 @@ type doorsense = {
 
 type ApiData = {
   total: number;
-  salas: sala[];
+  salas: [] | sala[];
+};
+
+type ApiDoorsenses = {
+  total: number;
+  doorsenses: [] | doorsense[];
 };
 
 
 
-export type { HomeUIProps, sala, doorsense, ApiData };
+export type { HomeUIProps, sala, doorsense, ApiData, ApiDoorsenses };

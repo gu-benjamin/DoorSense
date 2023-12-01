@@ -25,9 +25,6 @@ export default function PrivateFARoute({ children, pathname }: PrivateRouteProps
         if (!hasAcess) {
           push(APP_ROUTES.public.login);
         }
-        console.log('pathname', pathname);
-        console.log('hasTicketFA', hasTicketFA);
-        console.log('hasAcess', hasAcess);
         setAuthToFirstAcess(hasAcess);
       } catch (error) {
         console.log('error', error);

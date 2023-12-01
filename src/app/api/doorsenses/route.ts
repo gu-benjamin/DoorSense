@@ -21,7 +21,7 @@ export async function GET(request: Request) {
 
     console.log(data);
 
-    if(data.message === '401 Unauthorized'){
+    if(data.status === '401 Unauthorized'){
       return NextResponse.rewrite(new URL('/', request.url))
     }
 
@@ -33,7 +33,7 @@ export async function GET(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao recuperar doorsenses', error },
       { status: 500 }
     );
   }

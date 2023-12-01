@@ -41,6 +41,7 @@ const schema = z
 type FormProps = z.infer<typeof schema>;
 
 export default function FirstAcessForm() {
+  const {refresh, push} = useRouter();
   const pathname = usePathname();
   const [sucess, setSucess] = useState(false);
 
@@ -73,11 +74,13 @@ export default function FirstAcessForm() {
       }
     });
 
-    if (!res.ok) {
-      throw new Error('Falha ao registrar novos dados');
-    }
     const json = await res.json();
     console.log(json)
+
+    if(json.status === '401 Unauthorized' || '403 Forbidden'){
+      refresh();
+      push('/');
+    }
 
     if(json.status === '200 OK'){
       resetField('username');

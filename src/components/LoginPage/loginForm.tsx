@@ -62,6 +62,7 @@ export default function LoginForm() {
     if (!res.ok) {
       throw new Error('Falha ao autenticar');
     }
+    
     const json = await res.json();
     console.log(json)
 

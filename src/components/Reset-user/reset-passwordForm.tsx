@@ -35,6 +35,7 @@ const schema = z
 type FormProps = z.infer<typeof schema>;
 
 export default function ResetPasswordForm() {
+  const {refresh, push} = useRouter();
   const pathname = usePathname();
   const { ticket } = useParams();
   const [sucess, setSucess] = useState(false);
@@ -67,12 +68,13 @@ export default function ResetPasswordForm() {
       }
     });
 
-    if (!res.ok) {
-      throw new Error('Falha ao registrar nova senha');
-    }
-
     const json = await res.json();
     console.log(json);
+
+    if(json.status === '401 Unauthorized'){
+      refresh();
+      push('/');
+    }
 
     if (json.status === '200 OK') {
       resetField('newPassword');

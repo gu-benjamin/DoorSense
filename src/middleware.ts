@@ -3,11 +3,8 @@ import { NextResponse } from 'next/server';
 import { NextRequest } from 'next/server';
 
 export function middleware(request: NextRequest) {
-  // const token = request.cookies.get('token')?.value;
-  const isAuthenticated = request.cookies.get('token')?.value;
-  // const teste = verifyToken(token);
 
-  // console.log(teste)
+  const isAuthenticated = request.cookies.get('token')?.value;
 
   if (!isAuthenticated) {
     if (request.nextUrl.pathname === '/'){

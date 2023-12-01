@@ -35,7 +35,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Erro ao realizar login.', error },
       { status: 500 }
     );
   }
@@ -45,7 +45,7 @@ export async function DELETE() {
   try {
     cookies().delete('token');
     return NextResponse.json(
-      { message: 'Logout efetuado com sucesso' },
+      { message: 'Autenticação removida com sucesso.' },
       {
         status: 200
       }

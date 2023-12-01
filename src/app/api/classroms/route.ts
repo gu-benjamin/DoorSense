@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 
     console.log(data);
 
-    if(data.message === '401 Unauthorized'){
+    if(data.status === '401 Unauthorized'){
       return NextResponse.rewrite(new URL('/', request.url))
     }
 
@@ -37,7 +37,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao salvar dados.', error },
       { status: 500 }
     );
   }
@@ -66,7 +66,7 @@ export async function PUT(request: Request) {
 
     console.log(data);
 
-    if(data.message === '401 Unauthorized'){
+    if(data.status === '401 Unauthorized'){
       return NextResponse.rewrite(new URL('/', request.url))
     }
 
@@ -78,7 +78,7 @@ export async function PUT(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao alterar dados.', error },
       { status: 500 }
     );
   }
@@ -107,7 +107,7 @@ export async function DELETE(request: Request) {
 
     console.log(data);
 
-    if(data.message === '401 Unauthorized'){
+    if(data.status === '401 Unauthorized'){
       return NextResponse.rewrite(new URL('/', request.url))
     }
 
@@ -119,7 +119,7 @@ export async function DELETE(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao deletar dados.', error },
       { status: 500 }
     );
   }

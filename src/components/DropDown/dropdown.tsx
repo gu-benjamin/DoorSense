@@ -16,14 +16,14 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
   ({ name = '', label, helperText = '', icon, actionIcon, initialDoorsense, options, ...props }, ref) => {
     const inputId = useId();
     const hasError = helperText.length > 0;
-    const [valuesOption, setValuesOption] = useState(options)
+    // const [valuesOption, setValuesOption] = useState(options)
     
-    useEffect(() =>{
-      const indexValue = valuesOption.indexOf(initialDoorsense);
-      if (indexValue !== -1) {
-        setValuesOption(options.splice(indexValue, 1));
-      }
-    },[options])
+    // useEffect(() =>{
+    //   const indexValue = valuesOption.indexOf(initialDoorsense);
+    //   if (indexValue !== -1) {
+    //     setValuesOption(options.splice(indexValue, 1));
+    //   }
+    // },[options])
 
     return (
       <div className={`flex flex-col justify-start relative gap-3 text-start`}>
@@ -50,9 +50,10 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
           id={inputId}
           {...props}
         >
-          {initialDoorsense === '' ? (<option value="" >Selecione um Doorsense</option>) : (<option value={initialDoorsense} >{initialDoorsense}</option>) }
-        
-          {valuesOption.map((option) => (
+          {/* {initialDoorsense === '' ? (<option value="" >Selecione um Doorsense</option>) : (<option value={initialDoorsense} >{initialDoorsense}</option>) } */}
+
+          <option value="" >Selecione um Doorsense</option>
+          {options.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>
