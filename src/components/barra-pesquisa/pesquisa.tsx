@@ -11,6 +11,7 @@ import { InputLogin } from 'components/Inputs/Input-login';
 import ModalCreateClass from './../Dashboard/ClassModals/criar-sala';
 import Mensagem from 'components/Mensagem';
 import { ApiData } from 'types';
+import  SelectFilter  from './filter';
 
 type Datas = {
   data: ApiData,
@@ -48,9 +49,9 @@ export default function Barra({data, setList}: Datas) {
   return (
     <>
     {message && <Mensagem message={message} duration={3} />}
-      <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base">
-        <div className="relative w-full sm:mr-4">
-          <div className="bg-thirdy p-2 sm:p-4 rounded-2xl flex dark:bg-dark-100">
+      <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base ">
+        <div className="relative w-full sm:mr-4 ">
+          <div className="bg-thirdy p-2 sm:p-4 rounded-2xl flex dark:bg-dark-100 gap-5 ">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -58,9 +59,7 @@ export default function Barra({data, setList}: Datas) {
               placeholder="Buscar..."
               className="pl-10 pr-3 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
             />
-            <button className="ml-4 border-2 flex border-primary-100 text-primary-100 bg-transparent hover:text-white hover:bg-primary-100 font-semibold py-1 px-4 rounded">
-              <BiFilter size={24} color="" /> Filtros
-            </button>
+            <SelectFilter setList={setList} data={data}/>
           </div>
         </div>
 
