@@ -108,9 +108,7 @@ export default function LoginForm() {
       >
         {/* Campo Usuário */}
         <InputLogin
-          //Registrando campo na hook
           {...register('username', { required: true })}
-          //Pros
           placeholder="Digite seu usuário"
           icon={
             <IconUser
@@ -122,15 +120,13 @@ export default function LoginForm() {
               }
             />
           }
-          // label="Usuário:"
           helperText={errors.username?.message}
+          disabled={loading} // Desativa o input quando está carregando
         />
 
         {/* Campo password */}
         <InputLogin
-          // Registrando campo na hook
           {...register('password', { required: true })}
-          //Props
           placeholder="Digite sua senha"
           type={isPasswordVisible ? 'text' : 'password'}
           icon={
@@ -143,9 +139,8 @@ export default function LoginForm() {
               }
             />
           }
-          // label="Senha:"
           helperText={errors.password?.message}
-          //Botao icone de esconder a senha
+          disabled={loading} // Desativa o input quando está carregando
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
@@ -181,9 +176,7 @@ export default function LoginForm() {
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
           disabled={loading}
           type="submit"
-        >
-        
-        </Button>
+        />
       </form>
     </>
   );

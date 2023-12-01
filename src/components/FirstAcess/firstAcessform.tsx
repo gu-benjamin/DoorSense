@@ -106,9 +106,7 @@ export default function FirstAcessForm() {
       >
         {/* Campo Usuário */}
         <InputLogin
-          //Registrando campo na hook
           {...register('user', { required: true })}
-          //Pros
           placeholder="Crie seu usuário"
           icon={
             <IconUser
@@ -120,15 +118,13 @@ export default function FirstAcessForm() {
               }
             />
           }
-          // label="Usuário:"
           helperText={errors.user?.message}
+          disabled={isSubmitting || loading} // Desativar o input durante o envio
         />
 
         {/* Campo password */}
         <InputLogin
-          // Registrando campo na hook
           {...register('password', { required: true })}
-          //Props
           placeholder="Crie uma senha"
           type={isPasswordVisible ? 'text' : 'password'}
           icon={
@@ -141,9 +137,8 @@ export default function FirstAcessForm() {
               }
             />
           }
-          // label="Senha:"
           helperText={errors.password?.message}
-          //Botao icone de esconder a senha
+          disabled={isSubmitting || loading}
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
@@ -177,9 +172,7 @@ export default function FirstAcessForm() {
 
         {/* Campo CONFIRM password */}
         <InputLogin
-          // Registrando campo na hook
           {...register('confirmPassword', { required: true })}
-          //Props
           placeholder="Confirme a senha"
           type={isConfirmPasswordVisible ? 'text' : 'password'}
           icon={
@@ -192,9 +185,8 @@ export default function FirstAcessForm() {
               }
             />
           }
-          // label="Senha:"
           helperText={errors.confirmPassword?.message}
-          //Botao icone de esconder a senha
+          disabled={isSubmitting || loading}
           actionIcon={
             <ButtonIcon
               className={`absolute right-3 ${
@@ -227,7 +219,7 @@ export default function FirstAcessForm() {
         />
 
         <Button
-          btnName={loading ? <Loading /> : "ENTRAR"}
+          btnName={loading ? <Loading /> : 'ENTRAR'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
           type="submit"
           disabled={isSubmitting || loading} // Desativar o botão durante o envio

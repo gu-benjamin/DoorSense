@@ -145,64 +145,67 @@ export default function ModalEditClass({
             Insira os seguintes valores abaixo:
           </h1>
           <form
-            onSubmit={handleSubmit(handleForm)}
-            className="flex flex-col gap-4"
-          >
-            <InputLogin
-              {...register('nome', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.nome?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
-              defaultValue={classData.nome}
-              placeholder="Digite o nome da sala ..."
-              label="Nome da Sala:"
-              helperText={errors.nome?.message}
-            />
+          onSubmit={handleSubmit(handleForm)}
+          className="flex flex-col gap-4"
+        >
+          <InputLogin
+            {...register('nome', { required: true })}
+            icon={
+              <TbHomeEdit
+                size={30}
+                color={
+                  errors.nome?.message
+                    ? `var(--color-error)`
+                    : `var(--color-primary)`
+                }
+              />
+            }
+            defaultValue={classData.nome}
+            placeholder="Digite o nome da sala ..."
+            label="Nome da Sala:"
+            helperText={errors.nome?.message}
+            disabled={loading}
+          />
 
-            <InputLogin
-              {...register('numero', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.numero?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
-              defaultValue={inputNumber}
-              placeholder="Digite o número da sala ..."
-              type="number"
-              label="Número da sala:"
-              helperText={errors.numero?.message}
-            />
+          <InputLogin
+            {...register('numero', { required: true })}
+            icon={
+              <TbHomeEdit
+                size={30}
+                color={
+                  errors.numero?.message
+                    ? `var(--color-error)`
+                    : `var(--color-primary)`
+                }
+              />
+            }
+            defaultValue={inputNumber}
+            placeholder="Digite o número da sala ..."
+            type="number"
+            label="Número da sala:"
+            helperText={errors.numero?.message}
+            disabled={loading}
+          />
 
-            <Dropdown
-              {...register('arduino', { required: true })}
-              icon={
-                <TbHomeEdit
-                  size={30}
-                  color={
-                    errors.numero?.message
-                      ? `var(--color-error)`
-                      : `var(--color-primary)`
-                  }
-                />
-              }
-              placeholder="Digite o número da sala ..."
-              label="Doorsense ID:"
-              options={doorsenses}
-              helperText={errors.numero?.message}
-            />
-          </form>
+          <Dropdown
+            {...register('arduino', { required: true })}
+            icon={
+              <TbHomeEdit
+                size={30}
+                color={
+                  errors.numero?.message
+                    ? `var(--color-error)`
+                    : `var(--color-primary)`
+                }
+              />
+            }
+            placeholder="Digite o número da sala ..."
+            label="Doorsense ID:"
+            options={doorsenses}
+            helperText={errors.numero?.message}
+            disabled={loading}
+          />
+        </form>
         </Modal.Content>
       </Modal.MainSection>
 
