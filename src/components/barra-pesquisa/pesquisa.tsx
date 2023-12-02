@@ -38,13 +38,13 @@ export default function Barra({data, setList}: Datas) {
     {message && <Mensagem message={message} duration={3} />}
       <div className="text-md flex flex-col sm:flex-row mb-4 sm:text-base ">
         <div className="relative w-full sm:mr-4 ">
-          <div className="bg-thirdy p-2 sm:p-4 rounded-2xl flex dark:bg-dark-100 gap-5 ">
+          <div className="bg-thirdy p-2 sm:p-4 rounded-2xl flex dark:bg-dark-100 gap-3 ">
             <input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               type="search"
               placeholder="Buscar..."
-              className="pl-10 pr-3 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
+              className="sm:pl-10 pl-5 pr-3 p-1 text-base w-full flex focus:shadow-outline rounded-lg bg-white dark:bg-dark-200 focus:outline-none"
             />
             <SelectFilter setList={setList} data={data}/>
           </div>

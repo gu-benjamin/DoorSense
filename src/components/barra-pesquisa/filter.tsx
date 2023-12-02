@@ -49,13 +49,14 @@ useEffect(() => {
         <select
           value={filter}
           onChange={e => setFilter(e.target.value)}
-          className="border-2 flex border-primary-100 text-primary-100 bg-transparent font-semibold py-1 px-2 rounded focus:outline-none"
+          className="border-2 flex border-primary-100 text-primary-100 bg-transparent font-semibold py-1 rounded focus:outline-none"
         >
         {/* <BiFilter size={24} color="" /> Filtros */}
           <option value="numerico">Ordem Numérica</option>
           <option value="alfabetico">Ordem Alfabética</option>
           <option value="ativo">Ativo</option>
           <option value="inativo">Inativo</option>
+          <option value="inativo">Pendente</option>
         </select>
     </div>
   );
