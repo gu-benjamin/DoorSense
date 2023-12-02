@@ -1,8 +1,7 @@
 import React from 'react';
-import { FaFaceSadTear } from "react-icons/fa6";
 import { RiEmotionSadFill } from "react-icons/ri";
 
-const NahSalas: React.FC = () => {
+const EmptySalas: React.FC = () => {
   return (
     <div className="flex flex-col items-center mt-8">
       <RiEmotionSadFill color="#858585" size={50}/>
@@ -11,4 +10,4 @@ const NahSalas: React.FC = () => {
   );
 };
 
-export default NahSalas;
+export default EmptySalas;

@@ -13,7 +13,7 @@ export default function Cabecalho() {
         <p
           className={`dark:text-primary-100 text-center `}
         >
-          Arduíno
+          DoorSenseID
         </p>
         <p
           className={`dark:text-primary-100 text-center `}

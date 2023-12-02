@@ -1,16 +1,13 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import Card from 'components/Cardtable/';
 import Cabecalho from 'components/Cabecalho/cabecalho';
 import Barra from 'components/barra-pesquisa/pesquisa';
 import TopSection from 'components/Lista-de-Salas/lista';
-import { FaArrowLeft } from 'react-icons/fa';
-import { FaArrowRight } from 'react-icons/fa';
 import { HomeUIProps, ApiData, sala } from 'types';
-import NahSalas from 'components/Nah_Salas';
 import Loading from 'app/(authenticated)/loading';
+import EmptySalas from './../Empty';
 
 export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
   const [list, setList] = useState<ApiData>(datas);
@@ -45,7 +42,7 @@ export default function HomeUI({ datas, doorsenses }: HomeUIProps) {
                 </Card.Root>
               ))
             ) : (
-              <NahSalas />
+              <EmptySalas />
             )
           ) : (
             <Loading />

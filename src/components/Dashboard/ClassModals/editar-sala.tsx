@@ -163,7 +163,6 @@ export default function ModalEditClass({
               {...register('numero', { required: true })}
               defaultValue={inputNumber}
               placeholder="Digite o número da sala ..."
-              type="number"
               label="Número da sala:"
               helperText={errors.numero?.message}
               disabled={loading}
@@ -175,7 +174,7 @@ export default function ModalEditClass({
               label="Doorsense ID:"
               options={doorsenses}
               initialDoorsense={classData.arduino}
-              helperText={errors.numero?.message}
+              helperText={errors.arduino?.message}
               disabled={loading}
             />
           </form>

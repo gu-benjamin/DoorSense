@@ -12,13 +12,6 @@ type Datas = {
   setList: React.Dispatch<SetStateAction<ApiData>>;
 }
 
-type sala = {
-  id: string,
-  nome: string,
-  numero: string, 
-  arduino: string, 
-  status: string 
-}
 
 export default function Barra({data, setList}: Datas) {
   const [message, setMessage] = useState('');

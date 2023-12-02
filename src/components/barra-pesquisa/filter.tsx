@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { BiFilter } from 'react-icons/bi';
 import { ApiData, sala } from 'types';
 
 type Datas = {
