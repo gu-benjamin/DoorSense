@@ -7,6 +7,7 @@ import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import { IoWarningOutline } from 'react-icons/io5';
 import Loading from 'app/(authenticated)/loading';
+import { Logout } from 'functions/Logout';
 
 interface ModalDeleteClassProps {
   open: boolean;
@@ -40,18 +41,22 @@ export default function ModalDeleteClass({
         }
       });
 
-      if (!res.ok) {
-        throw new Error('Falha ao deletar');
+      const json = await res.json();
+
+      if (json.status === '401 Unauthorized') {
+        Logout();
+        router.refresh();
       }
 
-      // const json = await res.json();
-
-      setMessage('Sala deletada com sucesso');
-      toggleModalVisibility();
-      setTimeout(() => {
-        router.refresh();
-        setMessage('');
-      }, 5000);
+      if (json.status === '200 OK') {
+        setMessage('Sala deletada com sucesso');
+        toggleModalVisibility();
+        setTimeout(() => {
+          router.refresh();
+          setMessage('');
+        }, 5000);
+      }
+      
     } catch (error) {
       console.error('Erro ao deletar sala:', error);
       // Trate o erro conforme necessário

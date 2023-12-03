@@ -1,14 +1,10 @@
-import {
-  HtmlHTMLAttributes,
-  forwardRef,
-  useState,
-} from 'react';
+import { HtmlHTMLAttributes, forwardRef, useState } from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TiEdit } from 'react-icons/ti';
 import { BiTrash } from 'react-icons/bi';
-import { FaMinusCircle } from "react-icons/fa";
+import { FaMinusCircle } from 'react-icons/fa';
 import ModalDeleteClass from './../Dashboard/ClassModals/deletar-sala';
 import ModalEditClass from './../Dashboard/ClassModals/editar-sala';
 import Mensagem from 'components/Mensagem';
@@ -55,42 +51,27 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
           {data === 'Ativo' ? (
             <AiFillCheckCircle size={16} color="#00D715" />
           ) : data === null ? (
-            <FaMinusCircle size={16} color="#FFD700" /> 
+            <FaMinusCircle size={16} color="#858585" />
+          ) : data === 'Pendente' ? (
+            <FaMinusCircle size={16} color="#FFD700" />
           ) : (
             <AiFillCloseCircle size={16} color="#FF0000" />
           )}
 
           <p
-            className={` ${
+            className={`${
               data === 'Ativo'
                 ? 'text-green-500'
                 : data === null
-                ?' text-yellow-500'
+                ? 'text-gray-500'
+                : data === 'Pendente'
+                ? 'text-yellow-500'
                 : 'text-red-500'
             }`}
           >
-            {data === null ? 'Inativo' : 'Pendente'}
+            {data === null ? '---' : data}
+          </p>
 
-          </p> 
-
-          {/* Versão que deu certo */}
-            {/* {data === 'Ativo' ? (
-          // <>
-          //   <AiFillCheckCircle size={16} color="#00D715" />
-          //   <p className="text-green-500">Ativo</p>
-          //   </>
-          //   ) : data === null ? (
-          //     <>
-          //       <FaMinusCircle size={16} color="#FFD700" />
-          //       <p className="text-yellow-500">Pendente</p>
-          //     </>
-          //   ) : (
-          //     <>
-          //       <AiFillCloseCircle size={16} color="#FF0000" />
-          //       <p className="text-red-500">Inativo</p>
-          //     </>
-          //   )}
-                    </p> */}
           <div className="sm:hidden">
             <ButtonIcon
               icon={<MdKeyboardArrowDown size={18} color="#05AFF2" />}

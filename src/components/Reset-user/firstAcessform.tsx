@@ -53,7 +53,7 @@ export default function FirstAcessForm() {
   const {
     register,
     handleSubmit,
-    resetField,
+    reset,
     formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
@@ -90,9 +90,7 @@ export default function FirstAcessForm() {
       }
   
       if(json.status === '200 OK'){
-        resetField('username');
-        resetField('password');
-        resetField('confirmPassword');
+        reset();
         setSucess((prevState) => !prevState);
       }
     } catch (error) {

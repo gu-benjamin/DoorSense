@@ -5,8 +5,6 @@ import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
 import { Dropdown } from 'components/DropDown/dropdown';
 import { TbHomeEdit } from 'react-icons/tb';
-import { FaFilePen } from 'react-icons/fa6';
-import { MdEditLocationAlt } from 'react-icons/md';
 import { MdOutlineClose } from 'react-icons/md';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -14,13 +12,15 @@ import { useForm } from 'react-hook-form';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import Loading from 'app/(authenticated)/loading';
+import { Logout } from 'functions/Logout';
+
 
 type classData = {
   id: string;
   nome: string;
   numero?: string;
   arduino?: string;
-  status: string;
+  status: string | null; // Alterado o tipo para aceitar null
 };
 
 interface ModalEditClassProps {
@@ -64,7 +64,7 @@ export default function ModalEditClass({
   const {
     register,
     handleSubmit,
-    resetField,
+    reset,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -80,9 +80,7 @@ export default function ModalEditClass({
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
-    resetField('nome');
-    resetField('numero');
-    resetField('arduino');
+    reset();
   }
 
   //Função acionada ao dar submit do formulário
@@ -103,16 +101,21 @@ export default function ModalEditClass({
         }
       });
 
-      if (!res.ok) {
-        throw new Error('Falha ao editar sala');
+      const json = await res.json();
+
+      if (json.status === '401 Unauthorized') {
+        Logout();
+        router.refresh();
       }
 
-      const json = await res.json();
-      setMessage(json.data.message);
-      setTimeout(() => setMessage(''), 5000);
-
-      toggleModalVisibility();
-      router.refresh();
+      if (json.status === '200 OK') {
+        setMessage(json.data.message);
+        setTimeout(() => setMessage(''), 5000);
+  
+        toggleModalVisibility();
+        router.refresh();
+      }
+      
     } catch (error) {
       console.error('Erro ao editar sala:', error);
       // Trate o erro conforme necessário

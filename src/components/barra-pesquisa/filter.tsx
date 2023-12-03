@@ -32,14 +32,19 @@ useEffect(() => {
     case 'inativo':
       setList({
         ...data,
-        salas: data.salas.filter((item) => item.status == null)
+        salas: data.salas.filter((item) => item.status == 'Inativo')
+      });
+      break;
+    case 'pendente':
+      setList({
+        ...data,
+        salas: data.salas.filter((item) => item.status == 'Pendente')
       });
       break;
     default:
       setList(data);
   }
 }, [filter]);
-
 
   return (
     <div>
@@ -56,7 +61,7 @@ useEffect(() => {
           <option value="alfabetico">Ordem Alfabética</option>
           <option value="ativo">Ativo</option>
           <option value="inativo">Inativo</option>
-          <option value="inativo">Pendente</option>
+          <option value="pendente">Pendente</option>
         </select>
     </div>
   );

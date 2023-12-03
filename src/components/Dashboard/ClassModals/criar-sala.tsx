@@ -11,6 +11,7 @@ import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { BsHouseAdd } from "react-icons/bs";
 import { Modal } from 'components/Modal';
 import Loading from 'app/(authenticated)/loading';
+import { Logout } from 'functions/Logout';
 
 interface ModalCreateClassProps {
   open: boolean;
@@ -46,7 +47,7 @@ export default function ModalCreateClass({
   const {
     register,
     handleSubmit,
-    resetField,
+    reset,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -56,8 +57,7 @@ export default function ModalCreateClass({
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
-    resetField('nome');
-    resetField('numero');
+    reset();
   }
 
   //Função acionada ao dar submit do formulário
@@ -75,16 +75,21 @@ export default function ModalCreateClass({
         }
       });
 
-      if (!res.ok) {
-        throw new Error('Falha ao criar sala');
+      const json = await res.json();
+
+      if (json.status === '401 Unauthorized') {
+        Logout();
+        router.refresh();
       }
 
-      const json = await res.json();
-      setMessage(json.data.message);
-      setTimeout(() => setMessage(''), 5000);
+      if (json.status === '200 OK') {
+        setMessage(json.data.message);
+        setTimeout(() => setMessage(''), 5000);
+  
+        toggleModalVisibility();
+        router.refresh();
+      }
 
-      toggleModalVisibility();
-      router.refresh();
     } catch (error) {
       console.error('Erro ao processar formulário:', error);
       // Trate o erro conforme necessário

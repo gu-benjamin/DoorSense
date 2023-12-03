@@ -19,10 +19,13 @@ export async function GET(request: Request) {
 
     const data = await res.json();
 
-    console.log(data);
-
     if(data.status === '401 Unauthorized'){
-      return NextResponse.rewrite(new URL('/', request.url))
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
     }
 
     return NextResponse.json(
