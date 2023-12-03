@@ -15,6 +15,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import ModalSucessForm from './ModalSucess/index';
 import { APP_ROUTES } from 'constants/app_routes';
 import Loading from 'app/(authenticated)/loading';
+import { senhaSchema } from 'schemas';
 
 
 const schema = z
@@ -24,16 +25,8 @@ const schema = z
         required_error: 'Este campo é obrigatório'
       })
       .email('Por favor insira um e-mail válido.'),
-    password: z
-      .string({
-        required_error: 'Este campo é obrigatório'
-      })
-      .min(5, 'Por favor insira uma senha válida'),
-    confirmPassword: z
-      .string({
-        required_error: 'Este campo é obrigatório'
-      })
-      .min(5, 'Por favor insira uma senha válida')
+    password: senhaSchema,
+    confirmPassword: senhaSchema,
   })
   .refine((fields) => fields.password === fields.confirmPassword, {
     path: ['confirmPassword'],

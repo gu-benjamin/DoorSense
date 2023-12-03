@@ -151,9 +151,6 @@ export default function LoginForm() {
           disabled={loading} // Desativa o input quando está carregando
           actionIcon={
             <ButtonIcon
-              className={`absolute right-3 ${
-                errors.password?.message ? `bottom-12` : `bottom-2`
-              }`}
               icon={
                 isPasswordVisible ? (
                   <IconOpenPassword

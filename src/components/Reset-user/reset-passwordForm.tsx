@@ -14,19 +14,12 @@ import { useParams, usePathname, useRouter } from 'next/navigation';
 import ModalSucessForm from './ModalSucess';
 import { APP_ROUTES } from 'constants/app_routes';
 import Loading from 'app/(authenticated)/loading';
+import { senhaSchema } from 'schemas';
 
 const schema = z
   .object({
-    newPassword: z
-      .string({
-        required_error: 'Este campo é obrigatório'
-      })
-      .min(5, 'Por favor insira uma senha válida'),
-    confirmNewPassword: z
-      .string({
-        required_error: 'Este campo é obrigatório'
-      })
-      .min(5, 'Por favor insira uma senha válida')
+    newPassword: senhaSchema,
+    confirmNewPassword: senhaSchema
   })
   .refine((fields) => fields.newPassword === fields.confirmNewPassword, {
     path: ['confirmNewPassword'],
@@ -146,9 +139,6 @@ export default function ResetPasswordForm() {
           //Botao icone de esconder a senha
           actionIcon={
             <ButtonIcon
-              className={`absolute right-3 ${
-                errors.newPassword?.message ? `bottom-12` : `bottom-2`
-              }`}
               icon={
                 isPasswordVisible ? (
                   <IconOpenPassword
@@ -198,9 +188,6 @@ export default function ResetPasswordForm() {
           //Botao icone de esconder a senha
           actionIcon={
             <ButtonIcon
-              className={`absolute right-3 ${
-                errors.confirmNewPassword?.message ? `bottom-12` : `bottom-2`
-              }`}
               icon={
                 isConfirmPasswordVisible ? (
                   <IconOpenPassword
