@@ -40,6 +40,7 @@ export default function ResetPasswordForm() {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
@@ -51,7 +52,6 @@ export default function ResetPasswordForm() {
     setLoading(true);
 
     try {
-      console.log(data);
 
       const body = {
         newPassword: data.newPassword,
@@ -66,13 +66,15 @@ export default function ResetPasswordForm() {
         }
       });
 
-      const json = await res.json();
-      console.log(json);
-
-      if (json.status === '401 Unauthorized') {
-        refresh();
-        push(APP_ROUTES.public.login);
+      if (res.status >= 400) {
+        if(res.status === 401){
+          refresh();
+          push(APP_ROUTES.public.login);
+        }
+        throw new Error('Falha ao registrar nova senha. Tente novamente');
       }
+
+      const json = await res.json();
 
       if (json.status === '200 OK') {
         reset(); // Resetando os campos do formulário
@@ -80,15 +82,16 @@ export default function ResetPasswordForm() {
       }
     } catch (error) {
       console.error('Erro ao processar o formulário:', error);
-      // Trate o erro conforme necessário
+      setError('serverError', {
+        message: error.message
+      })
     } finally {
       setLoading(false);
     }
   };
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] =
-    useState(false);
+  const [isConfirmPasswordVisible, setIsConfirmPasswordVisible] = useState(false);
 
   const togglePasswordVisibility = () => {
     setIsPasswordVisible((prevState) => !prevState);
@@ -214,6 +217,8 @@ export default function ResetPasswordForm() {
           }
         />
 
+        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+
         <Button
           btnName={loading ? <Loading /> : 'Enviar'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
@@ -222,7 +227,7 @@ export default function ResetPasswordForm() {
         />
       </form>
 
-      <ModalSucessForm open={success} setOpen={setSuccess} pathname={pathname} />
+      <ModalSucessForm open={success} setOpen={setSuccess} pathname={pathname!} />
     </>
   );
 }

@@ -19,7 +19,14 @@ export async function PUT(request: Request) {
 
     const data = await res.json();
 
-    console.log(data);
+    if (data.status === '400 Bad Request') {
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
 
     if (
       data.status === '200 OK' ||
@@ -53,6 +60,7 @@ export async function PUT(request: Request) {
         status: 200
       }
     );
+
   } catch (error) {
     return NextResponse.json(
       { message: 'Falha ao fazer a requisição', error },

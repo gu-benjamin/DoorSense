@@ -1,5 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cookies } from 'next/headers';
+import { NextResponse } from 'next/server';
 import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
 
 export async function POST() {
@@ -32,7 +31,6 @@ export async function POST() {
 
 export async function PUT(request: Request) {
 
-  console.log(request);
   const reqData = await request.json();
   const { ticket, newPassword } = reqData;
 

@@ -40,7 +40,8 @@ export default function LoginForm() {
   const {
     register,
     handleSubmit,
-    resetField,
+    reset,
+    setError,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -53,7 +54,6 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      console.log(data);
       const body = data;
 
       const res = await fetch('/api/login', {
@@ -65,14 +65,13 @@ export default function LoginForm() {
       });
 
       if (!res.ok) {
-        throw new Error('Falha ao autenticar');
+        throw new Error('Usuário ou senha são inválidos. Tente novamente.');
       }
+
       const json = await res.json();
       console.log(json);
 
-      resetField('username');
-      resetField('password');
-
+      reset();
       router.refresh();
       if(json.message === 'Login realizado com sucesso / Crie Usuário'){
         router.push(APP_ROUTES.private.reset_user);
@@ -80,8 +79,10 @@ export default function LoginForm() {
   
       router.push(APP_ROUTES.private.dashboard);
     } catch (error) {
-      console.error('Erro ao processar formulário:', error);
-      // Trate o erro conforme necessário
+      setError('serverError', {
+        message: error.message
+      })
+
     } finally {
       setLoading(false);
     }
@@ -176,6 +177,9 @@ export default function LoginForm() {
             />
           }
         />
+
+        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+
         <Button
           btnName={loading ? <Loading /> : 'ENTRAR'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}

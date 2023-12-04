@@ -19,12 +19,19 @@ export async function POST(request: Request) {
 
     const data = await res.json();
 
-    if (data.status === '200 OK') {
-      if (data.token) {
-        cookies().set('token', data.token);
-      } else {
-        cookies().set('ticket', data.ticket);
-      }
+    if (data.status !== '200 OK') {
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
+    }
+
+    if (data.token) {
+      cookies().set('token', data.token);
+    } else {
+      cookies().set('ticket', data.ticket);
     }
 
     return NextResponse.json(

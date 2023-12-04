@@ -3,9 +3,9 @@
 import { useState, SetStateAction, ReactNode, useEffect } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { LuMail } from 'react-icons/lu';
-import { IoIosCheckmarkCircleOutline, IoIosCloseCircleOutline } from "react-icons/io";
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
+import Loading from 'app/(authenticated)/loading';
 
 interface ModalLoginFormProps {
   open: boolean;
@@ -13,10 +13,8 @@ interface ModalLoginFormProps {
 }
 
 export default function ModalLoginForm({ open, setOpen }: ModalLoginFormProps) {
-
-  const[apiRes, setApiRes] = useState('');
-
-  const sucess = apiRes === '200 OK' ? true : false;
+  const [mounted, setMounted] = useState(false);
+  const [message, setMessage] = useState('');
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
@@ -24,29 +22,42 @@ export default function ModalLoginForm({ open, setOpen }: ModalLoginFormProps) {
 
   //Função de enviar email de recuperação ao email registrado no banco de dados
   const enviarEmail = async () => {
-    const res = await fetch('/api/login/reset-password', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+    setMounted(false);
+    try {
+      const res = await fetch('/api/login/reset-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Erro ao enviar email');
       }
-    });
+      const json = await res.json();
+      const sucess = json.status === '200 OK' ? true : false;
 
-    if (!res.ok) {
-      throw new Error('Erro ao enviar email');
+      if (sucess) {
+        setMessage(
+          'Um e-mail de recuperação foi enviado. Por favor, verifique sua caixa de entrada.'
+        );
+      }
+    } catch (error) {
+      setMessage('Falha ao enviar e-mail. Feche e tente novamente.');
+    } finally {
+      setMounted(true);
     }
-
-    const json = await res.json();
-
-    setApiRes(json.status);
   };
 
-  useEffect(() =>{
-    if(open){
+  useEffect(() => {
+    if (open) {
       enviarEmail();
     }
 
-    return setApiRes('');
-
+    return () => {
+      setMessage('');
+      setMounted(false);
+    };
   }, [open]);
 
   return (
@@ -64,16 +75,14 @@ export default function ModalLoginForm({ open, setOpen }: ModalLoginFormProps) {
       </Modal.CloseTop>
       <Modal.MainSection>
         <Modal.Icon
-          icon={sucess ? <IoIosCheckmarkCircleOutline size={45} color={`var(--color-primary)`}/> : <IoIosCloseCircleOutline size={45} color={`var(--color-primary)`}/> }
+          icon={<LuMail size={45} color={`var(--color-primary)`} />}
         />
         <Modal.Title
           title={`Redefinição de senha`}
           className="dark:text-white"
         />
-        <Modal.Content>         
-          <p>
-            {sucess ? 'Um e-mail de recuperação foi enviado. Por favor, verifique sua caixa de entrada.' : 'Falha ao enviar e-mail. Feche e tente novamente.'}
-          </p>
+        <Modal.Content>
+          {mounted ? <p>{message}</p> : <Loading />}
         </Modal.Content>
       </Modal.MainSection>
       <Modal.Actions>

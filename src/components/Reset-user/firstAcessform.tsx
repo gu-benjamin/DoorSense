@@ -47,6 +47,7 @@ export default function FirstAcessForm() {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
@@ -59,8 +60,7 @@ export default function FirstAcessForm() {
     setLoading(true);
 
     try {
-    
-      console.log(data);
+      
       const body = {
         username: data.username,
         password: data.password
@@ -73,22 +73,26 @@ export default function FirstAcessForm() {
           'Content-Type': 'application/json'
         }
       });
+
+      if (res.status >= 400) {
+        if(res.status >= 401){
+          refresh();
+          push(APP_ROUTES.public.login);
+        }
+        throw new Error('Falha ao registrar novo usuário.');
+      }
   
       const json = await res.json();
       console.log(json)
-  
-      if(json.status === '401 Unauthorized' || '403 Forbidden'){
-        refresh();
-        push(APP_ROUTES.public.login);
-      }
   
       if(json.status === '200 OK'){
         reset();
         setSucess((prevState) => !prevState);
       }
     } catch (error) {
-      console.error('Erro ao processar o formulário:', error);
-      // Trate o erro conforme necessário
+      setError('serverError', {
+        message: error.message
+      })
     } finally {
       setLoading(false);
     }
@@ -243,6 +247,8 @@ export default function FirstAcessForm() {
           }
         />
 
+        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+
         <Button
           btnName={loading ? <Loading /> : 'Enviar'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
@@ -251,7 +257,7 @@ export default function FirstAcessForm() {
         />
       </form>
 
-      <ModalSucessForm open={sucess} setOpen={setSucess} pathname={pathname}/>
+      <ModalSucessForm open={sucess} setOpen={setSucess} pathname={pathname!}/>
     </>
   );
 }

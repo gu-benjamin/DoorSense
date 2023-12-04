@@ -6,8 +6,6 @@ export async function POST(request: Request) {
   const token = cookies().get('token');
   const reqData = await request.json();
 
-  console.log(reqData);
-
   try {
     const res = await fetch(
       `${DEV_API_ENDPOINT}salas/create/`,
@@ -22,6 +20,15 @@ export async function POST(request: Request) {
     );
 
     const data = await res.json();
+
+    if(data.status === '400 Bad Request'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
 
     if(data.status === '401 Unauthorized'){
       return NextResponse.json(
@@ -50,8 +57,6 @@ export async function PUT(request: Request) {
   const token = cookies().get('token');
   const reqData = await request.json();
 
-  console.log(reqData);
-
   try {
     const res = await fetch(
       `${DEV_API_ENDPOINT}salas/update/`,
@@ -76,6 +81,15 @@ export async function PUT(request: Request) {
       );
     }
 
+    if(data.status === '400 Bad Request'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
+
     return NextResponse.json(
       { data },
       {
@@ -94,8 +108,6 @@ export async function DELETE(request: Request) {
   const token = cookies().get('token');
   const reqData = await request.json();
 
-  console.log(reqData);
-
   try {
     const res = await fetch(
       `${DEV_API_ENDPOINT}salas/delete/`,
@@ -111,11 +123,29 @@ export async function DELETE(request: Request) {
 
     const data = await res.json();
 
+    if(data.status === '400 Bad Request'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
+
     if(data.status === '401 Unauthorized'){
       return NextResponse.json(
         { message: data.message, status: data.status },
         {
           status: 401
+        }
+      );
+    }
+
+    if(data.status === '404 Not Found'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 404
         }
       );
     }

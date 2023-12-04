@@ -48,6 +48,7 @@ export default function ModalCreateClass({
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -56,8 +57,8 @@ export default function ModalCreateClass({
   });
 
   function toggleModalVisibility() {
-    setOpen((prevState) => !prevState);
     reset();
+    setOpen((prevState) => !prevState);
   }
 
   //Função acionada ao dar submit do formulário
@@ -77,22 +78,24 @@ export default function ModalCreateClass({
 
       const json = await res.json();
 
-      if (json.status === '401 Unauthorized') {
-        Logout();
-        router.refresh();
+      if (!res.ok) {
+        if(res.status > 400){
+          toggleModalVisibility();
+          Logout();
+          router.refresh();
+        }
+        throw new Error(json.message);
       }
 
-      if (json.status === '200 OK') {
-        setMessage(json.data.message);
-        setTimeout(() => setMessage(''), 5000);
-  
-        toggleModalVisibility();
-        router.refresh();
-      }
+      setMessage(json.data.message);
+      setTimeout(() => setMessage(''), 5000);
+      toggleModalVisibility();
+      router.refresh();
 
     } catch (error) {
-      console.error('Erro ao processar formulário:', error);
-      // Trate o erro conforme necessário
+      setError('serverError', {
+        message: error.message
+      })
     } finally {
       setLoading(false);
     }
@@ -129,7 +132,7 @@ export default function ModalCreateClass({
             <h1>Insira os seguintes valores abaixo:</h1>
             <form
               onSubmit={handleSubmit(handleForm)}
-              className="flex flex-col gap-4"
+              className="flex flex-col gap-4 items-center"
             >
               <InputLogin
                 {...register('nome', { required: true })}
@@ -146,6 +149,9 @@ export default function ModalCreateClass({
                 helperText={errors.numero?.message}
                 disabled={loading}
               />
+
+            {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+
             </form>
           </Modal.Content>
         </Modal.MainSection>

@@ -5,7 +5,6 @@ export async function GET() {
   try {
     const hasTicket = checkHasTicket();
 
-    console.log(hasTicket)
     const cookies = {
       ticket: hasTicket,
     };

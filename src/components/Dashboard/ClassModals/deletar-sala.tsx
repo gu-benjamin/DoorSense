@@ -24,6 +24,7 @@ export default function ModalDeleteClass({
 }: ModalDeleteClassProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
@@ -43,23 +44,24 @@ export default function ModalDeleteClass({
 
       const json = await res.json();
 
-      if (json.status === '401 Unauthorized') {
-        Logout();
-        router.refresh();
+      if (!res.ok) {
+        if(res.status !== 404 && res.status >= 401){
+          toggleModalVisibility();
+          Logout();
+          router.refresh();
+        }
+        throw new Error(json.message);
       }
 
-      if (json.status === '200 OK') {
-        setMessage('Sala deletada com sucesso');
-        toggleModalVisibility();
-        setTimeout(() => {
-          router.refresh();
-          setMessage('');
-        }, 5000);
-      }
+      setMessage('Sala deletada com sucesso');
+      toggleModalVisibility();
+      setTimeout(() => {
+        router.refresh();
+        setMessage('');
+      }, 5000);
       
     } catch (error) {
-      console.error('Erro ao deletar sala:', error);
-      // Trate o erro conforme necessário
+       setErrorMessage(`Ocorreu um erro ao deletar a sala. ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -97,6 +99,8 @@ export default function ModalDeleteClass({
             Tem certeza que quer deletar essa sala? Essa sala será excluída{' '}
             <span className="text-red-500 font-bold">permanentemente</span>
           </h1>
+          {errorMessage.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errorMessage}</p>}
+
         </Modal.Content>
       </Modal.MainSection>
 

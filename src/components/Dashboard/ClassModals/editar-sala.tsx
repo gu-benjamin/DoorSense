@@ -65,6 +65,7 @@ export default function ModalEditClass({
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -76,11 +77,10 @@ export default function ModalEditClass({
   });
 
   const inputNumber = classData.numero !== null ? classData.numero : '';
-  // const inputArduino = classData.arduino !== null ? classData.arduino : '';
 
   function toggleModalVisibility() {
-    setOpen((prevState) => !prevState);
     reset();
+    setOpen((prevState) => !prevState);
   }
 
   //Função acionada ao dar submit do formulário
@@ -103,22 +103,26 @@ export default function ModalEditClass({
 
       const json = await res.json();
 
-      if (json.status === '401 Unauthorized') {
-        Logout();
-        router.refresh();
+      if (!res.ok) {
+        if(res.status > 400){
+          toggleModalVisibility();
+          Logout();
+          router.refresh();
+        }
+        throw new Error(json.message);
       }
 
-      if (json.status === '200 OK') {
-        setMessage(json.data.message);
-        setTimeout(() => setMessage(''), 5000);
-  
-        toggleModalVisibility();
-        router.refresh();
-      }
+      
+      setMessage(json.data.message);
+      setTimeout(() => setMessage(''), 5000);
+
+      toggleModalVisibility();
+      router.refresh();
       
     } catch (error) {
-      console.error('Erro ao editar sala:', error);
-      // Trate o erro conforme necessário
+      setError('serverError', {
+        message: error.message
+      })
     } finally {
       setLoading(false);
     }
@@ -151,7 +155,7 @@ export default function ModalEditClass({
           </h1>
           <form
             onSubmit={handleSubmit(handleForm)}
-            className="flex flex-col gap-4"
+            className="flex flex-col items-center gap-4"
           >
             <InputLogin
               {...register('nome', { required: true })}
@@ -180,6 +184,9 @@ export default function ModalEditClass({
               helperText={errors.arduino?.message}
               disabled={loading}
             />
+
+            {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+
           </form>
         </Modal.Content>
       </Modal.MainSection>

@@ -21,7 +21,7 @@ export default function ModalSucessForm({
 }: ModalSucessForm) {
   const router = useRouter();
 
-  const isResetPassword = pathname! === APP_ROUTES.public.reset_password;
+  const isFirstAcess = pathname === APP_ROUTES.private.reset_user;
 
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
@@ -52,14 +52,14 @@ export default function ModalSucessForm({
           }
         />
         <Modal.Title
-          title={isResetPassword ? 'Senha redefinida' : 'Usuário redefinido'}
+          title={isFirstAcess ? 'Usuário redefinido' : 'Senha redefinida'}
           className="dark:text-white"
         />
         <Modal.Content>
           <p>
-            {isResetPassword
-              ? 'A senha foi redefinida com sucesso. Para continuar o acesso, vá para login.'
-              : 'O usuário foi redefinido com sucesso. Para continuar o acesso, vá para login.'}
+            {isFirstAcess
+              ? 'O usuário foi redefinido com sucesso. Para continuar o acesso, vá para login.'
+              : 'A senha foi redefinida com sucesso. Para continuar o acesso, vá para login.'}
           </p>
         </Modal.Content>
       </Modal.MainSection>
