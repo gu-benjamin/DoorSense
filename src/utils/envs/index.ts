@@ -1,6 +1,3 @@
-const LOCAL_ENDPOINT = process.env.LOCAL_ENDPOINT;
 const API_ENDPOINT = process.env.API_ENDPOINT;
-const DEV_API_ENDPOINT = process.env.DEV_API_ENDPOINT;
-const SECRET = process.env.SECRET_KEY;
 
-export {LOCAL_ENDPOINT, API_ENDPOINT, DEV_API_ENDPOINT, SECRET};
+export { API_ENDPOINT };

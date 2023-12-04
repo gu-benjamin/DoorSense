@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
+import { API_ENDPOINT } from 'utils/envs';
 
 export async function POST() {
   const headersList = {
@@ -8,7 +8,7 @@ export async function POST() {
   };
 
   try {
-    const res = await fetch(`${DEV_API_ENDPOINT}login/forgot-password/`, {
+    const res = await fetch(`${API_ENDPOINT}login/forgot-password/`, {
       method: 'POST',
       headers: headersList
     });
@@ -35,7 +35,7 @@ export async function PUT(request: Request) {
   const { ticket, newPassword } = reqData;
 
   try {
-    const res = await fetch(`${DEV_API_ENDPOINT}login/reset-password/`, {
+    const res = await fetch(`${API_ENDPOINT}login/reset-password/`, {
       method: 'PUT',
       body: JSON.stringify({
         "new-password": newPassword

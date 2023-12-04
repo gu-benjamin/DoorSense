@@ -1,6 +1,6 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
-import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
+import { API_ENDPOINT } from 'utils/envs';
 
 export async function POST(request: Request) {
   const token = cookies().get('token');
@@ -8,7 +8,7 @@ export async function POST(request: Request) {
 
   try {
     const res = await fetch(
-      `${DEV_API_ENDPOINT}salas/create/`,
+      `${API_ENDPOINT}salas/create/`,
       {
         method: 'POST',
         body: JSON.stringify(reqData),
@@ -59,7 +59,7 @@ export async function PUT(request: Request) {
 
   try {
     const res = await fetch(
-      `${DEV_API_ENDPOINT}salas/update/`,
+      `${API_ENDPOINT}salas/update/`,
       {
         method: 'PUT',
         body: JSON.stringify(reqData),
@@ -110,7 +110,7 @@ export async function DELETE(request: Request) {
 
   try {
     const res = await fetch(
-      `${DEV_API_ENDPOINT}salas/delete/`,
+      `${API_ENDPOINT}salas/delete/`,
       {
         method: 'DELETE',
         body: JSON.stringify(reqData),

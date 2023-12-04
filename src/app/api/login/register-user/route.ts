@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
-import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
+import { API_ENDPOINT } from 'utils/envs';
 
 export async function PUT(request: Request) {
   const reqData = await request.json();
   const ticket = cookies().get('ticket');
 
   try {
-    const res = await fetch(`${DEV_API_ENDPOINT}login/register-user/`, {
+    const res = await fetch(`${API_ENDPOINT}login/register-user/`, {
       method: 'PUT',
       body: JSON.stringify(reqData),
       headers: {

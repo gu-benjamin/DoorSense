@@ -3,7 +3,7 @@ const HomeUI = dynamic(() => import('../../../components/Dashboard/index'), {
   ssr: false
 });
 import { cookies } from 'next/headers';
-import { API_ENDPOINT, DEV_API_ENDPOINT, LOCAL_ENDPOINT } from 'utils/envs';
+import { API_ENDPOINT } from 'utils/envs';
 import { doorsense } from 'types';
 import PrivateDBRoute from 'components/PrivateRoutes/Dashboard';
 
@@ -14,13 +14,13 @@ export default async function HomePage() {
     'Content-Type': 'application/json'
   };
 
-  const resSalas = await fetch(`${DEV_API_ENDPOINT}salas/`, {
+  const resSalas = await fetch(`${API_ENDPOINT}salas/`, {
     method: 'GET',
     headers: headersList
   });
 
   const resDoorsenses = await fetch(
-    `${DEV_API_ENDPOINT}doorsenses/`,
+    `${API_ENDPOINT}doorsenses/`,
     {
       method: 'GET',
       headers: headersList
