@@ -69,7 +69,6 @@ export default function LoginForm() {
       }
 
       const json = await res.json();
-      console.log(json);
 
       reset();
       router.refresh();

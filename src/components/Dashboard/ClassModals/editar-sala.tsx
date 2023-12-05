@@ -13,6 +13,7 @@ import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import Loading from 'app/(authenticated)/loading';
 import { Logout } from 'functions/Logout';
+import { doorsense } from 'types';
 
 
 type classData = {
@@ -128,6 +129,9 @@ export default function ModalEditClass({
     }
   };
 
+  const noRoom = doorsenses.filter((arduino) => arduino[1] == null );
+  const noRoomDoorsenses = noRoom.map((arduino) => arduino[0]);
+
   return (
     <Modal.Root open={open} onClose={setOpen}>
       {/*Parte de cima da modal - Action de fechar a modal*/}
@@ -179,7 +183,7 @@ export default function ModalEditClass({
               {...register('arduino', { required: true })}
               placeholder="Digite o número da sala ..."
               label="Doorsense ID:"
-              options={doorsenses}
+              options={noRoomDoorsenses}
               initialDoorsense={classData.arduino}
               helperText={errors.arduino?.message}
               disabled={loading}

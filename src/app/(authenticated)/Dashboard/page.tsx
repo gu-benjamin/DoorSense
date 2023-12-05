@@ -35,7 +35,7 @@ export default async function HomePage() {
 
   if (hasAuthorization) {
     const filterDoorsenses = dataDoorsenses.data.doorsenses.map(
-      (doorsense: doorsense) => doorsense.uniqueId
+      (doorsense: doorsense) => [doorsense.uniqueId, doorsense.sala]
     );
 
     return (

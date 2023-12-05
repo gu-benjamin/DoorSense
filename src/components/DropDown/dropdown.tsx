@@ -50,9 +50,11 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
                       dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`}
                       text-base`}
           id={inputId}
+          value={initialDoorsense !== undefined ? initialDoorsense : ""}
           {...props}
         >
           <option value="" >Selecione um Doorsense</option>
+          {initialDoorsense != undefined ? <option value={initialDoorsense} >{initialDoorsense}</option> : null}
           {availableOptions.map((option) => (
             <option key={option} value={option}>
               {option}

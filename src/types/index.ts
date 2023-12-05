@@ -18,7 +18,8 @@ type doorsense = {
   id: string,
   uniqueId: string,
   status: string,
-  lastUpdate: string
+  lastUpdate: string,
+  sala: string | null
 }
 
 type ApiData = {
