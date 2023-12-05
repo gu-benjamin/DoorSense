@@ -56,9 +56,9 @@ export default function LoginUI() {
         </div>
 
         {resolvedTheme === 'dark' ? (
-          <IconLogo size={100} />
+          <IconLogo size={170} />
         ) : (
-          <IconLogoDark size={100} />
+          <IconLogoDark size={170} />
         )}
 
 

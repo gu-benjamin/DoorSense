@@ -18,6 +18,13 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
     const inputId = useId();
     const hasError = helperText.length > 0;
 
+    const [valorSelec, setValorSelec] = useState(initialDoorsense != undefined ? initialDoorsense : "");
+
+    const handleChange = event => {
+      console.log(event.target.value);
+      setValorSelec(event.target.value);
+    };
+
     const [availableOptions, setAvailableOptions] = useState<string[]>(options);
 
     useEffect(() => {
@@ -50,11 +57,12 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
                       dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`}
                       text-base`}
           id={inputId}
-          value={initialDoorsense !== undefined ? initialDoorsense : ""}
+          defaultValue={initialDoorsense ? initialDoorsense : ''}
           {...props}
         >
-          <option value="" >Selecione um Doorsense</option>
-          {initialDoorsense != undefined ? <option value={initialDoorsense} >{initialDoorsense}</option> : null}
+          
+          {initialDoorsense ? <option value={initialDoorsense} >{initialDoorsense}</option> : <option value="" >Selecione um Doorsense</option>}
+          {initialDoorsense && <option value="" >Selecione um Doorsense</option>}
           {availableOptions.map((option) => (
             <option key={option} value={option}>
               {option}

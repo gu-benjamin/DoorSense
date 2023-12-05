@@ -43,9 +43,9 @@ export default function ResetUserUI() {
         </div>
 
         {resolvedTheme === 'dark' ? (
-          <IconLogo size={100} />
+          <IconLogo size={170} />
         ) : (
-          <IconLogoDark size={100} />
+          <IconLogoDark size={170} />
         )}
 
         {pathname === APP_ROUTES.private.reset_user ? <FirstAcessForm /> : <ResetPasswordForm />}
