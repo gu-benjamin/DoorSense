@@ -9,7 +9,7 @@ type DropdownProps = SelectHTMLAttributes<HTMLSelectElement> &{
   icon?: ReactNode;
   actionIcon?: ReactNode;
   initialDoorsense?: string;
-  options: string[]; // Adicione as opções do dropdown aqui
+  options: string[]; 
 };
 
 
