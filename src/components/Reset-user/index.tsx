@@ -2,13 +2,13 @@
 
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import Image from 'next/image';
-import LogoHome from '../Icons/logoSVG';
 import { useTheme } from 'next-themes';
-import LogoHomeDark from '../Icons/logoSVGdark';
 import FirstAcessForm from './firstAcessform';
 import ResetPasswordForm from './reset-passwordForm';
 import { usePathname } from 'next/navigation';
 import { APP_ROUTES } from 'constants/app_routes';
+import IconLogo from 'components/Icons/icon-logo';
+import IconLogoDark from 'components/Icons/icon-logodark';
 
 export default function ResetUserUI() {
   const { resolvedTheme } = useTheme();
@@ -43,9 +43,9 @@ export default function ResetUserUI() {
         </div>
 
         {resolvedTheme === 'dark' ? (
-          <LogoHomeDark size={170} />
+          <IconLogo size={100} />
         ) : (
-          <LogoHome size={170} />
+          <IconLogoDark size={100} />
         )}
 
         {pathname === APP_ROUTES.private.reset_user ? <FirstAcessForm /> : <ResetPasswordForm />}

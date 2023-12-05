@@ -4,11 +4,11 @@ import { useState, useEffect } from 'react';
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import { Button } from '../Buttons/Button/button';
 import Image from 'next/image';
-import LogoHome from '../Icons/logoSVG';
 import { useTheme } from 'next-themes';
-import LogoHomeDark from '../Icons/logoSVGdark';
 import LoginForm from './loginForm';
 import ModalLoginForm from './LoginModal/forgot-password';
+import IconLogo from 'components/Icons/icon-logo';
+import IconLogoDark from 'components/Icons/icon-logodark';
 
 export default function LoginUI() {
   const [open, setOpen] = useState(false);
@@ -56,10 +56,11 @@ export default function LoginUI() {
         </div>
 
         {resolvedTheme === 'dark' ? (
-          <LogoHomeDark size={170} />
+          <IconLogo size={100} />
         ) : (
-          <LogoHome size={170} />
+          <IconLogoDark size={100} />
         )}
+
 
         <LoginForm />
 

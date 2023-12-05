@@ -56,7 +56,7 @@ export default function ModalEditClass({
   setOpen,
   setMessage,
   classData,
-  doorsenses
+  doorsenses,
 }: ModalEditClassProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
