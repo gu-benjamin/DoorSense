@@ -17,15 +17,16 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
   ({ name = '', label, helperText = '', icon, actionIcon, initialDoorsense, options, ...props }, ref) => {
     const inputId = useId();
     const hasError = helperText.length > 0;
-
-    const [valorSelec, setValorSelec] = useState(initialDoorsense != undefined ? initialDoorsense : "");
-
-    const handleChange = event => {
-      console.log(event.target.value);
-      setValorSelec(event.target.value);
-    };
+    const [initialValue, setInitialValue] = useState(''); 
 
     const [availableOptions, setAvailableOptions] = useState<string[]>(options);
+
+    useEffect(() =>{
+      if(initialDoorsense){
+        setInitialValue(initialDoorsense);
+      }
+
+    },[])
 
     useEffect(() => {
       // Atualiza as opções disponíveis removendo o Arduino associado a outra sala
@@ -57,8 +58,9 @@ export const Dropdown = forwardRef<HTMLSelectElement, DropdownProps>(
                       dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`}
                       text-base`}
           id={inputId}
-          defaultValue={initialDoorsense ? initialDoorsense : ''}
           {...props}
+          value={initialValue}
+          onChange={(e) => {setInitialValue(e.target.value)}}
         >
           
           {initialDoorsense ? <option value={initialDoorsense} >{initialDoorsense}</option> : <option value="" >Selecione um Doorsense</option>}

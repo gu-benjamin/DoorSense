@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, SetStateAction, ReactNode, useEffect } from 'react';
+import { useState, SetStateAction, useEffect } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { LuMail } from 'react-icons/lu';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
