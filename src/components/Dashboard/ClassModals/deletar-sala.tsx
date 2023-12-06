@@ -26,12 +26,17 @@ export default function ModalDeleteClass({
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
+  useEffect(() =>{
+    return setErrorMessage('');
+  },[open])
+
   function toggleModalVisibility() {
     setOpen((prevState) => !prevState);
   }
 
   const deleteClass = async () => {
     setLoading(true);
+    setErrorMessage('');
 
     try {
       const res = await fetch('/api/classroms', {
@@ -61,7 +66,7 @@ export default function ModalDeleteClass({
       }, 5000);
       
     } catch (error) {
-       setErrorMessage(`Ocorreu um erro ao deletar a sala. ${error.message}`);
+       setErrorMessage(`Ocorreu um erro ao deletar a sala. ${(error as Error).message}`);
     } finally {
       setLoading(false);
     }

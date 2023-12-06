@@ -1,5 +1,3 @@
-import { SetStateAction } from 'react';
-
 interface HomeUIProps {
   datas: ApiData;
   doorsenses: [] | string[];

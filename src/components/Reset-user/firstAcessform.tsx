@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IconUser from 'components/Icons/icon-user';
 import IconLock from 'components/Icons/icon-lock';
 import IconOpenPassword from '../Icons/icon-password-open';
@@ -41,13 +41,13 @@ export default function FirstAcessForm() {
   const pathname = usePathname();
   const [sucess, setSucess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
@@ -58,6 +58,7 @@ export default function FirstAcessForm() {
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
     setLoading(true);
+    setApiError('');
 
     try {
       
@@ -90,9 +91,7 @@ export default function FirstAcessForm() {
         setSucess((prevState) => !prevState);
       }
     } catch (error) {
-      setError('serverError', {
-        message: error.message
-      })
+      setApiError((error as Error).message)
     } finally {
       setLoading(false);
     }
@@ -247,7 +246,7 @@ export default function FirstAcessForm() {
           }
         />
 
-        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+        {apiError.length > 0 && <p className='text-light-red font-normal italic text-sm'>{apiError}</p>}
 
         <Button
           btnName={loading ? <Loading /> : 'Enviar'}

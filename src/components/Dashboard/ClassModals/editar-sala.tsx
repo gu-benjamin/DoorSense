@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, SetStateAction, ReactNode, useEffect } from 'react';
+import React, { useState, SetStateAction, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { InputLogin } from 'components/Inputs/Input-login';
 import { Dropdown } from 'components/DropDown/dropdown';
@@ -13,7 +13,6 @@ import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { Modal } from 'components/Modal';
 import Loading from 'app/(authenticated)/loading';
 import { Logout } from 'functions/Logout';
-import { doorsense } from 'types';
 
 type classData = {
   id: string;
@@ -60,13 +59,19 @@ export default function ModalEditClass({
 }: ModalEditClassProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [inputNome, setInputNome] = useState('');
+  const [inputNumber, setInputNumber] = useState('');
+  const [apiError, setApiError] = useState('');
+
+  useEffect(() =>{
+    return setApiError('');
+  },[open])
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -76,12 +81,6 @@ export default function ModalEditClass({
       arduino: ''
     }
   });
-
-  // const inputNome = classData.numero !== null ? classData.numero : '';
-  // const inputNumber = classData.numero !== null ? classData.numero : '';
-
-  const [inputNome, setInputNome] = useState('');
-  const [inputNumber, setInputNumber] = useState('');
 
   useEffect(() => {
     setInputNome(classData.nome);
@@ -102,6 +101,7 @@ export default function ModalEditClass({
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
     setLoading(true);
+    setApiError('');
 
     try {
       const body = {
@@ -134,9 +134,7 @@ export default function ModalEditClass({
       toggleModalVisibility();
       router.refresh();
     } catch (error) {
-      setError('serverError', {
-        message: error.message
-      });
+      setApiError((error as Error).message)
     } finally {
       setLoading(false);
     }
@@ -207,9 +205,9 @@ export default function ModalEditClass({
               disabled={loading}
             />
 
-            {errors.serverError?.message.length > 0 && (
+            {apiError.length > 0 && (
               <p className="text-light-red font-normal italic text-sm">
-                {errors.serverError?.message}
+                {apiError}
               </p>
             )}
           </form>

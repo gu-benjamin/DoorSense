@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, SetStateAction, ReactNode, useEffect } from 'react';
+import { SetStateAction } from 'react';
 import { useRouter } from 'next/navigation';
 import { MdOutlineClose } from 'react-icons/md';
 import { IoIosCheckmarkCircleOutline } from 'react-icons/io';

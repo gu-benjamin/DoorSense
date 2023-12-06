@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import IconLock from 'components/Icons/icon-lock';
 import IconOpenPassword from '../Icons/icon-password-open';
 import IconClosePassword from '../Icons/icon-password-close';
@@ -35,12 +35,13 @@ export default function ResetPasswordForm() {
   const { ticket } = useParams();
   const [success, setSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
+
 
   const {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { errors, isSubmitting }
   } = useForm<FormProps>({
     mode: 'all',
@@ -50,6 +51,7 @@ export default function ResetPasswordForm() {
 
   const handleForm = async (data: FormProps) => {
     setLoading(true);
+    setApiError('');
 
     try {
 
@@ -82,9 +84,7 @@ export default function ResetPasswordForm() {
       }
     } catch (error) {
       console.error('Erro ao processar o formulário:', error);
-      setError('serverError', {
-        message: error.message
-      })
+      setApiError((error as Error).message)
     } finally {
       setLoading(false);
     }
@@ -217,7 +217,7 @@ export default function ResetPasswordForm() {
           }
         />
 
-        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+        {apiError.length > 0 && <p className='text-light-red font-normal italic text-sm'>{apiError}</p>}
 
         <Button
           btnName={loading ? <Loading /> : 'Enviar'}
