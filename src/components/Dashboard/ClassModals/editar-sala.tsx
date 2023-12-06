@@ -15,7 +15,6 @@ import Loading from 'app/(authenticated)/loading';
 import { Logout } from 'functions/Logout';
 import { doorsense } from 'types';
 
-
 type classData = {
   id: string;
   nome: string;
@@ -39,10 +38,11 @@ const schema = z.object({
       required_error: 'Este campo é obrigatório'
     })
     .min(3, 'A sala deve conter no mínimo 3 caracteres'),
-  numero: z.string({
-    required_error: 'Este campo é obrigatório'
-  }).min(1, 'A sala deve conter no mínimo 1 caractere')
-  .max(4, 'A sala deve conter no máximo 4 caracteres'),
+  numero: z
+    .string()
+    .max(4, 'A sala deve conter no máximo 4 caracteres')
+    .toUpperCase()
+    .trim(),
   arduino: z.string({
     required_error: 'Este campo é obrigatório'
   })
@@ -56,7 +56,7 @@ export default function ModalEditClass({
   setOpen,
   setMessage,
   classData,
-  doorsenses,
+  doorsenses
 }: ModalEditClassProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -77,7 +77,22 @@ export default function ModalEditClass({
     }
   });
 
-  const inputNumber = classData.numero !== null ? classData.numero : '';
+  // const inputNome = classData.numero !== null ? classData.numero : '';
+  // const inputNumber = classData.numero !== null ? classData.numero : '';
+
+  const [inputNome, setInputNome] = useState('');
+  const [inputNumber, setInputNumber] = useState('');
+
+  useEffect(() => {
+    setInputNome(classData.nome);
+    if (classData.numero) {
+      setInputNumber(classData.numero);
+    }
+    return () => {
+      setInputNome('');
+      setInputNumber('');
+    };
+  }, [classData]);
 
   function toggleModalVisibility() {
     reset();
@@ -105,7 +120,7 @@ export default function ModalEditClass({
       const json = await res.json();
 
       if (!res.ok) {
-        if(res.status > 400){
+        if (res.status > 400) {
           toggleModalVisibility();
           Logout();
           router.refresh();
@@ -113,23 +128,21 @@ export default function ModalEditClass({
         throw new Error(json.message);
       }
 
-      
       setMessage(json.data.message);
       setTimeout(() => setMessage(''), 5000);
 
       toggleModalVisibility();
       router.refresh();
-      
     } catch (error) {
       setError('serverError', {
         message: error.message
-      })
+      });
     } finally {
       setLoading(false);
     }
   };
 
-  const noRoom = doorsenses.filter((arduino) => arduino[1] == null );
+  const noRoom = doorsenses.filter((arduino) => arduino[1] == null);
   const noRoomDoorsenses = noRoom.map((arduino) => arduino[0]);
 
   return (
@@ -138,7 +151,12 @@ export default function ModalEditClass({
       <Modal.CloseTop>
         <ButtonIcon
           onClick={toggleModalVisibility}
-          icon={<MdOutlineClose size={30} className={`hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500`} />}
+          icon={
+            <MdOutlineClose
+              size={30}
+              className={`hover:text-red-500 hover:scale-110 focus:outline-none text-gray-500`}
+            />
+          }
         />
       </Modal.CloseTop>
 
@@ -163,15 +181,15 @@ export default function ModalEditClass({
           >
             <InputLogin
               {...register('nome', { required: true })}
-              defaultValue={classData.nome}
+              defaultValue={inputNome}
               placeholder="Digite o nome da sala ..."
-              label="Nome da Sala:"
+              label="Nome da Sala:*"
               helperText={errors.nome?.message}
               disabled={loading}
             />
 
             <InputLogin
-              {...register('numero', { required: true })}
+              {...register('numero')}
               defaultValue={inputNumber}
               placeholder="Digite o número da sala ..."
               label="Número da sala:"
@@ -189,8 +207,11 @@ export default function ModalEditClass({
               disabled={loading}
             />
 
-            {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
-
+            {errors.serverError?.message.length > 0 && (
+              <p className="text-light-red font-normal italic text-sm">
+                {errors.serverError?.message}
+              </p>
+            )}
           </form>
         </Modal.Content>
       </Modal.MainSection>

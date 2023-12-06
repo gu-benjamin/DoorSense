@@ -26,10 +26,7 @@ const schema = z.object({
       required_error: 'Este campo é obrigatório'
     })
     .min(3, 'A sala deve conter no mínimo 3 caracteres'),
-  numero: z.string({
-    required_error: 'Este campo é obrigatório'
-  }).min(1, 'A sala deve conter no mínimo 1 caracter')
-  .max(4, 'A sala deve conter no máximo 4 caracteres'),
+  numero: z.string().max(4, 'A sala deve conter no máximo 4 caracteres').toUpperCase().trim(),
 });
 
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
@@ -137,13 +134,13 @@ export default function ModalCreateClass({
               <InputLogin
                 {...register('nome', { required: true })}
                 placeholder="Digite o nome da sala ..."
-                label="Nome da Sala:"
+                label="Nome da Sala:*"
                 helperText={errors.nome?.message}
                 disabled={loading} // Desativa o input enquanto o carregamento estiver ocorrendo
               />
 
               <InputLogin
-                {...register('numero', { required: true })}
+                {...register('numero')}
                 placeholder="Digite o número da sala ..."
                 label="Número da sala:"
                 helperText={errors.numero?.message}
