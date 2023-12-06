@@ -35,13 +35,14 @@ type FormProps = z.infer<typeof schema>;
 export default function LoginForm() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [apiError, setApiError] = useState('');
+
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
     reset,
-    setError,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -52,6 +53,7 @@ export default function LoginForm() {
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
     setLoading(true);
+    setApiError('');
 
     try {
       const body = data;
@@ -78,9 +80,7 @@ export default function LoginForm() {
   
       router.push(APP_ROUTES.private.dashboard);
     } catch (error) {
-      setError('serverError', {
-        message: error.message
-      })
+      setApiError((error as Error).message)
 
     } finally {
       setLoading(false);
@@ -177,7 +177,7 @@ export default function LoginForm() {
           }
         />
 
-        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+        {apiError.length > 0 && <p className='text-light-red font-normal italic text-sm'>{apiError}</p>}
 
         <Button
           btnName={loading ? <Loading /> : 'ENTRAR'}
