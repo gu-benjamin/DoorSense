@@ -20,7 +20,7 @@ useEffect(() => {
     case 'numerico':
       setList({
         ...data,
-        salas: data.salas.slice().sort((a, b) => a.numero - b.numero)
+        salas: data.salas.slice().sort((a: any, b: any) => a.numero - b.numero)
       });
       break;
     case 'ativo':
