@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, ReactNode } from "react";
 import { twMerge } from 'tailwind-merge';
 
 interface ModalActionProps extends ButtonHTMLAttributes<HTMLButtonElement>{
-btnName: string
+btnName: string | ReactNode
 }
 
 export default function ModalAction({btnName, ...props}: ModalActionProps) {
@@ -10,7 +10,7 @@ export default function ModalAction({btnName, ...props}: ModalActionProps) {
     <>
       <button
         type="button"
-        className={twMerge(`botao-primary-modal`, props.className)}
+        className={twMerge(`botao-primary-modal `, props.className)}
         {...props}
       >
         {btnName}

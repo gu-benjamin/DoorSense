@@ -11,14 +11,14 @@ const CardData = forwardRef<HTMLInputElement, CardDataProps>(
   ({ data, ...props }, ref) => {
     return (
       <>
-        <p
-          className={twMerge(
-            `text-center dark:text-white`,
-            props.className
-          )}
-        >
-          {data !== null ? data : '---'}
-        </p>
+          <p
+            className={twMerge(
+              `dark:text-white text-center`,
+              props.className
+            )}
+          >
+            {data !== null ? data : '---'}
+          </p>
       </>
     );
   }

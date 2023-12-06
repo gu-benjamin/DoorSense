@@ -1,17 +1,17 @@
 import { NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
+import { API_ENDPOINT } from 'utils/envs';
 
 export async function POST(request: Request) {
-    const headersList = {
-      Accept: '*/*',
-      'Content-Type': 'application/json'
-    };
+  const headersList = {
+    Accept: '*/*',
+    'Content-Type': 'application/json'
+  };
 
   const reqData = await request.json();
 
   try {
-
-    const res = await fetch('http://localhost/doorsense_backend/api/login/', {
+    const res = await fetch(`${API_ENDPOINT}login/`, {
       method: 'POST',
       body: JSON.stringify(reqData),
       headers: headersList
@@ -19,8 +19,19 @@ export async function POST(request: Request) {
 
     const data = await res.json();
 
-    if(data.status === '200 OK'){
+    if (data.status !== '200 OK') {
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
+    }
+
+    if (data.token) {
       cookies().set('token', data.token);
+    } else {
+      cookies().set('ticket', data.ticket);
     }
 
     return NextResponse.json(
@@ -29,10 +40,9 @@ export async function POST(request: Request) {
         status: 200
       }
     );
-
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Erro ao realizar login.', error },
       { status: 500 }
     );
   }
@@ -40,17 +50,17 @@ export async function POST(request: Request) {
 
 export async function DELETE() {
   try {
-    cookies().delete('token')
+    cookies().delete('token');
     return NextResponse.json(
-      { message: 'Logout efetuado com sucesso'},
+      { message: 'Autenticação removida com sucesso.' },
+
       {
         status: 200
       }
-      );
-
+    );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao remover autenticação', error },
       { status: 500 }
     );
   }

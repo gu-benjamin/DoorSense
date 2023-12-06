@@ -1,3 +1,5 @@
+'use client'
+
 import '../globals.css';
 import type { Metadata } from 'next';
 import Header from './../../components/Header/header';
@@ -14,7 +16,7 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`w-screen h-screen flex flex-col justify-between`}>
+    <div className={`w-screen h-screen flex flex-col justify-between overflow-x-hidden`}>
       <Header />
       {children}
       <Footer />

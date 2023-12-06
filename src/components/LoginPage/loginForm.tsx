@@ -12,6 +12,8 @@ import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { useRouter } from 'next/navigation';
+import { APP_ROUTES } from 'constants/app_routes';
+import Loading from 'app/(authenticated)/loading';
 
 // Esquema de validação para o formulário do Login - Utilizado a lib Zod
 const schema = z.object({
@@ -32,12 +34,14 @@ type FormProps = z.infer<typeof schema>;
 
 export default function LoginForm() {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   // Chamada do hook useForm para a criação do formulário do login
   const {
     register,
     handleSubmit,
-    resetField,
+    reset,
+    setError,
     formState: { errors }
   } = useForm<FormProps>({
     mode: 'all',
@@ -47,29 +51,41 @@ export default function LoginForm() {
 
   //Função acionada ao dar submit do formulário
   const handleForm = async (data: FormProps) => {
-    
-    console.log(data);
-    const body = data;
+    setLoading(true);
 
-    const res = await fetch('/api/login', {
-      method: 'post',
-      body: JSON.stringify(body),
-      headers: {
-        'Content-Type': 'application/json'
+    try {
+      const body = data;
+
+      const res = await fetch('/api/login', {
+        method: 'post',
+        body: JSON.stringify(body),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (!res.ok) {
+        throw new Error('Usuário ou senha são inválidos. Tente novamente.');
       }
-    });
 
-    if (!res.ok) {
-      throw new Error('Falha ao autenticar');
+      const json = await res.json();
+
+      reset();
+      router.refresh();
+      if(json.message === 'Login realizado com sucesso / Crie Usuário'){
+        router.push(APP_ROUTES.private.reset_user);
+      }
+  
+      router.push(APP_ROUTES.private.dashboard);
+    } catch (error) {
+      setError('serverError', {
+        message: error.message
+      })
+
+    } finally {
+      setLoading(false);
     }
-    const json = await res.json();
-    console.log(json)
-
-    resetField('username');
-    resetField('password');
-
-    router.refresh();
-    router.push('/Dashboard');
+    
   };
 
   // STATES
@@ -98,10 +114,9 @@ export default function LoginForm() {
       >
         {/* Campo Usuário */}
         <InputLogin
-          //Registrando campo na hook
           {...register('username', { required: true })}
           //Pros
-          placeholder="Digite seu usuário"
+          placeholder="Digite seu usuário ..."
           icon={
             <IconUser
               size={30}
@@ -112,16 +127,15 @@ export default function LoginForm() {
               }
             />
           }
-          // label="Usuário:"
           helperText={errors.username?.message}
+          disabled={loading} // Desativa o input quando está carregando
         />
 
         {/* Campo password */}
         <InputLogin
-          // Registrando campo na hook
           {...register('password', { required: true })}
           //Props
-          placeholder="Digite sua senha"
+          placeholder="Digite sua senha ..."
           type={isPasswordVisible ? 'text' : 'password'}
           icon={
             <IconLock
@@ -133,14 +147,10 @@ export default function LoginForm() {
               }
             />
           }
-          // label="Senha:"
           helperText={errors.password?.message}
-          //Botao icone de esconder a senha
+          disabled={loading} // Desativa o input quando está carregando
           actionIcon={
             <ButtonIcon
-              className={`absolute right-3 ${
-                errors.password?.message ? `bottom-12` : `bottom-2`
-              }`}
               icon={
                 isPasswordVisible ? (
                   <IconOpenPassword
@@ -166,9 +176,14 @@ export default function LoginForm() {
             />
           }
         />
+
+        {errors.serverError?.message.length > 0 && <p className='text-light-red font-normal italic text-sm'>{errors.serverError?.message}</p>}
+
         <Button
-          btnName="ENTRAR"
+          btnName={loading ? <Loading /> : 'ENTRAR'}
           className={`botao-primary lg:px-10 xl:px-10 hover:scale-100 hover:bg-primary-60`}
+          disabled={loading}
+          type="submit"
         />
       </form>
     </>

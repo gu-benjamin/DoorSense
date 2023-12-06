@@ -6,7 +6,7 @@ import { twMerge } from 'tailwind-merge';
 type InputLoginProps = InputHTMLAttributes<HTMLInputElement> & {
   label?: string;
   helperText?: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   actionIcon?: ReactNode
 };
 
@@ -25,14 +25,17 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
     return (
       //Div root 
       <div
-        className={`flex flex-col justify-start relative gap-3 text-start`}
+        className={`flex flex-col justify-start relative gap-3 ${hasError && 'mb-7'} text-start`}
       >
         {/* Icone */}
-        <div className={`absolute ${hasError ? `bottom-10` : `bottom-2`}`}>{icon}</div>
+            
+        <div className={`absolute bottom-2`}>
+          {icon}
+        </div>
 
            {/* Label */}
         <label
-          className={twMerge(`text-base ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-400`}
+          className={twMerge(`text-base ${hasError ? `text-light-red` : `text-gray-500`} dark:${hasError ? `text-light-red` : `text-gray-200`}
                               duration-300  transform peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
                               peer-focus:dark:${hasError ? `text-light-red` : `text-primary`}
                               `,props.className)}
@@ -42,27 +45,29 @@ export const InputLogin = forwardRef<HTMLInputElement, InputLoginProps>(
         </label>
 
         {/* Campo de input */}
-        <input
-          type={type}
-          name={name}
-          ref={ref}
-          className={`px-9 lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
-                      bg-transparent outline-none
-                      peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
-                      dark:text-gray-500 dark:placeholder:${hasError ? `text-light-red` : `text-neutral-500`} 
-                      dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`} text-base`}
-          id={inputId}
-          {...props}
-        />
+        <div className='w-full relative'>
 
-        {/* <div className={`absolute right-3 ${hasError ? `bottom-8` : `bottom-2`}`}> */}
-          {actionIcon}  
-        {/* </div> */}
+          <input
+            type={type}
+            name={name}
+            ref={ref}
+            className={`${icon ? 'px-9' : 'px-4'} lg:w-80 xl:w-80 pb-2 border-b-2 ${hasError ? `border-light-red` : `border-primary-100`} 
+                        bg-transparent outline-none
+                        peer-focus:${hasError ? `text-light-red` : `text-primary-100`} 
+                        dark:text-gray-200 dark:placeholder:${hasError ? `text-light-red` : `text-gray-100`} 
+                        dark:peer-focus:${hasError ? `text-light-red` : `text-primary-100`} text-base`}
+            id={inputId}
+            {...props}
+          />
 
+          <div className={`absolute right-4 bottom-1`}>
+            {actionIcon}
+          </div>
 
-        {/* Mensagem de erro */}
-        {hasError && (<p className={`text-light-red font-normal italic text-sm`}>{helperText}</p>)}
-        {/* <p className={`text-light-red font-normal italic text-sm`}>Nao ta indo nao boy</p> */}
+          {/* Mensagem de erro */}
+          {hasError && (<p className={`absolute mt-2 text-light-red font-normal italic text-sm`}>{helperText}</p>)}
+          
+        </div>
         
       </div>
     );

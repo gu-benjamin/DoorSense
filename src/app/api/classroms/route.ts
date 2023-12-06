@@ -1,15 +1,14 @@
 import { cookies } from 'next/headers';
 import { NextResponse } from 'next/server';
+import { API_ENDPOINT } from 'utils/envs';
 
 export async function POST(request: Request) {
   const token = cookies().get('token');
   const reqData = await request.json();
 
-  console.log(reqData);
-
   try {
     const res = await fetch(
-      'http://localhost/doorsense_backend/api/salas/create/',
+      `${API_ENDPOINT}salas/create/`,
       {
         method: 'POST',
         body: JSON.stringify(reqData),
@@ -22,7 +21,23 @@ export async function POST(request: Request) {
 
     const data = await res.json();
 
-    console.log(data);
+    if(data.status === '400 Bad Request'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
+
+    if(data.status === '401 Unauthorized'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
+    }
 
     return NextResponse.json(
       { data },
@@ -32,7 +47,7 @@ export async function POST(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao salvar dados.', error },
       { status: 500 }
     );
   }
@@ -42,11 +57,9 @@ export async function PUT(request: Request) {
   const token = cookies().get('token');
   const reqData = await request.json();
 
-  console.log(reqData);
-
   try {
     const res = await fetch(
-      'http://localhost/doorsense_backend/api/salas/update/',
+      `${API_ENDPOINT}salas/update/`,
       {
         method: 'PUT',
         body: JSON.stringify(reqData),
@@ -59,7 +72,23 @@ export async function PUT(request: Request) {
 
     const data = await res.json();
 
-    console.log(data);
+    if(data.status === '401 Unauthorized'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
+    }
+
+    if(data.status === '400 Bad Request'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
 
     return NextResponse.json(
       { data },
@@ -69,7 +98,7 @@ export async function PUT(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao alterar dados.', error },
       { status: 500 }
     );
   }
@@ -79,11 +108,9 @@ export async function DELETE(request: Request) {
   const token = cookies().get('token');
   const reqData = await request.json();
 
-  console.log(reqData);
-
   try {
     const res = await fetch(
-      'http://localhost/doorsense_backend/api/salas/delete/',
+      `${API_ENDPOINT}salas/delete/`,
       {
         method: 'DELETE',
         body: JSON.stringify(reqData),
@@ -96,7 +123,32 @@ export async function DELETE(request: Request) {
 
     const data = await res.json();
 
-    console.log(data);
+    if(data.status === '400 Bad Request'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 400
+        }
+      );
+    }
+
+    if(data.status === '401 Unauthorized'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 401
+        }
+      );
+    }
+
+    if(data.status === '404 Not Found'){
+      return NextResponse.json(
+        { message: data.message, status: data.status },
+        {
+          status: 404
+        }
+      );
+    }
 
     return NextResponse.json(
       { data },
@@ -106,7 +158,7 @@ export async function DELETE(request: Request) {
     );
   } catch (error) {
     return NextResponse.json(
-      { message: 'Deu ruim men', error },
+      { message: 'Falha ao deletar dados.', error },
       { status: 500 }
     );
   }

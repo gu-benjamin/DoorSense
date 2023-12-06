@@ -1,36 +1,30 @@
-'use client';
-
-import {
-  HtmlHTMLAttributes,
-  ReactNode,
-  forwardRef,
-  useState,
-  useEffect
-} from 'react';
-import { twMerge } from 'tailwind-merge';
+import { HtmlHTMLAttributes, forwardRef, useState } from 'react';
 import { AiFillCheckCircle, AiFillCloseCircle } from 'react-icons/ai';
 import { ButtonIcon } from 'components/Buttons/Button-icon/button-icon';
 import { MdKeyboardArrowDown } from 'react-icons/md';
 import { TiEdit } from 'react-icons/ti';
 import { BiTrash } from 'react-icons/bi';
+import { FaMinusCircle } from 'react-icons/fa';
 import ModalDeleteClass from './../Dashboard/ClassModals/deletar-sala';
 import ModalEditClass from './../Dashboard/ClassModals/editar-sala';
+import Mensagem from 'components/Mensagem';
 
 type classData = {
   id: string;
   nome: string;
   numero?: string;
   arduino?: string;
-  status: string;
+  status: string | null; // Alterado o tipo para aceitar null
 };
 
 type CardStatusProps = HtmlHTMLAttributes<HTMLParagraphElement> & {
-  data: string;
+  data: string | null; // Alterado o tipo para aceitar null
   classData: classData;
+  doorsenses: string[];
 };
 
 export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
-  ({ data, classData, ...props }, ref) => {
+  ({ data, classData, doorsenses, ...props }, ref) => {
     const [isDropdownOpenCard, setIsDropdownOpenCard] = useState(false);
 
     const handleDropdownToggleCard = () => {
@@ -38,26 +32,7 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
     };
     const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
-    const [message, setMessage] = useState<string | null>();
-    const [Segundos, setSegundos] = useState(0);
-
-    // Função para iniciar a contagem regressiva
-    useEffect(() => {
-      if (message) {
-        const timer = setInterval(() => {
-          setSegundos((prevSeconds) => {
-            if (prevSeconds > 0) {
-              return prevSeconds - 0.01; // Update the progress bar more frequently
-            }
-            return prevSeconds;
-          });
-        }, 10);
-
-        return () => {
-          clearInterval(timer);
-        };
-      }
-    }, [message]);
+    const [message, setMessage] = useState('');
 
     // Função visibilidade da modal
     function toggleModalEditVisibility() {
@@ -68,49 +43,35 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
       setOpenDelete((prevState) => !prevState);
     }
 
-    // function Delete() {
-    //   setOpenDelete(false);
-    //   setMessage('Sala Removida com Sucesso');
-    //   setTimeout(() => setMessage(null), 3000);
-    //   setSegundos(3);
-    // }
-    //   function Editar() {
-    //   setOpenEdit(false);
-    //   setMessage('Sala Editada com Sucesso');
-    //   setTimeout(() => setMessage(null), 3000);
-    //   setSegundos(3);
-    // }
-
-    // const progressBarStyle = {
-    //   width: `${(3 - Segundos) * 20}%`, // Aumenta a largura em 20% a cada segundo
-    // };
-
     return (
       <>
-        {/* Renderização da mensagem com a barra de progresso
-        {message && (
-            <div className="bg-primary-100 p-3 rounded justify-self-center text-white relative">
-              {message} 
-              <div className=" h-1 absolute bottom-1 left-0 right-0">
-                <div className="bg-white h-full" style={progressBarStyle}></div>
-              </div>
-            </div>
-          )} */}
+        {message && <Mensagem message={message} duration={5} />}
 
-        <div className={`flex sm:flex sm:gap-2 items-center`}>
+        <div className={`flex sm:gap-2 items-center justify-center`}>
           {data === 'Ativo' ? (
             <AiFillCheckCircle size={16} color="#00D715" />
+          ) : data === null ? (
+            <FaMinusCircle size={16} color="#858585" />
+          ) : data === 'Pendente' ? (
+            <FaMinusCircle size={16} color="#FFD700" />
           ) : (
             <AiFillCloseCircle size={16} color="#FF0000" />
           )}
 
           <p
-            className={` ${
-              data === 'Ativo' ? 'text-green-500' : 'text-red-500'
+            className={`${
+              data === 'Ativo'
+                ? 'text-green-500'
+                : data === null
+                ? 'text-gray-500'
+                : data === 'Pendente'
+                ? 'text-yellow-500'
+                : 'text-red-500'
             }`}
           >
-            {data === 'Ativo' ? data : 'Inativo'}
+            {data === null ? '---' : data}
           </p>
+
           <div className="sm:hidden">
             <ButtonIcon
               icon={<MdKeyboardArrowDown size={18} color="#05AFF2" />}
@@ -151,13 +112,16 @@ export const CardStatus = forwardRef<HTMLInputElement, CardStatusProps>(
         <ModalEditClass
           open={openEdit}
           setOpen={setOpenEdit}
+          setMessage={setMessage}
           classData={classData}
+          doorsenses={doorsenses}
         />
 
         {/* Delete Modal */}
         <ModalDeleteClass
           open={openDelete}
           setOpen={setOpenDelete}
+          setMessage={setMessage}
           id={parseInt(classData.id)}
         />
       </>

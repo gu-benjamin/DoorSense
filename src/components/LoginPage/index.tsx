@@ -1,19 +1,14 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import IconUser from 'components/Icons/icon-user';
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
-import { InputLogin } from '../Inputs/Input-login/input-login';
 import { Button } from '../Buttons/Button/button';
-import { XCircleIcon } from '@heroicons/react/24/outline';
-import { ButtonIcon } from '../Buttons/Button-icon/button-icon';
-import IconLost from '../Icons/icon-lostpass';
 import Image from 'next/image';
-import { Modal } from 'components/Modal';
-import LogoHome from '../Icons/logoSVG';
 import { useTheme } from 'next-themes';
-import LogoHomeDark from '../Icons/logoSVGdark';
 import LoginForm from './loginForm';
+import ModalLoginForm from './LoginModal/forgot-password';
+import IconLogo from 'components/Icons/icon-logo';
+import IconLogoDark from 'components/Icons/icon-logodark';
 
 export default function LoginUI() {
   const [open, setOpen] = useState(false);
@@ -61,10 +56,11 @@ export default function LoginUI() {
         </div>
 
         {resolvedTheme === 'dark' ? (
-          <LogoHomeDark size={170} />
+          <IconLogo size={170} />
         ) : (
-          <LogoHome size={170} />
+          <IconLogoDark size={170} />
         )}
+
 
         <LoginForm />
 
@@ -73,44 +69,11 @@ export default function LoginUI() {
           btnName="Esqueceu a senha?"
           type="button"
           onClick={toggleModalVisibility}
-          className="dark:text-white"
+          className="dark:text-white focus:outline-none"
         />
       </section>
 
-      <Modal.Root open={open} onClose={setOpen}>
-        <Modal.CloseTop>
-          <ButtonIcon
-            onClick={toggleModalVisibility}
-            icon={<XCircleIcon width={25} height={25} />}
-          />
-        </Modal.CloseTop>
-        <Modal.MainSection>
-          <Modal.Icon
-            icon={<IconLost size={50} color={`var(--color-primary)`} />}
-          />
-          <Modal.Title title={`Redefinição de senha`} />
-          <Modal.Content>
-            <p>Por favor insira seu e-mail de recuperação</p>
-            <InputLogin
-              icon={<IconUser size={30} color={`#05AFF2`} />}
-              placeholder="Digite seu E-mail"
-              label="E-mail"
-            />
-          </Modal.Content>
-        </Modal.MainSection>
-        <Modal.Actions>
-          <Modal.Action
-            btnName="Sair"
-            className="botao-danger"
-            onClick={toggleModalVisibility}
-          />
-          <Modal.Action
-            btnName="Enviar"
-            className="botao-reset"
-            onClick={toggleModalVisibility}
-          />
-        </Modal.Actions>
-      </Modal.Root>
+      <ModalLoginForm open={open} setOpen={setOpen} />
     </main>
   );
 }

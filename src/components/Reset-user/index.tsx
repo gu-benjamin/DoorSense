@@ -2,24 +2,17 @@
 
 import { ThemeButton } from 'components/Buttons/ThemeButton/theme-button';
 import Image from 'next/image';
-import LogoHome from '../../components/Icons/logoSVG';
 import { useTheme } from 'next-themes';
-import LogoHomeDark from '../../components/Icons/logoSVGdark';
 import FirstAcessForm from './firstAcessform';
-import { useEffect, useState } from 'react';
+import ResetPasswordForm from './reset-passwordForm';
+import { usePathname } from 'next/navigation';
+import { APP_ROUTES } from 'constants/app_routes';
+import IconLogo from 'components/Icons/icon-logo';
+import IconLogoDark from 'components/Icons/icon-logodark';
 
-export default function FirstAcessUI() {
- 
+export default function ResetUserUI() {
   const { resolvedTheme } = useTheme();
-  // const [mounted, setMounted] = useState(false);
-  
-  // useEffect(() => {
-  //   setMounted(true);
-  // }, []);
-
-  // if (!mounted) {
-  //   return null;
-  // }
+  const pathname = usePathname();
 
   return (
     <main
@@ -49,14 +42,14 @@ export default function FirstAcessUI() {
           <ThemeButton />
         </div>
 
-
         {resolvedTheme === 'dark' ? (
-          <LogoHomeDark size={170} />
+          <IconLogo size={170} />
         ) : (
-          <LogoHome size={170} />
+          <IconLogoDark size={170} />
         )}
 
-        <FirstAcessForm/>
+        {pathname === APP_ROUTES.private.reset_user ? <FirstAcessForm /> : <ResetPasswordForm />}
+        
       </section>
     </main>
   );
