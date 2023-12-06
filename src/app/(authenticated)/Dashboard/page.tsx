@@ -5,7 +5,14 @@ const HomeUI = dynamic(() => import('../../../components/Dashboard/index'), {
 import { cookies } from 'next/headers';
 import { API_ENDPOINT } from 'utils/envs';
 import { doorsense } from 'types';
+import type { Metadata } from 'next';
 import PrivateDBRoute from 'components/PrivateRoutes/Dashboard';
+
+
+export const metadata: Metadata = {
+  title: 'Dashboard - DoorSense',
+  description: 'A experiência sensorial da inclusão'
+};
 
 export default async function HomePage() {
   const token = cookies().get('token');

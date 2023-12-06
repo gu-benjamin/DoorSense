@@ -1,18 +1,12 @@
 'use client';
 
 import './globals.css';
-import type { Metadata } from 'next';
 import { Mplus } from './../utils/fonts';
 import Providers from '../contexts/dark-theme';
 import { usePathname } from 'next/navigation';
 import { checkIsPublicPage } from 'functions/checkIsPublicPage';
 import PrivateFARoute  from '../components/PrivateRoutes/FirstAcess/';
 import { APP_ROUTES } from '../constants/app_routes';
-
-export const metadata: Metadata = {
-  title: 'DoorSense - Login',
-  description: 'A experiência sensorial da inclusão'
-};
 
 export default function RootLayout({
   children
