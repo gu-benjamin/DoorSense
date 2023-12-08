@@ -23,10 +23,11 @@ interface ModalCreateClassProps {
 const schema = z.object({
   nome: z
     .string({
-      required_error: 'Este campo é obrigatório'
+      required_error: 'Este campo é obrigatório.'
     })
-    .min(3, 'A sala deve conter no mínimo 3 caracteres'),
-  numero: z.string().max(4, 'A sala deve conter no máximo 4 caracteres').toUpperCase().trim(),
+    .min(3, 'A sala deve conter no mínimo 3 caracteres.')
+    .max(100, 'A sala deve conter no máximo 100 caracteres.'),
+  numero: z.string().max(4, 'O número da sala deve conter no máximo 4 caracteres.').toUpperCase().trim(),
 });
 
 // Declarar o tipo dos dados do formulário sendo o mesmo que o do schema, evitar problemas de tipagem
