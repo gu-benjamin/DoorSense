@@ -36,7 +36,7 @@ const schema = z.object({
     .string({
       required_error: 'Este campo é obrigatório.'
     })
-    .min(3, 'A sala deve conter no mínimo 3 caracteres.'),
+    .min(3, 'A sala deve conter no mínimo 3 caracteres.')
     .max(100, 'A sala deve conter no máximo 100 caracteres.'),
   numero: z
     .string()
