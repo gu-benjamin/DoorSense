@@ -167,9 +167,6 @@ export default function FirstAcessForm() {
           disabled={isSubmitting || loading}
           actionIcon={
             <ButtonIcon
-              className={`absolute right-3 ${
-                errors.password?.message ? `bottom-12` : `bottom-2`
-              }`}
               icon={
                 isPasswordVisible ? (
                   <IconOpenPassword
@@ -216,9 +213,6 @@ export default function FirstAcessForm() {
           disabled={isSubmitting || loading}
           actionIcon={
             <ButtonIcon
-              className={`absolute right-3 ${
-                errors.confirmPassword?.message ? `bottom-12` : `bottom-2`
-              }`}
               icon={
                 isConfirmPasswordVisible ? (
                   <IconOpenPassword
