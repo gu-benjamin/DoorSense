@@ -84,7 +84,6 @@ export default function FirstAcessForm() {
       }
   
       const json = await res.json();
-      console.log(json)
   
       if(json.status === '200 OK'){
         reset();

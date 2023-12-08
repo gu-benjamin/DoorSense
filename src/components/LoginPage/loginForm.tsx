@@ -78,7 +78,6 @@ export default function LoginForm() {
         router.push(APP_ROUTES.private.reset_user);
       }
   
-      router.push(APP_ROUTES.private.dashboard);
     } catch (error) {
       setApiError((error as Error).message)
 
