@@ -78,9 +78,6 @@ export default function ModalEditClass({
     mode: 'all',
     reValidateMode: 'onBlur',
     resolver: zodResolver(schema),
-    defaultValues: {
-      arduino: ''
-    }
   });
 
   useEffect(() => {
